@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="S4IL is a dev!"> <!-- CAN EDIT -->
-  <meta property="og:image" content="https://s4il.repl.co/images/round-logo.png"> <!-- CAN EDIT -->
-  <meta property="og:description" content="Hello, I'm S4IL! The Chill 🤙 This is my site for information and links! :)"> <!-- CAN EDIT -->
+  <meta property="og:image" content="/images/round-logo.png"> <!-- CAN EDIT -->
+  <meta property="og:description" content="Hello, I'm S4IL! Thse Chill 🤙 This is my custom captcha maker!"> <!-- CAN EDIT -->
   <meta name="theme-color" content="#0079F2"> <!-- CAN EDIT (use same value as the --button-primary-default variable in style.css) -->
 
-  <meta name="description" content="Hello, I'm S4IL! The Chill 🤙 This is my site for information and links! :)">
+  <meta name="description" content="Hello, I'm S4IL! The Chill 🤙 This is my costum captcha maker!">
   
-  <title>S4IL is a dev!</title>
-<link rel="icon" href="https://s4il.repl.co/images/round-logo.png" type="image/x-icon"/>
+  <title>Captcha Maker</title>
+<link rel="icon" href="/images/round-logo.png" type="image/x-icon"/>
 <link href="./style.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -29,6 +29,8 @@
 
     
     <div class="buttons">
+        <label>Captcha Checkbox Text</label>
+        <input placeholder="Put something in here..." value="I'm not a robot or am i?" id="cct">
         <label>Captcha Title</label>
         <input placeholder="Put something in here..." value="S4il" id="title">
         <label>Captcha Desc</label>
@@ -42,6 +44,13 @@
     width: 100%;
     height: 40px;
 ">
+        <label>Captcha Wrong Text</label>
+        <input placeholder="Put something in here..." value="Nuh uh" id="wtxt">
+        <label>Captcha Wrong Text Color</label>
+        <input type="color" value="#ff0000" id="wctxt" style="
+        width: 100%;
+        height: 40px;
+        ">
         <label>Captcha Type</label>
         <select id="type">
             <option>Textbox</option>

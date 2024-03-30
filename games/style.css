@@ -75,8 +75,6 @@ a {
   padding: 32px;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
   max-width: 400px;
-  position: relative;
-  top: 150px;
 }
 
 .card:hover {
@@ -193,20 +191,3 @@ a {
   }
 }
 
-input, select {
-  padding: 12px;
-  font-size: 16px;
-  border: none;
-  border-radius: 100px;
-}
-
-select {
-  cursor: pointer;
-}
-
-#ycl {
-  color: white;
-  text-decoration: none;
-  text-align: center;
-  display: none;
-}

@@ -22,24 +22,32 @@ if (type == "Textbox") {
     margin: 0;
     margin-bottom: 50px;
 ">${data.text}</h1>
-<input type="text">`
+<input type="text" id="tb">`
 }
-document.getElementById("ct").innerText = data.ctext
-document.getElementById("ct").style.color = data.ccolor
 document.getElementById("ctype").innerText = type + " Captcha"
 document.getElementById("ctitle").innerText = data.title
 document.getElementById("cdesc").innerText = data.desc
-
+document.getElementById("cct").innerText = data.cct
 
 // Function triggered when client clicks [Verify]
 function verifyCaptcha() {
     if (verify != true) {
-        document.getElementById("ct").style.display = "block"
+        if (type == "Textbox") {
+            if (document.getElementById("tb").value == data.text) {
+                document.getElementById("ct").innerText = data.ctext
+                document.getElementById("ct").style.color = data.ccolor
+            } else {
+                document.getElementById("ct").innerText = data.wtext
+                document.getElementById("ct").style.color = data.wcolor
+            }
+        }
+        document.getElementById("ct").style.display = "block";
         document.getElementById("fkrc-verifywin-verify-button").innerText = "Close";
         verify = true
     } else {
         closeVerifyWindow();
-        document.getElementById("ct").style.display = "none"
+        document.getElementById("tb").value = "";
+        document.getElementById("ct").style.display = "none";
         document.getElementById("fkrc-verifywin-verify-button").innerText = "Verify";
         verify = false
     }

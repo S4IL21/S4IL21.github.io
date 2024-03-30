@@ -76,7 +76,7 @@ a {
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
   max-width: 400px;
   position: relative;
-  top: 150px;
+  top: 200px;
 }
 
 .card:hover {

@@ -1,10 +1,15 @@
+import sanitizer from "./libs/sanitizer.js";
+const sanitize = new sanitizer()
+
 const params = new URLSearchParams(window.location.search);
 let [data,type] = params.get("c").split('.').map(it=>atob(it))
-verify = false
+let verify = false
 
 data = JSON.parse(data);
 
 if (type == "Textbox") {
+    data.text = sanitize.html(data.text)
+
     document.getElementById("rcc").innerHTML = `
     <h1 style="
     font-family: cursive;
@@ -18,11 +23,12 @@ if (type == "Textbox") {
 ">${data.text}</h1><h1 style="
     font-family: &quot;roboto sans&quot;, sans-serif;
     font-size: 35px;
-    height: 0;
     margin: 0;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 ">${data.text}</h1>
-<input type="text" id="tb">`
+<input type="text" id="tb" style="
+    width: 98%;
+">`
 }
 document.getElementById("ctype").innerText = type + " Captcha"
 document.getElementById("ctitle").innerText = data.title

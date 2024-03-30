@@ -91,7 +91,8 @@ body {
     position: absolute;
     visibility: hidden;
     margin: auto;
-    width: 310px;
+    min-width: 310px;
+    max-width: 400px;
     background-color: #fff;
     border: 1px solid #cecece;
     -webkit-box-shadow: 5px 6px 7px -3px rgba(0,0,0,0.12);

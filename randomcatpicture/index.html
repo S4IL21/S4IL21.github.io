@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Cat Picture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        #catButton {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #catButton:hover {
+            background-color: #45a049;
+        }
+        #catImage {
+            max-width: 80%;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random Cat Picture</h1>
+    <button id="catButton">Get Random Cat</button>
+    <br><br>
+    <img id="catImage" src="" alt="Random Cat">
+    
+    <script>
+        document.getElementById('catButton').addEventListener('click', function() {
+            fetch('https://api.thecatapi.com/v1/images/search', {
+                headers: {
+                    'x-api-key': ''
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const img = document.getElementById('catImage');
+                img.src = data[0].url;
+            })
+            .catch(error => {
+                console.error('Error fetching the cat image:', error);
+            });
+        });
+    </script>
+</body>
+</html>

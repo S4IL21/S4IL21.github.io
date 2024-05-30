@@ -1,6 +1,7 @@
 html {
     box-sizing: border-box;
     font-family: "Comic Neue", cursive;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 body {
@@ -15,6 +16,7 @@ body {
     text-align: center;
     padding: 20px;
     margin: 0;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
 }
 
 a {
@@ -37,13 +39,13 @@ textarea {
     color: #E8DFCA;
     resize: none;
     width: 30rem;
-    max-width: 80%;
+    max-width: 100%;
     height: 10rem;
     outline: none;
     border-radius: 5px;
     border: 2px solid #E8DFCA;
     padding: 10px;
-    margin-bottom: 20px;
+    margin: 10px;
     transition: background-color 0.3s ease;
 }
 
@@ -54,11 +56,16 @@ textarea:focus {
 #inputcontainer {
     width: 100%;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
     margin-bottom: 20px;
+}
+
+#inputcontainer > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 select {
@@ -80,6 +87,7 @@ select {
     color: #E8DFCA;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 10px;
 }
 
 #translate:hover {
@@ -88,15 +96,14 @@ select {
 
 #outputcontainer {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     width: 100%;
 }
 
 #outputdiv {
     width: 30rem;
-    max-width: 80%;
+    max-width: 100%;
     height: 10rem;
     background-color: #1A4D2E;
     border-radius: 5px;
@@ -109,4 +116,11 @@ select {
 
 #outputdiv:hover {
     background-color: #2A5D3E;
+}
+
+#buttoncontainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }

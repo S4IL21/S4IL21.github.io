@@ -29,8 +29,12 @@ a:hover {
 }
 
 h1 {
-    margin: 0 0 20px 0;
+    margin: 0 0 10px 0;
     font-size: 2.5rem;
+}
+
+p {
+    margin: 0 0 20px 0;
 }
 
 textarea {
@@ -62,10 +66,12 @@ textarea:focus {
     margin-bottom: 20px;
 }
 
-#inputcontainer > div {
+#controls {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
+    margin: 0 10px;
 }
 
 select {
@@ -75,7 +81,7 @@ select {
     border: 2px solid #E8DFCA;
     background-color: #1A4D2E;
     color: #E8DFCA;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 #translate {
@@ -87,7 +93,6 @@ select {
     color: #E8DFCA;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 10px;
 }
 
 #translate:hover {
@@ -116,11 +121,4 @@ select {
 
 #outputdiv:hover {
     background-color: #2A5D3E;
-}
-
-#buttoncontainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
 }

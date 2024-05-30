@@ -1,9 +1,9 @@
-html{
+html {
     box-sizing: border-box;
     font-family: "Comic Neue", cursive;
 }
 
-body{
+body {
     width: 100%;
     height: 100%;
     background-color: rgb(79, 111, 82);
@@ -11,27 +11,19 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-  align-items: center;
-  align-content: center;
+    align-items: center;
     text-align: center;
 }
 
-a{
+a {
     color: rgb(245, 239, 230);
 }
 
-
-h1{
-    display: flex;
-  
-    justify-content: center;
-  align-items: center;
-  align-content: center;
-    text-align: center;
+h1 {
     max-width: 100vw;
 }
 
-textarea{
+textarea {
     font-family: "Comic Neue", cursive;
     background-color: rgb(26, 77, 46);
     color: rgb(232, 223, 202);
@@ -41,41 +33,33 @@ textarea{
     height: 10rem;
     outline: none;
     border-radius: 5px;
-    border-color: rgb(245, 239, 230);
-    display: flex;
-    border: 2px solid  rgb(232, 223, 202);
+    border: 2px solid rgb(232, 223, 202);
     overflow: hidden;
 }
 
-#inputcontainer{
+#inputcontainer {
     width: 100%;
     display: flex;
     flex-direction: column;
-    flex-direction: column;
     justify-content: center;
-  align-items: center;
-  align-content: center;
+    align-items: center;
     text-align: center;
 }
 
-
-
-select{
+select {
     width: 10rem;
 }
 
-#translate{
+#translate {
     width: 7.5rem;
 }
-
-
 
 #outputcontainer {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Added */
-    justify-content: center; /* Added */
-    margin-top: 1rem; /* Adjust as needed */
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
     width: 100%;
 }
 
@@ -87,11 +71,9 @@ select{
     border-radius: 5px;
     border: 2px solid rgb(232, 223, 202);
     overflow: scroll;
-
-    cursor:pointer;
+    cursor: pointer;
 }
 
-#outputdiv:hover {     
-    background-color:rgb(21, 59, 36);
+#outputdiv:hover {
+    background-color: rgb(21, 59, 36);
 }
-

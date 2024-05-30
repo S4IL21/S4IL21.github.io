@@ -6,45 +6,31 @@
     <title>Darfish Translator</title>
     <link rel="stylesheet" href="index.css" />
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <header>
-        <h1>Unofficial Darfish Translator By S4IL</h1>
-        <p>Very cool</p>
+    <h1>Unofficial Darfish Translator By S4IL</h1>
+    <p>Very cool</p>
     </header>
 
     <div id="inputcontainer">
-        <textarea name="textarea" id="textinput" rows="7" placeholder="Write what you want to translate here"></textarea>
-        <div id="controls">
-            <select name="translation type">
-                <option value=1>Text to Darfish</option>
-                <option value=2>Darfish to Text</option>
-            </select>
-            <button id="translate" onclick="onButtonPress()">Translate</button>
-        </div>
+        <select name="translation type">
+            <option value=1>Text to Darfish</option>
+            <option value=2>Darfish to Text</option>
+        </select>
+
+        <textarea name="textarea" id="textinput"
+         input="textarea" 
+          rows="7" placeholder="Write what you want to translate here"></textarea>
+          <button id="translate" onclick="onButtonPress()">Translate</button>
     </div>
 
     <div id="outputcontainer">
         <div id="outputdiv" title="Click to copy"></div>
+      
     </div>
 
-    <script>
-        function loadExternalScript(url) {
-            const script = document.createElement('script');
-            script.src = url;
-            script.type = 'text/javascript';
-            script.async = true;
-            script.onload = function() {
-                console.log('Script loaded and executed.');
-            };
-            script.onerror = function() {
-                console.error('Error loading script.');
-            };
-            document.head.appendChild(script);
-        }
-
-        const scriptURL = 'https://raw.githubusercontent.com/luajinx/luajinx.github.io/main/translator.js';
-        loadExternalScript(scriptURL);
-    </script>
+    <script src="translator.js"></script> 
 </body>
 </html>

@@ -7,7 +7,8 @@ html {
 body {
     width: 100%;
     height: 100%;
-    background-color: #4F6F52;
+    background: url('https://static.darflen.com/img/background2.svg') no-repeat center center fixed;
+    background-size: cover;
     color: #E8DFCA;
     display: flex;
     flex-direction: column;
@@ -39,10 +40,10 @@ p {
 
 textarea {
     font-family: "Comic Neue", cursive;
-    background-color: #1A4D2E;
+    background-color: rgba(26, 77, 46, 0.8);
     color: #E8DFCA;
     resize: none;
-    width: 30rem;
+    width: 45%;
     max-width: 100%;
     height: 10rem;
     outline: none;
@@ -54,13 +55,13 @@ textarea {
 }
 
 textarea:focus {
-    background-color: #2A5D3E;
+    background-color: rgba(42, 93, 62, 0.8);
 }
 
 #inputcontainer {
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     margin-bottom: 20px;
@@ -79,7 +80,7 @@ select {
     padding: 10px;
     border-radius: 5px;
     border: 2px solid #E8DFCA;
-    background-color: #1A4D2E;
+    background-color: rgba(26, 77, 46, 0.8);
     color: #E8DFCA;
     margin-bottom: 10px;
 }
@@ -89,14 +90,14 @@ select {
     padding: 10px;
     border-radius: 5px;
     border: 2px solid #E8DFCA;
-    background-color: #1A4D2E;
+    background-color: rgba(26, 77, 46, 0.8);
     color: #E8DFCA;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 #translate:hover {
-    background-color: #2A5D3E;
+    background-color: rgba(42, 93, 62, 0.8);
 }
 
 #outputcontainer {
@@ -110,7 +111,7 @@ select {
     width: 30rem;
     max-width: 100%;
     height: 10rem;
-    background-color: #1A4D2E;
+    background-color: rgba(26, 77, 46, 0.8);
     border-radius: 5px;
     border: 2px solid #E8DFCA;
     padding: 10px;
@@ -120,5 +121,5 @@ select {
 }
 
 #outputdiv:hover {
-    background-color: #2A5D3E;
+    background-color: rgba(42, 93, 62, 0.8);
 }

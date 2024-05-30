@@ -1,0 +1,97 @@
+html{
+    box-sizing: border-box;
+    font-family: "Comic Neue", cursive;
+}
+
+body{
+    width: 100%;
+    height: 100%;
+    background-color: rgb(79, 111, 82);
+    color: rgb(232, 223, 202);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  align-items: center;
+  align-content: center;
+    text-align: center;
+}
+
+a{
+    color: rgb(245, 239, 230);
+}
+
+
+h1{
+    display: flex;
+  
+    justify-content: center;
+  align-items: center;
+  align-content: center;
+    text-align: center;
+    max-width: 100vw;
+}
+
+textarea{
+    font-family: "Comic Neue", cursive;
+    background-color: rgb(26, 77, 46);
+    color: rgb(232, 223, 202);
+    resize: none;
+    width: 30rem;
+    max-width: 80%;
+    height: 10rem;
+    outline: none;
+    border-radius: 5px;
+    border-color: rgb(245, 239, 230);
+    display: flex;
+    border: 2px solid  rgb(232, 223, 202);
+    overflow: hidden;
+}
+
+#inputcontainer{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-direction: column;
+    justify-content: center;
+  align-items: center;
+  align-content: center;
+    text-align: center;
+}
+
+
+
+select{
+    width: 10rem;
+}
+
+#translate{
+    width: 7.5rem;
+}
+
+
+
+#outputcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Added */
+    justify-content: center; /* Added */
+    margin-top: 1rem; /* Adjust as needed */
+    width: 100%;
+}
+
+#outputdiv {
+    width: 30rem;
+    max-width: 80%;
+    height: 10rem;
+    background-color: rgb(26, 77, 46);
+    border-radius: 5px;
+    border: 2px solid rgb(232, 223, 202);
+    overflow: scroll;
+
+    cursor:pointer;
+}
+
+#outputdiv:hover {     
+    background-color:rgb(21, 59, 36);
+}
+

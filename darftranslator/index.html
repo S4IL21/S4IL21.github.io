@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>darfish translator</title>
+    <link rel="stylesheet" href="index.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+    <h1>official darfish translator by:<a href="https://github.com/luajinx">jinx</a></h1>
+    <p>v0.2, Numbers are not supported <br> when translating darfish, make sure that the text is properly formatted (spaces in between each dargument) </p>
+    </header>
+
+    <div id="inputcontainer">
+        <select name="translation type">
+            <option value=1>text to darfish</option>
+            <option value=2>darfish to text</option>
+        </select>
+
+        <textarea name="textarea" id="textinput"
+         input="textarea" 
+          rows="7" placeholder="Write what you want to translate here"></textarea>
+          <button id="translate" onclick="onButtonPress()">Translate</button>
+    </div>
+
+    <div id="outputcontainer">
+        <div id="outputdiv" title="Click to copy"></div>
+      
+    </div>
+
+    <script src="translator.js"></script> 
+</body>
+</html>

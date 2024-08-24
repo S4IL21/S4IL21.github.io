@@ -57,12 +57,26 @@
     <script>
         async function fetchRandomPost() {
             try {
+                console.log("Fetching a new post...");
+
+                // Construct the URL with a cache-busting query parameter
                 const proxyUrl = "https://api.allorigins.win/get?url=";
                 const targetUrl = encodeURIComponent(`https://api.wasteof.money/random-post?timestamp=${new Date().getTime()}`);
-                const response = await fetch(proxyUrl + targetUrl);
-                const data = await response.json();
-                const jsonData = JSON.parse(data.contents);
+                
+                console.log(`Proxy URL: ${proxyUrl}`);
+                console.log(`Target URL: ${targetUrl}`);
 
+                const response = await fetch(proxyUrl + targetUrl);
+                console.log("Received response from proxy:", response);
+
+                const data = await response.json();
+                console.log("Data received from proxy:", data);
+
+                // Parse the JSON from the data.contents
+                const jsonData = JSON.parse(data.contents);
+                console.log("Parsed JSON data:", jsonData);
+
+                // Update the DOM with the fetched post
                 const postContainer = document.getElementById('post-container');
                 postContainer.innerHTML = `
                     <div class="poster-name" style="color: ${jsonData.poster?.color || 'black'}">${jsonData.poster?.name || 'Unknown'}</div>
@@ -71,18 +85,26 @@
                         Loves: ${jsonData.loves || 0} | Reposts: ${jsonData.reposts || 0} | Comments: ${jsonData.comments || 0}
                     </div>
                 `;
+                console.log("Post displayed successfully.");
+
             } catch (error) {
                 console.error('Error fetching the post:', error);
+
+                // Display an error message in the UI
                 const postContainer = document.getElementById('post-container');
                 postContainer.innerHTML = `<p>Error loading post. Please try again later.</p>`;
             }
         }
 
         // Fetch a post when the page loads
+        console.log("Page loaded, fetching initial post...");
         fetchRandomPost();
 
         // Fetch a new post when the button is clicked
-        document.getElementById('new-post-btn').addEventListener('click', fetchRandomPost);
+        document.getElementById('new-post-btn').addEventListener('click', () => {
+            console.log("New post button clicked, fetching a new post...");
+            fetchRandomPost();
+        });
     </script>
 
 </body>

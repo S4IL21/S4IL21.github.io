@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random WasteOf Post</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+            text-align: center;
+        }
+        #post-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto;
+            max-width: 500px;
+        }
+        .poster-name {
+            font-weight: bold;
+            color: green;
+        }
+        .post-content {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        .post-details {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #777;
+        }
+        #new-post-btn {
+            margin-top: 20px;
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #new-post-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Random WasteOf Post</h1>
+    <div id="post-container">
+        <p>Loading...</p>
+    </div>
+    <button id="new-post-btn">Get New Post</button>
+
+    <script>
+        // Function to fetch and display a random post
+        async function fetchRandomPost() {
+            try {
+                const response = await fetch('https://api.wasteof.money/random-post');
+                const data = await response.json();
+
+                const postContainer = document.getElementById('post-container');
+                postContainer.innerHTML = `
+                    <div class="poster-name" style="color: ${data.poster.color}">${data.poster.name}</div>
+                    <div class="post-content">${data.content}</div>
+                    <div class="post-details">
+                        Loves: ${data.loves} | Reposts: ${data.reposts} | Comments: ${data.comments}
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Error fetching the post:', error);
+                const postContainer = document.getElementById('post-container');
+                postContainer.innerHTML = `<p>Error loading post. Please try again later.</p>`;
+            }
+        }
+
+        // Fetch a post when the page loads
+        fetchRandomPost();
+
+        // Fetch a new post when the button is clicked
+        document.getElementById('new-post-btn').addEventListener('click', fetchRandomPost);
+    </script>
+
+</body>
+</html>

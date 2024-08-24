@@ -57,16 +57,11 @@
     <script>
         async function fetchRandomPost() {
             try {
-                // Using a public CORS proxy
                 const proxyUrl = "https://api.allorigins.win/get?url=";
-                const targetUrl = encodeURIComponent("https://api.wasteof.money/random-post");
+                const targetUrl = encodeURIComponent(`https://api.wasteof.money/random-post?timestamp=${new Date().getTime()}`);
                 const response = await fetch(proxyUrl + targetUrl);
                 const data = await response.json();
                 const jsonData = JSON.parse(data.contents);
-
-                // Log data to inspect its structure
-                console.log('Raw response data:', data);
-                console.log('Parsed JSON data:', jsonData);
 
                 const postContainer = document.getElementById('post-container');
                 postContainer.innerHTML = `

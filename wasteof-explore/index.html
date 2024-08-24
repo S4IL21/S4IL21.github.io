@@ -64,12 +64,16 @@
                 const data = await response.json();
                 const jsonData = JSON.parse(data.contents);
 
+                // Log data to inspect its structure
+                console.log('Raw response data:', data);
+                console.log('Parsed JSON data:', jsonData);
+
                 const postContainer = document.getElementById('post-container');
                 postContainer.innerHTML = `
-                    <div class="poster-name" style="color: ${jsonData.poster.color}">${jsonData.poster.name}</div>
-                    <div class="post-content">${jsonData.content}</div>
+                    <div class="poster-name" style="color: ${jsonData.poster?.color || 'black'}">${jsonData.poster?.name || 'Unknown'}</div>
+                    <div class="post-content">${jsonData.content || 'No content available.'}</div>
                     <div class="post-details">
-                        Loves: ${jsonData.loves} | Reposts: ${jsonData.reposts} | Comments: ${jsonData.comments}
+                        Loves: ${jsonData.loves || 0} | Reposts: ${jsonData.reposts || 0} | Comments: ${jsonData.comments || 0}
                     </div>
                 `;
             } catch (error) {

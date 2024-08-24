@@ -58,17 +58,18 @@
         async function fetchRandomPost() {
             try {
                 // Using a public CORS proxy
-                const proxyUrl = "https://cors-anywhere.herokuapp.com/";
-                const targetUrl = "https://api.wasteof.money/random-post";
+                const proxyUrl = "https://api.allorigins.win/get?url=";
+                const targetUrl = encodeURIComponent("https://api.wasteof.money/random-post");
                 const response = await fetch(proxyUrl + targetUrl);
                 const data = await response.json();
+                const jsonData = JSON.parse(data.contents);
 
                 const postContainer = document.getElementById('post-container');
                 postContainer.innerHTML = `
-                    <div class="poster-name" style="color: ${data.poster.color}">${data.poster.name}</div>
-                    <div class="post-content">${data.content}</div>
+                    <div class="poster-name" style="color: ${jsonData.poster.color}">${jsonData.poster.name}</div>
+                    <div class="post-content">${jsonData.content}</div>
                     <div class="post-details">
-                        Loves: ${data.loves} | Reposts: ${data.reposts} | Comments: ${data.comments}
+                        Loves: ${jsonData.loves} | Reposts: ${jsonData.reposts} | Comments: ${jsonData.comments}
                     </div>
                 `;
             } catch (error) {

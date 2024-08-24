@@ -22,7 +22,6 @@
         }
         .poster-name {
             font-weight: bold;
-            color: green;
         }
         .post-content {
             margin-top: 10px;
@@ -56,10 +55,12 @@
     <button id="new-post-btn">Get New Post</button>
 
     <script>
-        // Function to fetch and display a random post
         async function fetchRandomPost() {
             try {
-                const response = await fetch('https://api.wasteof.money/random-post');
+                // Using a public CORS proxy
+                const proxyUrl = "https://cors-anywhere.herokuapp.com/";
+                const targetUrl = "https://api.wasteof.money/random-post";
+                const response = await fetch(proxyUrl + targetUrl);
                 const data = await response.json();
 
                 const postContainer = document.getElementById('post-container');

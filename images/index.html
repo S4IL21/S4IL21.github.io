@@ -1,86 +1,54 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="S4IL is a dev!"> <!-- CAN EDIT -->
-  <meta property="og:image" content="round-logo.png"> <!-- CAN EDIT -->
-  <meta property="og:description" content="Hello, I'm S4IL! The Chill 🤙 These are some images, there are basically for me to use in other useless things, but you can also use them too if you want!"> <!-- CAN EDIT -->
-  <meta name="theme-color" content="#0079F2"> <!-- CAN EDIT (use same value as the --button-primary-default variable in style.css) -->
-
-  <meta name="description" content="Hello, I'm S4IL! The Chill 🤙 These are some images, there are basically for me to use in other useless things, but you can also use them too if you want!">
-  
-  <title>Images</title>
-<link rel="icon" href="/images/round-logo.png">
-<link href="style.css" rel="stylesheet" type="text/css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Image List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 5px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
-
 <body>
-  <div class="card">
-    <div class="top">
-      <div class="logo-wrapper">
-        <img src="round-logo.png"> <!-- CAN EDIT -->
-      </div>
-  
-      <div class="text">
-        <!-- CAN EDIT -->
-        <h1>S4IL</h1>
-        
-        <!-- CAN EDIT -->
-        <p>Hello, I'm S4IL! The Chill 🤙</p>
-        <p>These are some images, there are basically for me to use in other useless things, but you can also use them too if you want!<p>
-      </div>
-    </div>
+    <h1>GitHub Image List</h1>
+    <ul id="imageList"></ul>
 
-    <!-- CAN EDIT -->
-    <div class="buttons">
-      <a href="/more/"> <!-- link to somewhere -->
-        <button class="primary">Go Back</button>
-      </a>
-      
-       <a href="/images/logo.png" target="_blank"> <!-- link to somewhere -->
-        <button>Square Logo (PNG)</button>
+    <script>
+        const repo = 's4il/is-a-dev'; // Replace with your repo
+        const path = 'images'; // Directory in the repo
+        const imageList = document.getElementById('imageList');
 
-       <a href="/images/full-logo.png" target="_blank"> <!-- link to somewhere -->
-        <button>Full Logo (PNG)</button>
-
-      <a href="/images/round-logo.png" target="_blank"> <!-- link to somewhere -->
-        <button>Round Logo (PNG)</button>
-      </a>
-      
-       <a href="/images/blockcoin_banner.jpg" target="_blank"> <!-- link to somewhere -->
-        <button>BlockCoin Banner (JPG)</button>
-         
-       <a href="/images/blockcoin_discord.gif" target="_blank"> <!-- link to somewhere -->
-        <button>BlockCoin Discord Banner (GIF)</button>
-
-       <a href="/images/estuard.png" target="_blank"> <!-- link to somewhere -->
-        <button>April Fools Logo (PNG)</button>
-
-       <a href="/images/s4il-emojis" target="_blank"> <!-- link to somewhere -->
-        <button>S4IL Emojis (PNG)</button>
-
-       <a href="/images/s4il-emojis-svg" target="_blank"> <!-- link to somewhere -->
-        <button>S4IL Emojis (SVG)</button>
-
-       <a href="/images/osito_panda.png" target="_blank"> <!-- link to somewhere -->
-        <button>My Brother's OC (PNG)</button>
-
-       <a href="/images/blockcoin-logo.png" target="_blank"> <!-- link to somewhere -->
-        <button>BlockCoin Logo (PNG)</button>
-
-      <a href="/images/halloween-logo.png" target="_blank"> <!-- link to somewhere -->
-        <button>Halloween S4IL (PNG)</button>
-
-      <a href="/images/transparent-logo.png" target="_blank"> <!-- link to somewhere -->
-        <button>No Background S4IL (PNG)</button>
-
-
-
-      </a>
-    </div>       
-  </div>
-
-  <script src="script.js"></script>
+        fetch(`https://api.github.com/repos/${repo}/contents/${path}`)
+            .then(response => response.json())
+            .then(files => {
+                files.forEach(file => {
+                    if (file.type === 'file' && /\.(jpg|png|gif)$/.test(file.name)) {
+                        const listItem = document.createElement('li');
+                        const link = document.createElement('a');
+                        link.href = file.download_url;
+                        link.textContent = file.name;
+                        listItem.appendChild(link);
+                        imageList.appendChild(listItem);
+                    }
+                });
+            })
+            .catch(error => console.error('Error fetching the file list:', error));
+    </script>
 </body>
 </html>

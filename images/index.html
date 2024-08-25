@@ -30,12 +30,12 @@
     </style>
 </head>
 <body>
-    <h1>GitHub Image List</h1>
+    <h1>Image List</h1>
     <button id="goBack">Go Back</button>
     <ul id="imageList"></ul>
 
     <script>
-        const repo = 'S4IL21/S4IL21.github.io'; // Replace with your repo
+        const repo = 'S4IL21/S4IL21.github.io'; // GitHub repository
         const baseDir = 'images'; // Base directory in the repo
         let currentPath = baseDir; // Initialize current path
         const imageList = document.getElementById('imageList');
@@ -59,7 +59,7 @@
                                 currentPath = `${path}/${file.name}`;
                                 fetchDirectory(currentPath);
                             });
-                        } else if (file.type === 'file' && /\.(jpg|png|gif)$/.test(file.name)) {
+                        } else if (file.type === 'file' && /\.(jpg|png|gif|svg)$/.test(file.name)) {
                             link.href = `https://s4il.is-a.dev/${currentPath}/${file.name}`;
                             link.textContent = file.name;
                         }

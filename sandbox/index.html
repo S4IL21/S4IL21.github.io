@@ -24,8 +24,12 @@
             border: 1px solid #ccc;
         }
 
-        #controls button {
+        #controls button, #controls input {
             margin: 5px;
+        }
+
+        #sizeControl {
+            width: 100%;
         }
     </style>
 </head>
@@ -36,6 +40,8 @@
         <button onclick="setShape('triangle')">Triangle</button>
         <button onclick="setShape('pentagon')">Pentagon</button>
         <button onclick="deleteAll()">Delete All</button>
+        <label for="sizeControl">Size:</label>
+        <input type="range" id="sizeControl" min="10" max="100" value="20">
     </div>
     <canvas id="gameCanvas"></canvas>
     <script>
@@ -43,10 +49,18 @@
         const ctx = canvas.getContext('2d');
         const gravity = 0.5;
 
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        // Update canvas size to match window size
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        // Initialize canvas size
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
 
         let currentShape = 'square'; // Default shape
+        let currentSize = parseInt(document.getElementById('sizeControl').value);
 
         function setShape(shape) {
             currentShape = shape;
@@ -55,6 +69,10 @@
         function deleteAll() {
             particles.length = 0;
         }
+
+        document.getElementById('sizeControl').addEventListener('input', (event) => {
+            currentSize = parseInt(event.target.value);
+        });
 
         class Particle {
             constructor(x, y, size, shape) {
@@ -81,7 +99,8 @@
                     ctx.closePath();
                 } else if (this.shape === 'pentagon') {
                     const angle = Math.PI * 2 / 5;
-                    for (let i = 0; i < 5; i++) {
+                    ctx.moveTo(this.x + this.size / 2 * Math.cos(0), this.y + this.size / 2 * Math.sin(0));
+                    for (let i = 1; i < 5; i++) {
                         ctx.lineTo(this.x + this.size / 2 * Math.cos(i * angle), this.y + this.size / 2 * Math.sin(i * angle));
                     }
                     ctx.closePath();
@@ -173,9 +192,10 @@
         });
 
         function createParticles(event) {
-            const x = event.clientX - canvas.offsetLeft;
-            const y = event.clientY - canvas.offsetTop;
-            particles.push(new Particle(x - 10, y - 10, 20, currentShape));
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            particles.push(new Particle(x - currentSize / 2, y - currentSize / 2, currentSize, currentShape));
         }
 
         function detectCollisions() {

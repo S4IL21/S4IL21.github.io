@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sandbox Game</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            background: #eee;
+        }
+
+        #controls {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        #controls button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="controls">
+        <button onclick="setShape('square')">Square</button>
+        <button onclick="setShape('circle')">Circle</button>
+        <button onclick="setShape('triangle')">Triangle</button>
+        <button onclick="setShape('pentagon')">Pentagon</button>
+        <button onclick="deleteAll()">Delete All</button>
+    </div>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const gravity = 0.5;
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let currentShape = 'square'; // Default shape
+
+        function setShape(shape) {
+            currentShape = shape;
+        }
+
+        function deleteAll() {
+            particles.length = 0;
+        }
+
+        class Particle {
+            constructor(x, y, size, shape) {
+                this.x = x;
+                this.y = y;
+                this.size = size;
+                this.shape = shape;
+                this.dy = 0;
+                this.dx = 0;
+                this.friction = 0.98;
+            }
+
+            draw() {
+                ctx.fillStyle = '#333';
+                ctx.beginPath();
+                if (this.shape === 'square') {
+                    ctx.fillRect(this.x, this.y, this.size, this.size);
+                } else if (this.shape === 'circle') {
+                    ctx.arc(this.x + this.size / 2, this.y + this.size / 2, this.size / 2, 0, Math.PI * 2);
+                } else if (this.shape === 'triangle') {
+                    ctx.moveTo(this.x + this.size / 2, this.y);
+                    ctx.lineTo(this.x + this.size, this.y + this.size);
+                    ctx.lineTo(this.x, this.y + this.size);
+                    ctx.closePath();
+                } else if (this.shape === 'pentagon') {
+                    const angle = Math.PI * 2 / 5;
+                    for (let i = 0; i < 5; i++) {
+                        ctx.lineTo(this.x + this.size / 2 * Math.cos(i * angle), this.y + this.size / 2 * Math.sin(i * angle));
+                    }
+                    ctx.closePath();
+                }
+                ctx.fill();
+            }
+
+            update() {
+                this.dy += gravity;
+                this.y += this.dy;
+                this.x += this.dx;
+
+                // Apply friction
+                this.dx *= this.friction;
+                this.dy *= this.friction;
+
+                // Check for floor collision
+                if (this.y + this.size > canvas.height) {
+                    this.y = canvas.height - this.size;
+                    this.dy *= -0.8; // Bounce effect
+                }
+
+                // Check for wall collisions
+                if (this.x + this.size > canvas.width) {
+                    this.x = canvas.width - this.size;
+                    this.dx *= -0.8;
+                }
+                if (this.x < 0) {
+                    this.x = 0;
+                    this.dx *= -0.8;
+                }
+            }
+
+            collide(other) {
+                if (this.shape === 'square' && other.shape === 'square') {
+                    return !(this.x + this.size < other.x ||
+                             this.x > other.x + other.size ||
+                             this.y + this.size < other.y ||
+                             this.y > other.y + other.size);
+                } else if (this.shape === 'circle' && other.shape === 'circle') {
+                    const dx = this.x + this.size / 2 - (other.x + other.size / 2);
+                    const dy = this.y + this.size / 2 - (other.y + other.size / 2);
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    return distance < this.size / 2 + other.size / 2;
+                } else if (this.shape === 'square' && other.shape === 'circle') {
+                    const closestX = Math.max(other.x, Math.min(this.x + this.size, other.x + other.size));
+                    const closestY = Math.max(other.y, Math.min(this.y + this.size, other.y + other.size));
+                    const dx = closestX - (this.x + this.size / 2);
+                    const dy = closestY - (this.y + this.size / 2);
+                    return dx * dx + dy * dy < (this.size / 2) * (this.size / 2);
+                } else if (this.shape === 'circle' && other.shape === 'square') {
+                    return other.collide(this);
+                } else if (this.shape === 'triangle' && other.shape === 'triangle') {
+                    // Basic triangle-triangle collision detection
+                    return false; // Placeholder: Requires more advanced handling
+                } else if (this.shape === 'pentagon' && other.shape === 'pentagon') {
+                    // Basic pentagon-pentagon collision detection
+                    return false; // Placeholder: Requires more advanced handling
+                } else if (this.shape === 'triangle' && other.shape === 'circle') {
+                    // Triangle-circle collision detection
+                    const closestX = Math.max(other.x, Math.min(this.x + this.size, other.x + other.size));
+                    const closestY = Math.max(other.y, Math.min(this.y + this.size, other.y + other.size));
+                    const dx = closestX - (this.x + this.size / 2);
+                    const dy = closestY - (this.y + this.size / 2);
+                    return dx * dx + dy * dy < (other.size / 2) * (other.size / 2);
+                } else if (this.shape === 'circle' && other.shape === 'triangle') {
+                    return other.collide(this);
+                }
+                return false;
+            }
+        }
+
+        const particles = [];
+        let isMouseDown = false;
+
+        canvas.addEventListener('mousedown', (event) => {
+            isMouseDown = true;
+            createParticles(event);
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isMouseDown = false;
+        });
+
+        canvas.addEventListener('mousemove', (event) => {
+            if (isMouseDown) {
+                createParticles(event);
+            }
+        });
+
+        function createParticles(event) {
+            const x = event.clientX - canvas.offsetLeft;
+            const y = event.clientY - canvas.offsetTop;
+            particles.push(new Particle(x - 10, y - 10, 20, currentShape));
+        }
+
+        function detectCollisions() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    if (particles[i].collide(particles[j])) {
+                        // Basic collision response: exchange velocities
+                        const tempDx = particles[i].dx;
+                        const tempDy = particles[i].dy;
+                        particles[i].dx = particles[j].dx;
+                        particles[i].dy = particles[j].dy;
+                        particles[j].dx = tempDx;
+                        particles[j].dy = tempDy;
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            detectCollisions();
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>

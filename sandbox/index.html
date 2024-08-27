@@ -9,12 +9,10 @@
             margin: 0;
             overflow: hidden;
         }
-
         canvas {
             display: block;
             background: #eee;
         }
-
         #controls {
             position: fixed;
             top: 10px;
@@ -23,11 +21,9 @@
             padding: 10px;
             border: 1px solid #ccc;
         }
-
         #controls button, #controls input {
             margin: 5px;
         }
-
         #sizeControl {
             width: 100%;
         }
@@ -38,7 +34,10 @@
         <button onclick="setShape('square')">Square</button>
         <button onclick="setShape('circle')">Circle</button>
         <button onclick="setShape('triangle')">Triangle</button>
-        <button onclick="setShape('pentagon')">Pentagon</button>
+        <button onclick="setShape('hexagon')">Hexagon</button>
+        <button onclick="setTool('anchor')">Anchor</button>
+        <button onclick="setTool('unanchor')">Unanchor</button>
+        <button onclick="setTool('delete')">Delete</button>
         <button onclick="deleteAll()">Delete All</button>
         <label for="sizeControl">Size:</label>
         <input type="range" id="sizeControl" min="10" max="100" value="20">
@@ -49,21 +48,25 @@
         const ctx = canvas.getContext('2d');
         const gravity = 0.5;
 
-        // Update canvas size to match window size
+        // Resize canvas to fit the window
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         }
-
-        // Initialize canvas size
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
 
-        let currentShape = 'square'; // Default shape
+        let currentShape = 'square'; 
+        let currentTool = 'create'; 
         let currentSize = parseInt(document.getElementById('sizeControl').value);
 
         function setShape(shape) {
             currentShape = shape;
+            currentTool = 'create';
+        }
+
+        function setTool(tool) {
+            currentTool = tool;
         }
 
         function deleteAll() {
@@ -83,32 +86,47 @@
                 this.dy = 0;
                 this.dx = 0;
                 this.friction = 0.98;
+                this.anchored = false;
             }
 
             draw() {
-                ctx.fillStyle = '#333';
+                ctx.fillStyle = this.anchored ? '#ff6347' : '#333';
                 ctx.beginPath();
                 if (this.shape === 'square') {
                     ctx.fillRect(this.x, this.y, this.size, this.size);
                 } else if (this.shape === 'circle') {
                     ctx.arc(this.x + this.size / 2, this.y + this.size / 2, this.size / 2, 0, Math.PI * 2);
+                    ctx.fill();
                 } else if (this.shape === 'triangle') {
                     ctx.moveTo(this.x + this.size / 2, this.y);
                     ctx.lineTo(this.x + this.size, this.y + this.size);
                     ctx.lineTo(this.x, this.y + this.size);
                     ctx.closePath();
-                } else if (this.shape === 'pentagon') {
-                    const angle = Math.PI * 2 / 5;
-                    ctx.moveTo(this.x + this.size / 2 * Math.cos(0), this.y + this.size / 2 * Math.sin(0));
-                    for (let i = 1; i < 5; i++) {
-                        ctx.lineTo(this.x + this.size / 2 * Math.cos(i * angle), this.y + this.size / 2 * Math.sin(i * angle));
-                    }
-                    ctx.closePath();
+                    ctx.fill();
+                } else if (this.shape === 'hexagon') {
+                    this.drawPolygon(6);
+                    ctx.fill();
                 }
-                ctx.fill();
+            }
+
+            drawPolygon(sides) {
+                const angle = Math.PI * 2 / sides;
+                ctx.moveTo(
+                    this.x + this.size / 2 + this.size / 2 * Math.cos(0),
+                    this.y + this.size / 2 + this.size / 2 * Math.sin(0)
+                );
+                for (let i = 1; i <= sides; i++) {
+                    ctx.lineTo(
+                        this.x + this.size / 2 + this.size / 2 * Math.cos(i * angle),
+                        this.y + this.size / 2 + this.size / 2 * Math.sin(i * angle)
+                    );
+                }
+                ctx.closePath();
             }
 
             update() {
+                if (this.anchored) return;
+
                 this.dy += gravity;
                 this.y += this.dy;
                 this.x += this.dx;
@@ -153,21 +171,6 @@
                     return dx * dx + dy * dy < (this.size / 2) * (this.size / 2);
                 } else if (this.shape === 'circle' && other.shape === 'square') {
                     return other.collide(this);
-                } else if (this.shape === 'triangle' && other.shape === 'triangle') {
-                    // Basic triangle-triangle collision detection
-                    return false; // Placeholder: Requires more advanced handling
-                } else if (this.shape === 'pentagon' && other.shape === 'pentagon') {
-                    // Basic pentagon-pentagon collision detection
-                    return false; // Placeholder: Requires more advanced handling
-                } else if (this.shape === 'triangle' && other.shape === 'circle') {
-                    // Triangle-circle collision detection
-                    const closestX = Math.max(other.x, Math.min(this.x + this.size, other.x + other.size));
-                    const closestY = Math.max(other.y, Math.min(this.y + this.size, other.y + other.size));
-                    const dx = closestX - (this.x + this.size / 2);
-                    const dy = closestY - (this.y + this.size / 2);
-                    return dx * dx + dy * dy < (other.size / 2) * (other.size / 2);
-                } else if (this.shape === 'circle' && other.shape === 'triangle') {
-                    return other.collide(this);
                 }
                 return false;
             }
@@ -178,7 +181,7 @@
 
         canvas.addEventListener('mousedown', (event) => {
             isMouseDown = true;
-            createParticles(event);
+            handleMouseDown(event);
         });
 
         canvas.addEventListener('mouseup', () => {
@@ -186,20 +189,83 @@
         });
 
         canvas.addEventListener('mousemove', (event) => {
-            if (isMouseDown) {
-                createParticles(event);
+            if (isMouseDown && currentTool === 'create') {
+                const rect = canvas.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+                createParticles(x, y);
             }
         });
 
-        function createParticles(event) {
+        function handleMouseDown(event) {
             const rect = canvas.getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
+
+            if (currentTool === 'create') {
+                createParticles(x, y);
+            } else if (currentTool === 'anchor') {
+                anchorParticle(x, y);
+            } else if (currentTool === 'unanchor') {
+                unanchorParticle(x, y);
+            } else if (currentTool === 'delete') {
+                deleteParticle(x, y);
+            }
+        }
+
+        function createParticles(x, y) {
             particles.push(new Particle(x - currentSize / 2, y - currentSize / 2, currentSize, currentShape));
         }
 
-        function detectCollisions() {
-            for (let i = 0; i < particles.length; i++) {
+        function anchorParticle(x, y) {
+            for (let particle of particles) {
+                if (isInsideParticle(particle, x, y)) {
+                    particle.anchored = true;
+                    break;
+                }
+            }
+        }
+
+        function unanchorParticle(x, y) {
+            for (let particle of particles) {
+                if (isInsideParticle(particle, x, y)) {
+                    particle.anchored = false;
+                    break;
+                }
+            }
+        }
+
+        function deleteParticle(x, y) {
+            for (let i = particles.length - 1; i >= 0; i--) {
+                if (isInsideParticle(particles[i], x, y)) {
+                    particles.splice(i, 1);
+                    break;
+                }
+            }
+        }
+
+        function isInsideParticle(particle, x, y) {
+            if (particle.shape === 'square') {
+                return x >= particle.x && x <= particle.x + particle.size &&
+                       y >= particle.y && y <= particle.y + particle.size;
+            } else if (particle.shape === 'circle') {
+                const dx = x - (particle.x + particle.size / 2);
+                const dy = y - (particle.y + particle.size / 2);
+                return dx * dx + dy * dy <= (particle.size / 2) * (particle.size / 2);
+                } else if (particle.shape === 'triangle') {
+                // Simplified bounding box check for the triangle
+                return x >= particle.x && x <= particle.x + particle.size &&
+                       y >= particle.y && y <= particle.y + particle.size;
+                } else if (particle.shape === 'hexagon') {
+                // Simplified bounding box check for the hexagon
+                return x >= particle.x && x <= particle.x + particle.size &&
+                       y >= particle.y && y <= particle.y + particle.size;
+                }
+                return false;
+                }
+
+                function detectCollisions() {
+                for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     if (particles[i].collide(particles[j])) {
                         // Basic collision response: exchange velocities
@@ -211,23 +277,23 @@
                         particles[j].dy = tempDy;
                     }
                 }
-            }
-        }
+                }
+                }
 
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+                function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            particles.forEach(particle => {
+                particles.forEach(particle => {
                 particle.update();
                 particle.draw();
-            });
+                });
 
-            detectCollisions();
+                detectCollisions();
 
-            requestAnimationFrame(animate);
-        }
+                requestAnimationFrame(animate);
+                }
 
-        animate();
-    </script>
-</body>
-</html>
+                animate();
+                </script>
+                </body>
+                </html>

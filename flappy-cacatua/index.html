@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="S4IL is a dev!"> <!-- CAN EDIT -->
+  <meta property="og:image" content="/images/round-logo.png"> <!-- CAN EDIT -->
+  <meta property="og:description" content="Hello, I'm S4IL! The Chill 🤙 This the cacatua game! :]"> <!-- CAN EDIT -->
+  <meta name="theme-color" content="#0079F2"> <!-- CAN EDIT (use same value as the --button-primary-default variable in style.css) -->
+
+  <meta name="description" content="Hello, I'm S4IL! The Chill 🤙 This is the cacatua game! :]">
+  
+  <title>S4IL is a dev!</title>
+  <link rel="shortcut icon" href="/images/round-logo.png">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap'); /* Nueva fuente */
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #87CEEB; /* Azul cielo */
+            font-family: 'Roboto', sans-serif; /* Aplicar nueva fuente */
+        }
+
+        .game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .cacatua {
+            width: 100px;
+            height: 100px;
+            background: url('https://s4il.is-a.dev/flappy-cacatua/cacatua.png') no-repeat center center;
+            background-size: cover;
+            position: absolute;
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%) scaleX(-1); /* Invertir horizontalmente */
+        }
+
+        .obstacle {
+            position: absolute;
+            width: 60px;
+            background-color: #228B22; /* Verde para los obstáculos */
+        }
+
+        .obstacle-top {
+            height: 200px;
+            top: 0;
+        }
+
+        .obstacle-bottom {
+            height: 200px;
+            bottom: 0;
+        }
+
+        .hole {
+            position: absolute;
+            width: 60px;
+            background-color: transparent;
+        }
+
+        #score {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color: #fff;
+        }
+
+        #game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            display: none;
+            font-size: 48px; /* Texto más grande */
+        }
+
+        #restart-button,
+        #start-button {
+            margin-top: 20px;
+            padding: 20px 40px; /* Botón más grande */
+            font-size: 24px; /* Texto más grande */
+            background-color: #ff6347; /* Tomate */
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        #start-button {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        #title {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div id="score">Score: 0</div>
+        <div id="game-over">
+            <div>Game Over!</div>
+            <button id="restart-button">Volver a Jugar</button>
+        </div>
+        <div id="title">Flappy Cacatúa</div> <!-- Título agregado -->
+        <button id="start-button">Play</button>
+        <div class="cacatua" id="cacatua"></div>
+    </div>
+    <audio id="background-music" src="https://s4il.is-a.dev/flappy-cacatua/cacatua.mp3" loop></audio>
+    <script>
+        const cacatua = document.getElementById('cacatua');
+        const gameContainer = document.querySelector('.game-container');
+        const scoreElement = document.getElementById('score');
+        const gameOverElement = document.getElementById('game-over');
+        const restartButton = document.getElementById('restart-button');
+        const startButton = document.getElementById('start-button');
+        const backgroundMusic = document.getElementById('background-music');
+        const titleElement = document.getElementById('title');
+
+        const cacatuaWidth = cacatua.offsetWidth;
+        const cacatuaHeight = cacatua.offsetHeight;
+        const gravity = 0.6;
+        const lift = -10;
+        const obstacleWidth = 60;
+        const obstacleGap = 200; 
+        const obstacleSpeed = 3.5; /* Aumentar la velocidad del obstáculo */
+        const holeHeight = 100; 
+        const horizontalGap = 450; /* Aumentar el espacio horizontal entre obstáculos */
+
+        let cacatuaY = gameContainer.clientHeight / 2 - cacatuaHeight / 2;
+        let cacatuaVelocity = 0;
+        let obstacles = [];
+        let gameInterval;
+        let score = 0;
+        let gameStarted = false;
+
+        function startGame() {
+            titleElement.style.display = 'none';
+            startButton.style.display = 'none';
+            backgroundMusic.play(); // Iniciar la música cuando se presiona "Play"
+            document.addEventListener('keydown', flap);
+
+            // Mantener la cacatúa en el centro durante 2 segundos
+            setTimeout(() => {
+                if (!gameStarted) {
+                    gameStarted = true;
+                    gameInterval = setInterval(updateGame, 20);
+                    createObstacle();
+                }
+            }, 2000);
+        }
+
+        function flap(event) {
+            if (event.key === ' ' && !gameStarted) {
+                gameStarted = true;
+                gameInterval = setInterval(updateGame, 20);
+                createObstacle();
+            } else if (event.key === ' ') {
+                cacatuaVelocity = lift;
+            }
+        }
+
+        function updateGame() {
+            cacatuaVelocity += gravity;
+            cacatuaY += cacatuaVelocity;
+            cacatua.style.top = cacatuaY + 'px';
+
+            if (cacatuaY < 0 || cacatuaY + cacatuaHeight > gameContainer.clientHeight) {
+                endGame();
+            }
+
+            moveObstacles();
+            checkCollision();
+            if (obstacles.length === 0 || obstacles[obstacles.length - 1].x < gameContainer.clientWidth - horizontalGap) {
+                createObstacle();
+            }
+        }
+
+        function moveObstacles() {
+            for (let i = obstacles.length - 1; i >= 0; i--) {
+                const obs = obstacles[i];
+                obs.x -= obstacleSpeed;
+                obs.element.style.left = obs.x + 'px';
+
+                if (obs.x + obstacleWidth < 0) {
+                    obs.element.remove();
+                    obstacles.splice(i, 1);
+                    score += 0.3333333333; // Sumar 0.3 periódica (1/3)
+                    scoreElement.textContent = 'Score: ' + Math.round(score); // Redondear el score al número entero más cercano
+                }
+            }
+        }
+
+        function createObstacle() {
+            const gap = Math.floor(Math.random() * (gameContainer.clientHeight - holeHeight - obstacleGap)) + holeHeight;
+            const topHeight = gap - holeHeight;
+            const bottomHeight = gameContainer.clientHeight - gap - obstacleGap;
+
+            const obstacleTop = document.createElement('div');
+            obstacleTop.className = 'obstacle obstacle-top';
+            obstacleTop.style.height = topHeight + 'px';
+            obstacleTop.style.left = gameContainer.clientWidth + 'px';
+            gameContainer.appendChild(obstacleTop);
+
+            const hole = document.createElement('div');
+            hole.className = 'hole';
+            hole.style.height = holeHeight + 'px';
+            hole.style.left = gameContainer.clientWidth + 'px';
+            hole.style.top = topHeight + 'px';
+            gameContainer.appendChild(hole);
+
+            const obstacleBottom = document.createElement('div');
+            obstacleBottom.className = 'obstacle obstacle-bottom';
+            obstacleBottom.style.height = bottomHeight + 'px';
+            obstacleBottom.style.left = gameContainer.clientWidth + 'px';
+            gameContainer.appendChild(obstacleBottom);
+
+            obstacles.push({ element: obstacleTop, x: gameContainer.clientWidth });
+            obstacles.push({ element: hole, x: gameContainer.clientWidth });
+            obstacles.push({ element: obstacleBottom, x: gameContainer.clientWidth });
+        }
+
+        function checkCollision() {
+            for (const obs of obstacles) {
+                const obsRect = obs.element.getBoundingClientRect();
+                const cacatuaRect = cacatua.getBoundingClientRect();
+
+                if (
+                    cacatuaRect.left < obsRect.right &&
+                    cacatuaRect.right > obsRect.left &&
+                    cacatuaRect.top < obsRect.bottom &&
+                    cacatuaRect.bottom > obsRect.top
+                ) {
+                    // Comprobar si la cacatúa pasa por el agujero
+                    if (obs.element.classList.contains('hole')) {
+                        return; // Si está en el agujero, no hay colisión
+                    } else {
+                        endGame();
+                        return;
+                    }
+                }
+            }
+        }
+
+        function endGame() {
+            clearInterval(gameInterval);
+            document.removeEventListener('keydown', flap);
+            gameOverElement.style.display = 'block';
+        }
+
+        function restartGame() {
+            gameOverElement.style.display = 'none';
+            score = 0;
+            scoreElement.textContent = 'Score: 0';
+            cacatuaY = gameContainer.clientHeight;
+            cacatuaY = gameContainer.clientHeight / 2 - cacatuaHeight / 2;
+            cacatuaVelocity = 0;
+            cacatua.style.top = cacatuaY + 'px';
+
+            // Eliminar todos los obstáculos actuales
+            obstacles.forEach(obs => obs.element.remove());
+            obstacles = [];
+
+            gameStarted = false;
+
+            // Reiniciar el juego
+            startGame();
+            }
+
+            restartButton.addEventListener('click', restartGame);
+            startButton.addEventListener('click', startGame);
+            </script>
+            </body>
+            </html>

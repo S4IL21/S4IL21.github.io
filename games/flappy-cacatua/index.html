@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="Flappy Cacatúa"> <!-- CAN EDIT -->
-  <meta property="og:image" content="/games/cacatua.png"> <!-- CAN EDIT -->
+  <meta property="og:image" content="/games/flappy-cacatua/cacatua.png"> <!-- CAN EDIT -->
   <meta property="og:description" content="Hello, I'm S4IL! The Chill 🤙 This is the cacatúa game! :]"> <!-- CAN EDIT -->
   <meta name="theme-color" content="#0079F2"> <!-- CAN EDIT (use same value as the --button-primary-default variable in style.css) -->
 
   <meta name="description" content="Hello, I'm S4IL! The Chill 🤙 This is the cacatúa game! :]">
   
   <title>Flappy Cacatúa</title>
-  <link rel="shortcut icon" href="/games/cacatua.png">
+  <link rel="shortcut icon" href="/games/flappy-cacatua/cacatua.png">
   <head>
       <style>
           @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
@@ -34,7 +34,7 @@
           .cacatua {
               width: 100px;
               height: 100px;
-              background: url('https://s4il.is-a.dev/flappy-cacatua/cacatua.png') no-repeat center center;
+              background: url('https://s4il.is-a.dev/games/flappy-cacatua/cacatua.png') no-repeat center center;
               background-size: cover;
               position: absolute;
               left: 50px;
@@ -123,7 +123,7 @@
           <button id="start-button">Play</button>
           <div class="cacatua" id="cacatua"></div>
       </div>
-      <audio id="background-music" src="https://s4il.is-a.dev/flappy-cacatua/cacatua.mp3" loop></audio>
+      <audio id="background-music" src="https://s4il.is-a.dev/games/flappy-cacatua/cacatua.mp3" loop></audio>
       <script>
           const cacatua = document.getElementById('cacatua');
           const gameContainer = document.querySelector('.game-container');

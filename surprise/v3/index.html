@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="This is a surprise! What could it be? Only one way to find out!"> <!-- CAN EDIT -->
+  <meta property="og:image" content="/images/round-logo.png"> <!-- CAN EDIT -->
+  <meta property="og:description" content="Hello, I'm S4IL! The Chill 🤙 This is a surprise! :]"> <!-- CAN EDIT -->
+  <meta name="theme-color" content="#0079F2"> <!-- CAN EDIT (use same value as the --button-primary-default variable in style.css) -->
+
+  <meta name="description" content="Hello, I'm S4IL! The Chill 🤙 This is a surprise! :]">
+  
+  <title>Claim Surprise</title>
+<link rel="icon" href="/images/round-logo.png" type="image/x-icon"/>  <link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+<style>
+  body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+      perspective: 1200px; /* Ajusta la profundidad del efecto 3D */
+  }
+  .hidden {
+      display: none;
+  }
+  .button {
+      padding: 20px 40px;
+      font-size: 24px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.3s;
+  }
+  .button:hover {
+      background-color: #0056b3;
+      transform: scale(1.1);
+  }
+  .text {
+      font-size: 36px;
+      margin-top: 30px;
+      color: #333;
+  }
+  .image-container {
+      width: 300px; /* Aumenta el tamaño del contenedor de la imagen */
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+  .rotating-image {
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d; /* Permite la rotación 3D */
+      animation: rotate 5s linear infinite;
+  }
+  @keyframes rotate {
+      from {
+          transform: rotateY(0deg); /* Rote horizontalmente */
+      }
+      to {
+          transform: rotateY(360deg);
+      }
+  }
+  .audio {
+      display: none;
+  }
+</style>
+</head>
+<body>
+<button class="button" id="claimButton">Claim Surprise</button>
+
+<div class="hidden" id="surpriseContainer">
+  <div class="text">Get souprolled lololol</div>
+  <div class="image-container">
+      <img src="./soup.jpg" alt="Imagen Giratoria" class="rotating-image">
+  </div>
+  <audio class="audio" id="audio" src="./soup.mp3" autoplay></audio>
+</div>
+
+<script>
+  document.getElementById('claimButton').addEventListener('click', function() {
+      document.getElementById('claimButton').style.display = 'none';
+      document.getElementById('surpriseContainer').classList.remove('hidden');
+      document.getElementById('audio').play();
+  });
+</script>
+</body>
+</html>

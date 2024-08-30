@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Corruptor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        h1 {
+            color: #333;
+        }
+        #description {
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #555;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            display: inline-block;
+            max-width: 800px;
+            text-align: left;
+        }
+        #fileInputWrapper {
+            margin: 20px auto; /* Center the file input area */
+            border: 2px dashed #007bff;
+            padding: 30px; /* Increased padding to make the area bigger */
+            border-radius: 10px;
+            display: block;
+            width: 320px; /* Increased width */
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        #fileInputWrapper.dragover {
+            background-color: #e0e0e0;
+        }
+        #fileInputWrapper p {
+            margin: 0;
+            font-size: 18px; /* Increased font size */
+            color: #007bff;
+        }
+        #fileInput {
+            display: none;
+        }
+        #fileName {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #555;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        .language-switch {
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <div class="language-switch">
+            <button id="languageButton">Español</button>
+        </div>
+    </div>
+    <h1 id="headerTitle">File Corruptor</h1>
+    <div id="description">
+        <p>This tool allows you to upload a file and corrupt it by modifying its content. The corrupted file will have parts removed and garbage data added, making it unusable in most cases. 
+        <br><br>
+        It's designed to simulate file corruption, which can be used for testing purposes, educational demonstrations, or simply for fun. For example, if you haven't completed your homework on time, you can use this tool to create a corrupted file and tell your teacher that the file got damaged during the transfer! Just upload your file, and the tool will modify it in such a way that it becomes unreadable.
+        <br><br>
+        The corruption process works by altering the internal structure of the file, removing important data sections, and inserting random bytes, which causes most programs to fail when trying to open the file. This method ensures that the file is thoroughly corrupted, making it appear as though a genuine error occurred.
+        <br><br>
+        Remember, once a file is corrupted using this tool, it cannot be restored to its original state, so make sure to keep a backup of the original file if you need it.</p>
+    </div>
+
+    <div id="fileInputWrapper">
+        <input type="file" id="fileInput" />
+        <p id="fileInputText">Drag & Drop a file here or click to select one</p>
+    </div>
+    <div id="fileName"></div>
+    <button id="corruptButton">Corrupt and Download</button>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const fileInputWrapper = document.getElementById('fileInputWrapper');
+        const fileNameDisplay = document.getElementById('fileName');
+        const corruptButton = document.getElementById('corruptButton');
+        const languageButton = document.getElementById('languageButton');
+        const fileInputText = document.getElementById('fileInputText');
+        const headerTitle = document.getElementById('headerTitle');
+
+        let isSpanish = false;
+
+        fileInputWrapper.addEventListener('click', () => fileInput.click());
+
+        fileInputWrapper.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            fileInputWrapper.classList.add('dragover');
+        });
+
+        fileInputWrapper.addEventListener('dragleave', () => {
+            fileInputWrapper.classList.remove('dragover');
+        });
+
+        fileInputWrapper.addEventListener('drop', (event) => {
+            event.preventDefault();
+            fileInputWrapper.classList.remove('dragover');
+            fileInput.files = event.dataTransfer.files;
+            displayFileName();
+        });
+
+        fileInput.addEventListener('change', displayFileName);
+
+        function displayFileName() {
+            const file = fileInput.files[0];
+            if (file) {
+                fileNameDisplay.textContent = `Selected file: ${file.name}`;
+            }
+        }
+
+        corruptButton.addEventListener('click', function () {
+            const file = fileInput.files[0];
+
+            if (!file) {
+                alert(getLocalizedText('selectFileAlert'));
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                // Get file data
+                const arrayBuffer = event.target.result;
+
+                // Corrupt the file by deleting parts of it and appending garbage data
+                const byteArray = new Uint8Array(arrayBuffer);
+
+                // Corrupt by deleting the first 10 bytes
+                const corruptStart = 10;
+                const corruptEnd = byteArray.length - 10;
+                const corruptedData = new Uint8Array(corruptEnd - corruptStart + 30); // Add extra space for garbage data
+
+                for (let i = 0; i < corruptedData.length; i++) {
+                    if (i < corruptEnd - corruptStart) {
+                        corruptedData[i] = byteArray[corruptStart + i];
+                    } else {
+                        corruptedData[i] = Math.floor(Math.random() * 256); // Adding garbage data
+                    }
+                }
+
+                // Create a new Blob object with corrupted data
+                const corruptedBlob = new Blob([corruptedData], { type: file.type });
+
+                // Create a temporary link to download the corrupted file
+                const url = URL.createObjectURL(corruptedBlob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'corrupted_' + file.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                // Clean up the object URL
+                URL.revokeObjectURL(url);
+            };
+
+            reader.readAsArrayBuffer(file);
+        });
+
+        languageButton.addEventListener('click', () => {
+            isSpanish = !isSpanish;
+            updateLanguage();
+        });
+
+        function updateLanguage() {
+            if (isSpanish) {
+                document.getElementById('headerTitle').textContent = 'Corruptor de Archivos';
+                document.getElementById('fileInputText').textContent = 'Arrastra y suelta un archivo aquí o haz clic para seleccionar uno';
+                document.getElementById('corruptButton').textContent = 'Corromper y Descargar';
+                document.getElementById('languageButton').textContent = 'English';
+                document.getElementById('description').innerHTML = `
+                    <p>Esta herramienta te permite subir un archivo y corromperlo modificando su contenido. El archivo corrompido tendrá partes eliminadas y se le añadirá datos basura, haciéndolo inutilizable en la mayoría de los casos.
+                    <br><br>
+                    Está diseñado para simular la corrupción de archivos, lo que se puede utilizar con fines de prueba, demostraciones educativas o simplemente por diversión. Por ejemplo, si no has terminado tu tarea a tiempo, puedes usar esta herramienta para crear un archivo corrupto y decirle a tu profesor que el archivo se dañó durante la transferencia. ¡Solo sube tu archivo y la herramienta lo modificará de tal manera que sea ilegible!
+                    <br><br>
+                    El proceso de corrupción funciona alterando la estructura interna del archivo, eliminando secciones importantes de datos e insertando bytes aleatorios, lo que provoca que la mayoría de los programas fallen al intentar abrir el archivo. Este método asegura que el archivo esté completamente corrompido, dando la impresión de que ocurrió un error genuino.
+                    <br><br>
+                    Recuerda, una vez que un archivo está corrompido usando esta herramienta, no se puede restaurar a su estado original, así que asegúrate de mantener una copia de seguridad del archivo original si lo necesitas.</p>
+                `;
+            } else {
+                document.getElementById('headerTitle').textContent = 'File Corruptor';
+                document.getElementById('fileInputText').textContent = 'Drag & Drop a file here or click to select one';
+                document.getElementById('corruptButton').textContent = 'Corrupt and Download';
+                document.getElementById('languageButton').textContent = 'Español';
+                document.getElementById('description').innerHTML = `
+                    <p>This tool allows you to upload a file and corrupt it by modifying its content. The corrupted file will have parts removed and garbage data added, making it unusable in most cases.
+                    <br><br>
+                    It's designed to simulate file corruption, which can be used for testing purposes, educational demonstrations, or simply for fun. For example, if you haven't completed your homework on time, you can use this tool to create a corrupted file and tell your teacher that the file got damaged during the transfer! Just upload your file, and the tool will modify it in such a way that it becomes unreadable.
+                    <br><br>
+                    The corruption process works by altering the internal structure of the file, removing important data sections, and inserting random bytes, which causes most programs to fail when trying to open the file. This method ensures that the file is thoroughly corrupted, making it appear as though a genuine error occurred.
+                    <br><br>
+                    Remember, once a file is corrupted using this tool, it cannot be restored to its original state, so make sure to keep a backup of the original file if you need it.</p>
+                `;
+                }
+                }
+
+                function getLocalizedText(key) {
+                const texts = {
+                selectFileAlert: isSpanish ? 'Por favor, selecciona un archivo primero.' : 'Please select a file first.'
+                };
+                return texts[key];
+                }
+                </script>
+                </body>
+                </html>

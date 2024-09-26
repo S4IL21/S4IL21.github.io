@@ -3,94 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Encryptor and Decryptor</title>
+    <title>Text Encryptor & Decryptor</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            font-family: 'Arial', sans-serif;
+            background-color: #282c34;
+            color: #ffffff;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
+
         .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            background-color: #3c4043;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
             text-align: center;
         }
+
         h1 {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-bottom: 20px;
         }
+
         textarea {
             width: 100%;
             height: 100px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
+            margin-bottom: 20px;
+            border: 1px solid #cccccc;
             padding: 10px;
-            border-radius: 4px;
+            border-radius: 8px;
+            background-color: #20232a;
+            color: #ffffff;
+            font-size: 1rem;
         }
-        input[type="number"] {
-            width: 50px;
-            margin-bottom: 10px;
-            padding: 5px;
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            background-color: #20232a;
+            color: #ffffff;
+            font-size: 1rem;
         }
+
         button {
-            background-color: #28a745;
-            color: white;
+            background-color: #61dafb;
+            color: #000;
             border: none;
             padding: 10px;
             width: 100%;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 1rem;
             margin-top: 10px;
+            transition: background-color 0.3s ease;
         }
+
         button:hover {
-            background-color: #218838;
+            background-color: #21a1f1;
         }
+
         .output {
             margin-top: 20px;
             padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            background-color: #20232a;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
             min-height: 50px;
+            color: #61dafb;
+            font-size: 1rem;
         }
+
+        label {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>Encrypt & Decrypt</h1>
-    <textarea id="inputText" placeholder="Enter your message here..."></textarea>
-    <br>
-    <label for="key">Key (optional, default 3): </label>
-    <input type="number" id="key" value="3">
-    <br>
+    
+    <label for="inputText">Enter your message:</label>
+    <textarea id="inputText" placeholder="Type your message..."></textarea>
+
+    <label for="key">Key (Word or Symbol):</label>
+    <input type="text" id="key" placeholder="Enter key (optional)">
+    
     <button onclick="encrypt()">Encrypt</button>
     <button onclick="decrypt()">Decrypt</button>
-    <div class="output" id="outputText"></div>
+
+    <div class="output" id="outputText">Result will appear here...</div>
 </div>
 
 <script>
+    // Convert the key (string) into a shift value
+    function keyToShift(key) {
+        if (!key) return 3; // Default shift if no key is provided
+        return Array.from(key).reduce((sum, char) => sum + char.charCodeAt(0), 0) % 26;
+    }
+
+    // Encryption function
     function encrypt() {
         let text = document.getElementById("inputText").value;
-        let key = parseInt(document.getElementById("key").value) || 3;
-        let encryptedText = caesarCipher(text, key);
+        let key = document.getElementById("key").value;
+        let shift = keyToShift(key);
+        let encryptedText = caesarCipher(text, shift);
         document.getElementById("outputText").innerHTML = 'Encrypted: ' + encryptedText;
     }
 
+    // Decryption function
     function decrypt() {
         let text = document.getElementById("inputText").value;
-        let key = parseInt(document.getElementById("key").value) || 3;
-        let decryptedText = caesarCipher(text, -key);
+        let key = document.getElementById("key").value;
+        let shift = keyToShift(key);
+        let decryptedText = caesarCipher(text, -shift);
         document.getElementById("outputText").innerHTML = 'Decrypted: ' + decryptedText;
     }
 
+    // Caesar Cipher Algorithm
     function caesarCipher(str, shift) {
         return str
             .split('')
@@ -98,10 +140,11 @@
             .join('');
     }
 
+    // Function to shift individual characters
     function shiftChar(char, shift) {
-        if (!char.match(/[a-zA-Z]/)) return char;
+        if (!char.match(/[a-zA-Z]/)) return char; // Non-alphabetical characters stay the same
         const charCode = char.charCodeAt(0);
-        const base = charCode >= 65 && charCode <= 90 ? 65 : 97;
+        const base = charCode >= 65 && charCode <= 90 ? 65 : 97; // Check if upper or lower case
         return String.fromCharCode(((charCode - base + shift) % 26 + 26) % 26 + base);
     }
 </script>

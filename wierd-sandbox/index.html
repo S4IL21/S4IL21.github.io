@@ -35,6 +35,10 @@
         <button onclick="setShape('circle')">Circle</button>
         <button onclick="setShape('triangle')">Triangle</button>
         <button onclick="setShape('hexagon')">Hexagon</button>
+        <button onclick="setShape('pentagon')">Pentagon</button>
+        <button onclick="setShape('star')">Star</button>
+        <button onclick="setShape('octagon')">Octagon</button>
+        <button onclick="setShape('diamond')">Diamond</button>
         <button onclick="setTool('anchor')">Anchor</button>
         <button onclick="setTool('unanchor')">Unanchor</button>
         <button onclick="setTool('delete')">Delete</button>
@@ -48,7 +52,7 @@
         const ctx = canvas.getContext('2d');
         const gravity = 0.5;
 
-        // Resize canvas to fit the window
+        // Resize canvas
         function resizeCanvas() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -87,25 +91,47 @@
                 this.dx = 0;
                 this.friction = 0.98;
                 this.anchored = false;
+                this.bounceFactor = 0.8;
             }
 
             draw() {
                 ctx.fillStyle = this.anchored ? '#ff6347' : '#333';
                 ctx.beginPath();
-                if (this.shape === 'square') {
-                    ctx.fillRect(this.x, this.y, this.size, this.size);
-                } else if (this.shape === 'circle') {
-                    ctx.arc(this.x + this.size / 2, this.y + this.size / 2, this.size / 2, 0, Math.PI * 2);
-                    ctx.fill();
-                } else if (this.shape === 'triangle') {
-                    ctx.moveTo(this.x + this.size / 2, this.y);
-                    ctx.lineTo(this.x + this.size, this.y + this.size);
-                    ctx.lineTo(this.x, this.y + this.size);
-                    ctx.closePath();
-                    ctx.fill();
-                } else if (this.shape === 'hexagon') {
-                    this.drawPolygon(6);
-                    ctx.fill();
+                switch (this.shape) {
+                    case 'square':
+                        ctx.fillRect(this.x, this.y, this.size, this.size);
+                        break;
+                    case 'circle':
+                        ctx.arc(this.x + this.size / 2, this.y + this.size / 2, this.size / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                        break;
+                    case 'triangle':
+                        ctx.moveTo(this.x + this.size / 2, this.y);
+                        ctx.lineTo(this.x + this.size, this.y + this.size);
+                        ctx.lineTo(this.x, this.y + this.size);
+                        ctx.closePath();
+                        ctx.fill();
+                        break;
+                    case 'hexagon':
+                        this.drawPolygon(6);
+                        ctx.fill();
+                        break;
+                    case 'pentagon':
+                        this.drawPolygon(5);
+                        ctx.fill();
+                        break;
+                    case 'star':
+                        this.drawStar();
+                        ctx.fill();
+                        break;
+                    case 'octagon':
+                        this.drawPolygon(8);
+                        ctx.fill();
+                        break;
+                    case 'diamond':
+                        this.drawDiamond();
+                        ctx.fill();
+                        break;
                 }
             }
 
@@ -124,53 +150,100 @@
                 ctx.closePath();
             }
 
+            drawStar() {
+                const spikes = 5;
+                const outerRadius = this.size / 2;
+                const innerRadius = this.size / 4;
+                let rot = Math.PI / 2 * 3;
+                let step = Math.PI / spikes;
+
+                ctx.moveTo(this.x + this.size / 2, this.y);
+                for (let i = 0; i < spikes; i++) {
+                    ctx.lineTo(
+                        this.x + this.size / 2 + Math.cos(rot) * outerRadius,
+                        this.y + this.size / 2 + Math.sin(rot) * outerRadius
+                    );
+                    rot += step;
+                    ctx.lineTo(
+                        this.x + this.size / 2 + Math.cos(rot) * innerRadius,
+                        this.y + this.size / 2 + Math.sin(rot) * innerRadius
+                    );
+                    rot += step;
+                }
+                ctx.closePath();
+            }
+
+            drawDiamond() {
+                ctx.moveTo(this.x + this.size / 2, this.y);
+                ctx.lineTo(this.x + this.size, this.y + this.size / 2);
+                ctx.lineTo(this.x + this.size / 2, this.y + this.size);
+                ctx.lineTo(this.x, this.y + this.size / 2);
+                ctx.closePath();
+            }
+
             update() {
-                if (this.anchored) return;
+                if (this.anchored) return;  // No movement if anchored
 
                 this.dy += gravity;
                 this.y += this.dy;
                 this.x += this.dx;
 
-                // Apply friction
                 this.dx *= this.friction;
                 this.dy *= this.friction;
 
-                // Check for floor collision
+                // Stop at the floor
                 if (this.y + this.size > canvas.height) {
                     this.y = canvas.height - this.size;
-                    this.dy *= -0.8; // Bounce effect
+                    this.dy = 0;
                 }
-
-                // Check for wall collisions
                 if (this.x + this.size > canvas.width) {
                     this.x = canvas.width - this.size;
-                    this.dx *= -0.8;
+                    this.dx = 0;
                 }
                 if (this.x < 0) {
                     this.x = 0;
-                    this.dx *= -0.8;
+                    this.dx = 0;
                 }
             }
 
+            // Collision logic
             collide(other) {
-                if (this.shape === 'square' && other.shape === 'square') {
-                    return !(this.x + this.size < other.x ||
-                             this.x > other.x + other.size ||
-                             this.y + this.size < other.y ||
-                             this.y > other.y + other.size);
-                } else if (this.shape === 'circle' && other.shape === 'circle') {
-                    const dx = this.x + this.size / 2 - (other.x + other.size / 2);
-                    const dy = this.y + this.size / 2 - (other.y + other.size / 2);
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    return distance < this.size / 2 + other.size / 2;
-                } else if (this.shape === 'square' && other.shape === 'circle') {
-                    const closestX = Math.max(other.x, Math.min(this.x + this.size, other.x + other.size));
-                    const closestY = Math.max(other.y, Math.min(this.y + this.size, other.y + other.size));
-                    const dx = closestX - (this.x + this.size / 2);
-                    const dy = closestY - (this.y + this.size / 2);
-                    return dx * dx + dy * dy < (this.size / 2) * (this.size / 2);
-                } else if (this.shape === 'circle' && other.shape === 'square') {
-                    return other.collide(this);
+                if (this.anchored || other.anchored) {
+                    return this.collideStatic(other);  // Static collision if one is anchored
+                }
+                return this.collideDynamic(other);
+            }
+
+            collideStatic(other) {
+                // Basic bounding box check
+                if (this.x < other.x + other.size &&
+                    this.x + this.size > other.x &&
+                    this.y < other.y + other.size &&
+                    this.y + this.size > other.y) {
+                    this.dy = 0;
+                    this.dx = 0;
+                    this.y = other.y - this.size;  // Position on top of the other
+                    return true;
+                }
+                return false;
+            }
+
+            collideDynamic(other) {
+                // Basic bounding box check
+                if (this.x < other.x + other.size &&
+                    this.x + this.size > other.x &&
+                    this.y < other.y + other.size &&
+                    this.y + this.size > other.y) {
+                    // Swap velocities for basic bouncing effect
+                    let tempDx = this.dx;
+                    let tempDy = this.dy;
+                    this.dx = other.dx;
+                    this.dy = other.dy;
+                    other.dx = tempDx;
+                    other.dy = tempDy;
+
+                    this.y = other.y - this.size;  // Ensure no overlap
+                    return true;
                 }
                 return false;
             }
@@ -221,6 +294,8 @@
             for (let particle of particles) {
                 if (isInsideParticle(particle, x, y)) {
                     particle.anchored = true;
+                    particle.dy = 0;  // Stop motion
+                    particle.dx = 0;
                     break;
                 }
             }
@@ -245,55 +320,33 @@
         }
 
         function isInsideParticle(particle, x, y) {
-            if (particle.shape === 'square') {
-                return x >= particle.x && x <= particle.x + particle.size &&
-                       y >= particle.y && y <= particle.y + particle.size;
-            } else if (particle.shape === 'circle') {
-                const dx = x - (particle.x + particle.size / 2);
-                const dy = y - (particle.y + particle.size / 2);
-                return dx * dx + dy * dy <= (particle.size / 2) * (particle.size / 2);
-                } else if (particle.shape === 'triangle') {
-                // Simplified bounding box check for the triangle
-                return x >= particle.x && x <= particle.x + particle.size &&
-                       y >= particle.y && y <= particle.y + particle.size;
-                } else if (particle.shape === 'hexagon') {
-                // Simplified bounding box check for the hexagon
-                return x >= particle.x && x <= particle.x + particle.size &&
-                       y >= particle.y && y <= particle.y + particle.size;
-                }
-                return false;
-                }
+            // Basic bounding box detection for clicks
+            return x >= particle.x && x <= particle.x + particle.size &&
+                   y >= particle.y && y <= particle.y + particle.size;
+        }
 
-                function detectCollisions() {
-                for (let i = 0; i < particles.length; i++) {
+        function detectCollisions() {
+            for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
-                    if (particles[i].collide(particles[j])) {
-                        // Basic collision response: exchange velocities
-                        const tempDx = particles[i].dx;
-                        const tempDy = particles[i].dy;
-                        particles[i].dx = particles[j].dx;
-                        particles[i].dy = particles[j].dy;
-                        particles[j].dx = tempDx;
-                        particles[j].dy = tempDy;
-                    }
+                    particles[i].collide(particles[j]);
                 }
-                }
-                }
+            }
+        }
 
-                function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-                particles.forEach(particle => {
+            particles.forEach(particle => {
                 particle.update();
                 particle.draw();
-                });
+            });
 
-                detectCollisions();
+            detectCollisions();
 
-                requestAnimationFrame(animate);
-                }
+            requestAnimationFrame(animate);
+        }
 
-                animate();
-                </script>
-                </body>
-                </html>
+        animate();
+    </script>
+</body>
+</html>

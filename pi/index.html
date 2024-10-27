@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pi Digits Infinite Scroll</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      background-color: #f4f4f4;
+    }
+    .container {
+      width: 90%;
+      max-width: 600px;
+      margin-top: 20px;
+      font-size: 1.5em;
+      line-height: 1.6;
+      color: #333;
+    }
+    .digit {
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="piContainer">
+    <h1>Digits of Pi</h1>
+    <p>3.</p>
+    <div id="piDigits"></div>
+  </div>
+
+  <script>
+    // Array of Pi digits for demonstration
+    // You can get more Pi digits as needed.
+    const piDigits = "1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019".split("");
+
+    let digitIndex = 0; // To keep track of the current digit index
+
+    function loadMoreDigits() {
+      const container = document.getElementById("piDigits");
+      const fragment = document.createDocumentFragment();
+      for (let i = 0; i < 100; i++) {
+        if (digitIndex >= piDigits.length) {
+          digitIndex = 0; // Restart if we reach the end
+        }
+        const span = document.createElement("span");
+        span.className = "digit";
+        span.textContent = piDigits[digitIndex];
+        fragment.appendChild(span);
+        digitIndex++;
+      }
+      container.appendChild(fragment);
+    }
+
+    // Initial load
+    loadMoreDigits();
+
+    // Infinite scroll event
+    window.addEventListener("scroll", () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
+        loadMoreDigits();
+      }
+    });
+  </script>
+</body>
+</html>

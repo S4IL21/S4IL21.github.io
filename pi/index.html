@@ -34,35 +34,59 @@
   </div>
 
   <script>
-    // Array of Pi digits for demonstration; extend as needed.
-    const piDigits = "1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019".split("");
+    let digitIndex = 0; // To track the current digit index
 
-    let digitIndex = 0; // Current digit index
-
-    // Function to load a specific number of digits
-    function loadMoreDigits(count) {
-      const container = document.getElementById("piDigits");
-      const fragment = document.createDocumentFragment();
-      for (let i = 0; i < count; i++) {
-        if (digitIndex >= piDigits.length) {
-          digitIndex = 0; // Loop back if we reach the end of the array
+    // Function to calculate a single hexadecimal digit of Pi at position n using the BBP formula
+    function piHexDigit(n) {
+      function hexSeries(m, n) {
+        let sum = 0.0;
+        let k = 0;
+        while (k < n) {
+          sum += (1 / Math.pow(16, k)) * ((4 / (8 * k + m)) - (2 / (8 * k + m + 1)) - (1 / (8 * k + m + 4)) - (1 / (8 * k + m + 5)));
+          k++;
         }
-        const span = document.createElement("span");
-        span.className = "digit";
-        span.textContent = piDigits[digitIndex];
-        fragment.appendChild(span);
-        digitIndex++;
+        return sum;
       }
-      container.appendChild(fragment);
+      
+      let sum = 4 * hexSeries(1, n) - 2 * hexSeries(4, n) - hexSeries(5, n) - hexSeries(6, n);
+      sum = sum - Math.floor(sum);
+      return Math.floor(sum * 16);
     }
 
-    // Initial load with more digits
-    loadMoreDigits(500);
+    // Function to get n digits of Pi in base 10 by calculating hexadecimal digits and converting
+    function getPiDigits(n) {
+      let piDigits = "";
+      for (let i = 0; i < n; i++) {
+        const hexDigit = piHexDigit(digitIndex + i).toString(16);
+        piDigits += hexDigit;
+      }
+      digitIndex += n;
+      return piDigits;
+    }
 
-    // Scroll event to load more digits when reaching the page bottom
+    // Function to load more digits of Pi and append them to the container
+    function loadMoreDigits(count) {
+      const piContainer = document.getElementById("piDigits");
+      const fragment = document.createDocumentFragment();
+      const newDigits = getPiDigits(count);
+
+      for (let i = 0; i < newDigits.length; i++) {
+        const span = document.createElement("span");
+        span.className = "digit";
+        span.textContent = newDigits[i];
+        fragment.appendChild(span);
+      }
+      
+      piContainer.appendChild(fragment);
+    }
+
+    // Initial load of 100 digits
+    loadMoreDigits(100);
+
+    // Infinite scroll event listener
     window.addEventListener("scroll", () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-        loadMoreDigits(100); // Load 100 more digits on each scroll
+        loadMoreDigits(50); // Load 50 more digits when reaching the bottom
       }
     });
   </script>

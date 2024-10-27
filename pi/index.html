@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infinite Pi Digits Scroll</title>
+  <title>Infinite Pi Decimals</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,82 +11,62 @@
       padding: 0;
       display: flex;
       justify-content: center;
+      align-items: center;
+      min-height: 100vh;
       background-color: #f4f4f4;
     }
     .container {
-      width: 90%;
-      max-width: 600px;
+      width: 100%;
+      max-width: 1200px;
       margin-top: 20px;
-      font-size: 1.5em;
+      font-size: 2em; /* Increased font size for better readability */
       line-height: 1.6;
       color: #333;
-    }
-    .digit {
-      display: inline-block;
+      word-wrap: break-word;
     }
   </style>
 </head>
 <body>
-  <div class="container" id="piContainer">
-    <h1>Digits of Pi</h1>
-    <p>3.</p>
-    <div id="piDigits"></div>
-  </div>
+  <div class="container" id="piContainer"></div>
 
   <script>
-    let digitIndex = 0; // To track the current digit index
+    let start = 0; // Track the starting position for each API request
+    const initialBatchSize = 1000; // Initial number of digits to load
+    const batchSize = 500; // Number of digits to load on each scroll
 
-    // Function to calculate a single hexadecimal digit of Pi at position n using the BBP formula
-    function piHexDigit(n) {
-      function hexSeries(m, n) {
-        let sum = 0.0;
-        let k = 0;
-        while (k < n) {
-          sum += (1 / Math.pow(16, k)) * ((4 / (8 * k + m)) - (2 / (8 * k + m + 1)) - (1 / (8 * k + m + 4)) - (1 / (8 * k + m + 5)));
-          k++;
-        }
-        return sum;
-      }
-      
-      let sum = 4 * hexSeries(1, n) - 2 * hexSeries(4, n) - hexSeries(5, n) - hexSeries(6, n);
-      sum = sum - Math.floor(sum);
-      return Math.floor(sum * 16);
-    }
-
-    // Function to get n digits of Pi in base 10 by calculating hexadecimal digits and converting
-    function getPiDigits(n) {
-      let piDigits = "";
-      for (let i = 0; i < n; i++) {
-        const hexDigit = piHexDigit(digitIndex + i).toString(16);
-        piDigits += hexDigit;
-      }
-      digitIndex += n;
-      return piDigits;
+    // Function to fetch Pi digits from the API
+    function fetchPiDigits(start, count) {
+      return fetch(`https://api.pi.delivery/v1/pi?start=${start}&numberOfDigits=${count}`)
+        .then(response => response.json())
+        .then(data => data.content)
+        .catch(error => {
+          console.error("Error fetching Pi digits:", error);
+          return ""; // Return an empty string if there's an error
+        });
     }
 
     // Function to load more digits of Pi and append them to the container
-    function loadMoreDigits(count) {
-      const piContainer = document.getElementById("piDigits");
-      const fragment = document.createDocumentFragment();
-      const newDigits = getPiDigits(count);
+    async function loadMoreDigits(count, isFirstLoad = false) {
+      const piContainer = document.getElementById("piContainer");
+      let digits = await fetchPiDigits(start, count);
 
-      for (let i = 0; i < newDigits.length; i++) {
-        const span = document.createElement("span");
-        span.className = "digit";
-        span.textContent = newDigits[i];
-        fragment.appendChild(span);
+      // Insert comma after the first '3' for the initial load only
+      if (isFirstLoad && digits[0] === '3') {
+        digits = digits[0] + ',' + digits.slice(1);
       }
-      
-      piContainer.appendChild(fragment);
+
+      // Append the digits to the container
+      piContainer.textContent += digits;
+      start += count; // Update start position for the next batch
     }
 
-    // Initial load of 100 digits
-    loadMoreDigits(100);
+    // Initial load of 1000 digits
+    loadMoreDigits(initialBatchSize, true);
 
     // Infinite scroll event listener
     window.addEventListener("scroll", () => {
       if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-        loadMoreDigits(50); // Load 50 more digits when reaching the bottom
+        loadMoreDigits(batchSize); // Load the next batch of Pi digits when reaching the bottom
       }
     });
   </script>

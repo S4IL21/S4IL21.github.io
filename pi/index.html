@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pi Digits Infinite Scroll</title>
+  <title>Infinite Pi Digits Scroll</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -34,18 +34,18 @@
   </div>
 
   <script>
-    // Array of Pi digits for demonstration
-    // You can get more Pi digits as needed.
+    // Array of Pi digits for demonstration; extend as needed.
     const piDigits = "1415926535897932384626433832795028841971693993751058209749445923078164062862089986280348253421170679821480865132823066470938446095505822317253594081284811174502841027019".split("");
 
-    let digitIndex = 0; // To keep track of the current digit index
+    let digitIndex = 0; // Current digit index
 
-    function loadMoreDigits() {
+    // Function to load a specific number of digits
+    function loadMoreDigits(count) {
       const container = document.getElementById("piDigits");
       const fragment = document.createDocumentFragment();
-      for (let i = 0; i < 100; i++) {
+      for (let i = 0; i < count; i++) {
         if (digitIndex >= piDigits.length) {
-          digitIndex = 0; // Restart if we reach the end
+          digitIndex = 0; // Loop back if we reach the end of the array
         }
         const span = document.createElement("span");
         span.className = "digit";
@@ -56,13 +56,13 @@
       container.appendChild(fragment);
     }
 
-    // Initial load
-    loadMoreDigits();
+    // Initial load with more digits
+    loadMoreDigits(500);
 
-    // Infinite scroll event
+    // Scroll event to load more digits when reaching the page bottom
     window.addEventListener("scroll", () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 50) {
-        loadMoreDigits();
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+        loadMoreDigits(100); // Load 100 more digits on each scroll
       }
     });
   </script>

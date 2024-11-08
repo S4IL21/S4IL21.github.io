@@ -30,7 +30,7 @@
   margin: 0;
   padding: 0;
 }
-
+  
 html, body {
   width: 100%;
   height: 100%;
@@ -74,8 +74,7 @@ a {
   gap: 32px;
   padding: 32px;
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-  max-width: 500px;  /* Increased card width for larger screens */
-  width: 100%;
+  max-width: 400px;
 }
 
 .card:hover {
@@ -149,7 +148,6 @@ a {
   align-items: center;
   transition: 120ms ease-out;
 }
-
 .card button.icon {
   background: transparent;
   border-radius: 50%;
@@ -177,38 +175,19 @@ a {
 }
 
 
-/* Responsive Adjustments */
 @media only screen and (max-height: 700px) {
   .card {
-    transform: scale(0.85);  /* Slightly smaller card on shorter screens */
+    transform: scale(0.8);
   }
 
   .card:hover {
-    transform: scale(0.9);  /* Ensure it doesn't zoom too much */
+    transform: scale(0.85);
   }
 }
 
 @media only screen and (max-width: 500px) {
   .card {
-    width: 90%;  /* Make card width more flexible on smaller screens */
-    padding: 16px;  /* Reduce padding for smaller screens */
-  }
-
-  .card button {
-    font-size: 14px;  /* Slightly smaller font on smaller screens */
-    padding: 10px;  /* Reduce padding on smaller screens */
-  }
-
-  .card .top .logo-wrapper img {
-    width: 100px;  /* Smaller logo size on mobile */
-    height: 100px;
-  }
-
-  h1 {
-    font-size: 24px;  /* Smaller title font size */
-  }
-
-  p {
-    font-size: 12px;  /* Smaller paragraph text on mobile */
+    width: 90%;
   }
 }
+

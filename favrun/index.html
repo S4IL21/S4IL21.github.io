@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T-Rex Run Favicon Game</title>
+    <link id="favicon" rel="icon" href="">
+    <style>
+        /* Hide the main page content */
+        body { display: none; }
+        canvas {
+            border: 1px solid black;
+            display: block;
+            margin: 20px auto;
+            background-color: #f3f3f3;
+        }
+    </style>
+</head>
+<body>
+<script>
+    const canvas = document.createElement('canvas');
+    canvas.width = 16;  // Using a 16x16 canvas for the favicon
+    canvas.height = 16;
+    const ctx = canvas.getContext('2d');
+
+    // Game variables
+    let dino = { x: 1, y: 12, width: 3, height: 3, jumping: false };
+    let obstacles = [];
+    let gameSpeed = 1;
+    let score = 0;
+    let gameOver = false;
+
+    // Make the canvas visible on the screen
+    document.body.appendChild(canvas);
+
+    // Draw the T-Rex, obstacles, and background
+    function drawGame() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+
+        // Draw the ground (bottom row)
+        ctx.fillStyle = 'gray';
+        ctx.fillRect(0, 13, 16, 3);
+
+        // Draw the T-Rex (player)
+        ctx.fillStyle = 'green';
+        ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
+
+        // Draw obstacles (cacti)
+        ctx.fillStyle = 'brown';
+        obstacles.forEach(obstacle => {
+            ctx.fillRect(obstacle.x, obstacle.y, 1, 2); // Draw cacti
+        });
+
+        // Draw score
+        ctx.fillStyle = 'black';
+        ctx.font = '2px Arial';
+        ctx.fillText(`S: ${score}`, 0, 2);
+
+        // Update favicon
+        updateFavicon();
+    }
+
+    // Update the favicon by converting the canvas to a data URL
+    function updateFavicon() {
+        const favicon = document.getElementById('favicon');
+        favicon.href = canvas.toDataURL('image/png');
+    }
+
+    // Move obstacles and check for collisions
+    function updateObstacles() {
+        if (gameOver) return;
+
+        // Move obstacles leftward
+        obstacles.forEach(obstacle => {
+            obstacle.x -= gameSpeed;
+        });
+
+        // Remove obstacles that are out of the screen
+        obstacles = obstacles.filter(obstacle => obstacle.x >= 0);
+
+        // Add new obstacles at random intervals
+        if (Math.random() < 0.03) {
+            obstacles.push({ x: 15, y: 12 });
+        }
+
+        // Check for collisions with obstacles
+        obstacles.forEach(obstacle => {
+            if (dino.x + dino.width > obstacle.x && dino.x < obstacle.x + 1 && dino.y + dino.height > obstacle.y) {
+                gameOver = true;
+                setTimeout(() => {
+                    alert("Game Over! Reload the page to restart.");
+                }, 100);
+            }
+        });
+
+        // Increase score and game speed over time
+        if (!gameOver) {
+            score++;
+            if (score % 100 === 0) gameSpeed++;
+        }
+
+        drawGame();
+    }
+
+    // Handle jumping mechanics (longer jump)
+    function jump() {
+        if (dino.jumping || gameOver) return;
+
+        dino.jumping = true;
+
+        // Jump up by 6 pixels (instant)
+        dino.y -= 6;
+
+        // After reaching the peak, fall down after a longer delay
+        setTimeout(() => {
+            dino.y += 6;  // Instant fall back to the ground
+            dino.jumping = false;
+        }, 800);  // Delay increased to 800ms for a longer jump duration
+    }
+
+    // Listen for player input (Up arrow, spacebar, enter, or mouse click for jump)
+    window.addEventListener('keydown', e => {
+        if (e.key === 'ArrowUp' || e.key === ' ' || e.key === 'Enter') {
+            jump();
+        }
+    });
+
+    // Listen for mouse click to jump (only listen to clicks on the canvas)
+    canvas.addEventListener('click', () => {
+        jump();
+    });
+
+    // Game loop (moves obstacles and updates the screen)
+    function gameLoop() {
+        if (!gameOver) {
+            updateObstacles();
+            setTimeout(gameLoop, 100);
+        }
+    }
+
+    // Function to reset the game
+    function resetGame() {
+        // Reset game state
+        dino = { x: 1, y: 12, width: 3, height: 3, jumping: false };
+        obstacles = [];
+        gameSpeed = 1;
+        score = 0;
+        gameOver = false;
+
+        // Restart the game loop
+        gameLoop();
+    }
+
+    // Start the game
+    gameLoop();
+
+</script>
+</body>
+</html>

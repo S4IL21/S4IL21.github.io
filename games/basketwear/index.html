@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta property="og:image" content="./logo_basketwear.png"> <!-- CAN EDIT -->
-    <meta property="og:description" content="This is a Basketball game made in Scratch for WearOs (Smartwatches)"> <!-- CAN EDIT -->  
     <title>BasketWear Game</title>
-    <link rel="shortcut icon" href="./logo_basketwear.png">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,7 +11,7 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             height: 100vh;
             background-color: #f0f0f0;
         }
@@ -22,12 +19,29 @@
             border: none;
             width: 360px;
             height: 360px;
+            margin-top: 10%;
         }
     </style>
 </head>
 <body>
     <iframe 
-        src="https://turbowarp.org/embed/?project_url=s4il.is-a.dev/games/basketwear/BasketWear.sb3&size=360x360&autoplay&settings-button&addons=pause">
+        id="gameIframe"
+        src="https://turbowarp.org/embed/?project_url=s4il.is-a.dev/games/basketwear/BasketWear.sb3&size=360x360&autoplay&settings-button&addons=pause" 
+        allowfullscreen>
     </iframe>
+
+    <script>
+        // Wait for the page to load
+        window.onload = function() {
+            // Check every 100ms for the element with the unwanted class
+            const interval = setInterval(() => {
+                const unwantedElement = document.querySelector('.box_box_2jjDp');
+                if (unwantedElement) {
+                    unwantedElement.classList.remove('box_box_2jjDp');
+                    clearInterval(interval); // Stop checking once it's removed
+                }
+            }, 100);
+        };
+    </script>
 </body>
 </html>

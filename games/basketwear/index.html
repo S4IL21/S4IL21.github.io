@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:image" content="./logo_basketwear.png"> <!-- CAN EDIT -->
+    <meta property="og:description" content="This is a Basketball game made in Scratch for WearOs (Smartwatches)"> <!-- CAN EDIT -->  
     <title>BasketWear Game</title>
+    <link rel="shortcut icon" href="./logo_basketwear.png">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,32 +27,7 @@
 </head>
 <body>
     <iframe 
-        id="gameIframe"
-        src="https://turbowarp.org/embed/?project_url=s4il.is-a.dev/games/basketwear/BasketWear.sb3&size=360x360&autoplay&settings-button&addons=pause" 
-        allowfullscreen>
+        src="https://turbowarp.org/embed/?project_url=s4il.is-a.dev/games/basketwear/BasketWear.sb3&size=360x360&autoplay&settings-button&addons=pause">
     </iframe>
-
-    <script>
-        // Function to remove the unwanted class
-        function removeUnwantedClass() {
-            const unwantedElement = document.querySelector('.box_box_2jjDp');
-            if (unwantedElement) {
-                unwantedElement.classList.remove('box_box_2jjDp');
-                console.log('Class "box_box_2jjDp" removed');
-            } else {
-                console.log('Element with class "box_box_2jjDp" not found');
-            }
-        }
-
-        // Run the function periodically to ensure it works
-        const interval = setInterval(() => {
-            removeUnwantedClass();
-
-            // Stop checking if the element is found and processed
-            if (!document.querySelector('.box_box_2jjDp')) {
-                clearInterval(interval);
-            }
-        }, 100);
-    </script>
 </body>
 </html>

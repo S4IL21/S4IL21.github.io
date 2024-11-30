@@ -11,7 +11,7 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             height: 100vh;
             background-color: #f0f0f0;
         }
@@ -19,7 +19,6 @@
             border: none;
             width: 360px;
             height: 360px;
-            margin-top: 10%;
         }
     </style>
 </head>
@@ -31,17 +30,26 @@
     </iframe>
 
     <script>
-        // Wait for the page to load
-        window.onload = function() {
-            // Check every 100ms for the element with the unwanted class
-            const interval = setInterval(() => {
-                const unwantedElement = document.querySelector('.box_box_2jjDp');
-                if (unwantedElement) {
-                    unwantedElement.classList.remove('box_box_2jjDp');
-                    clearInterval(interval); // Stop checking once it's removed
-                }
-            }, 100);
-        };
+        // Function to remove the unwanted class
+        function removeUnwantedClass() {
+            const unwantedElement = document.querySelector('.box_box_2jjDp');
+            if (unwantedElement) {
+                unwantedElement.classList.remove('box_box_2jjDp');
+                console.log('Class "box_box_2jjDp" removed');
+            } else {
+                console.log('Element with class "box_box_2jjDp" not found');
+            }
+        }
+
+        // Run the function periodically to ensure it works
+        const interval = setInterval(() => {
+            removeUnwantedClass();
+
+            // Stop checking if the element is found and processed
+            if (!document.querySelector('.box_box_2jjDp')) {
+                clearInterval(interval);
+            }
+        }, 100);
     </script>
 </body>
 </html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Bald File Creator and Reader"> <!-- CAN EDIT -->
+    <meta property="og:image" content="./bald.png"> <!-- CAN EDIT -->
+    <meta property="og:description" content="This is the best file extension ever, why use .txt .json .mp4? .bald has it all!"> <!-- CAN EDIT -->  
+    <title>Bald File Creator and Reader</title>
+    <link rel="icon" href="./bald.png" type="image/x-icon"/>
+    <style>
+        /* General Body Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #333;
+            color: #f4f4f9;
+            transition: background-color 0.3s, color 0.3s;
+            position: relative;
+            overflow: auto; /* Enable scrolling */
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #333;
+            color: #f4f4f9;
+        }
+
+        /* Light Mode */
+        body.light-mode {
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Wrapper for content */
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #444;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container.light-mode {
+            background-color: #fff;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: inherit;
+        }
+
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        textarea, input[type="file"], input[type="text"] {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            color: #333;
+            font-size: 16px;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        input[type="text"] {
+            font-size: 16px;
+        }
+
+        /* Dark Mode Specific for Textboxes */
+        body.dark-mode input[type="text"],
+        body.dark-mode textarea,
+        body.dark-mode input[type="file"] {
+            background-color: #555;
+            color: #f4f4f9;
+            border: 1px solid #666;
+        }
+
+        button {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button.light-mode {
+            background-color: #008CBA; /* Light mode button color */
+        }
+
+        button.dark-mode {
+            background-color: #1E90FF; /* Dark mode button color */
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        /* Dark Mode Button */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: transparent;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 50%;
+            font-size: 30px;
+            z-index: 10;
+        }
+
+        /* File Output */
+        .file-output {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #555; /* Dark background for file output in dark mode */
+            border: 1px solid #666;
+            border-radius: 5px;
+            color: white;
+            width: 100%;
+            text-align: left;
+            overflow-wrap: break-word;
+            box-sizing: border-box;
+        }
+
+        .file-output.light-mode {
+            background-color: #fff; /* Light background for file output in light mode */
+            color: #333;
+            border: 1px solid #ddd;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #333;
+        }
+    </style>
+</head>
+<body class="dark-mode">
+
+    <!-- Dark/Light Mode Toggle Button -->
+    <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+        🌙
+    </button>
+
+    <!-- Content Wrapper -->
+    <div class="container">
+        <h1>Bald File Creator and Reader</h1>
+
+        <!-- Create .bald File Section -->
+        <h2>Create .bald File</h2>
+        <label for="createText">Text Content:</label><br>
+        <textarea id="createText" rows="4" cols="50"></textarea><br><br>
+        <label for="createJson">JSON Content (JSON string):</label><br>
+        <textarea id="createJson" rows="4" cols="50"></textarea><br><br>
+        <label for="createImage">Upload Image:</label><br>
+        <input type="file" id="createImage" accept="image/*"><br><br>
+        <label for="fileName">Custom File Name (without .bald extension):</label>
+        <input type="text" id="fileName" placeholder="Enter file name"><br><br>
+        <button id="createBtn" class="dark-mode" onclick="createBaldFile()">Create .bald File</button>
+
+        <!-- Read .bald File Section -->
+        <h2>Read .bald File</h2>
+        <input type="file" id="readFile" accept=".bald" onchange="readBaldFile(event)"><br><br>
+
+        <!-- File Output Section -->
+        <div class="file-output" id="fileOutput"></div>
+    </div>
+
+    <script>
+        // Dark/Light Mode Toggle Function
+        function toggleDarkMode() {
+            const body = document.body;
+            const container = document.querySelector('.container');
+            const modeButton = document.querySelector('.dark-mode-toggle');
+            const modeIcon = document.querySelector('.dark-mode-toggle');
+            const createBtn = document.getElementById('createBtn');
+            const fileOutput = document.getElementById('fileOutput');
+
+            body.classList.toggle('dark-mode');
+            body.classList.toggle('light-mode');
+            container.classList.toggle('dark-mode');
+            container.classList.toggle('light-mode');
+            fileOutput.classList.toggle('dark-mode');
+            fileOutput.classList.toggle('light-mode');
+            
+            // Toggle button icon
+            if (body.classList.contains('dark-mode')) {
+                modeIcon.textContent = '🌙'; // Dark mode icon
+                createBtn.classList.remove('light-mode');
+                createBtn.classList.add('dark-mode');
+            } else {
+                modeIcon.innerHTML = '🌞'; // Light mode icon
+                createBtn.classList.remove('dark-mode');
+                createBtn.classList.add('light-mode');
+            }
+        }
+
+        // Function to create .bald file
+        function createBaldFile() {
+            const text = document.getElementById("createText").value;
+            const jsonInput = document.getElementById("createJson").value;
+            const fileName = document.getElementById("fileName").value || "file";
+            const imageInput = document.getElementById("createImage").files[0];
+            
+            let jsonContent;
+
+            try {
+                if (jsonInput) {
+                    jsonContent = JSON.parse(jsonInput); // Check if JSON is valid
+                }
+            } catch (err) {
+                alert("Error: Invalid JSON input. Please enter valid JSON.");
+                return; // Stop execution if JSON is invalid
+            }
+
+            let imageContent;
+
+            if (imageInput) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    imageContent = e.target.result.split(",")[1];
+                    saveBaldFile(text, jsonContent, imageContent, fileName);
+                };
+                reader.readAsDataURL(imageInput);
+            } else {
+                saveBaldFile(text, jsonContent, imageContent, fileName);
+            }
+        }
+
+        // Function to save .bald file
+        function saveBaldFile(text, jsonContent, imageContent, fileName) {
+            const baldFileData = {
+                text: text || undefined,
+                json: jsonContent || undefined,
+                image: imageContent || undefined
+            };
+
+            const blob = new Blob([JSON.stringify(baldFileData)], { type: "application/json" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `${fileName}.bald`;
+            a.click();
+        }
+
+        // Function to read and display .bald file
+        function readBaldFile(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                try {
+                    const baldFileData = JSON.parse(e.target.result);
+                    displayBaldContent(baldFileData);
+                } catch (err) {
+                    alert("Error: Failed to read .bald file. The file may be corrupted.");
+                }
+            };
+
+            reader.onerror = function() {
+                alert("Error: Failed to read file.");
+            };
+
+            reader.readAsText(file);
+        }
+
+        // Function to display content based on type
+        function displayBaldContent(data) {
+            const output = document.getElementById("fileOutput");
+            output.innerHTML = ""; // Clear previous content
+
+            // Display text
+            if (data.text) {
+                output.innerHTML += `<h3>Text Content:</h3><p>${data.text}</p>`;
+            }
+
+            // Display JSON
+            if (data.json) {
+                output.innerHTML += `<h3>JSON Content:</h3><pre>${JSON.stringify(data.json, null, 2)}</pre>`;
+            }
+
+            // Display image
+            if (data.image) {
+                const imageURL = `data:image/png;base64,${data.image}`;
+                output.innerHTML += `<h3>Image:</h3><img src="${imageURL}" alt="Uploaded Image">`;
+            }
+
+            // Show Raw Data
+            const rawData = JSON.stringify(data, null, 2);
+            output.innerHTML += `<h3>Raw Data:</h3><pre>${rawData}</pre>`;
+        }
+    </script>
+</body>
+</html>

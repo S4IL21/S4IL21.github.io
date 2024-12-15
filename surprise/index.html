@@ -3,94 +3,96 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="This is a surprise! What could it be? Only one way to find out!"> <!-- CAN EDIT -->
+  <meta property="og:title" content="S4IL is a dev!"> <!-- CAN EDIT -->
   <meta property="og:image" content="/images/round-logo.png"> <!-- CAN EDIT -->
-  <meta property="og:description" content="Hello, I'm S4IL! The Chill 🤙 This is a surprise! :]"> <!-- CAN EDIT -->
+  <meta property="og:description" content="Hello, I'm S4IL! The Chill 🤙 These are my creations! :]"> <!-- CAN EDIT -->
   <meta name="theme-color" content="#0079F2"> <!-- CAN EDIT (use same value as the --button-primary-default variable in style.css) -->
 
-  <meta name="description" content="Hello, I'm S4IL! The Chill 🤙 This is a surprise! :]">
+  <meta name="description" content="Hello, I'm S4IL! The Chill 🤙 These are my creations! :]">
   
-  <title>Claim Surprise</title>
+  <title>My Creations</title>
 <link rel="icon" href="/images/round-logo.png" type="image/x-icon"/>  <link href="style.css" rel="stylesheet" type="text/css" />
 </head>
-<style>
-  body {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      background-color: #f0f0f0;
-      font-family: Arial, sans-serif;
-      perspective: 1200px; /* Ajusta la profundidad del efecto 3D */
-  }
-  .hidden {
-      display: none;
-  }
-  .button {
-      padding: 20px 40px;
-      font-size: 24px;
-      background-color: #007bff;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.3s;
-  }
-  .button:hover {
-      background-color: #0056b3;
-      transform: scale(1.1);
-  }
-  .text {
-      font-size: 36px;
-      margin-top: 30px;
-      color: #333;
-  }
-  .image-container {
-      width: 300px; /* Aumenta el tamaño del contenedor de la imagen */
-      height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-  }
-  .rotating-image {
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d; /* Permite la rotación 3D */
-      animation: rotate 5s linear infinite;
-  }
-  @keyframes rotate {
-      from {
-          transform: rotateY(0deg); /* Rote horizontalmente */
-      }
-      to {
-          transform: rotateY(360deg);
-      }
-  }
-  .audio {
-      display: none;
-  }
-</style>
-</head>
+
 <body>
-<button class="button" id="claimButton">Claim Surprise</button>
+  <div class="card">
+    <div class="top">
+      <div class="logo-wrapper">
+        <img src="/images/round-logo.png"> <!-- CAN EDIT -->
+      </div>
+  
+      <div class="text">
+        <!-- CAN EDIT -->
+        <h1>S4IL</h1>
+        
+        <!-- CAN EDIT -->
+        <p>Hello, I'm S4IL! The Chill 🤙</p>
+        <p>These are my creations (not all of them, only the best ones)<p>
+      </div>
+    </div>
 
-<div class="hidden" id="surpriseContainer">
-  <div class="text">Get cacatuarolled lololol</div>
-  <div class="image-container">
-      <img src="https://s4il.is-a.dev/games/flappy-cacatua/cacatua.png" alt="Imagen Giratoria" class="rotating-image">
+    <!-- CAN EDIT -->
+    <div class="buttons">
+      <a href="../"> <!-- link to somewhere -->
+        <button class="primary">Go Back</button>
+      </a>
+      <a href="https://blockcoin.social/" target="_blank"> <!-- link to somewhere -->
+        <button>BlockCoin📌</button>
+      </a>
+      
+       <a href="/custom-captcha/edit/" target="_blank"> <!-- link to somewhere -->
+        <button>Costum Captcha</button>
+
+      <a href="/SpamOur.vbs" target="_blank"> <!-- link to somewhere -->
+        <button>SpamOur</button>
+      </a>
+
+      <a href="/corruptor/" target="_blank"> <!-- link to somewhere -->
+        <button>File Corruptor</button>
+      </a>
+
+      <a href="/wierd-sandbox/" target="_blank"> <!-- link to somewhere -->
+        <button>Wierd Sandbox</button>
+      </a>
+
+      <a href="/secmes/" target="_blank"> <!-- link to somewhere -->
+        <button>Secmes</button>
+      </a>
+   
+      <a href="/wasteof-random/" target="_blank"> <!-- link to somewhere -->
+        <button>Wasteof Random Post</button>
+      </a>
+      
+       <a href="/charging_only/" target="_blank"> <!-- link to somewhere -->
+        <button>Charging Only Chat</button>
+      </a>
+
+      <a href="/randomcat/" target="_blank"> <!-- link to somewhere -->
+        <button>Random Cat</button>
+      </a>
+
+      <a href="https://phntvldacer1.github.io" target="_blank"> <!-- link to somewhere -->
+        <button>A Web For Phnt</button>
+      </a>
+      
+      <a href="https://0.is-a.dev/" target="_blank"> <!-- link to somewhere -->
+        <button>The Zero Zone</button>
+      </a>
+
+      <a href="https://emvas.s4il.is-a.dev/" target="_blank"> <!-- link to somewhere -->
+        <button>Submarine EMVAS</button>
+      </a>
+
+      <a href="https://s4il.is-a.dev/favrun/" target="_blank"> <!-- link to somewhere -->
+        <button>Favrun</button>
+      </a>
+
+      <a href="https://s4il.is-a.dev/bald/" target="_blank"> <!-- link to somewhere -->
+        <button>Bald File Creator and Reader</button>
+      </a>
+    </div>       
   </div>
-  <audio class="audio" id="audio" src="https://s4il.is-a.dev/games/flappy-cacatua/cacatua.mp3" autoplay></audio>
-</div>
 
-<script>
-  document.getElementById('claimButton').addEventListener('click', function() {
-      document.getElementById('claimButton').style.display = 'none';
-      document.getElementById('surpriseContainer').classList.remove('hidden');
-      document.getElementById('audio').play();
-  });
-</script>
+  <script src="script.js"></script>
 </body>
 </html>

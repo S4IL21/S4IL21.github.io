@@ -60,10 +60,11 @@
                                 currentPath = `${path}/${file.name}`;
                                 fetchDirectory(currentPath);
                             });
-                        } else if (file.type === 'file' && /\.(jpg|png|gif|svg)$/.test(file.name)) {
+                        } else if (file.type === 'file') {
                             link.href = `https://s4il.is-a.dev/${currentPath}/${file.name}`;
                             link.textContent = file.name;
                         }
+
 
                         listItem.appendChild(link);
                         imageList.appendChild(listItem);

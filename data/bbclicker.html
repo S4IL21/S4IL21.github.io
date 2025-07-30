@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BlockBit Heartbeat Smooth SVG</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000000;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .main-icon {
+      width: 240px;   /* Increased size */
+      height: 240px;  /* Increased size */
+      cursor: pointer;
+      animation: rotateAnim 3s ease-in-out infinite;
+      transform-origin: center center;
+    }
+
+    @keyframes rotateAnim {
+      0%, 100% {
+        transform: rotate(-2deg);
+      }
+      50% {
+        transform: rotate(2deg);
+      }
+    }
+
+    .mini-icon {
+      position: fixed;
+      top: -50px;
+      width: 30px;
+      opacity: 0.5;
+      pointer-events: none;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Main SVG Icon -->
+  <div id="main-icon" class="main-icon">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0,0,105.4232,105.4232">
+      <g transform="translate(-187.2884,-127.2884)">
+        <g fill-rule="nonzero" stroke-linejoin="miter" stroke-dasharray="" stroke-dashoffset="0" style="mix-blend-mode: normal">
+          <path d="M240,129.2884c27.99281,0 50.7116,22.7188 50.7116,50.7116c0,27.99281 -22.7188,50.7116 -50.7116,50.7116c-27.99281,0 -50.7116,-22.7188 -50.7116,-50.7116c0,-27.99281 22.7188,-50.7116 50.7116,-50.7116z" fill="#000000" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-miterlimit="4"/>
+          <path d="M209.17993,162.99585c0,-1.56519 1.26883,-2.83404 2.83404,-2.83404h5.66804c1.41701,0 2.12553,0.70851 2.83405,1.41701l2.83404,2.83404c0.70851,0.70851 1.41701,1.41701 2.83404,1.41701h8.50206c1.41701,0 2.12551,-0.7085 2.83405,-1.41701l2.83404,-2.83404c0.70851,-0.70851 1.41701,-1.41701 2.83404,-1.41701h24.7977c1.56519,0 2.83404,1.26884 2.83404,2.83404v28.34023c0,1.56519 -1.26883,2.83404 -2.83404,2.83404h-24.7977c-1.41701,0 -2.12551,0.7085 -2.83404,1.41701l-2.83404,2.83404c-0.70851,0.70851 -1.41701,1.41701 -2.83405,1.41701h-8.50206c-1.41701,0 -2.12551,-0.70851 -2.83404,-1.41701l-2.83404,-2.83404c-0.70851,-0.70851 -1.41702,-1.41701 -2.83405,-1.41701h-5.66804c-1.56519,0 -2.83404,-1.26884 -2.83404,-2.83404z" fill="#ffffff" stroke="#ffffff" stroke-width="8" stroke-linecap="butt" stroke-miterlimit="10"/>
+          <path d="M209.17993,162.99586c0,-1.56519 1.26884,-2.83404 2.83404,-2.83404h5.66804c1.41701,0 2.12552,0.7085 2.83404,1.41701l2.83404,2.83404c0.7085,0.7085 1.41701,1.41701 2.83404,1.41701h8.50206c1.41701,0 2.12551,-0.7085 2.83404,-1.41701l2.83404,-2.83404c0.7085,-0.7085 1.41701,-1.41701 2.83404,-1.41701h24.7977c1.56519,0 2.83404,1.26884 2.83404,2.83404v28.34023c0,1.56519 -1.26884,2.83404 -2.83404,2.83404h-24.7977c-1.41701,0 -2.12551,0.7085 -2.83404,1.41701l-2.83404,2.83404c-0.7085,0.7085 -1.41701,1.41701 -2.83404,1.41701h-8.50206c-1.41701,0 -2.12551,-0.7085 -2.83404,-1.41701l-2.83404,-2.83404c-0.7085,-0.7085 -1.41702,-1.41701 -2.83404,-1.41701h-5.66804c-1.56519,0 -2.83404,-1.26884 -2.83404,-2.83404z" fill="#ffffff" stroke="#000000" stroke-width="4" stroke-linecap="butt" stroke-miterlimit="10"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Sound -->
+  <audio id="coin-sound" src="https://cdn.pixabay.com/audio/2024/08/07/audio_a88b4e255c.mp3"></audio>
+
+  <script>
+    const mainIcon = document.getElementById('main-icon');
+    const sound = document.getElementById('coin-sound');
+    let lastClickTime = 0;
+    const cooldown = 800;
+    const miniCount = 20;
+
+    mainIcon.addEventListener('click', () => {
+      const now = Date.now();
+      const canLogClick = now - lastClickTime > cooldown;
+
+      // Smooth heartbeat bump
+      mainIcon.animate([
+        { transform: 'scale(1)' },
+        { transform: 'scale(1.08)' },
+        { transform: 'scale(0.97)' },
+        { transform: 'scale(1)' }
+      ], {
+        duration: 400,
+        easing: 'ease-in-out',
+        composite: 'add'
+      });
+
+      sound.currentTime = 0;
+      sound.play();
+
+      if (canLogClick) {
+        console.log("click");
+        lastClickTime = now;
+      }
+
+      spawnMiniSVGs();
+    });
+
+    function spawnMiniSVGs() {
+      const spacing = window.innerWidth / miniCount;
+      const usedCols = [];
+
+      for (let i = 0; i < miniCount; i++) {
+        let col;
+        do {
+          col = Math.floor(Math.random() * miniCount);
+        } while (usedCols.includes(col));
+        usedCols.push(col);
+
+        const left = col * spacing + (spacing / 2) - 15;
+
+        const mini = document.createElement('div');
+        mini.className = 'mini-icon';
+        mini.style.left = `${left}px`;
+
+        mini.innerHTML = `
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0,0,105.4232,105.4232">
+            <g transform="translate(-187.2884,-127.2884)">
+              <g fill-rule="nonzero" stroke-linejoin="miter">
+                <path d="M240,129.2884c27.99281,0 50.7116,22.7188 50.7116,50.7116c0,27.99281 -22.7188,50.7116 -50.7116,50.7116c-27.99281,0 -50.7116,-22.7188 -50.7116,-50.7116c0,-27.99281 22.7188,-50.7116 50.7116,-50.7116z" fill="#000000" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-miterlimit="4"/>
+                <path d="M209.17993,162.99585c0,-1.56519 1.26883,-2.83404 2.83404,-2.83404h5.66804c1.41701,0 2.12553,0.70851 2.83405,1.41701l2.83404,2.83404c0.70851,0.70851 1.41701,1.41701 2.83404,1.41701h8.50206c1.41701,0 2.12551,-0.7085 2.83405,-1.41701l2.83404,-2.83404c0.70851,-0.70851 1.41701,-1.41701 2.83404,-1.41701h24.7977c1.56519,0 2.83404,1.26884 2.83404,2.83404v28.34023c0,1.56519 -1.26883,2.83404 -2.83404,2.83404h-24.7977c-1.41701,0 -2.12551,0.7085 -2.83404,1.41701l-2.83404,2.83404c-0.70851,0.70851 -1.41701,1.41701 -2.83405,1.41701h-8.50206c-1.41701,0 -2.12551,-0.70851 -2.83404,-1.41701l-2.83404,-2.83404c-0.70851,-0.70851 -1.41702,-1.41701 -2.83405,-1.41701h-5.66804c-1.56519,0 -2.83404,-1.26884 -2.83404,-2.83404z" fill="#ffffff" stroke="#ffffff" stroke-width="8" stroke-linecap="butt" stroke-miterlimit="10"/>
+                <path d="M209.17993,162.99586c0,-1.56519 1.26884,-2.83404 2.83404,-2.83404h5.66804c1.41701,0 2.12552,0.7085 2.83404,1.41701l2.83404,2.83404c0.7085,0.7085 1.41701,1.41701 2.83404,1.41701h8.50206c1.41701,0 2.12551,-0.7085 2.83404,-1.41701l2.83404,-2.83404c0.7085,-0.7085 1.41701,-1.41701 2.83404,-1.41701h24.7977c1.56519,0 2.83404,1.26884 2.83404,2.83404v28.34023c0,1.56519 -1.26884,2.83404 -2.83404,2.83404h-24.7977c-1.41701,0 -2.12551,0.7085 -2.83404,1.41701l-2.83404,2.83404c-0.7085,0.7085 -1.41701,1.41701 -2.83404,1.41701h-8.50206c-1.41701,0 -2.12551,-0.7085 -2.83404,-1.41701l-2.83404,-2.83404c-0.7085,-0.7085 -1.41702,-1.41701 -2.83404,-1.41701h-5.66804c-1.56519,0 -2.83404,-1.26884 -2.83404,-2.83404z" fill="#ffffff" stroke="#000000" stroke-width="4" stroke-linecap="butt" stroke-miterlimit="10"/>
+              </g>
+            </g>
+          </svg>
+        `;
+
+        const delay = Math.random() * 0.6;
+        const duration = 1.5 + Math.random() * 1.5;
+        mini.style.animationDelay = `${delay}s`;
+        mini.style.animationDuration = `${duration}s`;
+
+        document.body.appendChild(mini);
+        setTimeout(() => mini.remove(), (duration + delay) * 1000);
+      }
+    }
+  </script>
+</body>
+</html>

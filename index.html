@@ -5,6 +5,20 @@
   <title>
    Portfolio - S4IL
   </title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://s4il.is-a.dev/images/logo.png"/>
+  <!-- Metadata -->
+  <meta name="description" content="S4IL's portfolio - Full-Stack Developer, projects, skills, and contact information."/>
+  <meta name="author" content="S4IL"/>
+  <meta property="og:title" content="Portfolio - S4IL"/>
+  <meta property="og:description" content="S4IL's portfolio - Full-Stack Developer, projects, skills, and contact information."/>
+  <meta property="og:image" content="https://s4il.is-a.dev/images/logo.png"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://s4il.is-a.dev/"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Portfolio - S4IL"/>
+  <meta name="twitter:description" content="S4IL's portfolio - Full-Stack Developer, projects, skills, and contact information."/>
+  <meta name="twitter:image" content="https://s4il.is-a.dev/images/logo.png"/>
   <script src="https://cdn.tailwindcss.com">
   </script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
@@ -27,8 +41,10 @@
       height: 2px;
       background: #4f46e5;
       bottom: 0;
-      left: -100%;
-      transition: left 0.3s ease;
+      left: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(.4,0,.2,1);
     }
     .nav-link:hover,
     .nav-link:focus {
@@ -37,13 +53,13 @@
     }
     .nav-link:hover::after,
     .nav-link:focus::after {
-      left: 0;
+      transform: scaleX(1);
     }
     .nav-link.active {
       color: #6366f1;
     }
     .nav-link.active::after {
-      left: 0;
+      transform: scaleX(1);
     }
     /* Animated gradient text */
     .gradient-text {
@@ -206,156 +222,69 @@
      About Me
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-     <img alt="Creative workspace with a modern computer, notebook, and coffee cup on a wooden desk, bright and inspiring environment" class="rounded-2xl shadow-lg" height="500" loading="lazy" src="https://storage.googleapis.com/a1aa/image/ba5d7b0c-6167-43a0-4cdc-c0323036c12e.jpg" width="500"/>
+     <img alt="Creative workspace with a modern computer, notebook, and coffee cup on a wooden desk, bright and inspiring environment" class="rounded-2xl shadow-lg" height="500" loading="lazy" src="https://www.geenxt.com/wp-content/uploads/2024/04/image-1024x585.jpeg" width="500"/>
      <div class="text-gray-300 space-y-6 text-lg leading-relaxed">
       <p>
        I'm S4IL, a full-stack developer with over 6 years of experience building scalable and performant web applications. I specialize in JavaScript frameworks, modern CSS, and creating smooth user experiences with animations.
-      </p>
-      <p>
-       I love turning complex problems into elegant solutions and continuously learning new technologies to stay ahead in the fast-evolving web development world.
-      </p>
-      <p>
-       When I'm not coding, you can find me exploring nature, sketching, or experimenting with new recipes.
       </p>
      </div>
     </div>
    </section>
    <!-- Projects Section -->
-   <section class="bg-gray-800 py-20" id="projects" tabindex="-1">
-    <div class="max-w-7xl mx-auto px-6 sm:px-10">
-     <h2 class="text-4xl font-extrabold gradient-text mb-12 text-center">
-      Projects
-     </h2>
-     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-      <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
-       <img alt="Screenshot of Project 1: A dashboard UI showing charts and graphs with a dark theme and modern design" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/9df51d25-b8b8-455f-5cd6-5850866f174a.jpg" width="600"/>
-       <div class="p-6">
-        <h3 class="text-2xl font-semibold mb-2 text-indigo-400">
-         Project One
-        </h3>
-        <p class="text-gray-300 mb-4">
-         A responsive dashboard application with real-time data visualization and user management features.
-        </p>
-        <div class="flex space-x-4 text-indigo-500 text-lg">
-         <a aria-label="GitHub repository for Project One" class="hover:text-indigo-400 transition" href="#">
-          <i class="fab fa-github">
-          </i>
-         </a>
-         <a aria-label="Live demo for Project One" class="hover:text-indigo-400 transition" href="#">
-          <i class="fas fa-external-link-alt">
-          </i>
-         </a>
-        </div>
-       </div>
-      </article>
-      <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
-       <img alt="Screenshot of Project 2: E-commerce website product page with product images, descriptions, and add to cart button" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/1cb42e2b-c763-4fc5-97f4-88a74cd0f63c.jpg" width="600"/>
-       <div class="p-6">
-        <h3 class="text-2xl font-semibold mb-2 text-indigo-400">
-         Project Two
-        </h3>
-        <p class="text-gray-300 mb-4">
-         A modern e-commerce platform with smooth animations, product filtering, and secure checkout.
-        </p>
-        <div class="flex space-x-4 text-indigo-500 text-lg">
-         <a aria-label="GitHub repository for Project Two" class="hover:text-indigo-400 transition" href="#">
-          <i class="fab fa-github">
-          </i>
-         </a>
-         <a aria-label="Live demo for Project Two" class="hover:text-indigo-400 transition" href="#">
-          <i class="fas fa-external-link-alt">
-          </i>
-         </a>
-        </div>
-       </div>
-      </article>
-      <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
-       <img alt="Screenshot of Project 3: Mobile app landing page featuring call to action buttons and app screenshots" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/26dae9e5-20a6-4886-f676-6a542d5c8f74.jpg" width="600"/>
-       <div class="p-6">
-        <h3 class="text-2xl font-semibold mb-2 text-indigo-400">
-         Project Three
-        </h3>
-        <p class="text-gray-300 mb-4">
-         A sleek landing page for a mobile app with animated sections and interactive call-to-action buttons.
-        </p>
-        <div class="flex space-x-4 text-indigo-500 text-lg">
-         <a aria-label="GitHub repository for Project Three" class="hover:text-indigo-400 transition" href="#">
-          <i class="fab fa-github">
-          </i>
-         </a>
-         <a aria-label="Live demo for Project Three" class="hover:text-indigo-400 transition" href="#">
-          <i class="fas fa-external-link-alt">
-          </i>
-         </a>
-        </div>
-       </div>
-      </article>
-      <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
-       <img alt="Screenshot of Project 4: Blog platform interface showing posts, dark mode toggle, and comments section" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/431dc8a3-6d66-47ea-c40f-252d3c69bb47.jpg" width="600"/>
-       <div class="p-6">
-        <h3 class="text-2xl font-semibold mb-2 text-indigo-400">
-         Project Four
-        </h3>
-        <p class="text-gray-300 mb-4">
-         A blogging platform with dark mode, user comments, and a clean, readable layout.
-        </p>
-        <div class="flex space-x-4 text-indigo-500 text-lg">
-         <a aria-label="GitHub repository for Project Four" class="hover:text-indigo-400 transition" href="#">
-          <i class="fab fa-github">
-          </i>
-         </a>
-         <a aria-label="Live demo for Project Four" class="hover:text-indigo-400 transition" href="#">
-          <i class="fas fa-external-link-alt">
-          </i>
-         </a>
-        </div>
-       </div>
-      </article>
-      <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
-       <img alt="Screenshot of Project 5: Portfolio website featuring an interactive gallery with hover animations" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/971501a6-c10f-4937-7251-3889bab34b01.jpg" width="600"/>
-       <div class="p-6">
-        <h3 class="text-2xl font-semibold mb-2 text-indigo-400">
-         Project Five
-        </h3>
-        <p class="text-gray-300 mb-4">
-         A personal portfolio website with an interactive project gallery and smooth scrolling animations.
-        </p>
-        <div class="flex space-x-4 text-indigo-500 text-lg">
-         <a aria-label="GitHub repository for Project Five" class="hover:text-indigo-400 transition" href="#">
-          <i class="fab fa-github">
-          </i>
-         </a>
-         <a aria-label="Live demo for Project Five" class="hover:text-indigo-400 transition" href="#">
-          <i class="fas fa-external-link-alt">
-          </i>
-         </a>
-        </div>
-       </div>
-      </article>
-      <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
-       <img alt="Screenshot of Project 6: Chat application interface showing real-time messaging and user list" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/52636325-7271-4506-9486-1de750e81916.jpg" width="600"/>
-       <div class="p-6">
-        <h3 class="text-2xl font-semibold mb-2 text-indigo-400">
-         Project Six
-        </h3>
-        <p class="text-gray-300 mb-4">
-         A real-time chat application with user presence indicators and private messaging features.
-        </p>
-        <div class="flex space-x-4 text-indigo-500 text-lg">
-         <a aria-label="GitHub repository for Project Six" class="hover:text-indigo-400 transition" href="#">
-          <i class="fab fa-github">
-          </i>
-         </a>
-         <a aria-label="Live demo for Project Six" class="hover:text-indigo-400 transition" href="#">
-          <i class="fas fa-external-link-alt">
-          </i>
-         </a>
-        </div>
-       </div>
-      </article>
+  <section class="bg-gray-800 py-20" id="projects" tabindex="-1">
+   <div class="max-w-7xl mx-auto px-6 sm:px-10">
+    <h2 class="text-4xl font-extrabold gradient-text mb-12 text-center">
+    Projects
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+    <!-- Vibepost -->
+    <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+     <img alt="Vibepost social platform screenshot" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/9df51d25-b8b8-455f-5cd6-5850866f174a.jpg" width="600"/>
+     <div class="p-6">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-400">Vibepost</h3>
+      <p class="text-gray-300 mb-4">A modern social platform for sharing posts and connecting with friends. Built for speed and privacy.</p>
+      <div class="flex space-x-4 text-indigo-500 text-lg">
+      <a aria-label="Live demo for Vibepost" class="hover:text-indigo-400 transition" href="https://vibepost.s4il.is-a.dev/" target="_blank" rel="noopener noreferrer">
+       <i class="fas fa-external-link-alt"></i>
+      </a>
+      </div>
      </div>
+    </article>
+    <!-- Blockcoin -->
+    <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+     <img alt="Blockcoin dashboard screenshot" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/431dc8a3-6d66-47ea-c40f-252d3c69bb47.jpg" width="600"/>
+     <div class="p-6">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-400">Blockcoin</h3>
+      <p class="text-gray-300 mb-4">A fun and educational blockchain simulator and dashboard for learning crypto basics.</p>
+      <div class="flex space-x-4 text-indigo-500 text-lg">
+      <a aria-label="Live demo for Blockcoin" class="hover:text-indigo-400 transition" href="https://blockcoin.s4il.is-a.dev/" target="_blank" rel="noopener noreferrer">
+       <i class="fas fa-external-link-alt"></i>
+      </a>
+      </div>
+     </div>
+    </article>
+    <!-- This Website -->
+    <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+     <img alt="Screenshot of this portfolio website" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://s4il.is-a.dev/images/logo.png" width="600"/>
+     <div class="p-6">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-400">This Website</h3>
+      <p class="text-gray-300 mb-4">My personal portfolio, built with HTML, Tailwind CSS, and custom JavaScript. Responsive, modern, and open source.</p>
+      <div class="flex space-x-4 text-indigo-500 text-lg">
+      <a aria-label="GitHub repository for this website" class="hover:text-indigo-400 transition" href="https://github.com/S4IL21/S4IL21.github.io" target="_blank" rel="noopener noreferrer">
+       <i class="fab fa-github"></i>
+      </a>
+      <a aria-label="Live demo for this website" class="hover:text-indigo-400 transition" href="https://s4il.is-a.dev/" target="_blank" rel="noopener noreferrer">
+       <i class="fas fa-external-link-alt"></i>
+      </a>
+      </div>
+     </div>
+    </article>
     </div>
-   </section>
+    <div class="flex justify-center mt-12">
+    <a href="https://s4il.is-a.dev/creations/more/" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-4 rounded-lg shadow-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400">View More</a>
+    </div>
+   </div>
+  </section>
    <!-- Skills Section -->
    <section class="max-w-5xl mx-auto px-6 sm:px-10 py-20" id="skills" tabindex="-1">
     <h2 class="text-4xl font-extrabold gradient-text mb-12 text-center">
@@ -485,8 +414,11 @@
     </div>
    </section>
   </main>
-  <footer class="bg-gray-900 py-8 text-center text-gray-500 text-sm select-none">
-   © 2025 S4IL. All rights reserved.
+  <footer class="bg-gray-900 py-8 text-center text-gray-500 text-sm select-none flex flex-col items-center gap-2">
+   <div>© 2025 S4IL. All rights reserved.</div>
+   <a href="/privacy" class="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300 transition text-base font-medium" aria-label="Privacy Policy">
+     <i class="fas fa-user-secret"></i> Privacy Policy
+   </a>
   </footer>
   <script>
    const menuBtn = document.getElementById('menu-btn');

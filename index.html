@@ -1,108 +1,547 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="S4IL is a dev!"> <!-- CAN EDIT -->
-  <meta property="og:image" content="/images/round-logo.png"> <!-- CAN EDIT -->
-  <meta property="og:description" content="Hi, I’m S4IL.
-I’m a developer passionate about creating efficient, innovative solutions and building projects that make an impact. This is my personal website where I showcase my work, share insights, and connect with others. Take a look around!""> <!-- CAN EDIT -->
-  <meta name="theme-color" content="#0079F2"> <!-- CAN EDIT (use same value as the --button-primary-default variable in style.css) -->
-
-  <meta name="description" content="Hi, I’m S4IL.
-I’m a developer passionate about creating efficient, innovative solutions and building projects that make an impact. This is my personal website where I showcase my work, share insights, and connect with others. Take a look around!">
-  
-  <title>S4IL is a dev!</title>
-  <link rel="shortcut icon" href="/images/round-logo.png">
-  <link href="style.css" rel="stylesheet" type="text/css" />
-</head>
-
-<body>
-  <div class="card">
-    <div class="top">
-      <div class="logo-wrapper">
-        <img src="/images/round-logo.png"> <!-- CAN EDIT -->
-      </div>
-  
-      <div class="text">
-        <!-- CAN EDIT -->
-        <h1>S4IL</h1>
-        
-        <!-- CAN EDIT -->
-        <p>Hello, I'm S4IL! 😎🤙💙</p>
-        <p>I’m a developer passionate about creating efficient, innovative solutions and building projects that make an impact. This is my personal website where I showcase my work, share insights, and connect with others. Take a look around!<p>
-      </div>
-    </div>
-
-    <!-- CAN EDIT -->
-    <div class="socials">
-      <a href="mailto:s4il.is.a.dev@gmail.com"> <!-- link to mail -->
-        <button class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-<path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6" stroke="var(--text-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-        </button>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Portfolio - S4IL
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Poppins', sans-serif;
+    }
+    /* Animated underline for nav links */
+    .nav-link {
+      position: relative;
+      overflow: hidden;
+      color: #d1d5db; /* text-gray-300 */
+      transition: color 0.3s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: #4f46e5;
+      bottom: 0;
+      left: -100%;
+      transition: left 0.3s ease;
+    }
+    .nav-link:hover,
+    .nav-link:focus {
+      color: #6366f1; /* indigo-500 */
+      outline: none;
+    }
+    .nav-link:hover::after,
+    .nav-link:focus::after {
+      left: 0;
+    }
+    .nav-link.active {
+      color: #6366f1;
+    }
+    .nav-link.active::after {
+      left: 0;
+    }
+    /* Animated gradient text */
+    .gradient-text {
+      background: linear-gradient(90deg, #4f46e5, #3b82f6, #06b6d4);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 3s ease infinite;
+    }
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    /* Floating animation for hero image */
+    @keyframes floatUpDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+    .float-animation {
+      animation: floatUpDown 4s ease-in-out infinite;
+    }
+    /* Card hover effect */
+    .card-hover:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4),
+        0 10px 10px -5px rgba(99, 102, 241, 0.3);
+    }
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    /* Button pulse animation */
+    .btn-pulse {
+      animation: pulse 2.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+      }
+      50% {
+        box-shadow: 0 0 15px 10px rgba(99, 102, 241, 0);
+      }
+    }
+  </style>
+ </head>
+ <body class="bg-gray-900 text-gray-100 selection:bg-indigo-600 selection:text-white scroll-smooth">
+  <header class="fixed w-full bg-gray-900 bg-opacity-90 backdrop-blur-md z-50 shadow-md">
+   <nav class="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between h-16">
+    <a class="flex items-center space-x-3 select-none" href="#">
+     <img class="w-10 h-10 rounded-md" height="40" loading="lazy" src="https://s4il.is-a.dev/images/logo.png" width="40"/>
+     <span class="text-2xl font-bold gradient-text">
+      S4IL
+     </span>
+    </a>
+    <ul class="hidden md:flex space-x-8 text-lg font-medium" id="nav-links">
+     <li>
+      <a class="nav-link active focus:outline-none" href="#home" data-link="home">
+       Home
       </a>
-
-
-      <a href="https://replit.com/@S4IL" target="_blank"> <!-- link to replit -->
-        <button class="icon">
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21.49897" height="22.02491" viewBox="0,0,21.49897,22.02491"><g transform="translate(-229.00052,-168.98755)"><g data-paper-data="{&quot;isPaintingLayer&quot;:true}" fill-rule="nonzero" stroke="none" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" style="mix-blend-mode: normal"><path d="M232.05251,170.3641c0,-0.76025 0.6163,-1.37655 1.37655,-1.37655h6.42393c0.76023,0 1.37655,0.6163 1.37655,1.37655v5.96508h-7.80049c-0.76025,0 -1.37655,-0.61633 -1.37655,-1.37655z" fill="#ffffff" stroke-width="1"/><path d="M241.32244,176.32917h7.80049c0.76023,0 1.37655,0.61633 1.37655,1.37655v4.58852c0,0.76023 -0.61633,1.37655 -1.37655,1.37655h-7.80049z" fill="#ffffff" stroke-width="1"/><path d="M232.05251,185.04737c0,-0.76023 0.6163,-1.37655 1.37655,-1.37655h7.80049v5.96508c0,0.76023 -0.61633,1.37655 -1.37655,1.37655h-6.42393c-0.76025,0 -1.37655,-0.61633 -1.37655,-1.37655z" fill="#ffffff" stroke-width="1"/><path d="M229.00052,181.36444v-1.45107h1.11621v1.45107z" fill="none" stroke-width="0"/></g></g></svg>
-        </button>
+     </li>
+     <li>
+      <a class="nav-link focus:outline-none" href="#about" data-link="about">
+       About
       </a>
-
-      <a href="https://dsc.gg/tatom" target="_blank"> <!-- link to discord -->
-        <button class="icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 20" fill="none">
-<g clip-path="url(#clip0_2_1995)">
-<path d="M20.317 2.19206C18.7873 1.47476 17.147 0.946284 15.4319 0.643604C15.4007 0.637762 15.3695 0.652361 15.3534 0.681558C15.1424 1.06502 14.9087 1.56527 14.7451 1.95847C12.9004 1.67623 11.0652 1.67623 9.25832 1.95847C9.09465 1.55653 8.85248 1.06502 8.64057 0.681558C8.62448 0.653335 8.59328 0.638736 8.56205 0.643604C6.84791 0.945317 5.20756 1.47379 3.67694 2.19206C3.66368 2.1979 3.65233 2.20764 3.64479 2.22029C0.533392 6.97077 -0.31895 11.6045 0.0991801 16.1808C0.101072 16.2031 0.11337 16.2246 0.130398 16.2382C2.18321 17.7788 4.17171 18.7142 6.12328 19.3341C6.15451 19.3438 6.18761 19.3322 6.20748 19.3059C6.66913 18.6616 7.08064 17.9823 7.43348 17.2679C7.4543 17.226 7.43442 17.1764 7.39186 17.1598C6.73913 16.9068 6.1176 16.5983 5.51973 16.2479C5.47244 16.2197 5.46865 16.1506 5.51216 16.1175C5.63797 16.0211 5.76382 15.9209 5.88395 15.8197C5.90569 15.8012 5.93598 15.7973 5.96153 15.8089C9.88928 17.6416 14.1415 17.6416 18.023 15.8089C18.0485 15.7963 18.0788 15.8002 18.1015 15.8187C18.2216 15.9199 18.3475 16.0211 18.4742 16.1175C18.5177 16.1506 18.5149 16.2197 18.4676 16.2479C17.8697 16.6051 17.2482 16.9068 16.5945 17.1589C16.552 17.1754 16.533 17.226 16.5538 17.2679C16.9143 17.9813 17.3258 18.6606 17.7789 19.3049C17.7978 19.3322 17.8319 19.3438 17.8631 19.3341C19.8241 18.7142 21.8126 17.7788 23.8654 16.2382C23.8834 16.2246 23.8948 16.2041 23.8967 16.1817C24.3971 10.8911 23.0585 6.29534 20.3482 2.22125C20.3416 2.20764 20.3303 2.1979 20.317 2.19206ZM8.02002 13.3943C6.8375 13.3943 5.86313 12.2848 5.86313 10.9222C5.86313 9.55964 6.8186 8.45014 8.02002 8.45014C9.23087 8.45014 10.1958 9.56938 10.1769 10.9222C10.1769 12.2848 9.22141 13.3943 8.02002 13.3943ZM15.9947 13.3943C14.8123 13.3943 13.8379 12.2848 13.8379 10.9222C13.8379 9.55964 14.7933 8.45014 15.9947 8.45014C17.2056 8.45014 18.1705 9.56938 18.1516 10.9222C18.1516 12.2848 17.2056 13.3943 15.9947 13.3943Z" fill="var(--text-color)"/>
-</g>
-<defs>
-<clipPath id="clip0_2_1995">
-<rect width="24" height="19" fill="white" transform="translate(0 0.5)"/>
-</clipPath>
-</defs>
-</svg>
-        </button>
+     </li>
+     <li>
+      <a class="nav-link focus:outline-none" href="#projects" data-link="projects">
+       Projects
       </a>
-
-      <a href="https://github.com/S4IL21" target="_blank"> <!-- link to github -->
-        <button class="icon">
-         <svg preserveAspectRatio="xMidYMin" width="24" height="24" viewBox="0 0 24 24" fill="var(--text-color)" aria-hidden="true" class="css-1b8e0pq" style="vertical-align: middle;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.22 19.845 4.98 19.17C4.845 18.825 4.26 17.76 3.75 17.475C3.33 17.25 2.73 16.695 3.735 16.68C4.68 16.665 5.355 17.55 5.58 17.91C6.66 19.725 8.385 19.215 9.075 18.9C9.18 18.12 9.495 17.595 9.84 17.295C7.17 16.995 4.38 15.96 4.38 11.37C4.38 10.065 4.845 8.985 5.61 8.145C5.49 7.845 5.07 6.615 5.73 4.965C5.73 4.965 6.735 4.65 9.03 6.195C9.99 5.925 11.01 5.79 12.03 5.79C13.05 5.79 14.07 5.925 15.03 6.195C17.325 4.635 18.33 4.965 18.33 4.965C18.99 6.615 18.57 7.845 18.45 8.145C19.215 8.985 19.68 10.05 19.68 11.37C19.68 15.975 16.875 16.995 14.205 17.295C14.64 17.67 15.015 18.39 15.015 19.515C15.015 21.12 15 22.41 15 22.815C15 23.13 15.225 23.505 15.825 23.385C18.2072 22.5808 20.2773 21.0498 21.7438 19.0074C23.2103 16.9651 23.9994 14.5143 24 12C24 5.37 18.63 0 12 0Z"></path></svg>
-        </button>
+     </li>
+     <li>
+      <a class="nav-link focus:outline-none" href="#skills" data-link="skills">
+       Skills
       </a>
-    </div>
-
-  <a href="/privacy" target="_blank"> <!-- privacy link -->
-    <button class="icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20" fill="none">
-        <rect x="0" fill="none" width="20" height="20"/>
-        <g>
-          <path 
-            d="M10 9.6c-.6 0-1 .4-1 1 0 .4.3.7.6.8l-.3 1.4h1.3l-.3-1.4c.4-.1.6-.4.6-.8.1-.6-.3-1-.9-1zm.1-4.3c-.7 0-1.4.5-1.4 1.2V8h2.7V6.5c-.1-.7-.6-1.2-1.3-1.2zM10 2L3 5v3c.1 4.4 2.9 8.3 7 9.9 4.1-1.6 6.9-5.5 7-9.9V5l-7-3zm4 11c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9c0-.6.4-1 1-1h.3V6.5C7.4 5.1 8.6 4 10 4c1.4 0 2.6 1.1 2.7 2.5V8h.3c.6 0 1 .4 1 1v4z" 
-            fill="white"
-          />
-        </g>
-      </svg>
+     </li>
+     <li>
+      <a class="nav-link focus:outline-none" href="#contact" data-link="contact">
+       Contact
+      </a>
+     </li>
+    </ul>
+    <button aria-label="Toggle menu" class="md:hidden focus:outline-none text-indigo-500" id="menu-btn" type="button">
+     <i class="fas fa-bars fa-lg">
+     </i>
     </button>
-  </a>
-
-    <!-- CAN EDIT -->
-    <div class="buttons">
-      <a href="/creations/"> <!-- link to somewhere -->
-        <button class="primary">My Creations</button>
+   </nav>
+   <div class="md:hidden bg-gray-800 bg-opacity-95 backdrop-blur-sm hidden" id="mobile-menu">
+    <ul class="flex flex-col space-y-4 p-6 text-lg font-semibold">
+     <li>
+      <a class="nav-link block active focus:outline-none" href="#home" data-link="home">
+       Home
       </a>
-
-      <a href="/socials/"> <!-- link to somewhere -->
-        <button>My Socials</button>
+     </li>
+     <li>
+      <a class="nav-link block focus:outline-none" href="#about" data-link="about">
+       About
       </a>
-      
-      <a href="/more/"> <!-- link to somewhere -->
-        <button>More...</button>
+     </li>
+     <li>
+      <a class="nav-link block focus:outline-none" href="#projects" data-link="projects">
+       Projects
       </a>
-    </div>       
-  </div>
+     </li>
+     <li>
+      <a class="nav-link block focus:outline-none" href="#skills" data-link="skills">
+       Skills
+      </a>
+     </li>
+     <li>
+      <a class="nav-link block focus:outline-none" href="#contact" data-link="contact">
+       Contact
+      </a>
+     </li>
+    </ul>
+   </div>
+  </header>
+  <main class="pt-20">
+   <!-- Hero Section -->
+   <section class="min-h-screen flex flex-col md:flex-row items-center justify-center max-w-7xl mx-auto px-6 sm:px-10 gap-12" id="home" tabindex="-1">
+    <div class="text-center md:text-left max-w-xl space-y-6">
+     <h1 class="text-5xl sm:text-6xl font-extrabold gradient-text leading-tight">
+      Hi, I'm
+      <span class="text-indigo-500">
+       S4IL
+      </span>
+     </h1>
+     <p class="text-lg sm:text-xl text-gray-300">
+      A passionate
+      <span class="font-semibold text-indigo-400">
+       Full-Stack Developer
+      </span>
+      crafting modern, responsive, and animated web experiences.
+     </p>
+     <div class="flex justify-center md:justify-start space-x-6 mt-6">
+      <a class="btn-pulse inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400" href="#projects">
+       View Projects
+      </a>
+      <a class="inline-block border-2 border-indigo-600 hover:bg-indigo-600 hover:text-white text-indigo-400 font-semibold px-6 py-3 rounded-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400" href="#contact">
+       Contact Me
+      </a>
+     </div>
+    </div>
+    <div class="w-full max-w-md">
+     <img class="rounded-3xl shadow-2xl float-animation" height="400" loading="lazy" src="https://s4il.is-a.dev/images/logo.png" width="400"/>
+    </div>
+   </section>
+   <!-- About Section -->
+   <section class="max-w-5xl mx-auto px-6 sm:px-10 py-20" id="about" tabindex="-1">
+    <h2 class="text-4xl font-extrabold gradient-text mb-12 text-center">
+     About Me
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+     <img alt="Creative workspace with a modern computer, notebook, and coffee cup on a wooden desk, bright and inspiring environment" class="rounded-2xl shadow-lg" height="500" loading="lazy" src="https://storage.googleapis.com/a1aa/image/ba5d7b0c-6167-43a0-4cdc-c0323036c12e.jpg" width="500"/>
+     <div class="text-gray-300 space-y-6 text-lg leading-relaxed">
+      <p>
+       I'm S4IL, a full-stack developer with over 6 years of experience building scalable and performant web applications. I specialize in JavaScript frameworks, modern CSS, and creating smooth user experiences with animations.
+      </p>
+      <p>
+       I love turning complex problems into elegant solutions and continuously learning new technologies to stay ahead in the fast-evolving web development world.
+      </p>
+      <p>
+       When I'm not coding, you can find me exploring nature, sketching, or experimenting with new recipes.
+      </p>
+     </div>
+    </div>
+   </section>
+   <!-- Projects Section -->
+   <section class="bg-gray-800 py-20" id="projects" tabindex="-1">
+    <div class="max-w-7xl mx-auto px-6 sm:px-10">
+     <h2 class="text-4xl font-extrabold gradient-text mb-12 text-center">
+      Projects
+     </h2>
+     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+       <img alt="Screenshot of Project 1: A dashboard UI showing charts and graphs with a dark theme and modern design" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/9df51d25-b8b8-455f-5cd6-5850866f174a.jpg" width="600"/>
+       <div class="p-6">
+        <h3 class="text-2xl font-semibold mb-2 text-indigo-400">
+         Project One
+        </h3>
+        <p class="text-gray-300 mb-4">
+         A responsive dashboard application with real-time data visualization and user management features.
+        </p>
+        <div class="flex space-x-4 text-indigo-500 text-lg">
+         <a aria-label="GitHub repository for Project One" class="hover:text-indigo-400 transition" href="#">
+          <i class="fab fa-github">
+          </i>
+         </a>
+         <a aria-label="Live demo for Project One" class="hover:text-indigo-400 transition" href="#">
+          <i class="fas fa-external-link-alt">
+          </i>
+         </a>
+        </div>
+       </div>
+      </article>
+      <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+       <img alt="Screenshot of Project 2: E-commerce website product page with product images, descriptions, and add to cart button" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/1cb42e2b-c763-4fc5-97f4-88a74cd0f63c.jpg" width="600"/>
+       <div class="p-6">
+        <h3 class="text-2xl font-semibold mb-2 text-indigo-400">
+         Project Two
+        </h3>
+        <p class="text-gray-300 mb-4">
+         A modern e-commerce platform with smooth animations, product filtering, and secure checkout.
+        </p>
+        <div class="flex space-x-4 text-indigo-500 text-lg">
+         <a aria-label="GitHub repository for Project Two" class="hover:text-indigo-400 transition" href="#">
+          <i class="fab fa-github">
+          </i>
+         </a>
+         <a aria-label="Live demo for Project Two" class="hover:text-indigo-400 transition" href="#">
+          <i class="fas fa-external-link-alt">
+          </i>
+         </a>
+        </div>
+       </div>
+      </article>
+      <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+       <img alt="Screenshot of Project 3: Mobile app landing page featuring call to action buttons and app screenshots" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/26dae9e5-20a6-4886-f676-6a542d5c8f74.jpg" width="600"/>
+       <div class="p-6">
+        <h3 class="text-2xl font-semibold mb-2 text-indigo-400">
+         Project Three
+        </h3>
+        <p class="text-gray-300 mb-4">
+         A sleek landing page for a mobile app with animated sections and interactive call-to-action buttons.
+        </p>
+        <div class="flex space-x-4 text-indigo-500 text-lg">
+         <a aria-label="GitHub repository for Project Three" class="hover:text-indigo-400 transition" href="#">
+          <i class="fab fa-github">
+          </i>
+         </a>
+         <a aria-label="Live demo for Project Three" class="hover:text-indigo-400 transition" href="#">
+          <i class="fas fa-external-link-alt">
+          </i>
+         </a>
+        </div>
+       </div>
+      </article>
+      <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+       <img alt="Screenshot of Project 4: Blog platform interface showing posts, dark mode toggle, and comments section" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/431dc8a3-6d66-47ea-c40f-252d3c69bb47.jpg" width="600"/>
+       <div class="p-6">
+        <h3 class="text-2xl font-semibold mb-2 text-indigo-400">
+         Project Four
+        </h3>
+        <p class="text-gray-300 mb-4">
+         A blogging platform with dark mode, user comments, and a clean, readable layout.
+        </p>
+        <div class="flex space-x-4 text-indigo-500 text-lg">
+         <a aria-label="GitHub repository for Project Four" class="hover:text-indigo-400 transition" href="#">
+          <i class="fab fa-github">
+          </i>
+         </a>
+         <a aria-label="Live demo for Project Four" class="hover:text-indigo-400 transition" href="#">
+          <i class="fas fa-external-link-alt">
+          </i>
+         </a>
+        </div>
+       </div>
+      </article>
+      <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+       <img alt="Screenshot of Project 5: Portfolio website featuring an interactive gallery with hover animations" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/971501a6-c10f-4937-7251-3889bab34b01.jpg" width="600"/>
+       <div class="p-6">
+        <h3 class="text-2xl font-semibold mb-2 text-indigo-400">
+         Project Five
+        </h3>
+        <p class="text-gray-300 mb-4">
+         A personal portfolio website with an interactive project gallery and smooth scrolling animations.
+        </p>
+        <div class="flex space-x-4 text-indigo-500 text-lg">
+         <a aria-label="GitHub repository for Project Five" class="hover:text-indigo-400 transition" href="#">
+          <i class="fab fa-github">
+          </i>
+         </a>
+         <a aria-label="Live demo for Project Five" class="hover:text-indigo-400 transition" href="#">
+          <i class="fas fa-external-link-alt">
+          </i>
+         </a>
+        </div>
+       </div>
+      </article>
+      <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+       <img alt="Screenshot of Project 6: Chat application interface showing real-time messaging and user list" class="w-full h-48 object-cover" height="400" loading="lazy" src="https://storage.googleapis.com/a1aa/image/52636325-7271-4506-9486-1de750e81916.jpg" width="600"/>
+       <div class="p-6">
+        <h3 class="text-2xl font-semibold mb-2 text-indigo-400">
+         Project Six
+        </h3>
+        <p class="text-gray-300 mb-4">
+         A real-time chat application with user presence indicators and private messaging features.
+        </p>
+        <div class="flex space-x-4 text-indigo-500 text-lg">
+         <a aria-label="GitHub repository for Project Six" class="hover:text-indigo-400 transition" href="#">
+          <i class="fab fa-github">
+          </i>
+         </a>
+         <a aria-label="Live demo for Project Six" class="hover:text-indigo-400 transition" href="#">
+          <i class="fas fa-external-link-alt">
+          </i>
+         </a>
+        </div>
+       </div>
+      </article>
+     </div>
+    </div>
+   </section>
+   <!-- Skills Section -->
+   <section class="max-w-5xl mx-auto px-6 sm:px-10 py-20" id="skills" tabindex="-1">
+    <h2 class="text-4xl font-extrabold gradient-text mb-12 text-center">
+     Skills
+    </h2>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 text-center">
+     <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+      <img alt="JavaScript logo in yellow and black colors" class="w-20 h-20" height="80" loading="lazy" src="https://storage.googleapis.com/a1aa/image/0d228ac7-91fb-4dd4-cd74-843979ac50de.jpg" width="80"/>
+      <h3 class="text-indigo-400 font-semibold text-xl">
+       JavaScript
+      </h3>
+      <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+       <div class="bg-indigo-600 h-3 rounded-full" style="width: 90%">
+       </div>
+      </div>
+     </div>
+     <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+      <img alt="React logo with blue atom symbol on white background" class="w-20 h-20" height="80" loading="lazy" src="https://storage.googleapis.com/a1aa/image/0f3ee2e7-7c53-4fc1-adc1-e68b491ea1bf.jpg" width="80"/>
+      <h3 class="text-indigo-400 font-semibold text-xl">
+       React
+      </h3>
+      <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+       <div class="bg-indigo-600 h-3 rounded-full" style="width: 85%">
+       </div>
+      </div>
+     </div>
+     <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+      <img alt="Node.js logo with green hexagon and white text" class="w-20 h-20" height="80" loading="lazy" src="https://storage.googleapis.com/a1aa/image/57ccb0db-aa59-433e-df55-75ac862658c3.jpg" width="80"/>
+      <h3 class="text-indigo-400 font-semibold text-xl">
+       Node.js
+      </h3>
+      <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+       <div class="bg-indigo-600 h-3 rounded-full" style="width: 80%">
+       </div>
+      </div>
+     </div>
+     <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+      <img alt="Tailwind CSS logo with teal and blue wave shapes" class="w-20 h-20" height="80" loading="lazy" src="https://storage.googleapis.com/a1aa/image/7f3e17a6-a8df-47c5-d75b-f8d671755f72.jpg" width="80"/>
+      <h3 class="text-indigo-400 font-semibold text-xl">
+       Tailwind CSS
+      </h3>
+      <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+       <div class="bg-indigo-600 h-3 rounded-full" style="width: 95%">
+       </div>
+      </div>
+     </div>
+     <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+      <img alt="TypeScript logo with blue background and white TS letters" class="w-20 h-20" height="80" loading="lazy" src="https://storage.googleapis.com/a1aa/image/9720079b-3da9-47c5-25ab-c3382e590535.jpg" width="80"/>
+      <h3 class="text-indigo-400 font-semibold text-xl">
+       TypeScript
+      </h3>
+      <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+       <div class="bg-indigo-600 h-3 rounded-full" style="width: 75%">
+       </div>
+      </div>
+     </div>
+     <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+      <img alt="GraphQL logo with pink hexagonal shape and white text" class="w-20 h-20" height="80" loading="lazy" src="https://storage.googleapis.com/a1aa/image/9dc1d436-d354-4902-eeef-f4e257a80b67.jpg" width="80"/>
+      <h3 class="text-indigo-400 font-semibold text-xl">
+       GraphQL
+      </h3>
+      <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+       <div class="bg-indigo-600 h-3 rounded-full" style="width: 70%">
+       </div>
+      </div>
+     </div>
+     <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+      <img alt="Git logo with orange diamond shape and white text" class="w-20 h-20" height="80" loading="lazy" src="https://storage.googleapis.com/a1aa/image/ccefd2b3-5393-4d70-2c8c-94cd1a7c3838.jpg" width="80"/>
+      <h3 class="text-indigo-400 font-semibold text-xl">
+       Git
+      </h3>
+      <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+       <div class="bg-indigo-600 h-3 rounded-full" style="width: 90%">
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+   <!-- Contact Section -->
+   <section class="bg-gray-800 py-20" id="contact" tabindex="-1">
+    <div class="max-w-3xl mx-auto px-6 sm:px-10 text-center">
+     <h2 class="text-4xl font-extrabold gradient-text mb-8">
+      Get In Touch
+     </h2>
+     <p class="text-gray-300 mb-12 text-lg">
+      Whether you want to collaborate on a project, have a question, or just want to say hi, feel free to reach out!
+     </p>
+     <form action="#" class="space-y-6 text-left" method="POST" novalidate="">
+      <div>
+       <label class="block mb-2 font-semibold text-indigo-400" for="name">
+        Name
+       </label>
+       <input class="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="name" name="name" placeholder="Your full name" required="" type="text"/>
+      </div>
+      <div>
+       <label class="block mb-2 font-semibold text-indigo-400" for="email">
+        Email
+       </label>
+       <input class="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="email" name="email" placeholder="you@example.com" required="" type="email"/>
+      </div>
+      <div>
+       <label class="block mb-2 font-semibold text-indigo-400" for="message">
+        Message
+       </label>
+       <textarea class="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="message" name="message" placeholder="Write your message here..." required="" rows="5"></textarea>
+      </div>
+      <div class="text-center">
+       <button class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-4 rounded-lg shadow-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400" type="submit">
+        Send Message
+       </button>
+      </div>
+     </form>
+     <div class="mt-16 flex justify-center space-x-10 text-indigo-500 text-3xl">
+      <a aria-label="GitHub profile" class="hover:text-indigo-400 transition" href="https://github.com/S4IL21" rel="noopener noreferrer" target="_blank">
+       <i class="fab fa-github">
+       </i>
+      </a>
+      <a aria-label="DSC profile" class="hover:text-indigo-400 transition" href="https://dsc.gg/tatom" rel="noopener noreferrer" target="_blank">
+       <i class="fas fa-users">
+       </i>
+      </a>
+      <a aria-label="Send email" class="hover:text-indigo-400 transition" href="mailto:s4il.is.a.dev@gmail.com">
+       <i class="fas fa-envelope">
+       </i>
+      </a>
+     </div>
+    </div>
+   </section>
+  </main>
+  <footer class="bg-gray-900 py-8 text-center text-gray-500 text-sm select-none">
+   © 2025 S4IL. All rights reserved.
+  </footer>
+  <script>
+   const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.querySelectorAll('a.nav-link');
 
-  <script src="script.js"></script>
-</body>
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      menuBtn.querySelector('i').classList.toggle('fa-bars');
+      menuBtn.querySelector('i').classList.toggle('fa-times');
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuBtn.querySelector('i').classList.add('fa-bars');
+        menuBtn.querySelector('i').classList.remove('fa-times');
+      });
+    });
+
+    // Highlight nav links on scroll
+    const sections = ['home', 'about', 'projects', 'skills', 'contact'].map(id => document.getElementById(id));
+
+    function onScroll() {
+      const scrollPos = window.scrollY + window.innerHeight / 3;
+
+      let currentSectionId = 'home'; // default
+
+      for (const section of sections) {
+        if (section.offsetTop <= scrollPos) {
+          currentSectionId = section.id;
+        }
+      }
+
+      navLinks.forEach(link => {
+        if (link.dataset.link === currentSectionId) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Also update mobile menu links
+      mobileMenu.querySelectorAll('a.nav-link').forEach(link => {
+        if (link.dataset.link === currentSectionId) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', onScroll);
+    window.addEventListener('load', onScroll);
+  </script>
+ </body>
 </html>

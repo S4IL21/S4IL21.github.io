@@ -6,8 +6,8 @@
   <meta property="og:title" content="S4IL is a dev!"> <!-- CAN EDIT -->
   <meta property="og:image" content="/images/round-logo.png"> <!-- CAN EDIT -->
   <meta property="og:description" content="Hi, I’m S4IL.
-I’m a developer passionate about creating efficient, innovative solutions and building projects that make an impact. This is my personal website where I showcase my work, share insights, and connect with others. Take a look around!"> <!-- CAN EDIT -->
-  <meta name="theme-color" content="#0079F2"> <!-- CAN EDIT -->
+I’m a developer passionate about creating efficient, innovative solutions and building projects that make an impact. This is my personal website where I showcase my work, share insights, and connect with others. Take a look around!""> <!-- CAN EDIT -->
+  <meta name="theme-color" content="#0079F2"> <!-- CAN EDIT (use same value as the --button-primary-default variable in style.css) -->
 
   <meta name="description" content="Hi, I’m S4IL.
 I’m a developer passionate about creating efficient, innovative solutions and building projects that make an impact. This is my personal website where I showcase my work, share insights, and connect with others. Take a look around!">
@@ -15,77 +15,6 @@ I’m a developer passionate about creating efficient, innovative solutions and 
   <title>S4IL is a dev!</title>
   <link rel="shortcut icon" href="/images/round-logo.png">
   <link href="style.css" rel="stylesheet" type="text/css" />
-  <style>
-    body {
-      background: #0f172a;
-      color: white;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    .card {
-      background: #1e293b;
-      padding: 2rem;
-      border-radius: 1rem;
-      text-align: center;
-      max-width: 600px;
-      width: 90%;
-    }
-    .logo-wrapper img {
-      width: 100px;
-      border-radius: 50%;
-      margin-bottom: 1rem;
-    }
-    h1 {
-      margin: 0;
-    }
-    .socials {
-      margin: 1.5rem 0;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .icon {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-      border-radius: 0.5rem;
-      transition: background 0.2s;
-    }
-    .icon:hover {
-      background: rgba(255,255,255,0.1);
-    }
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-    button {
-      background: #334155;
-      color: white;
-      border: none;
-      padding: 0.7rem 1.2rem;
-      border-radius: 0.5rem;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    button:hover {
-      background: #475569;
-    }
-    .primary {
-      background: #0079F2;
-    }
-    .primary:hover {
-      background: #005fcc;
-    }
-  </style>
 </head>
 
 <body>
@@ -96,58 +25,81 @@ I’m a developer passionate about creating efficient, innovative solutions and 
       </div>
   
       <div class="text">
+        <!-- CAN EDIT -->
         <h1>S4IL</h1>
+        
+        <!-- CAN EDIT -->
         <p>Hello, I'm S4IL! 😎🤙💙</p>
-        <p>I’m a developer passionate about creating efficient, innovative solutions and building projects that make an impact. This is my personal website where I showcase my work, share insights, and connect with others. Take a look around!</p>
+        <p>I’m a developer passionate about creating efficient, innovative solutions and building projects that make an impact. This is my personal website where I showcase my work, share insights, and connect with others. Take a look around!<p>
       </div>
     </div>
 
-    <!-- FIXED: all socials (including privacy) in one row -->
+    <!-- CAN EDIT -->
     <div class="socials">
-      <a href="mailto:s4il.is.a.dev@gmail.com">
+      <a href="mailto:s4il.is.a.dev@gmail.com"> <!-- link to mail -->
         <button class="icon">
-          <!-- mail svg -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
-            <path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+<path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6" stroke="var(--text-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
         </button>
       </a>
 
-      <a href="https://replit.com/@S4IL" target="_blank">
+
+      <a href="https://replit.com/@S4IL" target="_blank"> <!-- link to replit -->
         <button class="icon">
-          <!-- replit svg -->
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="21.5" height="22" viewBox="0,0,21.5,22"><g transform="translate(-229,-169)" fill="#ffffff"><path d="M232.1,170.4c0,-0.8 0.6,-1.4 1.4,-1.4h6.4c0.8,0 1.4,0.6 1.4,1.4v6h-7.8c-0.8,0 -1.4,-0.6 -1.4,-1.4z"/><path d="M241.3,176.3h7.8c0.8,0 1.4,0.6 1.4,1.4v4.6c0,0.8 -0.6,1.4 -1.4,1.4h-7.8z"/><path d="M232.1,185c0,-0.8 0.6,-1.4 1.4,-1.4h7.8v6c0,0.8 -0.6,1.4 -1.4,1.4h-6.4c-0.8,0 -1.4,-0.6 -1.4,-1.4z"/></g></svg>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21.49897" height="22.02491" viewBox="0,0,21.49897,22.02491"><g transform="translate(-229.00052,-168.98755)"><g data-paper-data="{&quot;isPaintingLayer&quot;:true}" fill-rule="nonzero" stroke="none" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" style="mix-blend-mode: normal"><path d="M232.05251,170.3641c0,-0.76025 0.6163,-1.37655 1.37655,-1.37655h6.42393c0.76023,0 1.37655,0.6163 1.37655,1.37655v5.96508h-7.80049c-0.76025,0 -1.37655,-0.61633 -1.37655,-1.37655z" fill="#ffffff" stroke-width="1"/><path d="M241.32244,176.32917h7.80049c0.76023,0 1.37655,0.61633 1.37655,1.37655v4.58852c0,0.76023 -0.61633,1.37655 -1.37655,1.37655h-7.80049z" fill="#ffffff" stroke-width="1"/><path d="M232.05251,185.04737c0,-0.76023 0.6163,-1.37655 1.37655,-1.37655h7.80049v5.96508c0,0.76023 -0.61633,1.37655 -1.37655,1.37655h-6.42393c-0.76025,0 -1.37655,-0.61633 -1.37655,-1.37655z" fill="#ffffff" stroke-width="1"/><path d="M229.00052,181.36444v-1.45107h1.11621v1.45107z" fill="none" stroke-width="0"/></g></g></svg>
         </button>
       </a>
 
-      <a href="https://dsc.gg/tatom" target="_blank">
+      <a href="https://dsc.gg/tatom" target="_blank"> <!-- link to discord -->
         <button class="icon">
-          <!-- discord svg -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" fill="white"><path d="M20.3 2.2C18.8 1.5 17.1 0.9 15.4 0.6c-.1 0-.2.1-.2.2-.2.4-.4.9-.6 1.3-1.8-.3-3.6-.3-5.4 0-.2-.4-.4-.9-.6-1.3 0-.1-.1-.2-.2-.2C6.8.9 5.2 1.5 3.7 2.2c0 .1-.1.1-.1.2C.5 7-0.3 11.6.1 16.2c0 .1.1.2.1.2 2.1 1.6 4.1 2.6 6.1 3.2.1 0 .2 0 .2-.1.5-.6.9-1.3 1.2-2 .1-.1 0-.2-.1-.2-.7-.3-1.3-.6-1.9-1 .1-.1.2-.2.3-.3 4 2 8.2 2 12.1 0 .1.1.2.2.3.3-.6.4-1.3.7-1.9 1-.1 0-.2.1-.1.2.3.7.8 1.4 1.2 2 .1.1.1.1.2.1 2-.6 4-1.6 6.1-3.2.1 0 .1-.1.1-.2.5-5.3-.8-9.9-3.5-14 0-.1-.1-.1-.2-.2zM8 13.4c-1.2 0-2.2-1.1-2.2-2.5S6.8 8.5 8 8.5c1.2 0 2.2 1.1 2.2 2.5S9.2 13.4 8 13.4zm8 0c-1.2 0-2.2-1.1-2.2-2.5s1-2.5 2.2-2.5c1.2 0 2.2 1.1 2.2 2.5s-1 2.5-2.2 2.5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 20" fill="none">
+<g clip-path="url(#clip0_2_1995)">
+<path d="M20.317 2.19206C18.7873 1.47476 17.147 0.946284 15.4319 0.643604C15.4007 0.637762 15.3695 0.652361 15.3534 0.681558C15.1424 1.06502 14.9087 1.56527 14.7451 1.95847C12.9004 1.67623 11.0652 1.67623 9.25832 1.95847C9.09465 1.55653 8.85248 1.06502 8.64057 0.681558C8.62448 0.653335 8.59328 0.638736 8.56205 0.643604C6.84791 0.945317 5.20756 1.47379 3.67694 2.19206C3.66368 2.1979 3.65233 2.20764 3.64479 2.22029C0.533392 6.97077 -0.31895 11.6045 0.0991801 16.1808C0.101072 16.2031 0.11337 16.2246 0.130398 16.2382C2.18321 17.7788 4.17171 18.7142 6.12328 19.3341C6.15451 19.3438 6.18761 19.3322 6.20748 19.3059C6.66913 18.6616 7.08064 17.9823 7.43348 17.2679C7.4543 17.226 7.43442 17.1764 7.39186 17.1598C6.73913 16.9068 6.1176 16.5983 5.51973 16.2479C5.47244 16.2197 5.46865 16.1506 5.51216 16.1175C5.63797 16.0211 5.76382 15.9209 5.88395 15.8197C5.90569 15.8012 5.93598 15.7973 5.96153 15.8089C9.88928 17.6416 14.1415 17.6416 18.023 15.8089C18.0485 15.7963 18.0788 15.8002 18.1015 15.8187C18.2216 15.9199 18.3475 16.0211 18.4742 16.1175C18.5177 16.1506 18.5149 16.2197 18.4676 16.2479C17.8697 16.6051 17.2482 16.9068 16.5945 17.1589C16.552 17.1754 16.533 17.226 16.5538 17.2679C16.9143 17.9813 17.3258 18.6606 17.7789 19.3049C17.7978 19.3322 17.8319 19.3438 17.8631 19.3341C19.8241 18.7142 21.8126 17.7788 23.8654 16.2382C23.8834 16.2246 23.8948 16.2041 23.8967 16.1817C24.3971 10.8911 23.0585 6.29534 20.3482 2.22125C20.3416 2.20764 20.3303 2.1979 20.317 2.19206ZM8.02002 13.3943C6.8375 13.3943 5.86313 12.2848 5.86313 10.9222C5.86313 9.55964 6.8186 8.45014 8.02002 8.45014C9.23087 8.45014 10.1958 9.56938 10.1769 10.9222C10.1769 12.2848 9.22141 13.3943 8.02002 13.3943ZM15.9947 13.3943C14.8123 13.3943 13.8379 12.2848 13.8379 10.9222C13.8379 9.55964 14.7933 8.45014 15.9947 8.45014C17.2056 8.45014 18.1705 9.56938 18.1516 10.9222C18.1516 12.2848 17.2056 13.3943 15.9947 13.3943Z" fill="var(--text-color)"/>
+</g>
+<defs>
+<clipPath id="clip0_2_1995">
+<rect width="24" height="19" fill="white" transform="translate(0 0.5)"/>
+</clipPath>
+</defs>
+</svg>
         </button>
       </a>
 
-      <a href="https://github.com/S4IL21" target="_blank">
+      <a href="https://github.com/S4IL21" target="_blank"> <!-- link to github -->
         <button class="icon">
-          <!-- github svg -->
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.44 9.8 8.21 11.39.6.1.82-.3.82-.62 0-.3-.01-1.25-.01-2.25-3.02.55-3.8-1.14-4.04-1.82-.14-.35-.6-1.42-1.02-1.7-.35-.2-.86-.7 0-.7.8-.01 1.37.74 1.56 1.05.9 1.52 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.69-.3-5.51-1.34-5.51-5.96 0-1.32.47-2.39 1.23-3.23-.12-.3-.53-1.52.12-3.16 0 0 1-.32 3.3 1.23a11.4 11.4 0 0 1 6 0c2.3-1.55 3.3-1.23 3.3-1.23.65 1.64.24 2.86.12 3.16.76.84 1.23 1.91 1.23 3.23 0 4.64-2.82 5.66-5.51 5.96.36.31.68.92.68 1.86 0 1.34-.01 2.42-.01 2.75 0 .31.22.72.82.61C20.56 21.8 24 17.31 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        </button>
-      </a>
-
-      <a href="/privacy" target="_blank">
-        <button class="icon">
-          <!-- privacy svg -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20" fill="white">
-            <path d="M10 9.6c-.6 0-1 .4-1 1 0 .4.3.7.6.8l-.3 1.4h1.3l-.3-1.4c.4-.1.6-.4.6-.8.1-.6-.3-1-.9-1zm.1-4.3c-.7 0-1.4.5-1.4 1.2V8h2.7V6.5c-.1-.7-.6-1.2-1.3-1.2zM10 2L3 5v3c.1 4.4 2.9 8.3 7 9.9 4.1-1.6 6.9-5.5 7-9.9V5l-7-3zm4 11c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9c0-.6.4-1 1-1h.3V6.5C7.4 5.1 8.6 4 10 4c1.4 0 2.6 1.1 2.7 2.5V8h.3c.6 0 1 .4 1 1v4z"/>
-          </svg>
+         <svg preserveAspectRatio="xMidYMin" width="24" height="24" viewBox="0 0 24 24" fill="var(--text-color)" aria-hidden="true" class="css-1b8e0pq" style="vertical-align: middle;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.22 19.845 4.98 19.17C4.845 18.825 4.26 17.76 3.75 17.475C3.33 17.25 2.73 16.695 3.735 16.68C4.68 16.665 5.355 17.55 5.58 17.91C6.66 19.725 8.385 19.215 9.075 18.9C9.18 18.12 9.495 17.595 9.84 17.295C7.17 16.995 4.38 15.96 4.38 11.37C4.38 10.065 4.845 8.985 5.61 8.145C5.49 7.845 5.07 6.615 5.73 4.965C5.73 4.965 6.735 4.65 9.03 6.195C9.99 5.925 11.01 5.79 12.03 5.79C13.05 5.79 14.07 5.925 15.03 6.195C17.325 4.635 18.33 4.965 18.33 4.965C18.99 6.615 18.57 7.845 18.45 8.145C19.215 8.985 19.68 10.05 19.68 11.37C19.68 15.975 16.875 16.995 14.205 17.295C14.64 17.67 15.015 18.39 15.015 19.515C15.015 21.12 15 22.41 15 22.815C15 23.13 15.225 23.505 15.825 23.385C18.2072 22.5808 20.2773 21.0498 21.7438 19.0074C23.2103 16.9651 23.9994 14.5143 24 12C24 5.37 18.63 0 12 0Z"></path></svg>
         </button>
       </a>
     </div>
 
+  <a href="/privacy" target="_blank"> <!-- privacy link -->
+    <button class="icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20" fill="none">
+        <rect x="0" fill="none" width="20" height="20"/>
+        <g>
+          <path 
+            d="M10 9.6c-.6 0-1 .4-1 1 0 .4.3.7.6.8l-.3 1.4h1.3l-.3-1.4c.4-.1.6-.4.6-.8.1-.6-.3-1-.9-1zm.1-4.3c-.7 0-1.4.5-1.4 1.2V8h2.7V6.5c-.1-.7-.6-1.2-1.3-1.2zM10 2L3 5v3c.1 4.4 2.9 8.3 7 9.9 4.1-1.6 6.9-5.5 7-9.9V5l-7-3zm4 11c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9c0-.6.4-1 1-1h.3V6.5C7.4 5.1 8.6 4 10 4c1.4 0 2.6 1.1 2.7 2.5V8h.3c.6 0 1 .4 1 1v4z" 
+            fill="white"
+          />
+        </g>
+      </svg>
+    </button>
+  </a>
+
+    <!-- CAN EDIT -->
     <div class="buttons">
-      <a href="/creations/"><button class="primary">My Creations</button></a>
-      <a href="/socials/"><button>My Socials</button></a>
-      <a href="/more/"><button>More...</button></a>
+      <a href="/creations/"> <!-- link to somewhere -->
+        <button class="primary">My Creations</button>
+      </a>
+
+      <a href="/socials/"> <!-- link to somewhere -->
+        <button>My Socials</button>
+      </a>
+      
+      <a href="/more/"> <!-- link to somewhere -->
+        <button>More...</button>
+      </a>
     </div>       
   </div>
 

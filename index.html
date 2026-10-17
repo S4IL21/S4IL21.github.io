@@ -8,12 +8,11 @@
   <meta name="description" content="S4IL builds social platforms, Discord bots and weird little tools. Check out VibePost, Tatom, BaldBot and more.">
   <meta name="author" content="S4IL">
   <link rel="canonical" href="https://s4il.is-a.dev/">
-  <meta name="theme-color" content="#ffd93d">
+  <meta name="theme-color" content="#ff5fa8">
 
   <!-- Icons -->
-  <link rel="icon" href="assets/img/s4il-icon.svg" type="image/svg+xml">
-  <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
-  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="icon" href="files/round-logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="files/logo.png">
 
   <!-- Social -->
   <meta property="og:type" content="website">
@@ -64,9 +63,8 @@
       --paper:#fff4d6;
       --blue:#00adf2;      /* the mascot's background blue */
       --sky:#bfeaff;
-      --yellow:#ffd93d;
+      --accent:#ff5fa8;      /* the one loud colour: hot pink */
       --teal:#00cbcb;      /* the mascot's hoodie */
-      --pink:#ff8fc7;
       --purple:#c9b3ff;
       --green:#8cff93;
       --coral:#ff8a78;
@@ -101,7 +99,7 @@
     a{color:inherit;text-decoration:none}
     button{font:inherit;color:inherit;cursor:pointer}
     strong{font-weight:700}
-    ::selection{background:var(--ink);color:var(--yellow)}
+    ::selection{background:var(--ink);color:var(--accent)}
     :focus-visible{outline:4px dashed var(--ink);outline-offset:4px;border-radius:6px}
     main:focus{outline:none}
     main{overflow-x:clip}
@@ -111,7 +109,7 @@
     .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
     .sprite{position:absolute;width:0;height:0;overflow:hidden}
     .sentinel{position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none}
-    .skip{position:fixed;left:12px;top:-120px;z-index:100;padding:12px 18px;background:var(--yellow);border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:var(--sh-s);font-weight:700;transition:top .2s}
+    .skip{position:fixed;left:12px;top:-120px;z-index:100;padding:12px 18px;background:var(--accent);border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:var(--sh-s);font-weight:700;transition:top .2s}
     .skip:focus{top:12px}
     .i{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
     .ico{fill:currentColor}
@@ -121,7 +119,7 @@
     .title--hero{--fs:clamp(4.25rem,14vw,9.5rem);text-shadow:var(--stroke-5),8px 8px 0 var(--ink);line-height:.92}
     .title--section{--fs:clamp(2.75rem,7vw,5rem)}
 
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:52px;padding:.55em 1.15em;background:var(--c,var(--yellow));border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:var(--sh-s);font:700 1.0625rem/1.1 var(--font-body);text-align:center;transition:translate .12s,box-shadow .12s,background-color .12s}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:52px;padding:.55em 1.15em;background:var(--c,var(--accent));border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:var(--sh-s);font:700 1.0625rem/1.1 var(--font-body);text-align:center;transition:translate .12s,box-shadow .12s,background-color .12s}
     .btn svg{width:1.15em;height:1.15em;flex:none}
     .btn--white{--c:var(--white)}
     .btn--lg{min-height:60px;padding:.6em 1.4em;font-size:1.25rem;border-radius:16px;box-shadow:6px 6px 0 var(--ink)}
@@ -135,23 +133,23 @@
 
     .tags{display:flex;flex-wrap:wrap;gap:8px}
     .tags li{padding:.1em .6em;background:var(--white);border:2.5px solid var(--ink);border-radius:10px;font:700 .8125rem/1.7 var(--font-mono)}
-    .tags li:nth-child(4n+1){background:var(--yellow)}
+    .tags li:nth-child(4n+1){background:var(--accent)}
     .tags li:nth-child(4n+2){background:var(--sky)}
-    .tags li:nth-child(4n+3){background:var(--pink)}
+    .tags li:nth-child(4n+3){background:var(--purple)}
     .tags li:nth-child(4n+4){background:var(--green)}
 
     .card{position:relative;display:flex;flex-direction:column;background:var(--white);border:var(--bw) solid var(--ink);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
     .spark{position:absolute;width:var(--s,34px);height:var(--s,34px);rotate:var(--rot,0deg);pointer-events:none;fill:var(--c,#fff);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round}
     .spark--a{left:46%;top:9%;--s:44px;--rot:-8deg}
-    .spark--b{left:43%;bottom:9%;--s:30px;--c:var(--yellow);--rot:10deg}
-    .spark--c{right:4%;bottom:7%;--s:38px;--c:var(--pink);--rot:-6deg}
+    .spark--b{left:43%;bottom:9%;--s:30px;--c:var(--accent);--rot:10deg}
+    .spark--c{right:4%;bottom:7%;--s:38px;--c:var(--purple);--rot:-6deg}
 
     .js .reveal:not(.is-in){opacity:0}
     .js .reveal.is-in{animation:pop .6s var(--pop) backwards}
     @keyframes pop{from{opacity:0;translate:0 28px;scale:.95}to{opacity:1;translate:0 0;scale:1}}
 
     /* ---------- Header ---------- */
-    .site-header{position:sticky;top:0;z-index:50;background:var(--yellow);border-bottom:4px solid var(--ink)}
+    .site-header{position:sticky;top:0;z-index:50;background:var(--accent);border-bottom:4px solid var(--ink)}
     .bar{min-height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
     .brand{display:inline-flex;align-items:center;gap:10px;min-height:48px}
     .brand img{width:46px;height:46px;border:var(--bw) solid var(--ink);border-radius:50%;background:var(--blue)}
@@ -161,7 +159,7 @@
     .nav-list a[aria-current]{background:var(--sky)}
     .nav-list .nav-cta{background:var(--blue)}
     .nav-list a:active{translate:3px 3px;box-shadow:0 0 0 var(--ink)}
-    @media (hover:hover){.nav-list a:hover{background:var(--pink);translate:-1px -1px;box-shadow:5px 5px 0 var(--ink)}}
+    @media (hover:hover){.nav-list a:hover{background:var(--purple);translate:-1px -1px;box-shadow:5px 5px 0 var(--ink)}}
     .nav-toggle{display:none;align-items:center;gap:10px;min-height:48px;padding:0 16px;background:var(--white);border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:var(--sh-s);font:700 1rem/1 var(--font-body)}
     .nav-toggle svg{width:22px;height:22px}
     .nav-toggle .i-close,.nav-toggle[aria-expanded="true"] .i-menu{display:none}
@@ -185,7 +183,7 @@
     /* ---------- Sections ---------- */
     .section{position:relative;padding-block:clamp(56px,8vw,104px);border-bottom:4px solid var(--ink)}
     .section--paper{background-color:var(--paper);background-image:radial-gradient(rgba(11,11,15,.13) 1.6px,transparent 1.9px);background-size:22px 22px}
-    .section--yellow{background:var(--yellow)}
+    .section--accent{background:var(--accent)}
     .section--blue{background:var(--blue);overflow:hidden}
     .section-head{position:relative;display:grid;justify-items:start;gap:14px;margin-bottom:clamp(32px,4.5vw,56px)}
     .section-lead{max-width:34em;font-size:clamp(1.15rem,2vw,1.35rem);font-weight:500}
@@ -198,7 +196,7 @@
     .p-tatom{grid-column:span 5}
     .p-chlor,.p-bald,.p-block{grid-column:span 4}
     .p-others{grid-column:span 12}
-    .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:var(--c,var(--yellow));border-bottom:var(--bw) solid var(--ink)}
+    .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:var(--c,var(--accent));border-bottom:var(--bw) solid var(--ink)}
     .card-title{font:400 clamp(1.9rem,3vw,2.4rem)/1 var(--font-display);letter-spacing:.01em;text-shadow:2px 2px 0 rgba(255,255,255,.7)}
     .card-body{display:flex;flex:1;flex-direction:column;gap:14px;padding:20px 20px 22px}
     .card-body p{max-width:42em}
@@ -208,7 +206,7 @@
     .caps li{padding:.2em .75em;background:var(--white);border:2.5px solid var(--ink);border-radius:999px;font:700 .9375rem/1.4 var(--font-body)}
     .caps li:nth-child(odd){background:var(--paper)}
     .caps a{display:block;margin:-.2em -.75em;padding:.2em .75em;border-radius:inherit;transition:background-color .12s}
-    @media (hover:hover){.caps a:hover{background:var(--yellow)}}
+    @media (hover:hover){.caps a:hover{background:var(--accent)}}
     .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:auto;padding-top:6px}
 
     .shot{position:relative;border-bottom:var(--bw) solid var(--ink);background:var(--ink)}
@@ -220,13 +218,13 @@
     .term{border-bottom:var(--bw) solid var(--ink);background:#15151f;color:var(--white)}
     .term-bar{display:flex;align-items:center;gap:7px;padding:9px 14px;background:var(--white);border-bottom:var(--bw) solid var(--ink);color:var(--ink);font:700 .8125rem/1 var(--font-mono)}
     .term-bar i{width:12px;height:12px;border:2px solid var(--ink);border-radius:50%;background:var(--coral)}
-    .term-bar i:nth-child(2){background:var(--yellow)}
+    .term-bar i:nth-child(2){background:var(--orange)}
     .term-bar i:nth-child(3){background:var(--green)}
     .term-bar span{margin-left:6px}
     .term pre{padding:14px 18px;white-space:pre-wrap;overflow-wrap:anywhere;font:700 clamp(.8rem,.5vw + .55rem,.88rem)/1.65 var(--font-mono)}
     .term .c{color:#9da3bd}
     .term .p{color:var(--green)}
-    .element{display:grid;grid-template-rows:auto 1fr;flex:none;width:54px;aspect-ratio:1;margin-block:-8px;padding:4px 6px;background:var(--yellow);border:var(--bw) solid var(--ink);border-radius:10px;box-shadow:3px 3px 0 var(--ink);rotate:7deg;font:700 .65rem/1 var(--font-mono)}
+    .element{display:grid;grid-template-rows:auto 1fr;flex:none;width:54px;aspect-ratio:1;margin-block:-8px;padding:4px 6px;background:var(--accent);border:var(--bw) solid var(--ink);border-radius:10px;box-shadow:3px 3px 0 var(--ink);rotate:7deg;font:700 .65rem/1 var(--font-mono)}
     .element b{align-self:center;justify-self:center;font:400 1.55rem/1 var(--font-display)}
     .element sup{font-size:.55em;vertical-align:.6em}
 
@@ -243,23 +241,23 @@
     /* ---------- About + stack ---------- */
     .about-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(28px,4vw,56px);align-items:start}
     .about-card{padding:clamp(22px,3.2vw,38px);display:grid;gap:18px;font-size:clamp(1.1rem,1.6vw,1.25rem);line-height:1.6}
-    .about-card .title{margin-bottom:6px;color:var(--yellow)}
-    .about-card a{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px;text-decoration-color:var(--pink)}
-    .char{padding:0;background:var(--pink)}
+    .about-card .title{margin-bottom:6px;color:var(--accent)}
+    .about-card a{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px;text-decoration-color:var(--accent)}
+    .char{padding:0;background:var(--sky)}
     .char-head{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--white);border-bottom:var(--bw) solid var(--ink)}
     .char-head img{width:92px;height:auto;border:var(--bw) solid var(--ink);border-radius:18px;background:var(--blue)}
-    .char-name{font:400 2.4rem/1 var(--font-display);text-shadow:2px 2px 0 var(--yellow)}
+    .char-name{font:400 2.4rem/1 var(--font-display);text-shadow:2px 2px 0 var(--accent)}
     .char-sub{font:700 .8125rem/1.3 var(--font-mono)}
     .stats{padding:12px 16px 18px;display:grid;gap:10px}
     .stats>div{display:grid;grid-template-columns:7.6em 1fr;gap:12px;align-items:center}
-    .stats dt{justify-self:start;padding:.1em .6em;background:var(--ink);color:var(--yellow);border-radius:8px;font:700 .75rem/1.7 var(--font-mono);letter-spacing:.04em;text-transform:uppercase}
+    .stats dt{justify-self:start;padding:.1em .6em;background:var(--ink);color:var(--accent);border-radius:8px;font:700 .75rem/1.7 var(--font-mono);letter-spacing:.04em;text-transform:uppercase}
     .stats dd{font-weight:700;line-height:1.3}
     .stack{margin-top:clamp(40px,6vw,72px);display:grid;gap:20px}
     .stack h3{font:400 clamp(2rem,4vw,2.9rem)/1 var(--font-display);text-shadow:var(--stroke-3),4px 4px 0 var(--ink);color:var(--white)}
     .pills{display:flex;flex-wrap:wrap;gap:12px}
     .pills li{padding:.4em .95em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 var(--ink);font:700 1.0625rem/1.3 var(--font-body)}
     .pills li:nth-child(5n+1){background:var(--sky)}
-    .pills li:nth-child(5n+2){background:var(--pink)}
+    .pills li:nth-child(5n+2){background:var(--paper)}
     .pills li:nth-child(5n+3){background:var(--green)}
     .pills li:nth-child(5n+4){background:var(--white)}
     .pills li:nth-child(5n+5){background:var(--purple)}
@@ -271,21 +269,21 @@
     .mail{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
     .btn--xl{min-height:64px;padding:.5em 1.1em;font-size:clamp(1.05rem,3.4vw,1.75rem);box-shadow:6px 6px 0 var(--ink);overflow-wrap:anywhere}
     .btn.is-done{--c:var(--green)}
-    .socials{display:flex;flex-wrap:wrap;gap:14px;margin-top:6px}
-    .social{display:inline-flex;align-items:center;gap:.6em;min-height:52px;padding:.4em 1em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:var(--sh-s);font:700 1.0625rem/1.1 var(--font-body);transition:translate .12s,box-shadow .12s,background-color .12s}
+    .socials{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
+    .social{display:inline-flex;align-items:center;gap:.6em;min-height:52px;padding:.4em .85em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:var(--sh-s);font:700 1.0625rem/1.1 var(--font-body);transition:translate .12s,box-shadow .12s,background-color .12s}
     .social svg{width:24px;height:24px;flex:none}
     .social:active{translate:4px 4px;box-shadow:0 0 0 var(--ink)}
-    @media (hover:hover){.social:hover{background:var(--yellow);translate:-2px -2px;box-shadow:7px 7px 0 var(--ink)}.social:hover:active{translate:4px 4px;box-shadow:0 0 0 var(--ink)}}
+    @media (hover:hover){.social:hover{background:var(--accent);translate:-2px -2px;box-shadow:7px 7px 0 var(--ink)}.social:hover:active{translate:4px 4px;box-shadow:0 0 0 var(--ink)}}
     .contact-art{position:relative;display:grid;justify-items:center;padding-top:44px}
     .contact-art img.big{width:min(100%,340px);height:auto;background:var(--blue);border:4px solid var(--ink);border-radius:32px;box-shadow:10px 10px 0 var(--ink);rotate:-3deg}
     .contact-art .bubble{top:0;left:auto;right:4%;rotate:4deg}
     .contact-art .bubble::after{left:auto;right:36px}
 
     /* ---------- Footer ---------- */
-    .site-footer{background:var(--ink);color:var(--yellow);padding-block:28px 36px;font:700 1rem/1.5 var(--font-body)}
+    .site-footer{background:var(--ink);color:var(--accent);padding-block:28px 36px;font:700 1rem/1.5 var(--font-body)}
     .foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 32px}
     .foot ul{display:flex;flex-wrap:wrap;gap:4px 22px}
-    .foot a{display:inline-flex;align-items:center;gap:.4em;min-height:40px;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:5px;text-decoration-color:var(--pink)}
+    .foot a{display:inline-flex;align-items:center;gap:.4em;min-height:40px;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:5px;text-decoration-color:var(--white)}
     .foot a svg{width:1em;height:1em}
     .site-footer :focus-visible{outline-color:var(--white)}
     @media (hover:hover){.foot a:hover{color:var(--white)}}
@@ -308,7 +306,7 @@
     }
     @media (max-width:720px){
       .js .nav-toggle{display:inline-flex}
-      .js .nav-list{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:12px;padding:18px var(--gutter) 24px;background:var(--yellow);border-bottom:4px solid var(--ink)}
+      .js .nav-list{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:12px;padding:18px var(--gutter) 24px;background:var(--accent);border-bottom:4px solid var(--ink)}
       .js .nav-list[data-open]{display:flex}
       .js .nav-list a{display:flex;justify-content:center;min-height:56px;font-size:1.2rem}
       .nav-list{flex-wrap:wrap;justify-content:flex-end;gap:8px}
@@ -343,10 +341,10 @@
     "@type": "Person",
     "name": "S4IL",
     "url": "https://s4il.is-a.dev/",
-    "image": "https://s4il.is-a.dev/assets/img/apple-touch-icon.png",
+    "image": "https://s4il.is-a.dev/files/round-logo.png",
     "jobTitle": "Full-stack developer",
     "homeLocation": { "@type": "Place", "name": "Barcelona, Spain" },
-    "sameAs": ["https://github.com/S4IL21", "https://www.youtube.com/@-How-To-Tutorials-", "https://scratch.mit.edu/users/s4il/", "https://wasteof.money/users/s4il"]
+    "sameAs": ["https://github.com/S4IL21", "https://www.youtube.com/@-How-To-Tutorials-", "https://scratch.mit.edu/users/s4il/"]
   }
   </script>
 </head>
@@ -371,8 +369,6 @@
       <symbol id="b-youtube" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
       <symbol id="b-scratch" viewBox="0 0 24 24"><path d="M11.406 11.312c-.78-.123-1.198-.654-.99-2.295l.023-.198c.175-1.426.321-1.743.996-1.706.198.013.426.14.654.33.211.247.68.568.945 1.204.19.466.254.77.281 1.098l.042.402v-.002a.68.68 0 0 0 1.342-.007c.008-.044.176-4.365.176-4.436 0-.38-.302-.69-.68-.696a.685.685 0 0 0-.682.688c0 .009-.001.605-.014 1.206-.536-.592-1.223-1.123-1.994-1.17-2.058-.11-2.283 1.811-2.419 2.918l-.02.196c-.278 2.189.441 3.569 2.13 3.837 1.838.293 3.063.72 3.074 1.868.007.446-.224.903-.627 1.254a2.163 2.163 0 0 1-1.749.507 3.233 3.233 0 0 1-.539-.141c-.24-.136-.847-.51-1.154-.942-.26-.364-.35-.937-.378-1.3.004-.163.005-.27.005-.283a.69.69 0 0 0-.669-.703.689.689 0 0 0-.696.682c0 .013-.017 1.367-.066 2.183-.07 1.313 0 2.426 0 2.474.028.382.35.67.727.644a.681.681 0 0 0 .635-.733c0-.006-.033-.545-.029-1.29a5.21 5.21 0 0 0 1.938.773 3.451 3.451 0 0 0 2.856-.82c.713-.619 1.122-1.464 1.11-2.32-.024-2.555-2.865-3.004-4.228-3.222M14.174 0a5.51 5.51 0 0 0-2.724.723h-.112c-2.637 0-4.937 1.392-6.15 3.728-.728 1.393-.9 2.75-.999 3.579-.012.089-.018.17-.028.262-.12.974-.123 1.904-.01 2.772a5.824 5.824 0 0 0-.625 2.529v.016a58.919 58.919 0 0 1-.057 1.95 29.72 29.72 0 0 0-.008 2.94l.013.209C3.698 21.676 6.159 24 9.083 24a5.516 5.516 0 0 0 3.463-1.21 8.357 8.357 0 0 0 5.195-2.08c1.826-1.587 2.859-3.845 2.83-6.19-.013-1.362-.346-2.638-.978-3.763.117-1.273.221-4.996.221-5.03 0-3.103-2.484-5.67-5.539-5.727zm.056 2.675c1.642.03 2.978 1.412 2.978 3.081 0 .038-.145 4.497-.215 4.883a3.152 3.152 0 0 1-.203.69c.756.89 1.165 2 1.175 3.256.021 1.555-.681 3.076-1.926 4.16a5.763 5.763 0 0 1-3.8 1.444 5.986 5.986 0 0 1-.718-.048 3.386 3.386 0 0 1-.172.215 2.97 2.97 0 0 1-2.264 1.038c-1.573 0-2.897-1.255-3.013-2.856l-.008-.122a27.366 27.366 0 0 1 .005-2.662c.039-.679.06-1.831.062-2.08a3.124 3.124 0 0 1 .783-2.025c-.237-.835-.312-1.836-.167-3.02l.024-.212c.083-.695.208-1.72.72-2.7.765-1.473 2.168-2.318 3.848-2.318a4.568 4.568 0 0 1 .824.07c.546-.5 1.27-.81 2.067-.794Z"/></symbol>
       <symbol id="b-roblox" viewBox="0 0 24 24"><path d="M18.926 23.998 0 18.892 5.075.002 24 5.108ZM15.348 10.09l-5.282-1.453-1.414 5.273 5.282 1.453z"/></symbol>
-      <symbol id="b-replit" viewBox="0 0 24 24"><path d="M2 1.5A1.5 1.5 0 0 1 3.5 0h7A1.5 1.5 0 0 1 12 1.5V8H3.5A1.5 1.5 0 0 1 2 6.5ZM12 8h8.5A1.5 1.5 0 0 1 22 9.5v5a1.5 1.5 0 0 1-1.5 1.5H12ZM2 17.5A1.5 1.5 0 0 1 3.5 16H12v6.5a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 2 22.5Z"/></symbol>
-      <symbol id="b-wasteof" viewBox="0 0 24 24"><path d="M1.5 5h3.6l2.2 9.4L10 5h2.7l2.7 9.4L17.6 5h3.6l-4.4 14.2h-3L11.4 10.7 8.6 19.2h-3z"/></symbol>
       <symbol id="star" viewBox="0 0 24 24"><path d="M12 1.5l2.5 8.2L22.5 12l-8 2.3L12 22.5l-2.5-8.2L1.5 12l8-2.3z"/></symbol>
     </defs>
   </svg>
@@ -380,7 +376,7 @@
   <header class="site-header" data-header>
     <div class="wrap bar">
       <a class="brand" href="#top" aria-label="S4IL, back to top">
-        <img src="assets/img/s4il-icon.svg" width="46" height="46" alt="" fetchpriority="high">
+        <img src="assets/img/s4il-icon.png" width="46" height="46" alt="">
         <span>S4IL</span>
       </a>
       <nav aria-label="Primary">
@@ -413,7 +409,7 @@
 
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <h1 class="title title--hero" id="hero-title"><span class="nb">Hi, I&rsquo;m</span> <span class="name">S4IL!<svg class="squiggle" viewBox="0 0 200 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 9c14-9 26 9 40 0s26 9 40 0 26 9 40 0 26 9 40 0 26 9 32 3" fill="none" stroke="#0b0b0f" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 9c14-9 26 9 40 0s26 9 40 0 26 9 40 0 26 9 40 0 26 9 32 3" fill="none" stroke="#ffd93d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></h1>
+          <h1 class="title title--hero" id="hero-title"><span class="nb">Hi, I&rsquo;m</span> <span class="name">S4IL!<svg class="squiggle" viewBox="0 0 200 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 9c14-9 26 9 40 0s26 9 40 0 26 9 40 0 26 9 40 0 26 9 32 3" fill="none" stroke="#0b0b0f" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 9c14-9 26 9 40 0s26 9 40 0 26 9 40 0 26 9 40 0 26 9 32 3" fill="none" stroke="#ff5fa8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></h1>
           <p class="lead">Social platforms, Discord bots and weird little tools. I build whatever sounds fun.</p>
           <div class="cta-row">
             <a class="btn btn--lg" href="#projects">See my stuff <svg class="i" aria-hidden="true"><use href="#i-down"/></svg></a>
@@ -442,7 +438,7 @@
 
           <!-- VibePost -->
           <article class="card project p-vibe reveal" id="vibepost" aria-labelledby="vibepost-title">
-            <div class="card-top" style="--c:var(--yellow)">
+            <div class="card-top" style="--c:var(--accent)">
               <h3 class="card-title" id="vibepost-title">VibePost</h3>
               <span class="sticker" style="--c:var(--green)">Pre-beta</span>
             </div>
@@ -464,7 +460,7 @@
           <article class="card project p-tatom reveal" id="tatom" aria-labelledby="tatom-title">
             <div class="card-top" style="--c:var(--sky)">
               <h3 class="card-title" id="tatom-title">Tatom</h3>
-              <span class="sticker" style="--c:var(--yellow)">My company</span>
+              <span class="sticker" style="--c:var(--accent)">My company</span>
             </div>
             <figure class="shot shot--fill">
               <img src="assets/img/shots/tatom.webp" srcset="assets/img/shots/tatom-480.webp 480w, assets/img/shots/tatom.webp 760w" sizes="(min-width:1001px) 480px, 100vw" width="760" height="800" alt="Screenshot of the Tatom website: “We build things today. For a better web tomorrow.” on a dark blue background, with the Tatom train logo." loading="lazy" decoding="async">
@@ -511,11 +507,11 @@
 
           <!-- BaldBot -->
           <article class="card project p-bald reveal" id="baldbot" aria-labelledby="baldbot-title">
-            <div class="card-top" style="--c:var(--pink)">
+            <div class="card-top" style="--c:var(--green)">
               <h3 class="card-title" id="baldbot-title">BaldBot</h3>
-              <span class="sticker" style="--c:var(--yellow)">Discord bot</span>
+              <span class="sticker" style="--c:var(--white)">Discord bot</span>
             </div>
-            <div class="art art--fill" style="--c:var(--pink)">
+            <div class="art art--fill" style="--c:var(--green)">
               <p class="bubble">Da baldest bot in da universe</p>
               <img class="sq" src="assets/img/baldbot-art.webp" width="232" height="232" alt="BaldBot’s profile picture: a shiny blue cartoon head with big googly eyes" loading="lazy" decoding="async">
             </div>
@@ -572,7 +568,7 @@
     </section>
 
     <!-- ====================== About ====================== -->
-    <section class="section section--yellow" id="about" aria-labelledby="about-title">
+    <section class="section section--accent" id="about" aria-labelledby="about-title">
       <div class="wrap">
         <div class="about-grid">
           <div class="card about-card reveal">
@@ -638,8 +634,6 @@
             <li><a class="social" href="https://www.youtube.com/@-How-To-Tutorials-" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-youtube"/></svg>YouTube<span class="sr-only"> (opens in a new tab)</span></a></li>
             <li><a class="social" href="https://scratch.mit.edu/users/s4il/" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-scratch"/></svg>Scratch<span class="sr-only"> (opens in a new tab)</span></a></li>
             <li><a class="social" href="https://www.roblox.com/users/2023170110/profile" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-roblox"/></svg>Roblox<span class="sr-only"> (opens in a new tab)</span></a></li>
-            <li><a class="social" href="https://wasteof.money/users/s4il" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-wasteof"/></svg>Wasteof<span class="sr-only"> (opens in a new tab)</span></a></li>
-            <li><a class="social" href="https://replit.com/@S4IL" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-replit"/></svg>Replit<span class="sr-only"> (opens in a new tab)</span></a></li>
           </ul>
         </div>
         <div class="contact-art">

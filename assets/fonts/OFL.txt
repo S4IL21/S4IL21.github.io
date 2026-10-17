@@ -4,6 +4,7 @@ Fonts in this folder are self-hosted, Latin subsets (Google Fonts / Fontsource):
   - space-mono-bold.woff2 (Space Mono Bold)
   - manrope.woff2         (Manrope, variable)
   - jetbrains-mono.woff2  (JetBrains Mono, variable)
+  - mona-sans.woff2       (Mona Sans, variable weight and width, unmodified Latin file from Fontsource)
 
 All are licensed under the SIL Open Font License 1.1 (full text below).
 Copyright notices:
@@ -12,6 +13,7 @@ Copyright notices:
   Space Mono:     Copyright 2016 The Space Mono Project Authors (https://github.com/googlefonts/spacemono)
   Manrope:        Copyright 2019 The Manrope Project Authors (https://github.com/sharanda/manrope)
   JetBrains Mono: Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)
+  Mona Sans:      Copyright 2022 The Mona Sans Project Authors (https://github.com/github/mona-sans), with Reserved Font Name "Mona"
 
 ------------------------------------------------------------------------
 

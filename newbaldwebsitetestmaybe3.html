@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>S4IL | Social platforms, Discord bots and weird tools</title>
+  <meta name="description" content="S4IL builds social platforms, Discord bots and weird little tools. VibePost, Tatom, Chloride, BaldBot and more.">
+  <meta name="author" content="S4IL">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a0a0a">
+  <!-- Points at the homepage on purpose: if this file is ever renamed to index.html, nothing needs changing -->
+  <link rel="canonical" href="https://s4il.is-a.dev/">
+
+  <link rel="icon" href="files/round-logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="files/logo.png">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="S4IL">
+  <meta property="og:title" content="Hi, I'm S4IL.">
+  <meta property="og:description" content="Social platforms, Discord bots and weird little tools.">
+  <meta property="og:url" content="https://s4il.is-a.dev/">
+  <meta property="og:image" content="https://s4il.is-a.dev/assets/img/og-dark.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A giant S4IL wordmark on black with a cartoon avatar in a teal hoodie standing on the letters, waving.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Hi, I'm S4IL.">
+  <meta name="twitter:description" content="Social platforms, Discord bots and weird little tools.">
+  <meta name="twitter:image" content="https://s4il.is-a.dev/assets/img/og-dark.png">
+
+  <link rel="preload" href="assets/fonts/mona-sans.woff2" as="font" type="font/woff2" crossorigin>
+  <script>
+    /* Flags are set before first paint so nothing flashes. The timeout is a failsafe: the intro never blocks the content. */
+    (function () {
+      var d = document.documentElement, m = window.matchMedia;
+      d.classList.add('js');
+      if (m('(hover: hover) and (pointer: fine)').matches) d.classList.add('can-hover');
+      if (!m('(prefers-reduced-motion: reduce)').matches) d.classList.add('motion');
+      setTimeout(function () { d.classList.add('is-ready'); }, 3500);
+    })();
+  </script>
+
+  <style>
+    /* ==========================================================================
+       S4IL personal site, black.
+       Type does the work: one family (Mona Sans), one easing curve, sharp corners,
+       no colour except the mascot and the screenshots.
+       ========================================================================== */
+
+    /* ---------- Font (self-hosted, Latin, variable weight + width) ---------- */
+    @font-face{font-family:"Mona Sans";src:url(assets/fonts/mona-sans.woff2) format("woff2");font-weight:400 900;font-stretch:100% 125%;font-style:normal;font-display:swap}
+    @font-face{font-family:"Mona Fallback";src:local("Arial"),local("ArialMT");font-weight:400 599;size-adjust:103.93%;ascent-override:104.88%;descent-override:30.79%;line-gap-override:0%}
+    @font-face{font-family:"Mona Fallback";src:local("Arial Bold"),local("Arial-BoldMT");font-weight:600 900;size-adjust:101.53%;ascent-override:107.36%;descent-override:31.52%;line-gap-override:0%}
+
+    /* ---------- Tokens ---------- */
+    :root{
+      color-scheme:dark;
+      --bg:#0a0a0a;
+      --fg:#f4f4f2;
+      --fg-2:#9d9d99;       /* secondary text, 7:1 on the background */
+      --fg-3:#8b8b87;       /* tertiary text, 5.7:1 */
+      --line:#232322;
+      --line-2:#383836;
+      --cyan:#00adf2;       /* the mascot's blue, used almost nowhere */
+
+      --font:"Mona Sans","Mona Fallback",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+
+      --pad:clamp(20px,4.2vw,64px);
+      --gap:clamp(16px,2.2vw,32px);
+      --header-h:72px;
+      --dock-h:26px;
+      --lk-ar:3.1654;       /* width / height of the S4IL wordmark */
+      --ease:cubic-bezier(.16,1,.3,1);
+    }
+
+    /* ---------- Base ---------- */
+    *,*::before,*::after{box-sizing:border-box}
+    html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:var(--header-h);scrollbar-color:#2c2c2b var(--bg)}
+    html.lenis,html.lenis body{height:auto}
+    .lenis.lenis-smooth iframe{pointer-events:none}
+    @media (prefers-reduced-motion:no-preference){html:not(.lenis){scroll-behavior:smooth}}
+    body{margin:0;min-height:100vh;background:var(--bg);color:var(--fg);font:400 1.0625rem/1.6 var(--font);font-synthesis:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:clip}
+    h1,h2,h3,p,ul,ol,dl,dd,figure,pre{margin:0}
+    ul{padding:0;list-style:none}
+    img,svg{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+    ::selection{background:var(--cyan);color:#000}
+    :focus-visible{outline:2px solid var(--cyan);outline-offset:4px;border-radius:2px}
+    main:focus{outline:none}
+
+    .wrap{max-width:1680px;margin-inline:auto;padding-inline:var(--pad)}
+    .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+    .sprite{position:absolute;width:0;height:0;overflow:hidden}
+    .skip{position:fixed;left:var(--pad);top:-80px;z-index:100;padding:10px 16px;background:var(--fg);color:#000;font-weight:650;transition:top .25s var(--ease)}
+    .skip:focus{top:14px}
+    .i{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:square;stroke-linejoin:miter}
+    .ico{fill:currentColor}
+
+    /* Links: the label rolls up on hover; long links get an underline that draws in */
+    .roll{display:inline-flex;flex-direction:column;overflow:hidden;height:1.25em;line-height:1.25;vertical-align:middle}
+    .roll>span{display:block;height:1.25em;transition:transform .6s var(--ease)}
+    @media (hover:hover){a:hover>.roll>span,button:hover>.roll>span{transform:translateY(-100%)}}
+    .ul{background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:100% 100%;background-size:0 1px;transition:background-size .7s var(--ease)}
+    @media (hover:hover){.ul:hover{background-position:0 100%;background-size:100% 1px}}
+
+    /* ---------- Header ---------- */
+    .top{position:fixed;inset:0 0 auto 0;z-index:60;height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:24px;padding-inline:var(--pad);border-bottom:1px solid transparent;transition:background-color .6s var(--ease),border-color .6s var(--ease)}
+    .top.is-stuck{background:var(--bg);border-bottom-color:var(--line)}
+    .dock-link{display:flex;align-items:center;min-height:44px;padding-right:14px}
+    .dock{display:block;height:var(--dock-h);aspect-ratio:var(--lk-ar)}
+    .dock svg{width:100%;height:100%;fill:var(--fg)}
+    .motion.dock-on .dock svg{opacity:0}
+    .menu{display:flex;align-items:center;gap:clamp(18px,3vw,44px)}
+    .menu a{display:inline-flex;align-items:center;min-height:44px;font-size:.9375rem;font-weight:500;color:var(--fg-2);transition:color .4s var(--ease)}
+    .menu a:hover,.menu a[aria-current]{color:var(--fg)}
+    .menu a[aria-current]::before{content:"";width:5px;height:5px;margin-right:9px;border-radius:50%;background:var(--cyan)}
+
+    /* ---------- Hero ---------- */
+    .hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:space-between;gap:clamp(24px,5vh,64px);padding:calc(var(--header-h) + clamp(28px,6vh,76px)) var(--pad) clamp(20px,4vh,44px)}
+    .statement{max-width:17em;font-size:clamp(1.7rem,3.3vw,3.4rem);font-weight:500;line-height:1.1;letter-spacing:-.035em;text-wrap:balance}
+    .statement .hi{color:var(--fg-2)}
+    .hero-space{position:relative;width:min(100%,146vh);width:min(100%,146svh);aspect-ratio:var(--lk-ar)}
+
+    /* The lockup: the S4IL wordmark with the mascot standing on it. Before the script runs it is just part of the hero. */
+    .lockup{position:relative;width:100%;aspect-ratio:var(--lk-ar);pointer-events:none}
+    .dock-on .lockup{position:fixed;left:0;top:0;z-index:70;transform-origin:0 0}
+    .lk-word{display:block;width:100%;height:100%;fill:var(--fg);overflow:hidden}
+    .lk-mascot{--mw:min(26%,34vh);--mw:min(26%,34svh);position:absolute;left:calc(var(--mx,81%) - var(--mw) / 2);bottom:calc(100% - 1.19%);width:var(--mw);overflow:hidden;opacity:var(--mo,1)}
+    .lk-mascot svg{display:block;width:100%;height:auto;aspect-ratio:162.63/157.58}
+
+    /* Intro: letters rise out of the baseline, the mascot pops out of the letters, then the sentence follows */
+    .motion .lk-word path{transform:translateY(790px)}
+    .motion.is-ready .lk-word path{transform:none;transition:transform 1.2s var(--ease);transition-delay:calc(.1s + var(--i) * .08s)}
+    .motion .lk-mascot svg{transform:translateY(104%)}
+    .motion.is-ready .lk-mascot svg{transform:none;transition:transform 1.25s var(--ease) .62s}
+    .motion .menu a{opacity:0}
+    .motion.is-ready .menu a{opacity:1;transition:opacity 1s var(--ease) .6s,color .4s var(--ease)}
+
+    /* Words that rise out of a mask (hero sentence and section titles) */
+    .split .w{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .06em .18em;margin:0 -.06em -.18em}
+    .split .wi{display:inline-block;transform:translate3d(0,110%,0)}
+    .split.in .wi,.is-ready .statement.split .wi{transform:none;transition:transform 1.15s var(--ease);transition-delay:calc(var(--base,0s) + var(--i) * 42ms)}
+    .statement{--base:.78s}
+
+    /* ---------- Sections ---------- */
+    .sec{padding-block:clamp(96px,13vw,200px)}
+    .display{font-size:clamp(2.3rem,6.2vw,6.25rem);font-weight:800;font-stretch:125%;letter-spacing:-.04em;line-height:.98;text-wrap:balance}
+    .sec-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 48px;margin-bottom:clamp(36px,5vw,84px)}
+    .lead{max-width:24em;color:var(--fg-2);font-size:1.125rem;line-height:1.5}
+
+    /* ---------- Work: a list, not a grid of cards ---------- */
+    .work{border-top:1px solid var(--line)}
+    .row{position:relative}
+    .row::before,.row::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1px}
+    .row::before{background:var(--line);transform-origin:left}
+    .row::after{background:var(--fg);transform:scaleX(0);transform-origin:right;transition:transform .8s var(--ease)}
+    @media (hover:hover){.row:hover::after{transform:scaleX(1);transform-origin:left}}
+    .motion .row:not(.in)::before{transform:scaleX(0)}
+    .motion .row.in::before{transition:transform 1.3s var(--ease)}
+    .row-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,4fr) minmax(0,2.2fr);gap:var(--gap);align-items:center;padding-block:clamp(22px,2.8vw,42px);transition:opacity .6s var(--ease)}
+    .row-link::after{content:"";position:absolute;inset:0;z-index:1}
+    .row-link:focus-visible{outline:none}
+    .row-link:focus-visible::after{outline:2px solid var(--cyan);outline-offset:6px}
+    .row-name{font-size:clamp(2rem,5.2vw,5rem);font-weight:650;letter-spacing:-.045em;line-height:1;transition:transform .8s var(--ease)}
+    .row-desc{display:block;color:var(--fg-2);font-size:1rem;line-height:1.5;max-width:34em}
+    .row-tags{display:block;margin-top:.55em;color:var(--fg-3);font-size:.875rem;line-height:1.45}
+    .row-meta{display:flex;align-items:center;justify-content:flex-end;gap:10px;color:var(--fg-2);font-size:.9375rem;text-align:right}
+    .row-arrow{width:18px;height:18px;flex:none;opacity:0;transform:translate(-8px,8px);transition:opacity .5s var(--ease),transform .7s var(--ease)}
+    @media (hover:hover){
+      .work:has(.row:hover) .row:not(:hover) .row-grid{opacity:.3}
+      .row:hover .row-name{transform:translateX(clamp(8px,1.3vw,22px))}
+      .row:hover .row-arrow{opacity:1;transform:none}
+    }
+    .row:has(.row-link:focus-visible) .row-arrow{opacity:1;transform:none}
+
+    /* The picture for each row: inline on phones and without a mouse, a floating preview with one */
+    .row-media{position:relative;aspect-ratio:16/10;max-width:520px;margin:0 0 clamp(22px,2.8vw,42px);overflow:hidden;border:1px solid var(--line-2);background:#000}
+    .row-media>img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
+    .row-media>img.pos-left{object-position:0 0}
+    .m-term{height:100%;padding:18px 20px;background:#0c0c0c;font:500 12.5px/1.75 var(--mono);color:#e8e8e6;white-space:pre-wrap}
+    .m-term .c{color:#8d8d89}
+    .m-term .p{color:var(--cyan)}
+    .m-art{height:100%;display:grid;place-items:center;background:var(--cyan)}
+    .m-art img{width:34%;aspect-ratio:1;object-fit:cover}
+    .m-gh{height:100%;display:grid;place-items:center;align-content:center;gap:14px;background:#141414;color:var(--fg);font-size:.9375rem;font-weight:500}
+    .m-gh svg{width:76px;height:76px}
+    .can-hover .row-media{display:none}
+
+    .peek{position:fixed;left:0;top:0;z-index:80;width:clamp(300px,27vw,440px);aspect-ratio:16/10;pointer-events:none;opacity:0;transition:opacity .45s var(--ease)}
+    .peek.is-on{opacity:1}
+    .peek-card{position:absolute;inset:0;overflow:hidden;border:1px solid var(--line-2);background:#000;transform:scale(.88);transition:transform .8s var(--ease)}
+    .peek.is-on .peek-card{transform:none}
+    .peek-item{position:absolute;inset:0;opacity:0;transition:opacity .4s var(--ease)}
+    .peek-item.is-active{opacity:1}
+    .can-hover .peek .row-media{display:block;max-width:none;width:100%;height:100%;margin:0;border:0;aspect-ratio:auto}
+
+    /* ---------- About + stack ---------- */
+    .about-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gap);margin-top:clamp(36px,5vw,84px)}
+    .facts{grid-column:1/5;align-self:start}
+    .facts>div{display:grid;gap:2px;padding-block:14px;border-top:1px solid var(--line)}
+    .facts dt{color:var(--fg-3);font-size:.875rem}
+    .facts dd{font-weight:550}
+    .about-copy{grid-column:5/13;display:grid;gap:1.1em;font-size:clamp(1.35rem,2.3vw,2.1rem);font-weight:450;line-height:1.28;letter-spacing:-.022em}
+    .about-copy p{max-width:30em}
+    .about-copy a{background-image:linear-gradient(currentColor,currentColor);background-repeat:no-repeat;background-position:0 100%;background-size:100% 1px}
+    .stack{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gap);margin-top:clamp(72px,9vw,140px);padding-top:clamp(24px,3vw,40px);border-top:1px solid var(--line)}
+    .stack-title{grid-column:1/5;font-size:clamp(1.5rem,2.4vw,2.2rem);font-weight:750;font-stretch:112%;letter-spacing:-.035em;line-height:1.05}
+    .stack-list{grid-column:5/13;font-size:clamp(1.25rem,2.1vw,1.9rem);font-weight:450;line-height:1.4;letter-spacing:-.02em}
+    .stack-list li{display:inline;white-space:nowrap}
+    .stack-list li::after{content:",";color:var(--fg-3)}
+    .stack-list li:last-child::after{content:"."}
+
+    /* ---------- Contact ---------- */
+    .contact{position:relative;overflow:hidden}
+    .say{font-size:clamp(3.4rem,15.5vw,15.5rem);line-height:.9;letter-spacing:-.05em;word-spacing:.04em}
+    .contact .lead{margin-top:clamp(20px,2.4vw,36px)}
+    .mail-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px clamp(16px,2vw,32px);margin-top:clamp(28px,4vw,60px)}
+    .mail{display:inline-flex;align-items:center;min-height:44px;font-size:clamp(1.35rem,4.3vw,4.2rem);font-weight:650;letter-spacing:-.04em;line-height:1.1;overflow-wrap:anywhere;padding-bottom:.08em;background-image:linear-gradient(var(--line-2),var(--line-2)),linear-gradient(var(--fg),var(--fg));background-repeat:no-repeat;background-position:0 100%,100% 100%;background-size:100% 2px,0 2px;transition:background-size .8s var(--ease)}
+    @media (hover:hover){.mail:hover{background-position:0 100%,0 100%;background-size:100% 2px,100% 2px}}
+    .copy{display:inline-flex;align-items:center;min-height:44px;color:var(--fg-2);font-size:.9375rem;font-weight:500;transition:color .4s var(--ease)}
+    .copy:hover,.copy.is-done{color:var(--fg)}
+    .socials{display:flex;flex-wrap:wrap;gap:6px clamp(22px,3vw,44px);margin-top:clamp(28px,3.4vw,52px);padding-bottom:clamp(120px,16vw,260px)}
+    .soc{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:1.0625rem;font-weight:550}
+    .soc svg{width:15px;height:15px}
+    .ct-mascot{position:absolute;right:var(--pad);bottom:0;width:clamp(170px,22vw,340px);overflow:hidden;pointer-events:none}
+    .ct-mascot img{width:100%;height:auto;aspect-ratio:162.63/157.58;transform:translateY(8%)}
+    .motion .ct-mascot img{transform:translateY(62%)}
+    .motion .contact.in .ct-mascot img{transform:translateY(8%);transition:transform 1.5s var(--ease) .25s}
+
+    /* ---------- Footer ---------- */
+    .foot{border-top:1px solid var(--line);color:var(--fg-2);font-size:.9375rem}
+    .foot-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 28px;min-height:76px}
+    .foot a{display:inline-flex;align-items:center;min-height:44px;color:var(--fg)}
+
+    /* ---------- Responsive ---------- */
+    @media (max-width:1000px){
+      .about-grid,.stack{display:block}
+      .facts{max-width:26em;margin-bottom:clamp(36px,6vw,56px)}
+      .stack-title{margin-bottom:18px}
+    }
+    @media (max-width:720px){
+      :root{--header-h:64px;--dock-h:22px}
+      .lk-mascot{--mw:min(38%,32svh)}
+      .row-grid{grid-template-columns:minmax(0,1fr) auto;row-gap:12px}
+      .row-name{grid-column:1}
+      .row-meta{grid-column:2}
+      .row-grid>.row-body{grid-column:1/-1;grid-row:2}
+      .row-arrow{display:none}
+      .row-media{max-width:none}
+    }
+    @media (prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation:none !important;transition-duration:.001ms !important;transition-delay:0ms !important}
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "S4IL",
+    "url": "https://s4il.is-a.dev/",
+    "image": "https://s4il.is-a.dev/files/round-logo.png",
+    "jobTitle": "Full-stack developer",
+    "sameAs": ["https://github.com/S4IL21", "https://www.youtube.com/@-How-To-Tutorials-", "https://scratch.mit.edu/users/s4il/"]
+  }
+  </script>
+</head>
+
+<body id="body">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Symbols -->
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5"/></symbol>
+      <symbol id="b-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+      <symbol id="wm" viewBox="0 0 2367.2 747.8"><path d="M364.4 747.8Q240.2 747.8 159.4 716.4Q78.6 685.1 39.4 629.7Q0.3 574.4 0 503.5H226.8Q228 531.9 244 553.8Q260 575.6 292.3 587.7Q324.6 599.7 372.9 599.7Q412.8 599.7 440.1 592Q467.4 584.3 481.7 568.9Q496 553.6 496 531.9Q496 512.1 488.8 500Q481.5 487.9 463.8 480.8Q446.2 473.7 416.5 468.9Q386.8 464.1 341.1 459Q257.6 449.1 196.6 433Q135.7 416.8 96.2 391.2Q56.7 365.6 37.5 327.4Q18.2 289.1 18.2 236Q18.2 160 59.4 107.7Q100.5 55.3 177.7 27.7Q254.9 0 362.5 0Q458.3 0 530.7 25.5Q603.1 51.1 645.5 100.9Q687.9 150.7 694.7 223.1H474.6Q470.7 195.2 454.8 178.4Q438.9 161.6 413.2 153.9Q387.4 146.2 353.9 146.2Q318.4 146.2 293.2 153.9Q267.9 161.5 255 176.2Q242 190.8 242 210.5Q242 233.6 254.2 246.1Q266.4 258.6 300.4 265.5Q334.3 272.4 399.1 279.6Q484.5 289.5 545.6 304.7Q606.7 319.9 645.4 346.1Q684.1 372.2 702.5 413Q720.8 453.8 720.8 513.9Q720.8 587.1 679.3 639.7Q637.8 692.2 558.6 720Q479.4 747.8 364.4 747.8Z"/><path d="M1153.4 737.9V221.2H1154.4L995.7 426.9H1478.5V590.9H770.6V448.4L1113.5 16.9H1365.7V737.9Z"/><path d="M1531.2 737.9V8.9H1749.3V737.9Z"/><path d="M1812.2 737.9V8.9H2030.3V603.7L1986.9 560.5H2367.2V737.9Z"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="top" data-top>
+    <a class="dock-link" href="#top" aria-label="S4IL, back to top">
+      <span class="dock" data-dock aria-hidden="true"><svg viewBox="0 0 2367.2 747.8" aria-hidden="true" focusable="false"><use href="#wm"/></svg></span>
+    </a>
+    <nav class="menu" aria-label="Primary">
+      <a href="#projects"><span class="roll"><span>Projects</span><span aria-hidden="true">Projects</span></span></a>
+      <a href="#about"><span class="roll"><span>About</span><span aria-hidden="true">About</span></span></a>
+      <a href="#contact"><span class="roll"><span>Say hi</span><span aria-hidden="true">Say hi</span></span></a>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+
+    <!-- ====================== Hero ====================== -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <h1 class="statement" id="hero-title" data-split="hero"><span class="hi">Hi, I&rsquo;m S4IL.</span> I build social platforms, Discord bots and weird little tools.</h1>
+
+      <div class="hero-space" data-space>
+        <div class="lockup" data-lockup aria-hidden="true">
+          <div class="lk-mascot"><svg class="mk" viewBox="0 0 162.63 157.58" focusable="false" aria-hidden="true"><g stroke-miterlimit="10"><path fill="#00cbcb" stroke="#000" stroke-width="5" d="M119.54 95.33c0 .25-11.46 3.94-26.81 3.94-16.15 0-29.23-4.24-29.23-9.46s13.08-9.45 29.23-9.45c6.62 0 15.1.53 19.52 2.82a13 13 0 0 1 6.23 6.62 15 15 0 0 1 1.06 5.53z"/><g stroke="#000"><path fill="#ffca95" stroke-width="5" d="M106.95 147.47c-3.98.25-7.42-2.56-7.69-6.27-.26-3.71 2.09-7.1 6.74-7.16 5.03-.07 7.46 2.98 7.69 6.27.26 3.71-2.76 6.92-6.74 7.16z"/><path fill="#8cff93" stroke-width="3" d="m112.92 135.9-11.28.7z"/><path fill="#00cbcb" stroke-width="3.5" d="M99.27 135.95c-5.38-20-8.86-51.02-3.1-51.71 2.18-.34 4.3 1.58 6.27 4.85 7.04 11.7 12.25 40.65 11.59 45.96-.29 2.3-14.64 1.35-14.76.9z"/></g><g stroke="#000"><path fill="#ffca95" stroke-width="5" d="M34.16 55.45c2.46 2.38 3.25 6.11-.2 9.53-3.2 3.16-7.46 2.5-10.23-.19a6.4 6.4 0 0 1 .2-9.53 7.6 7.6 0 0 1 10.23.19z"/><path fill="#8cff93" stroke-width="3" d="m37.15 58.96-8.16 7.3z"/><path fill="#00cbcb" stroke-width="3.5" d="M38.57 58.77c4.66 3.13 24.15 26.25 28.68 38.98 1.28 3.57 1.37 6.32-.37 7.59-4.44 3.5-26.73-19.82-38.98-37.02-.28-.39 8.65-10.9 10.67-9.55z"/></g><path fill="#ffca95" stroke="#000" stroke-width="5" d="M117.22 51.87c0 18.43-16.72 34-37.07 34s-36.62-15.57-36.62-34S60.03 18.5 80.37 18.5s36.85 14.94 36.85 33.37z"/><path d="M85.08 128.68v-.17z"/><path fill="#00cbcb" stroke="#000" stroke-width="3.5" d="M62.6 145.7 64 83.92s10.53 2.32 15.92 2.32c5.45 0 16.61-2.32 16.61-2.32l.7 61.78z"/><path fill="#006969" d="M92.01 144.17v-57.7l2.9-.63.79 58.33z"/><path d="M85.05 85.32v-.05h3.45v.05z"/><path d="m84.03 87.32-.23-1.99 5.04-.5.23 1.98zm-13.06-.66.05-1.44h3.37v1.53s-1.08.39-1.64.39-1.78-.48-1.78-.48"/><path fill="#6a3a37" d="M68.36 71.95c4.44-1.86 10.03-1.07 14.62-.99 3.92.04 10.63-.74 11.76 1.36.94 2-5.02 5.43-8.09 7.42-1.5.97-3.28 1.25-5.21 1.57-2.3.34-4.8.52-7.03-.16-1.95-.61-4.06-1.83-5.28-3.52-.97-1.63-2.64-4.88-.77-5.68"/><path fill="#ab5e58" d="M77.13 76.42c.68.01 3.23.81 3.8 1.1a6 6 0 0 1 1.93 1.76c.24.3.63.84.34 1.13-.51.45-1.34.36-2.05.47-1.23.18-2.47.24-3.71.27-.87.02-1.67.11-2.4-.04a10 10 0 0 1-3.22-1.05c-1.07-.69-3.65-2.1-2.84-2.66 1.6-1.13 5.56-1 8.15-.98"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="3" d="M68.47 71.95c6.77-.87 7.79-.88 12.38-.8 3.92.05 12.79-.57 14 1.17.94 2-3.42 5.92-7.47 7.79-1.5.96-3.9.88-5.83 1.2-2.3.34-4.8.52-7.02-.16-1.95-.61-4.07-1.83-5.29-3.52-.97-1.63-2.63-4.88-.77-5.68z"/><path fill="#762509" stroke="#000" stroke-linecap="round" stroke-width="4.32" d="M57.31 18.58c.97-.61 1.86-.96 2.96-1.31 1.16-.37 2.4-.86 3.57-1.23 1.1-.35 2.24-.8 3.33-1.18a67 67 0 0 1 6.66-1.91c1.28-.3 2.64-.25 3.95-.4 1.17-.12 2.34-.35 3.52-.43 1.16-.08 2.34-.23 3.47-.03 1.17.2 2.2.82 3.32 1.2q1.85.66 3.73 1.26c1.39.45 2.77.92 4.17 1.3 1.25.34 2.57.42 3.8.84 1.14.4 2.27.93 3.25 1.62 2.08 1.46 2.77 1.75 4.75 3.33.5.4 1.93 2 1.93 2 .37.47 1.97 2.48 3.04 3.27.95.69 2.22.96 3.26 1.62.97.56 1.76 1.45 2.78 1.98s3.21.27 3.31 1.2c.1.97-1.85 1.88-2.94 2.6-.98.6-2.08 1.05-3.2 1.3-1.15.2-2.35.07-3.47.03-2.32-.17-5.94-1-6.83-.76-.63.13 2.92.49 3.25 1.61.26 1.03-.96 2.4-2.08 2.69-4.55 1-9.33.75-13.99.93q-1.77.06-3.41-.38c-2.14-.61-5.33-2.4-6.2-2.36-.65-.03 1.79 1.57 2.72 2.39.9.77 2.91 1.66 2.73 2.39-.22.68-2.38.53-3.53.69q-1.77.2-3.52.19c-2.33-.1-4.71-.07-6.83-.77-2.24-.8-3.76-3.5-6.04-3.6-1.16-.08-.25 2.27-.85 3.25-.7 1.05-1.66 2.73-2.94 2.59-4.7-.53-8.75-5.55-13.3-4.41-3.1.78-2.1 5.57-3.54 7.98-1.1 2.15-2.93 6.65-4.03 5.65-1.78-1.64-1.61-7.28-1.23-10.95.01-3.45 1.12-6.8 2.4-10.08.4-1.04 1.39-1.8 2.07-2.68 1.92-2.73 4.13-6.3 5.18-7.53 0 0 3.52-3.1 4.78-3.9z"/><path d="M84.93 116.83v-.15z"/><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="2.5" d="M87.14 105.48V85.82m-14 16.56V86.65"/><path d="M70.62 99.07c0-1.37 1.2-2.48 2.67-2.48s2.66 1.1 2.66 2.48-1.19 2.48-2.66 2.48-2.67-1.11-2.67-2.48m13.85 2.9c0-1.38 1.2-2.49 2.67-2.49s2.67 1.11 2.67 2.49c0 1.37-1.2 2.48-2.67 2.48s-2.67-1.11-2.67-2.48"/><text xml:space="preserve" fill="#0092d9" font-family="Impact" font-size="40" style="mix-blend-mode:normal" transform="translate(67.94 119.74)scale(.32986)"><tspan x="0" dy="0">S4IL</tspan></text><path fill="none" stroke="#000" stroke-linecap="round" stroke-width="5" d="m46.37 53 68.7-5.83"/><path d="M59.86 66.58c-1.22-.6-2.43-1.21-2.96-2.67-.54-1.47-1.47-9.38-1.47-9.38l20.1-3.14s1.49 5.79 1.5 9.57c0 3.78-.14 2.73-1.47 3.17s-15.21 2.7-15.7 2.45m28.26-3.63c-1.22-.6-2.43-1.21-2.96-2.67-.54-1.47-1.47-9.38-1.47-9.38l20.1-3.14s1.49 5.79 1.5 9.57c0 3.78-.15 2.74-1.47 3.17-1.33.43-15.21 2.7-15.7 2.45"/><path fill="#959595" d="M66.21 65.78 55.1 49.88l8.67-.97 12.01 15.38zm27.91-3.7L83.95 47.52l7.93-.88 11 14.07z"/><path fill="#006968" d="M116.06 93.94s-2.26-4.77-4.9-6.58c-2.63-1.81-10.84-4.22-10.84-4.22s4.24-.4 7.17.32c2.8.68 7.74 2.78 8.18 4.47.43.47 1.38 2.66 1.48 3.16.36 1.63.36 2.58.36 2.58zm-6.68 40.86L99.07 91.46s-1.15-4.1-.84-4.7c.37-.11 1.41.52 1.93 1.65.6.97 1.15 1.7 1.5 2.67a90 90 0 0 0 1.84 3.94s2.69 7.17 3.76 10.85c1.39 4.1 3.2 13.5 3.2 13.5s1.2 5.54 1.16 6.25c.53 2.1.96 8.84.79 8.98z"/></g></svg></div>
+          <svg class="lk-word" viewBox="0 0 2367.2 747.8" focusable="false"><path style="--i:0" d="M364.4 747.8Q240.2 747.8 159.4 716.4Q78.6 685.1 39.4 629.7Q0.3 574.4 0 503.5H226.8Q228 531.9 244 553.8Q260 575.6 292.3 587.7Q324.6 599.7 372.9 599.7Q412.8 599.7 440.1 592Q467.4 584.3 481.7 568.9Q496 553.6 496 531.9Q496 512.1 488.8 500Q481.5 487.9 463.8 480.8Q446.2 473.7 416.5 468.9Q386.8 464.1 341.1 459Q257.6 449.1 196.6 433Q135.7 416.8 96.2 391.2Q56.7 365.6 37.5 327.4Q18.2 289.1 18.2 236Q18.2 160 59.4 107.7Q100.5 55.3 177.7 27.7Q254.9 0 362.5 0Q458.3 0 530.7 25.5Q603.1 51.1 645.5 100.9Q687.9 150.7 694.7 223.1H474.6Q470.7 195.2 454.8 178.4Q438.9 161.6 413.2 153.9Q387.4 146.2 353.9 146.2Q318.4 146.2 293.2 153.9Q267.9 161.5 255 176.2Q242 190.8 242 210.5Q242 233.6 254.2 246.1Q266.4 258.6 300.4 265.5Q334.3 272.4 399.1 279.6Q484.5 289.5 545.6 304.7Q606.7 319.9 645.4 346.1Q684.1 372.2 702.5 413Q720.8 453.8 720.8 513.9Q720.8 587.1 679.3 639.7Q637.8 692.2 558.6 720Q479.4 747.8 364.4 747.8Z"/><path style="--i:1" d="M1153.4 737.9V221.2H1154.4L995.7 426.9H1478.5V590.9H770.6V448.4L1113.5 16.9H1365.7V737.9Z"/><path style="--i:2" d="M1531.2 737.9V8.9H1749.3V737.9Z"/><path style="--i:3" d="M1812.2 737.9V8.9H2030.3V603.7L1986.9 560.5H2367.2V737.9Z"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== Projects ====================== -->
+    <section class="sec" id="projects" aria-labelledby="projects-title">
+      <div class="wrap">
+        <header class="sec-head">
+          <h2 class="display" id="projects-title" data-split>Stuff I&rsquo;ve made</h2>
+          <p class="lead">The main stuff. The rest lives on my GitHub.</p>
+        </header>
+
+        <ul class="work" role="list" data-work>
+
+          <li class="row">
+            <div class="row-grid">
+              <h3 class="row-name"><a class="row-link" href="https://vibepost.ddns.net/" target="_blank" rel="noopener noreferrer">VibePost<span class="sr-only"> (opens in a new tab)</span></a></h3>
+              <div class="row-body">
+                <p class="row-desc">A social platform where you pick what your feed shows. No algorithm trying to hook you. Still pre-beta, so stuff might break.</p>
+                <p class="row-tags">Tailwind CSS, Alpine.js, JavaScript</p>
+              </div>
+              <p class="row-meta">Pre-beta <svg class="i row-arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur"/></svg></p>
+            </div>
+            <div class="row-media">
+              <img class="pos-left" src="assets/img/shots/vibepost-clean.webp" srcset="assets/img/shots/vibepost-clean-640.webp 640w, assets/img/shots/vibepost-clean.webp 1000w" sizes="(min-width:720px) 440px, 100vw" width="1000" height="550" alt="Screenshot of the VibePost homepage: a black page with the VibePost logo and the headline Feel the Vibe, Share the Moment." loading="lazy" decoding="async">
+            </div>
+          </li>
+
+          <li class="row">
+            <div class="row-grid">
+              <h3 class="row-name"><a class="row-link" href="https://tatom.c00l.site/" target="_blank" rel="noopener noreferrer">Tatom<span class="sr-only"> (opens in a new tab)</span></a></h3>
+              <div class="row-body">
+                <p class="row-desc">I own this one. VibePost, BlockCoin and BaldBot all live here.</p>
+                <p class="row-tags">&ldquo;We build things today. For a better web tomorrow.&rdquo;</p>
+              </div>
+              <p class="row-meta">My company <svg class="i row-arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur"/></svg></p>
+            </div>
+            <div class="row-media">
+              <img src="assets/img/shots/tatom-wide.webp" srcset="assets/img/shots/tatom-wide-640.webp 640w, assets/img/shots/tatom-wide.webp 1000w" sizes="(min-width:720px) 440px, 100vw" width="1000" height="805" alt="Screenshot of the Tatom website: We build things today. For a better web tomorrow. on a dark blue background, with the Tatom train logo." loading="lazy" decoding="async">
+            </div>
+          </li>
+
+          <li class="row">
+            <div class="row-grid">
+              <h3 class="row-name"><a class="row-link" href="https://github.com/S4IL21/chloride" target="_blank" rel="noopener noreferrer">Chloride<span class="sr-only"> (opens in a new tab)</span></a></h3>
+              <div class="row-body">
+                <p class="row-desc">My self-hosted AI agent for Discord. It has memory, runs scheduled tasks and uses tools in a sandbox, with permissions you set. Docker Compose, your own keys.</p>
+                <p class="row-tags">Python, Docker</p>
+              </div>
+              <p class="row-meta">Open source <svg class="i row-arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur"/></svg></p>
+            </div>
+            <div class="row-media" role="img" aria-label="The commands to install and run Chloride: pip install, chloride create my-bot, chloride run.">
+              <div class="m-term" aria-hidden="true"><span class="c"># install</span>
+<span class="p">$</span> python -m pip install -e .
+<span class="c"># new workspace (edit config.yaml)</span>
+<span class="p">$</span> chloride create my-bot
+<span class="p">$</span> cd my-bot
+<span class="c"># run it (Docker Compose)</span>
+<span class="p">$</span> chloride run</div>
+            </div>
+          </li>
+
+          <li class="row">
+            <div class="row-grid">
+              <h3 class="row-name"><a class="row-link" href="https://discord.com/oauth2/authorize?client_id=1407055827487031336" target="_blank" rel="noopener noreferrer">BaldBot<span class="sr-only"> (opens in a new tab)</span></a></h3>
+              <div class="row-body">
+                <p class="row-desc">Da baldest bot in da universe. An economy bot where the currency is hair. Grow hairs, buy boosters and dominate the follicle economy.</p>
+                <p class="row-tags">Python, Docker</p>
+              </div>
+              <p class="row-meta">Discord bot <svg class="i row-arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur"/></svg></p>
+            </div>
+            <div class="row-media">
+              <div class="m-art"><img src="assets/img/baldbot-art.webp" width="232" height="232" alt="BaldBot's profile picture: a shiny blue cartoon head with big googly eyes" loading="lazy" decoding="async"></div>
+            </div>
+          </li>
+
+          <li class="row">
+            <div class="row-grid">
+              <h3 class="row-name"><a class="row-link" href="https://blockcoin.vercel.app/" target="_blank" rel="noopener noreferrer">BlockCoin<span class="sr-only"> (opens in a new tab)</span></a></h3>
+              <div class="row-body">
+                <p class="row-desc">A social platform with a game twist: earn coins from likes, followers and views, then trade, gift or buy posts. Retired now, but the site is still up.</p>
+                <p class="row-tags">SvelteKit</p>
+              </div>
+              <p class="row-meta">Archived <svg class="i row-arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur"/></svg></p>
+            </div>
+            <div class="row-media">
+              <img src="assets/img/shots/blockcoin.webp" srcset="assets/img/shots/blockcoin-480.webp 480w, assets/img/shots/blockcoin.webp 820w" sizes="(min-width:720px) 440px, 100vw" width="820" height="615" alt="Screenshot of the BlockCoin homepage: Write, Post, Earn. next to a phone showing the app's feed." loading="lazy" decoding="async">
+            </div>
+          </li>
+
+          <li class="row">
+            <div class="row-grid">
+              <h3 class="row-name"><a class="row-link" href="https://github.com/S4IL21?tab=repositories" target="_blank" rel="noopener noreferrer">Others<span class="sr-only"> (opens in a new tab)</span></a></h3>
+              <div class="row-body">
+                <p class="row-desc">Smaller projects, experiments and forks live on my GitHub.</p>
+              </div>
+              <p class="row-meta">On GitHub <svg class="i row-arrow" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur"/></svg></p>
+            </div>
+            <div class="row-media" role="img" aria-label="The GitHub mark and github.com/S4IL21.">
+              <div class="m-gh" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#b-github"/></svg><span>github.com/S4IL21</span></div>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ====================== About ====================== -->
+    <section class="sec" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <h2 class="display" id="about-title" data-split>About me</h2>
+
+        <div class="about-grid">
+          <dl class="facts">
+            <div><dt>Role</dt><dd>Full-stack dev</dd></div>
+            <div><dt>Owns</dt><dd>Tatom</dd></div>
+            <div><dt>Now</dt><dd>Building VibePost</dd></div>
+            <div><dt>Main language</dt><dd>Python</dd></div>
+            <div><dt>Into</dt><dd>AI, automation, self-hosting</dd></div>
+          </dl>
+          <div class="about-copy">
+            <p>I&rsquo;m S4IL, a full-stack dev from Barcelona. I build things from scratch, whether that&rsquo;s a website, a bot or a tool nobody asked for. I care how it looks and feels, not just whether the code runs.</p>
+            <p>Right now I&rsquo;m building <a href="#projects">VibePost</a>. It lives under Tatom, my company, along with BaldBot and the retired BlockCoin.</p>
+            <p>On the side I mess with AI agents, automation and self-hosting, mostly in Python. Code. Learn. Repeat.</p>
+          </div>
+        </div>
+
+        <div class="stack">
+          <h3 class="stack-title">Stuff I use</h3>
+          <ul class="stack-list" role="list">
+            <li>Python</li>
+            <li>JavaScript</li>
+            <li>TypeScript</li>
+            <li>Node.js</li>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>SCSS</li>
+            <li>SvelteKit</li>
+            <li>Tailwind CSS</li>
+            <li>Alpine.js</li>
+            <li>Tkinter</li>
+            <li>ttkbootstrap</li>
+            <li>Discord API</li>
+            <li>Docker</li>
+            <li>Docker Compose</li>
+            <li>Git</li>
+            <li>GitHub</li>
+            <li>GitHub Pages</li>
+            <li>Vercel</li>
+            <li>Batch</li>
+            <li>VBScript</li>
+            <li>Scratch</li>
+            <li>MIT App Inventor</li>
+            <li>Java</li>
+            <li>C#</li>
+            <li>C++</li>
+            <li>Lua</li>
+            <li>AI agents</li>
+            <li>automation</li>
+            <li>self-hosting</li>
+            <li>and more</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== Contact ====================== -->
+    <section class="sec contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <h2 class="display say" id="contact-title" data-split>Say hi.</h2>
+        <p class="lead">Got an idea? Found a bug? Just wanna say hi? Email me or find me anywhere below.</p>
+
+        <p class="mail-row">
+          <a class="mail" href="mailto:s4il.is.a.dev@gmail.com" data-mail>s4il.is.a.dev@gmail.com</a>
+          <button class="copy" type="button" data-copy="s4il.is.a.dev@gmail.com"><span data-copy-label>Copy</span></button>
+          <span class="sr-only" role="status" data-copy-status></span>
+        </p>
+
+        <ul class="socials" role="list">
+          <li><a class="soc ul" href="https://github.com/S4IL21" target="_blank" rel="noopener noreferrer">GitHub <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a></li>
+          <li><a class="soc ul" href="https://dsc.gg/tatom" target="_blank" rel="noopener noreferrer">Discord <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(Tatom Official server, opens in a new tab)</span></a></li>
+          <li><a class="soc ul" href="https://www.youtube.com/@-How-To-Tutorials-" target="_blank" rel="noopener noreferrer">YouTube <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a></li>
+          <li><a class="soc ul" href="https://scratch.mit.edu/users/s4il/" target="_blank" rel="noopener noreferrer">Scratch <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a></li>
+          <li><a class="soc ul" href="https://www.roblox.com/users/2023170110/profile" target="_blank" rel="noopener noreferrer">Roblox <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a></li>
+        </ul>
+      </div>
+      <div class="ct-mascot" aria-hidden="true"><img src="assets/img/mascot/blushing-cutout.svg" width="163" height="158" alt="" loading="lazy"></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot-in">
+      <p>&copy; <span data-year>2026</span> S4IL. Code. Learn. Repeat.</p>
+      <a class="ul" href="#top">Back to top</a>
+    </div>
+  </footer>
+
+  <div class="peek" data-peek aria-hidden="true"><div class="peek-card"></div></div>
+
+  <script src="assets/js/lenis.min.js"></script>
+  <script>
+    (() => {
+      const $ = (s, r = document) => r.querySelector(s);
+      const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+      const root = document.documentElement;
+      const motion = root.classList.contains('motion');
+      const canHover = root.classList.contains('can-hover');
+      const canObserve = 'IntersectionObserver' in window;
+      const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+      const lerp = (a, b, t) => a + (b - a) * t;
+      const ease = (t) => t * t * (3 - 2 * t);
+      const headerH = () => parseFloat(getComputedStyle(root).getPropertyValue('--header-h')) || 72;
+
+      /* ---------- Smooth scrolling (Lenis), only when motion is welcome ---------- */
+      let lenis = null;
+      if (motion && window.Lenis) lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true });
+      const goTo = (target, offset = 0) => {
+        if (lenis) lenis.scrollTo(target, { offset, duration: 1.6, easing: (t) => 1 - Math.pow(1 - t, 4) });
+        else if (typeof target === 'number') window.scrollTo({ top: target, behavior: motion ? 'smooth' : 'auto' });
+        else target.scrollIntoView({ behavior: motion ? 'smooth' : 'auto', block: 'start' });
+      };
+      if (lenis) {
+        document.addEventListener('click', (e) => {
+          const a = e.target.closest && e.target.closest('a[href^="#"]');
+          if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey) return;
+          const id = a.getAttribute('href').slice(1);
+          const el = id ? document.getElementById(id) : null;
+          if (id && !el) return;
+          e.preventDefault();
+          if (!id || id === 'top') goTo(0); else goTo(el);
+          history.replaceState(null, '', id ? '#' + id : location.pathname);
+          if (el) { el.setAttribute('tabindex', '-1'); el.focus({ preventScroll: true }); }
+        });
+      }
+
+      /* ---------- Split text into words that can rise out of a mask ---------- */
+      if (motion) {
+        $$('[data-split]').forEach((el) => {
+          let i = 0;
+          const label = el.textContent.replace(/\s+/g, ' ').trim();
+          const walk = (node) => {
+            [...node.childNodes].forEach((n) => {
+              if (n.nodeType === 3) {
+                const frag = document.createDocumentFragment();
+                n.textContent.split(/(\s+)/).forEach((part) => {
+                  if (!part) return;
+                  if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+                  const w = document.createElement('span'); w.className = 'w'; w.setAttribute('aria-hidden', 'true');
+                  const wi = document.createElement('span'); wi.className = 'wi'; wi.style.setProperty('--i', i++); wi.textContent = part;
+                  w.appendChild(wi); frag.appendChild(w);
+                });
+                node.replaceChild(frag, n);
+              } else if (n.nodeType === 1) walk(n);
+            });
+          };
+          walk(el);
+          el.setAttribute('aria-label', label);
+          el.classList.add('split');
+        });
+      }
+
+      /* ---------- The lockup: the big wordmark glides into the header and becomes the logo ---------- */
+      const lockup = $('[data-lockup]');
+      const space = $('[data-space]');
+      const dock = $('[data-dock]');
+      const top = $('[data-top]');
+      let geo = null, lastY = -1;
+      const paint = (force) => {
+        const y = window.scrollY;
+        if (top) top.classList.toggle('is-stuck', y > 12);
+        if (!geo || (!force && y === lastY)) return;
+        lastY = y;
+        const p = clamp(y / geo.range, 0, 1), e = ease(p);
+        const s = lerp(1, geo.s1, e), x = lerp(geo.x0, geo.x1, e), yy = lerp(geo.y0, geo.y1, e);
+        lockup.style.transform = `translate3d(${x.toFixed(2)}px,${yy.toFixed(2)}px,0) scale(${s.toFixed(5)})`;
+        lockup.style.setProperty('--mo', clamp(1 - p * 2.8, 0, 1).toFixed(3));
+      };
+      const measure = () => {
+        if (!motion || !lockup || !space || !dock) return;
+        const a = space.getBoundingClientRect(), b = dock.getBoundingClientRect();
+        geo = { x0: a.left, y0: a.top + window.scrollY, x1: b.left, y1: b.top, range: window.innerHeight * 0.8, s1: b.height / a.height };
+        lockup.style.width = a.width + 'px';
+        root.classList.add('dock-on');
+        paint(true);
+      };
+      measure();
+      let timer;
+      window.addEventListener('resize', () => { clearTimeout(timer); timer = setTimeout(measure, 120); });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+      window.addEventListener('load', measure);
+
+      /* Intro starts once things are measured */
+      requestAnimationFrame(() => requestAnimationFrame(() => root.classList.add('is-ready')));
+
+      /* One loop drives the smooth scroll and the lockup */
+      if (lenis || geo) {
+        const frame = (t) => { if (lenis) lenis.raf(t); paint(false); requestAnimationFrame(frame); };
+        requestAnimationFrame(frame);
+      } else {
+        window.addEventListener('scroll', () => paint(false), { passive: true });
+      }
+
+      /* ---------- Reveal on scroll: rows draw their line, titles rise ---------- */
+      const watch = $$('[data-split]:not([data-split="hero"]), .row, .contact');
+      if (canObserve && motion) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -12% 0px', threshold: 0.01 });
+        watch.forEach((el) => io.observe(el));
+      } else {
+        watch.forEach((el) => el.classList.add('in'));
+      }
+
+      /* ---------- Mark the section you're in ---------- */
+      if (canObserve) {
+        const links = new Map($$('.menu a[href^="#"]').map((a) => [a.getAttribute('href').slice(1), a]));
+        const spy = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            links.forEach((a) => a.removeAttribute('aria-current'));
+            const a = links.get(e.target.id);
+            if (a) a.setAttribute('aria-current', 'location');
+          });
+        }, { rootMargin: '-45% 0px -50% 0px' });
+        links.forEach((_, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
+        const hero = $('#top');
+        if (hero) new IntersectionObserver(([e]) => { if (e.isIntersecting) links.forEach((a) => a.removeAttribute('aria-current')); }, { rootMargin: '-45% 0px -50% 0px' }).observe(hero);
+      }
+
+      /* ---------- Project preview that follows the pointer (mouse only) ---------- */
+      const work = $('[data-work]');
+      const peek = $('[data-peek]');
+      if (canHover && work && peek) {
+        const card = $('.peek-card', peek);
+        const rows = $$('.row', work);
+        const items = rows.map((row) => {
+          const media = $('.row-media', row);
+          const item = document.createElement('div');
+          item.className = 'peek-item';
+          if (media) {
+            const c = media.cloneNode(true);
+            c.removeAttribute('role'); c.removeAttribute('aria-label');
+            $$('img', c).forEach((im) => { im.alt = ''; im.loading = 'eager'; });
+            item.appendChild(c);
+          }
+          card.appendChild(item);
+          return item;
+        });
+        let cur = -1, on = false, running = false, hovering = false;
+        let px = 0, py = 0, tx = 0, ty = 0, x = 0, y = 0, rot = 0;
+        const dims = () => ({ w: peek.offsetWidth, h: peek.offsetHeight });
+        const aim = (cx, cy) => {
+          const { w, h } = dims();
+          let nx = cx + 40; if (nx + w > innerWidth - 16) nx = cx - 40 - w;
+          tx = clamp(nx, 16, innerWidth - w - 16);
+          ty = clamp(cy - h / 2, headerH() + 8, innerHeight - h - 16);
+        };
+        const setActive = (i) => {
+          if (i === cur) return;
+          if (cur >= 0) items[cur].classList.remove('is-active');
+          cur = i; items[i].classList.add('is-active');
+        };
+        const loop = () => {
+          if (on && hovering) {
+            /* keep the right row active even while the page scrolls under a still pointer */
+            const el = document.elementFromPoint(px, py);
+            const row = el && el.closest ? el.closest('.row') : null;
+            const i = row ? rows.indexOf(row) : -1;
+            if (i >= 0) setActive(i); else if (!document.activeElement.closest || !document.activeElement.closest('.row')) { on = false; peek.classList.remove('is-on'); }
+          }
+          const k = motion ? 0.16 : 1;
+          x = lerp(x, tx, k); y = lerp(y, ty, k);
+          rot = lerp(rot, motion ? clamp((tx - x) * 0.035, -8, 8) : 0, 0.14);
+          peek.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0) rotate(${rot.toFixed(2)}deg)`;
+          if (on || Math.abs(tx - x) > 0.3 || Math.abs(ty - y) > 0.3 || Math.abs(rot) > 0.05) requestAnimationFrame(loop); else running = false;
+        };
+        const kick = () => { if (!running) { running = true; requestAnimationFrame(loop); } };
+        const show = (i) => {
+          setActive(i);
+          if (!on) { on = true; x = tx; y = ty; peek.classList.add('is-on'); }
+          kick();
+        };
+        rows.forEach((row, i) => {
+          row.addEventListener('pointerenter', (e) => { if (e.pointerType === 'touch') return; hovering = true; px = e.clientX; py = e.clientY; aim(px, py); show(i); });
+          row.addEventListener('pointermove', (e) => { if (e.pointerType === 'touch') return; hovering = true; px = e.clientX; py = e.clientY; aim(px, py); kick(); });
+          row.addEventListener('focusin', () => {
+            hovering = false;
+            const b = row.getBoundingClientRect(), { w, h } = dims();
+            tx = clamp(b.right - w - 24, 16, innerWidth - w - 16);
+            ty = clamp(b.top + b.height / 2 - h / 2, headerH() + 8, innerHeight - h - 16);
+            show(i);
+          });
+        });
+        const hide = () => { on = false; peek.classList.remove('is-on'); };
+        work.addEventListener('pointerleave', () => { hovering = false; hide(); });
+        work.addEventListener('focusout', (e) => { if (!work.contains(e.relatedTarget)) hide(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+      }
+
+      /* ---------- Copy email, with a fallback that selects the address instead ---------- */
+      const copyBtn = $('[data-copy]');
+      if (copyBtn) {
+        const label = $('[data-copy-label]', copyBtn);
+        const status = $('[data-copy-status]');
+        const mail = $('[data-mail]');
+        let t;
+        const done = (text, announce, ok) => {
+          label.textContent = text; status.textContent = announce;
+          copyBtn.classList.toggle('is-done', ok);
+          clearTimeout(t);
+          t = setTimeout(() => { label.textContent = 'Copy'; copyBtn.classList.remove('is-done'); }, 2400);
+        };
+        copyBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(copyBtn.dataset.copy);
+            done('Copied', 'Email address copied to the clipboard.', true);
+          } catch {
+            const range = document.createRange(); range.selectNodeContents(mail);
+            const sel = getSelection(); sel.removeAllRanges(); sel.addRange(range);
+            done('Selected', 'Could not copy automatically. The address is selected, press Ctrl or Command plus C.', false);
+          }
+        });
+      }
+
+      const year = $('[data-year]');
+      if (year) year.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>

@@ -1,510 +1,894 @@
+<!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>
-   Portfolio - S4IL
-  </title>
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="https://s4il.is-a.dev/files/round-logo.png"/>
-  <!-- Metadata -->
-  <meta name="description" content="S4IL's portfolio - Full-Stack Developer, projects, skills, and contact information."/>
-  <meta name="author" content="S4IL"/>
-  <meta property="og:title" content="Portfolio - S4IL"/>
-  <meta property="og:description" content="S4IL's portfolio - Full-Stack Developer, projects, skills, and contact information."/>
-  <meta property="og:image" content="https://s4il.is-a.dev/files/round-logo.png"/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://s4il.is-a.dev/"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:title" content="Portfolio - S4IL"/>
-  <meta name="twitter:description" content="S4IL's portfolio - Full-Stack Developer, projects, skills, and contact information."/>
-  <meta name="twitter:image" content="https://s4il.is-a.dev/files/round-logo.png"/>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189746536271408" crossorigin="anonymous"></script>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>S4IL — Full-stack developer in Barcelona</title>
+  <meta name="description" content="S4IL is a full-stack developer in Barcelona building social platforms and Discord bots. See VibePost, Chloride, BaldBot and more.">
+  <meta name="author" content="S4IL">
+  <link rel="canonical" href="https://s4il.is-a.dev/">
+  <meta name="theme-color" content="#0a0b0d">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Icons -->
+  <link rel="icon" href="assets/img/s4il-icon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+  <!-- Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="S4IL">
+  <meta property="og:title" content="S4IL — I build software from scratch">
+  <meta property="og:description" content="Full-stack developer in Barcelona building social platforms and Discord bots.">
+  <meta property="og:url" content="https://s4il.is-a.dev/">
+  <meta property="og:image" content="https://s4il.is-a.dev/assets/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="S4IL: I build software from scratch. A cartoon avatar of S4IL waving, in sunglasses and a teal hoodie.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="S4IL — I build software from scratch">
+  <meta name="twitter:description" content="Full-stack developer in Barcelona building social platforms and Discord bots.">
+  <meta name="twitter:image" content="https://s4il.is-a.dev/assets/img/og.png">
+
+  <!-- Fonts: self-hosted, preloaded so the first paint uses the real faces -->
+  <link rel="preload" href="assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/geist.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/geist-mono.woff2" as="font" type="font/woff2" crossorigin>
+
+  <script>document.documentElement.classList.add('js')</script>
+
   <style>
-   body {
-      font-family: 'Poppins', sans-serif;
+    /* ==========================================================================
+       S4IL — personal site
+       One file on purpose: design tokens first, components after, a small script
+       at the very end. Content lives in the HTML, so editing copy never touches CSS.
+       ========================================================================== */
+
+    /* ---------- Fonts (self-hosted, Latin subset) ---------- */
+    @font-face{font-family:"Geist";src:url(assets/fonts/geist.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+    @font-face{font-family:"Geist Mono";src:url(assets/fonts/geist-mono.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+    @font-face{font-family:"Instrument Serif";src:url(assets/fonts/instrument-serif.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+    @font-face{font-family:"Instrument Serif";src:url(assets/fonts/instrument-serif-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
+    /* Metric-matched fallbacks: system text is scaled to the web font's proportions, so nothing jumps on swap */
+    @font-face{font-family:"Geist Fallback";src:local("Arial");size-adjust:105.55%;ascent-override:95.21%;descent-override:27.95%;line-gap-override:0%}
+    @font-face{font-family:"Geist Mono Fallback";src:local("Courier New");size-adjust:99.98%;ascent-override:100.52%;descent-override:29.5%;line-gap-override:0%}
+    @font-face{font-family:"Instrument Serif Fallback";src:local("Times New Roman");size-adjust:84.32%;ascent-override:117.4%;descent-override:36.76%;line-gap-override:0%}
+    @font-face{font-family:"Instrument Serif Fallback";src:local("Times New Roman Italic"),local("TimesNewRoman-Italic");font-style:italic;size-adjust:88.63%;ascent-override:111.7%;descent-override:34.98%;line-gap-override:0%}
+
+    /* ---------- Tokens ---------- */
+    :root{
+      color-scheme:dark;
+
+      /* surfaces + ink */
+      --bg:#0a0b0d;
+      --bg-1:#0f1114;
+      --line:#1b1f24;
+      --line-2:#2a2f36;
+      --text:#eceef0;
+      --text-2:#a4aab3;
+      --text-3:#7b828c;
+
+      /* the one accent, lifted from the avatar's own blue */
+      --accent:#00adf2;
+      --accent-2:#52c8ff;
+      --accent-ink:#00141f;
+      --accent-soft:rgba(0,173,242,.1);
+
+      /* type */
+      --font-sans:"Geist","Geist Fallback",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+      --font-serif:"Instrument Serif","Instrument Serif Fallback","Times New Roman",serif;
+      --font-mono:"Geist Mono","Geist Mono Fallback",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+      --fs-display:clamp(3.75rem,2.1rem + 6.4vw,8rem);
+      --fs-h2:clamp(2.5rem,1.6rem + 3.4vw,4.5rem);
+      --fs-h3:clamp(2.5rem,1.7rem + 2.8vw,4.25rem);
+      --fs-lead:clamp(1.0625rem,.98rem + .4vw,1.3125rem);
+
+      /* layout */
+      --page:1200px;
+      --gutter:clamp(20px,4.5vw,56px);
+      --header-h:64px;
+
+      /* shape + motion */
+      --r-s:6px;
+      --r-m:10px;
+      --r-l:16px;
+      --ease:cubic-bezier(.2,.7,.2,1);
     }
-    /* Animated underline for nav links */
-    .nav-link {
-      position: relative;
-      overflow: hidden;
-      color: #d1d5db; /* text-gray-300 */
-      transition: color 0.3s ease;
+
+    /* ---------- Base ---------- */
+    *,*::before,*::after{box-sizing:border-box}
+    html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:calc(var(--header-h) + 16px)}
+    @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+    body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font:400 1rem/1.6 var(--font-sans);font-synthesis:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}
+    h1,h2,h3,h4,p,ul,ol,dl,dd,figure{margin:0}
+    ul,ol{padding:0;list-style:none}
+    img,svg{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit;cursor:pointer}
+    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+    ::selection{background:var(--accent);color:var(--accent-ink)}
+    main:focus{outline:none}
+
+    .nb{white-space:nowrap}
+    .sprite{position:absolute;width:0;height:0;overflow:hidden}
+    .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+    .skip{position:fixed;left:16px;top:-80px;z-index:100;padding:12px 16px;border-radius:var(--r-s);background:var(--accent);color:var(--accent-ink);font-weight:600;transition:top .2s var(--ease)}
+    .skip:focus{top:16px}
+    .sentinel{position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none}
+    .wrap{width:min(100% - 2*var(--gutter),var(--page));margin-inline:auto}
+    .i{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+
+    /* ---------- Type ---------- */
+    .display{font:400 var(--fs-display)/.9 var(--font-serif);letter-spacing:-.025em;word-spacing:.04em;text-wrap:balance}
+    .display em{font-style:italic;color:var(--accent);padding-right:.04em}
+    .h2{font:400 var(--fs-h2)/1 var(--font-serif);letter-spacing:-.02em;text-wrap:balance}
+    .h3{font:400 var(--fs-h3)/.95 var(--font-serif);letter-spacing:-.02em}
+    .lead{font-size:var(--fs-lead);line-height:1.55;color:var(--text-2);text-wrap:pretty}
+    .label{font:500 .75rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+    .section-label{display:flex;align-items:center;gap:14px;font:500 .75rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+    .section-label::before{content:"";width:6px;height:6px;border-radius:1px;background:var(--accent)}
+    .section-label::after{content:"";flex:1;height:1px;background:var(--line)}
+
+    /* ---------- Components ---------- */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border:1px solid transparent;border-radius:var(--r-s);font:500 .9375rem/1 var(--font-sans);letter-spacing:-.005em;white-space:nowrap;transition:background-color .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease),transform .15s var(--ease)}
+    .btn svg{width:18px;height:18px;flex:none;transition:transform .25s var(--ease)}
+    .btn:active{transform:translateY(1px) scale(.99)}
+    .btn-primary{background:var(--accent);color:var(--accent-ink)}
+    .btn-ghost{border-color:var(--line-2);color:var(--text);background:transparent}
+    @media (hover:hover){
+      .btn-primary:hover{background:var(--accent-2)}
+      .btn-primary:hover svg{transform:translateY(2px)}
+      .btn-ghost:hover{border-color:var(--text-3);background:var(--bg-1)}
+      .btn-ghost:hover .ur{transform:translate(2px,-2px)}
     }
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      background: #4f46e5;
-      bottom: 0;
-      left: 0;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    .btn .muted{color:var(--text-3);font-weight:400}
+
+    .tags{display:flex;flex-wrap:wrap;gap:8px}
+    .tags li{padding:7px 10px;border:1px solid var(--line-2);border-radius:var(--r-s);font:500 .75rem/1 var(--font-mono);color:var(--text-2)}
+    .chip{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid var(--line-2);border-radius:999px;font:500 .6875rem/1 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--text-2);white-space:nowrap}
+    .chip i{width:6px;height:6px;border-radius:50%;background:var(--text-3)}
+    .chip--accent{color:var(--accent);border-color:rgba(0,173,242,.35);background:var(--accent-soft)}
+    .chip--accent i{background:var(--accent)}
+
+    .facts>div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid var(--line)}
+    .facts>div:last-child{border-bottom:1px solid var(--line)}
+    .facts dt{font:500 .6875rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+    .facts dd{font:500 .8125rem/1.35 var(--font-mono);text-align:right;color:var(--text)}
+    .facts a{position:relative;text-decoration:underline;text-decoration-color:var(--line-2);text-decoration-thickness:1px;text-underline-offset:5px;transition:color .2s var(--ease),text-decoration-color .2s var(--ease)}
+    @media (hover:hover){.facts a:hover{color:var(--accent);text-decoration-color:var(--accent)}}
+    .facts a::after,.contact-list a::after,.foot a::after,.mail-link::after{content:"";position:absolute;inset:-10px -8px}
+    .clock{display:inline-block;min-width:10ch;color:var(--text-3);font-variant-numeric:tabular-nums}
+
+    /* ---------- Header ---------- */
+    .site-header{position:sticky;top:0;z-index:50;background:rgba(10,11,13,.92);border-bottom:1px solid transparent;transition:border-color .3s var(--ease)}
+    .site-header.is-stuck{border-bottom-color:var(--line)}
+    .bar{height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:inline-flex;align-items:center;gap:12px;min-height:44px}
+    .brand img{width:32px;height:32px;border-radius:50%;box-shadow:0 0 0 1px var(--line-2)}
+    .brand span{font:600 1.0625rem/1 var(--font-mono);letter-spacing:.04em}
+    .nav-list{display:flex;align-items:center;gap:2px}
+    .nav-list a{position:relative;display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:var(--r-s);font:500 .9375rem/1 var(--font-sans);color:var(--text-2);transition:color .2s var(--ease),border-color .2s var(--ease),background-color .2s var(--ease)}
+    .nav-list a[aria-current]{color:var(--text)}
+    .nav-list a:not(.nav-cta)[aria-current]::after{content:"";position:absolute;left:14px;right:14px;bottom:5px;height:1px;background:var(--accent)}
+    .nav-list .nav-cta{margin-left:10px;border:1px solid var(--line-2);color:var(--text)}
+    .nav-list .nav-cta[aria-current]{border-color:var(--accent)}
+    @media (hover:hover){
+      .nav-list a:hover{color:var(--text)}
+      .nav-list .nav-cta:hover{border-color:var(--text-3);background:var(--bg-1)}
     }
-    .nav-link:hover,
-    .nav-link:focus {
-      color: #6366f1; /* indigo-500 */
-      outline: none;
+    .nav-toggle{display:none;align-items:center;gap:10px;min-height:44px;padding:0 14px;border:1px solid var(--line-2);border-radius:var(--r-s);background:transparent;font:500 .75rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase}
+    .nav-toggle svg{width:18px;height:18px}
+    .nav-toggle .i-close,.nav-toggle[aria-expanded="true"] .i-menu{display:none}
+    .nav-toggle[aria-expanded="true"] .i-close{display:block}
+
+    /* ---------- Hero ---------- */
+    .hero{padding-block:clamp(40px,9vh,112px) clamp(48px,8vh,96px)}
+    .hero-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter);row-gap:56px;align-items:center}
+    .hero-copy{grid-column:1/span 8}
+    .hero-copy .lead{max-width:34em;margin-top:clamp(24px,3vw,36px)}
+    .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(28px,4vw,44px)}
+    .plate{grid-column:9/span 4;display:grid;gap:18px}
+    .plate-avatar{width:100%;height:auto;max-width:340px}
+    @keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+    .rise{animation:rise .9s var(--ease) both;animation-delay:var(--d,0ms)}
+
+    /* ---------- Sections ---------- */
+    .section{padding-block:clamp(64px,8vw,112px)}
+    .section-head{display:grid;gap:clamp(20px,3vw,32px);margin-bottom:clamp(40px,6vw,72px)}
+    .section-head .h2{max-width:14em}
+    .section-head .lead{max-width:34em}
+    .js .reveal{opacity:0;transform:translateY(14px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0ms)}
+    .js .reveal.is-in{opacity:1;transform:none}
+
+    /* ---------- Feature projects ---------- */
+    .feature{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter);row-gap:40px;align-items:center;padding-block:clamp(48px,7vw,96px);border-top:1px solid var(--line)}
+    .feature-copy{grid-column:1/span 5;display:grid;gap:20px;align-content:start}
+    .feature-visual{grid-column:7/span 6}
+    .feature--flip .feature-copy{grid-column:8/span 5;grid-row:1}
+    .feature--flip .feature-visual{grid-column:1/span 6;grid-row:1}
+    .meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px;font:500 .75rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+    .meta .num{color:var(--accent)}
+    .standfirst{font:400 clamp(1.25rem,1.1rem + .5vw,1.5rem)/1.35 var(--font-sans);letter-spacing:-.01em;color:var(--text);text-wrap:balance}
+    .copy{color:var(--text-2);text-wrap:pretty}
+    .links{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+    .panel{border:1px solid var(--line);border-radius:var(--r-l);overflow:hidden;background:var(--bg-1)}
+    .caption{margin-top:14px;font:500 .75rem/1.5 var(--font-mono);letter-spacing:.02em;color:var(--text-3)}
+
+    /* VibePost: a tiny interactive take on "you decide what your feed looks like" */
+    .vp-panel{background:#000;border-color:var(--line-2)}
+    .vp-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 16px;padding:14px 16px;border-bottom:1px solid var(--line-2)}
+    .vp-brand{display:flex;align-items:center;gap:10px;font:500 .75rem/1 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--text-2)}
+    .vp-brand img{width:22px;height:22px;border-radius:5px}
+    .vp-chips{display:flex;flex-wrap:wrap;gap:6px}
+    .vp-chip{min-height:36px;padding:0 14px;border:1px solid var(--line-2);border-radius:999px;background:transparent;color:var(--text-2);font:500 .75rem/1 var(--font-mono);transition:background-color .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease),transform .15s var(--ease)}
+    .vp-chip[aria-pressed="true"]{background:var(--accent-soft);border-color:rgba(0,173,242,.5);color:var(--accent)}
+    .vp-chip:active{transform:scale(.96)}
+    @media (hover:hover){.vp-chip[aria-pressed="false"]:hover{border-color:var(--text-3);color:var(--text)} .vp-chip[aria-pressed="true"]:hover{border-color:var(--accent)}}
+    .vp-feed{position:relative;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start;padding:16px}
+    .vp-col{display:grid;gap:12px;align-content:start}
+    .vp-post{display:flex;flex-direction:column;gap:12px;padding:14px;border:1px solid var(--line-2);border-radius:12px;background:#07090b}
+    .vp-post[hidden],.vp-empty[hidden]{display:none}
+    .vp.is-touched .vp-post{animation:pop .4s var(--ease) both}
+    @keyframes pop{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:none}}
+    .vp-empty{position:absolute;inset:0;display:grid;place-items:center;padding:16px;text-align:center;color:var(--text-3);font:italic 400 clamp(1.375rem,1.2rem + .6vw,1.75rem)/1.2 var(--font-serif)}
+    .sk-head{display:flex;align-items:center;gap:10px}
+    .sk-av{flex:none;width:26px;height:26px;border-radius:50%;background:#1a1f25}
+    .sk{display:block;height:8px;border-radius:4px;background:#1a1f25}
+    .sk--40{width:40%}.sk--60{width:60%}.sk--90{width:90%}
+    .sk-lines{display:grid;gap:8px}
+    .sk-media{display:grid;place-items:center;aspect-ratio:16/10;border-radius:8px;background:linear-gradient(135deg,#141920,#0c0f13);color:#3b4350}
+    .sk-media svg{width:34px;height:34px}
+    .sk-wave{display:flex;align-items:center;gap:3px;height:52px;padding:0 2px}
+    .sk-wave i{flex:1;height:30%;border-radius:2px;background:#222a33}
+    .sk-wave i:nth-child(4n+1){height:55%}
+    .sk-wave i:nth-child(4n+2){height:90%}
+    .sk-wave i:nth-child(4n+3){height:40%}
+    .sk-wave i:nth-child(5n){height:100%}
+
+    /* Chloride: real commands from its README + the chloride-ion element tile */
+    .cl-panel{padding:clamp(20px,3vw,32px)}
+    .cl-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+    .cl-path{display:grid;font:500 .75rem/1.7 var(--font-mono);letter-spacing:.04em;color:var(--text-3)}
+    .cl-path b{font-weight:500;color:var(--text-2)}
+    .el{display:grid;grid-template-rows:auto 1fr auto;flex:none;width:88px;aspect-ratio:1;padding:8px 10px;border:1px solid rgba(0,173,242,.55);border-radius:8px;background:var(--accent-soft);color:var(--accent);font-family:var(--font-mono)}
+    .el-n{font-size:.6875rem;line-height:1}
+    .el-s{align-self:center;justify-self:center;font:400 2.5rem/1 var(--font-serif)}
+    .el-s sup{font:inherit;font-size:.5em;vertical-align:.85em;margin-left:.05em}
+    .el-w{font-size:.5625rem;line-height:1;letter-spacing:.1em;text-transform:uppercase}
+    .cl-code{margin:clamp(20px,3vw,32px) 0 0;white-space:pre-wrap;overflow-wrap:anywhere;font:400 clamp(.78rem,.72rem + .3vw,.9rem)/1.9 var(--font-mono);color:var(--text)}
+    .cl-code .c{color:var(--text-3)}
+    .cl-code .p{color:var(--accent);user-select:none}
+    .cl-feats{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(20px,3vw,32px);padding-top:20px;border-top:1px solid var(--line)}
+    .cl-feats li{padding:7px 10px;border:1px solid var(--line-2);border-radius:var(--r-s);font:500 .75rem/1 var(--font-mono);color:var(--text-2)}
+
+    /* ---------- More projects (index rows) ---------- */
+    .more{margin-top:clamp(8px,2vw,24px)}
+    .more-head{margin-bottom:24px}
+    .rows{border-top:1px solid var(--line-2)}
+    .row{position:relative;isolation:isolate;display:grid;grid-template-columns:40px 72px minmax(0,1fr) 220px 150px;align-items:center;gap:24px;padding:24px 0;border-bottom:1px solid var(--line)}
+    .row::before{content:"";position:absolute;inset:0 -16px;z-index:-1;border-radius:var(--r-m);background:transparent;transition:background-color .25s var(--ease)}
+    .row-num{font:500 .75rem/1 var(--font-mono);letter-spacing:.08em;color:var(--text-3)}
+    .row-thumb{display:grid;place-items:center;width:72px;height:72px;overflow:hidden;border:1px solid var(--line-2);border-radius:14px;background:#0c0e11}
+    .row-thumb img{width:100%;height:100%;object-fit:cover}
+    .row-thumb--pad img{object-fit:contain;padding:11px}
+    .row-thumb .coin-gem{width:48px;height:48px;fill:none;stroke:var(--text-2);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+    .row-thumb .coin-gem .gem{stroke:var(--accent)}
+    .row-title{font:400 clamp(1.75rem,1.4rem + 1.2vw,2.25rem)/1.05 var(--font-serif);letter-spacing:-.01em}
+    .row-desc{margin-top:8px;max-width:46ch;font-size:.96875rem;line-height:1.55;color:var(--text-2);text-wrap:pretty}
+    .row-meta{display:grid;gap:10px;justify-items:start}
+    .row-type{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font:500 .6875rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
+    .row-meta .tags li{padding:5px 8px;font-size:.6875rem}
+    .row-go{justify-self:end;display:inline-flex;align-items:center;gap:8px;font:500 .875rem/1 var(--font-sans);color:var(--text-2);white-space:nowrap;transition:color .2s var(--ease)}
+    .row-go svg{width:18px;height:18px;transition:transform .25s var(--ease)}
+    .row-link::after{content:"";position:absolute;inset:0 -16px;border-radius:var(--r-m)}
+    .row-link:focus-visible{outline:none}
+    .row-link:focus-visible::after{outline:2px solid var(--accent);outline-offset:-2px}
+    @media (hover:hover){
+      .row:hover::before{background:var(--bg-1)}
+      .row:hover .row-go{color:var(--accent)}
+      .row:hover .row-go svg{transform:translate(2px,-2px)}
     }
-    .nav-link:hover::after,
-    .nav-link:focus::after {
-      transform: scaleX(1);
+
+    /* ---------- About ---------- */
+    .about{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gutter);row-gap:48px;align-items:start}
+    .about-main{grid-column:1/span 7;display:grid;gap:clamp(28px,4vw,44px)}
+    .prose{display:grid;gap:20px;max-width:36em;font-size:var(--fs-lead);line-height:1.6;color:var(--text-2)}
+    .prose p{text-wrap:pretty}
+    .about-facts{grid-column:9/span 4}
+
+    /* ---------- Stack ---------- */
+    .stack-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:48px var(--gutter)}
+    .stack-col{padding-top:20px;border-top:1px solid var(--line-2)}
+    .stack-col ul{display:grid;gap:12px;margin-top:20px;font-size:1.0625rem;line-height:1.3}
+    .stack-col--serif ul{gap:6px;font:italic 400 1.75rem/1.15 var(--font-serif);color:var(--text)}
+
+    /* ---------- Contact ---------- */
+    .contact{border-top:1px solid var(--line)}
+    .contact-head{margin-bottom:clamp(32px,5vw,56px)}
+    .display-2{margin-top:clamp(24px,3vw,32px);font:400 clamp(4rem,2rem + 10vw,10rem)/.88 var(--font-serif);letter-spacing:-.03em}
+    .display-2 em{font-style:italic;color:var(--accent)}
+    .contact .lead{max-width:30em;margin-top:clamp(24px,3vw,32px)}
+    .mail{display:flex;flex-wrap:wrap;align-items:center;gap:16px 24px;margin-top:clamp(32px,5vw,48px)}
+    .mail-link{position:relative;padding-bottom:4px;border-bottom:1px solid var(--accent);font:400 clamp(1.5rem,.9rem + 2.7vw,3rem)/1.1 var(--font-serif);letter-spacing:-.01em;overflow-wrap:anywhere;transition:color .2s var(--ease)}
+    @media (hover:hover){.mail-link:hover{color:var(--accent-2)}}
+    .btn-copy.is-done{border-color:var(--accent);color:var(--accent)}
+    .contact-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px var(--gutter);margin-top:clamp(48px,7vw,88px)}
+    .contact-list li{display:grid;gap:12px;align-content:start;padding-top:18px;border-top:1px solid var(--line-2)}
+    .contact-list a,.contact-list span.val{font-size:1.0625rem}
+    .contact-list a{position:relative;display:inline-flex;align-items:center;gap:8px;justify-self:start;border-bottom:1px solid var(--line-2);transition:color .2s var(--ease),border-color .2s var(--ease)}
+    .contact-list a svg{width:16px;height:16px;transition:transform .25s var(--ease)}
+    @media (hover:hover){
+      .contact-list a:hover{color:var(--accent);border-color:var(--accent)}
+      .contact-list a:hover svg{transform:translate(2px,-2px)}
     }
-    .nav-link.active {
-      color: #6366f1;
+
+    /* ---------- Footer ---------- */
+    .site-footer{border-top:1px solid var(--line);padding-block:28px 40px;font:500 .8125rem/1.5 var(--font-mono);color:var(--text-3)}
+    .foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px}
+    .foot ul{display:flex;flex-wrap:wrap;gap:4px 24px}
+    .foot a{position:relative;display:inline-flex;align-items:center;gap:6px;min-height:32px;transition:color .2s var(--ease)}
+    .foot svg{width:14px;height:14px}
+    @media (hover:hover){.foot a:hover{color:var(--text)}}
+
+    /* ---------- Responsive ---------- */
+    @media (max-width:1023px){
+      .hero-copy{grid-column:1/-1}
+      .plate{grid-column:1/-1;grid-template-columns:minmax(0,220px) minmax(0,1fr);align-items:center;gap:32px}
+      .feature-copy,.feature--flip .feature-copy{grid-column:1/-1;grid-row:auto}
+      .feature-visual,.feature--flip .feature-visual{grid-column:1/-1;grid-row:auto}
+      .about-main{grid-column:1/-1}
+      .about-facts{grid-column:1/-1}
+      .stack-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .row{grid-template-columns:72px minmax(0,1fr) auto;grid-template-areas:"thumb main go" "thumb meta meta";gap:12px 20px;align-items:start}
+      .row-num{display:none}
+      .row-thumb{grid-area:thumb}
+      .row-main{grid-area:main}
+      .row-meta{grid-area:meta}
+      .row-go{grid-area:go;padding-top:6px}
     }
-    .nav-link.active::after {
-      transform: scaleX(1);
+    @media (max-width:760px){
+      .row{grid-template-columns:56px minmax(0,1fr) auto;grid-template-areas:"thumb head go" "desc desc desc" "meta meta meta";gap:14px 16px;align-items:center}
+      .row-main{display:contents}
+      .row-title{grid-area:head}
+      .row-desc{grid-area:desc;margin-top:0;max-width:none}
+      .row-meta{grid-area:meta}
+      .row-go{grid-area:go;padding-top:0}
+      .row-thumb{width:56px;height:56px;border-radius:12px}
+      .row-thumb--pad img{padding:9px}
+      .row-thumb .coin-gem{width:38px;height:38px}
     }
-    /* Animated gradient text */
-    .gradient-text {
-      background: linear-gradient(90deg, #4f46e5, #3b82f6, #06b6d4);
-      background-size: 200% 200%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradientShift 3s ease infinite;
+    @media (max-width:720px){
+      .js .nav-toggle{display:inline-flex}
+      .js .nav-list{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:0;padding:8px var(--gutter) 28px;background:var(--bg);border-bottom:1px solid var(--line)}
+      .js .nav-list[data-open]{display:flex}
+      .js .nav-list a{display:flex;min-height:60px;padding:0;border-bottom:1px solid var(--line);border-radius:0;font:400 2rem/1 var(--font-serif);color:var(--text)}
+      .js .nav-list a[aria-current]{color:var(--accent)}
+      .js .nav-list a:not(.nav-cta)[aria-current]::after{display:none}
+      .js .nav-list .nav-cta{margin:0;border:0;border-bottom:1px solid var(--line)}
+      .nav-list{flex-wrap:wrap;justify-content:flex-end;gap:0}
+      .nav-list a{padding:0 8px}
+      .nav-list .nav-cta{margin-left:0;border:0}
+      .contact-list{grid-template-columns:1fr}
     }
-    @keyframes gradientShift {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
+    @media (max-width:640px){
+      .plate{grid-template-columns:104px minmax(0,1fr);gap:20px}
+      .cta-row .btn{flex:1 1 auto}
+      .vp-feed{gap:10px;padding:12px}
+      .vp-col{gap:10px}
+      .vp-post{padding:10px;gap:10px}
+      .row::before,.row-link::after{inset:0}
+      .row-title{font-size:1.75rem}
+      .stack-grid{gap:40px 24px}
+      .foot{flex-direction:column;align-items:flex-start}
     }
-    /* Floating animation for hero image */
-    @keyframes floatUpDown {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-15px);
-      }
+    @media (max-width:420px){
+      .plate{grid-template-columns:88px minmax(0,1fr)}
+      .stack-col--serif ul{font-size:1.5rem}
     }
-    .float-animation {
-      animation: floatUpDown 4s ease-in-out infinite;
+
+    @media (prefers-reduced-motion:reduce){
+      *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0ms!important}
+      .js .reveal{opacity:1;transform:none}
     }
-    /* Card hover effect */
-    .card-hover:hover {
-      transform: translateY(-10px) scale(1.05);
-      box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4),
-        0 10px 10px -5px rgba(99, 102, 241, 0.3);
-    }
-    .card-hover {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    /* Button pulse animation */
-    .btn-pulse {
-      animation: pulse 2.5s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% {
-        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
-      }
-      50% {
-        box-shadow: 0 0 15px 10px rgba(99, 102, 241, 0);
-      }
+    @media print{
+      .site-header,.skip,.nav-toggle{display:none}
+      .js .reveal{opacity:1;transform:none}
     }
   </style>
- </head>
- <body class="bg-gray-900 text-gray-100 selection:bg-indigo-600 selection:text-white scroll-smooth">
-  <header class="fixed w-full bg-gray-900 bg-opacity-90 backdrop-blur-md z-50 shadow-md">
-   <nav class="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between h-16">
-    <a class="flex items-center space-x-3 select-none" href="#">
-     <img class="w-10 h-10 rounded-md" height="40" loading="lazy" src="https://s4il.is-a.dev/files/logo.png" width="40"/>
-     <span class="text-2xl font-bold gradient-text">
-      S4IL
-     </span>
-    </a>
-    <ul class="hidden md:flex space-x-8 text-lg font-medium" id="nav-links">
-     <li>
-      <a class="nav-link active focus:outline-none" href="#home" data-link="home">
-       Home
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "S4IL",
+    "url": "https://s4il.is-a.dev/",
+    "image": "https://s4il.is-a.dev/assets/img/apple-touch-icon.png",
+    "jobTitle": "Full-stack developer",
+    "homeLocation": { "@type": "Place", "name": "Barcelona, Spain" },
+    "sameAs": ["https://github.com/S4IL21"]
+  }
+  </script>
+</head>
+
+<body id="top">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="sentinel" data-sentinel aria-hidden="true"></div>
+
+  <!-- Icon sprite: styled by .i, coloured by currentColor -->
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5"/></symbol>
+      <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14m0 0-6-6m6 6 6-6"/></symbol>
+      <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 19V5m0 0-6 6m6-6 6 6"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 9h16M4 15h16"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+      <symbol id="i-img" viewBox="0 0 24 24"><path d="m3.5 18 5.2-6.4 3.8 4.4 2.5-3 5.5 5"/><circle cx="16.5" cy="8" r="1.8"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M10.2 8.8v6.4l5-3.2z"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="site-header" data-header>
+    <div class="wrap bar">
+      <a class="brand" href="#top" aria-label="S4IL, back to top">
+        <img src="assets/img/s4il-icon.svg" width="32" height="32" alt="" fetchpriority="high">
+        <span>S4IL</span>
       </a>
-     </li>
-     <li>
-      <a class="nav-link focus:outline-none" href="#about" data-link="about">
-       About
-      </a>
-     </li>
-     <li>
-      <a class="nav-link focus:outline-none" href="#projects" data-link="projects">
-       Projects
-      </a>
-     </li>
-     <li>
-      <a class="nav-link focus:outline-none" href="#skills" data-link="skills">
-       Skills
-      </a>
-     </li>
-     <li>
-      <a class="nav-link focus:outline-none" href="#contact" data-link="contact">
-       Contact
-      </a>
-     </li>
-    </ul>
-    <button aria-label="Toggle menu" class="md:hidden focus:outline-none text-indigo-500" id="menu-btn" type="button">
-     <i class="fas fa-bars fa-lg">
-     </i>
-    </button>
-   </nav>
-   <div class="md:hidden bg-gray-800 bg-opacity-95 backdrop-blur-sm hidden" id="mobile-menu">
-    <ul class="flex flex-col space-y-4 p-6 text-lg font-semibold">
-     <li>
-      <a class="nav-link block active focus:outline-none" href="#home" data-link="home">
-       Home
-      </a>
-     </li>
-     <li>
-      <a class="nav-link block focus:outline-none" href="#about" data-link="about">
-       About
-      </a>
-     </li>
-     <li>
-      <a class="nav-link block focus:outline-none" href="#projects" data-link="projects">
-       Projects
-      </a>
-     </li>
-     <li>
-      <a class="nav-link block focus:outline-none" href="#skills" data-link="skills">
-       Skills
-      </a>
-     </li>
-     <li>
-      <a class="nav-link block focus:outline-none" href="#contact" data-link="contact">
-       Contact
-      </a>
-     </li>
-    </ul>
-   </div>
+
+      <nav class="nav" aria-label="Primary">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-list">
+          <span class="nav-toggle-label">Menu</span>
+          <svg class="i i-menu" aria-hidden="true"><use href="#i-menu"/></svg>
+          <svg class="i i-close" aria-hidden="true"><use href="#i-close"/></svg>
+        </button>
+        <ul class="nav-list" id="nav-list" role="list">
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#stack">Stack</a></li>
+          <li><a class="nav-cta" href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
-  <main class="pt-20">
-   <!-- Hero Section -->
-   <section class="min-h-screen flex flex-col md:flex-row items-center justify-center max-w-7xl mx-auto px-6 sm:px-10 gap-12" id="home" tabindex="-1">
-    <div class="text-center md:text-left max-w-xl space-y-6">
-     <h1 class="text-5xl sm:text-6xl font-extrabold gradient-text leading-tight">
-      Hi, I'm
-      <span class="text-indigo-500">
-       S4IL
-      </span>
-     </h1>
-     <p class="text-lg sm:text-xl text-gray-300">
-      A passionate
-      <span class="font-semibold text-indigo-400">
-       Full-Stack Developer
-      </span>
-      making modern and responsive web experiences.
-     </p>
-     <div class="flex justify-center md:justify-start space-x-6 mt-6">
-      <a class="btn-pulse inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400" href="#projects">
-       View Projects
-      </a>
-      <a class="inline-block border-2 border-indigo-600 hover:bg-indigo-600 hover:text-white text-indigo-400 font-semibold px-6 py-3 rounded-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400" href="#contact">
-       Contact Me
-      </a>
-     </div>
-    </div>
-    <div class="w-full max-w-md">
-     <img class="rounded-3xl shadow-2xl float-animation" height="400" loading="lazy" src="https://s4il.is-a.dev/files/logo.png" width="400"/>
-    </div>
-   </section>
-   <!-- About Section -->
-   <section class="max-w-5xl mx-auto px-6 sm:px-10 py-20" id="about" tabindex="-1">
-    <h2 class="text-4xl font-extrabold gradient-text mb-12 text-center">
-     About Me
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-     <img alt="Creative workspace with a modern computer, notebook, and coffee cup on a wooden desk, bright and inspiring environment" class="rounded-2xl shadow-lg" height="500" loading="lazy" src="https://www.geenxt.com/wp-content/uploads/2024/04/image-1024x585.jpeg" width="500"/>
-     <div class="text-gray-300 space-y-6 text-lg leading-relaxed">
-      <p>
-       I'm S4IL, a full-stack developer with over 6 years of experience building scalable and performant web applications. I specialize in Python, Html, modern CSS, and creating smooth user experiences.
-      </p>
-     </div>
-    </div>
-   </section>
-   <!-- Projects Section -->
-  <section class="bg-gray-800 py-20" id="projects" tabindex="-1">
-   <div class="max-w-7xl mx-auto px-6 sm:px-10">
-    <h2 class="text-4xl font-extrabold gradient-text mb-12 text-center">
-    Projects
-    </h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-    <!-- VibePost -->
-    <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
-  <div style="background:#000;" class="w-full aspect-[16/9] flex items-center justify-center">
-    <img alt="VibePost" class="object-contain max-h-full max-w-full" height="400" loading="lazy" src="https://tatom.vercel.app/1.png" width="600"/>
-  </div>
-     <div class="p-6">
-      <h3 class="text-2xl font-semibold mb-2 text-indigo-400">VibePost</h3>
-      <p class="text-gray-300 mb-4">VibePost is a social platform built around fairness and real connection. There are no algorithms designed to keep you addicted, which means everyone has the same chance of being seen and discovered.
 
-You decide what your feed looks like. Whether you want to see only text, just videos, only images, audio posts, or any combination, the choice is yours.
+  <main id="main" tabindex="-1">
 
-Share your creativity in any form, connect through direct messages, and be part of a community that values genuine moments and good vibes.</p>
-      <div class="flex space-x-4 text-indigo-500 text-lg">
-        <a aria-label="Live demo for VibePost" class="hover:text-indigo-400 transition" href="https://vibepost.ddns.net/" target="_blank" rel="noopener noreferrer">
-          <i class="fas fa-external-link-alt"></i>
-        </a>
+    <!-- ====================== Hero ====================== -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <h1 class="display rise" id="hero-title" style="--d:40ms">I build software <em>from&nbsp;scratch.</em></h1>
+          <p class="lead rise" style="--d:160ms">Full-stack developer in Barcelona. I&nbsp;build social platforms and Discord bots, tinker with AI agents and automation, and have a soft spot for <span class="nb">self-hosting</span> things that probably don&rsquo;t need to be.</p>
+          <div class="cta-row rise" style="--d:260ms">
+            <a class="btn btn-primary" href="#projects">View projects <svg class="i" aria-hidden="true"><use href="#i-down"/></svg></a>
+            <a class="btn btn-ghost" href="#contact">Get in touch</a>
+          </div>
+        </div>
+
+        <aside class="plate rise" style="--d:200ms" aria-label="At a glance">
+          <img class="plate-avatar" src="assets/img/s4il.svg" width="326" height="316" alt="Cartoon portrait of S4IL waving, with brown hair, sunglasses and a teal hoodie." fetchpriority="high" decoding="async">
+          <dl class="facts">
+            <div><dt>GitHub</dt><dd><a href="https://github.com/S4IL21" target="_blank" rel="noopener noreferrer">@S4IL21<span class="sr-only"> (opens in a new tab)</span></a></dd></div>
+            <div><dt>Based</dt><dd>Barcelona, ES <span class="clock" data-clock></span></dd></div>
+            <div><dt>Role</dt><dd>Full-stack developer</dd></div>
+            <div><dt>Now</dt><dd>Building VibePost</dd></div>
+          </dl>
+        </aside>
       </div>
-     </div>
-    </article>
-    <!-- Tatom -->
-    <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
-  <div style="background:#000;" class="w-full aspect-[16/9] flex items-center justify-center">
-    <img alt="Tatom" class="object-contain max-h-full max-w-full" height="400" loading="lazy" src="https://tatom.vercel.app/banner.png" width="600"/>
-  </div>
-     <div class="p-6">
-      <h3 class="text-2xl font-semibold mb-2 text-indigo-400">Tatom</h3>
-      <p class="text-gray-300 mb-4">Tatom is a digital innovation company focused on creating unique online experiences. At Tatom, we experiment, build, and shape the future of the internet, one project at a time.</p>
-      <div class="flex space-x-4 text-indigo-500 text-lg">
-        <a aria-label="Live demo for Tatom" class="hover:text-indigo-400 transition" href="https://tatom.vercel.app/" target="_blank" rel="noopener noreferrer">
-          <i class="fas fa-external-link-alt"></i>
-        </a>
-      </div>
-     </div>
-    </article>
-    <!-- This Website -->
-    <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
-     <img alt="Screenshot of this portfolio website" class="w-full h-48 object-cover" height="400" loading="lazy" src="/files/mywebsite.png" width="600"/>
-     <div class="p-6">
-      <h3 class="text-2xl font-semibold mb-2 text-indigo-400">This Website</h3>
-      <p class="text-gray-300 mb-4">My personal portfolio, built with HTML, Tailwind CSS, and custom JavaScript. Responsive, modern, and open source.</p>
-      <div class="flex space-x-4 text-indigo-500 text-lg">
-        <a aria-label="GitHub repository for this website" class="hover:text-indigo-400 transition" href="https://github.com/S4IL21/S4IL21.github.io" target="_blank" rel="noopener noreferrer">
-          <i class="fab fa-github"></i>
-        </a>
-      </div>
-     </div>
-    </article>
-    </div>
-    <div class="flex justify-center mt-12">
-    <a href="https://s4il.is-a.dev/projects/more/" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-4 rounded-lg shadow-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400">View More</a>
-    </div>
-   </div>
-  </section>
-   <!-- Skills Section -->
-   <section class="max-w-5xl mx-auto px-6 sm:px-10 py-20" id="skills" tabindex="-1">
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 text-center">
-      <!-- Python -->
-      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
-        <img alt="Python logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="80"/>
-        <h3 class="text-indigo-400 font-semibold text-xl">Python</h3>
-        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-          <div class="bg-indigo-600 h-3 rounded-full" style="width: 100%"></div>
+    </section>
+
+    <!-- ====================== Projects ====================== -->
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-label">Projects</p>
+          <h2 class="h2" id="projects-title">Selected projects</h2>
+          <p class="lead">Roughly in order of how much attention they&rsquo;re getting right now.</p>
+        </header>
+
+        <!-- 01 VibePost -->
+        <article class="feature reveal" id="vibepost" aria-labelledby="vibepost-title">
+          <div class="feature-copy">
+            <p class="meta"><span class="num">01</span><span>Social platform</span><span class="chip chip--accent"><i aria-hidden="true"></i>Pre-beta</span></p>
+            <h3 class="h3" id="vibepost-title">VibePost</h3>
+            <p class="standfirst">A social platform where you decide what your feed looks like.</p>
+            <p class="copy">Built around fairness and real connection. There&rsquo;s no algorithm designed to keep you hooked, so everyone has the same chance of being seen. Pick the formats you want (text, images, video, audio, or any mix) and talk to people through direct messages. It&rsquo;s still pre-beta, so expect rough edges.</p>
+            <ul class="tags" role="list" aria-label="Built with">
+              <li>Tailwind CSS</li><li>Alpine.js</li><li>JavaScript</li>
+            </ul>
+            <div class="links">
+              <a class="btn btn-ghost" href="https://vibepost.ddns.net/" target="_blank" rel="noopener noreferrer">Visit VibePost <svg class="i ur" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
+            </div>
+          </div>
+
+          <figure class="feature-visual vp" aria-label="Interactive illustration of VibePost&rsquo;s feed filters">
+            <div class="panel vp-panel">
+              <div class="vp-top">
+                <div class="vp-brand"><img src="assets/img/vibepost.webp" width="22" height="22" alt="" loading="lazy">Your feed</div>
+                <div class="vp-chips" role="group" aria-label="Choose what your feed shows">
+                  <button class="vp-chip" type="button" aria-pressed="true" data-type="text">Text</button>
+                  <button class="vp-chip" type="button" aria-pressed="true" data-type="image">Images</button>
+                  <button class="vp-chip" type="button" aria-pressed="true" data-type="video">Video</button>
+                  <button class="vp-chip" type="button" aria-pressed="true" data-type="audio">Audio</button>
+                </div>
+              </div>
+              <div class="vp-feed" aria-hidden="true">
+                <div class="vp-col">
+                  <div class="vp-post" data-type="image">
+                    <div class="sk-head"><i class="sk-av"></i><i class="sk sk--40"></i></div>
+                    <div class="sk-media"><svg class="i"><use href="#i-img"/></svg></div>
+                  </div>
+                  <div class="vp-post" data-type="text">
+                    <div class="sk-head"><i class="sk-av"></i><i class="sk sk--60"></i></div>
+                    <div class="sk-lines"><i class="sk"></i><i class="sk sk--90"></i><i class="sk sk--60"></i></div>
+                  </div>
+                  <div class="vp-post" data-type="video">
+                    <div class="sk-head"><i class="sk-av"></i><i class="sk sk--60"></i></div>
+                    <div class="sk-media"><svg class="i"><use href="#i-play"/></svg></div>
+                  </div>
+                </div>
+                <div class="vp-col">
+                  <div class="vp-post" data-type="text">
+                    <div class="sk-head"><i class="sk-av"></i><i class="sk sk--40"></i></div>
+                    <div class="sk-lines"><i class="sk sk--90"></i><i class="sk"></i><i class="sk sk--40"></i></div>
+                  </div>
+                  <div class="vp-post" data-type="audio">
+                    <div class="sk-head"><i class="sk-av"></i><i class="sk sk--40"></i></div>
+                    <div class="sk-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  </div>
+                  <div class="vp-post" data-type="image">
+                    <div class="sk-head"><i class="sk-av"></i><i class="sk sk--60"></i></div>
+                    <div class="sk-media"><svg class="i"><use href="#i-img"/></svg></div>
+                  </div>
+                </div>
+                <p class="vp-empty" hidden>Nothing selected. Your feed, your rules.</p>
+              </div>
+            </div>
+            <p class="sr-only" role="status" data-vp-status></p>
+            <figcaption class="caption">An illustration of the idea, not a screenshot. Tap a format to try it.</figcaption>
+          </figure>
+        </article>
+
+        <!-- 02 Chloride -->
+        <article class="feature feature--flip reveal" id="chloride" aria-labelledby="chloride-title">
+          <div class="feature-copy">
+            <p class="meta"><span class="num">02</span><span>AI agent</span><span class="chip"><i aria-hidden="true"></i>Open source</span></p>
+            <h3 class="h3" id="chloride-title">Chloride</h3>
+            <p class="standfirst">A persistent AI agent that lives in Discord.</p>
+            <p class="copy">It keeps memory, runs scheduled automations and uses tools inside a sandbox, with permissions you configure. You host it yourself with Docker Compose, on your own machine and with your own keys.</p>
+            <ul class="tags" role="list" aria-label="Built with">
+              <li>Python 3.11+</li><li>Docker Compose</li><li>Discord</li>
+            </ul>
+            <div class="links">
+              <a class="btn btn-ghost" href="https://github.com/S4IL21/chloride" target="_blank" rel="noopener noreferrer">GitHub <span class="muted">· fork</span> <svg class="i ur" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
+            </div>
+          </div>
+
+          <figure class="feature-visual">
+            <div class="panel cl-panel">
+              <div class="cl-top">
+                <p class="cl-path"><b>~/my-bot</b><span>Python 3.11+</span><span>Docker Compose</span></p>
+                <div class="el" aria-hidden="true"><span class="el-n">17</span><span class="el-s">Cl<sup>−</sup></span><span class="el-w">Chloride</span></div>
+              </div>
+              <pre class="cl-code"><code><span class="c"># install</span>
+<span class="p">$ </span>python -m pip install -e .
+
+<span class="c"># new workspace, then edit config.yaml</span>
+<span class="p">$ </span>chloride create my-bot
+<span class="p">$ </span>cd my-bot
+
+<span class="c"># start it (Docker Compose)</span>
+<span class="p">$ </span>chloride run</code></pre>
+              <ul class="cl-feats" role="list" aria-label="Capabilities">
+                <li>Discord integration</li><li>Sandboxing</li><li>Memory</li><li>Scheduled automations</li><li>Tool permissions</li>
+              </ul>
+            </div>
+            <figcaption class="caption">Setup commands, straight from the README.</figcaption>
+          </figure>
+        </article>
+
+        <!-- 03 – 06: one <li class="row"> per project. To add one, copy a row and change the number,
+             thumbnail, title link, one-liner, type/tags and the action label. The whole row is the link. -->
+        <div class="more">
+          <h3 class="label more-head">More projects</h3>
+          <ul class="rows" role="list">
+            <li class="row reveal">
+              <span class="row-num">03</span>
+              <span class="row-thumb row-thumb--pad"><img src="assets/img/tatom.webp" width="72" height="72" alt="" loading="lazy"></span>
+              <div class="row-main">
+                <h4 class="row-title"><a class="row-link" href="https://tatom.vercel.app/" target="_blank" rel="noopener noreferrer">Tatom<span class="sr-only"> (opens in a new tab)</span></a></h4>
+                <p class="row-desc">The company behind VibePost, BlockCoin and BaldBot. I&rsquo;m the owner.</p>
+              </div>
+              <div class="row-meta"><span class="row-type">Company</span></div>
+              <span class="row-go" aria-hidden="true">Visit <svg class="i"><use href="#i-ur"/></svg></span>
+            </li>
+
+            <li class="row reveal">
+              <span class="row-num">04</span>
+              <span class="row-thumb"><img src="assets/img/baldbot.webp" width="72" height="72" alt="" loading="lazy"></span>
+              <div class="row-main">
+                <h4 class="row-title"><a class="row-link" href="https://discord.com/oauth2/authorize?client_id=1407055827487031336" target="_blank" rel="noopener noreferrer">BaldBot<span class="sr-only"> (add to Discord, opens in a new tab)</span></a></h4>
+                <p class="row-desc">An economy bot where the currency is hair. Grow hairs, buy boosters and dominate the follicle economy.</p>
+              </div>
+              <div class="row-meta">
+                <span class="row-type">Discord bot</span>
+                <ul class="tags" role="list" aria-label="Built with"><li>Python</li><li>Docker</li></ul>
+              </div>
+              <span class="row-go" aria-hidden="true">Add to Discord <svg class="i"><use href="#i-ur"/></svg></span>
+            </li>
+
+            <li class="row reveal">
+              <span class="row-num">05</span>
+              <span class="row-thumb row-thumb--pad"><img src="assets/img/blockcoin.webp" width="72" height="72" alt="" loading="lazy"></span>
+              <div class="row-main">
+                <h4 class="row-title"><a class="row-link" href="https://blockcoin.vercel.app/" target="_blank" rel="noopener noreferrer">BlockCoin<span class="sr-only"> (opens in a new tab)</span></a></h4>
+                <p class="row-desc">A social platform with a game-like twist: earn coins from likes, followers and views, then trade, gift or buy posts.</p>
+              </div>
+              <div class="row-meta">
+                <span class="row-type">Social platform <span class="chip"><i aria-hidden="true"></i>Archived</span></span>
+                <ul class="tags" role="list" aria-label="Built with"><li>SvelteKit</li></ul>
+              </div>
+              <span class="row-go" aria-hidden="true">Visit <svg class="i"><use href="#i-ur"/></svg></span>
+            </li>
+
+            <li class="row reveal">
+              <span class="row-num">06</span>
+              <span class="row-thumb"><svg class="coin-gem" aria-hidden="true" viewBox="0 0 48 48"><circle cx="18" cy="27" r="11"/><circle cx="18" cy="27" r="6"/><path class="gem" d="M35 10l8.5 9.5L35 36l-8.5-16.5zM26.5 19.5h17"/></svg></span>
+              <div class="row-main">
+                <h4 class="row-title"><a class="row-link" href="https://github.com/S4IL21/Hill-Climb-Racing-Hacks" target="_blank" rel="noopener noreferrer">Hill Climb Racing Hacks<span class="sr-only"> (opens in a new tab)</span></a></h4>
+                <p class="row-desc">A Python GUI that attaches to Hill Climb Racing on Windows and edits your coins and gems in memory. Built for educational and testing purposes.</p>
+              </div>
+              <div class="row-meta">
+                <span class="row-type">Desktop tool</span>
+                <ul class="tags" role="list" aria-label="Built with"><li>Python</li><li>Tkinter</li><li>ttkbootstrap</li></ul>
+              </div>
+              <span class="row-go" aria-hidden="true">GitHub <svg class="i"><use href="#i-ur"/></svg></span>
+            </li>
+          </ul>
         </div>
       </div>
-      <!-- MIT App Inventor -->
-      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
-  <img alt="MIT App Inventor logo" class="w-20 h-20" height="80" loading="lazy" src="https://storage.googleapis.com/mitai2gallery/gallery/apps/3c074e02-4be7-4c99-9b44-44637e34e96c/image" width="80"/>
-        <h3 class="text-indigo-400 font-semibold text-xl">MIT App Inventor</h3>
-        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-          <div class="bg-indigo-600 h-3 rounded-full" style="width: 100%"></div>
+    </section>
+
+    <!-- ====================== About ====================== -->
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-label">About</p>
+        </header>
+        <div class="about">
+          <div class="about-main reveal">
+            <h2 class="h2" id="about-title">Whether it runs is the easy part.</h2>
+            <div class="prose">
+              <p>I&nbsp;care how things look, feel and behave, which is a big part of why I&nbsp;like building from scratch: every decision, from the data model to the hover state, is mine to make.</p>
+              <p>Right now that means VibePost, a social platform with no algorithm built to keep you scrolling. It lives under Tatom, the company I&nbsp;own, alongside BaldBot and the archived BlockCoin.</p>
+              <p>Outside of that I&nbsp;keep poking at AI agents, automation and <span class="nb">self-hosting</span>, mostly in Python. Code, learn, repeat.</p>
+            </div>
+          </div>
+          <dl class="facts about-facts reveal" style="--d:120ms">
+            <div><dt>Based in</dt><dd>Barcelona, Spain</dd></div>
+            <div><dt>Role</dt><dd>Full-stack developer</dd></div>
+            <div><dt>Owner of</dt><dd><a href="https://tatom.vercel.app/" target="_blank" rel="noopener noreferrer">Tatom<span class="sr-only"> (opens in a new tab)</span></a></dd></div>
+            <div><dt>Working on</dt><dd><a href="#vibepost">VibePost</a></dd></div>
+            <div><dt>Elsewhere</dt><dd><a href="https://github.com/S4IL21" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a></dd></div>
+          </dl>
         </div>
       </div>
-      <!-- Scratch -->
-      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
-  <img alt="Scratch logo" class="w-20 h-20" height="80" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/7/75/Scratch.logo.S.png" width="80"/>
-        <h3 class="text-indigo-400 font-semibold text-xl">Scratch</h3>
-        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-          <div class="bg-indigo-600 h-3 rounded-full" style="width: 100%"></div>
+    </section>
+
+    <!-- ====================== Stack ====================== -->
+    <section class="section" id="stack" aria-labelledby="stack-title">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="section-label">Stack</p>
+          <h2 class="h2" id="stack-title">Tools and interests</h2>
+          <p class="lead">What my projects are built with, and what I&nbsp;like to explore.</p>
+        </header>
+        <div class="stack-grid">
+          <div class="stack-col reveal">
+            <h3 class="label">Languages</h3>
+            <ul role="list"><li>Python</li><li>JavaScript</li><li>TypeScript</li><li>HTML &amp; CSS</li></ul>
+          </div>
+          <div class="stack-col reveal" style="--d:70ms">
+            <h3 class="label">Frameworks</h3>
+            <ul role="list"><li>SvelteKit</li><li>Tailwind CSS</li><li>Alpine.js</li><li>Tkinter</li></ul>
+          </div>
+          <div class="stack-col reveal" style="--d:140ms">
+            <h3 class="label">Platforms</h3>
+            <ul role="list"><li>Discord API</li><li>Docker</li><li>Vercel</li><li>GitHub Pages</li></ul>
+          </div>
+          <div class="stack-col stack-col--serif reveal" style="--d:210ms">
+            <h3 class="label">Interests</h3>
+            <ul role="list"><li>AI agents</li><li>Automation</li><li>Self-hosting</li><li>Emerging tech</li></ul>
+          </div>
         </div>
       </div>
-      <!-- JavaScript -->
-      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
-        <img alt="JavaScript logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="80"/>
-        <h3 class="text-indigo-400 font-semibold text-xl">JavaScript</h3>
-        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-          <div class="bg-indigo-600 h-3 rounded-full" style="width: 90%"></div>
+    </section>
+
+    <!-- ====================== Contact ====================== -->
+    <!-- Email lives in two places on purpose: the mailto link (works without JavaScript) and data-copy on the button. -->
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <header class="contact-head">
+          <p class="section-label">Contact</p>
+          <h2 class="display-2" id="contact-title">Say <em>hello.</em></h2>
+          <p class="lead">Ideas, questions, bug reports or a plain hello. Email is the easiest way to reach me; Discord works too.</p>
+        </header>
+
+        <div class="mail">
+          <a class="mail-link" href="mailto:s4il.is.a.dev@gmail.com" data-mail>s4il.is.a.dev@gmail.com</a>
+          <button class="btn btn-ghost btn-copy" type="button" data-copy="s4il.is.a.dev@gmail.com">
+            <svg class="i" aria-hidden="true"><use href="#i-copy" data-copy-icon/></svg>
+            <span data-copy-label>Copy address</span>
+          </button>
+          <p class="sr-only" role="status" data-copy-status></p>
         </div>
+
+        <ul class="contact-list" role="list">
+          <li>
+            <span class="label">GitHub</span>
+            <a href="https://github.com/S4IL21" target="_blank" rel="noopener noreferrer">github.com/S4IL21 <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
+          </li>
+          <li>
+            <span class="label">Discord</span>
+            <a href="https://dsc.gg/tatom" target="_blank" rel="noopener noreferrer">Tatom Official server <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
+          </li>
+          <li>
+            <span class="label">Location</span>
+            <span class="val">Barcelona, Spain <span class="clock" data-clock></span></span>
+          </li>
+        </ul>
       </div>
-      <!-- HTML -->
-      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
-        <img alt="HTML5 logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="80"/>
-        <h3 class="text-indigo-400 font-semibold text-xl">HTML</h3>
-        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-          <div class="bg-indigo-600 h-3 rounded-full" style="width: 85%"></div>
-        </div>
-      </div>
-      <!-- CSS -->
-      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
-        <img alt="CSS3 logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="80"/>
-        <h3 class="text-indigo-400 font-semibold text-xl">CSS</h3>
-        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-          <div class="bg-indigo-600 h-3 rounded-full" style="width: 80%"></div>
-        </div>
-      </div>
-      <!-- Node.js -->
-      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
-        <img alt="Node.js logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="80"/>
-        <h3 class="text-indigo-400 font-semibold text-xl">Node.js</h3>
-        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-          <div class="bg-indigo-600 h-3 rounded-full" style="width: 75%"></div>
-        </div>
-      </div>
-      <!-- TypeScript -->
-      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
-        <img alt="TypeScript logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="80"/>
-        <h3 class="text-indigo-400 font-semibold text-xl">TypeScript</h3>
-        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-          <div class="bg-indigo-600 h-3 rounded-full" style="width: 70%"></div>
-        </div>
-      </div>
-      <!-- C# -->
-      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
-        <img alt="C# logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" width="80"/>
-        <h3 class="text-indigo-400 font-semibold text-xl">C#</h3>
-        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-          <div class="bg-indigo-600 h-3 rounded-full" style="width: 60%"></div>
-        </div>
-      </div>
-      <!-- Java -->
-      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
-        <img alt="Java logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="80"/>
-        <h3 class="text-indigo-400 font-semibold text-xl">Java</h3>
-        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-          <div class="bg-indigo-600 h-3 rounded-full" style="width: 55%"></div>
-        </div>
-      </div>
-      <!-- Lua -->
-      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
-        <img alt="Lua logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" width="80"/>
-        <h3 class="text-indigo-400 font-semibold text-xl">Lua</h3>
-        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-          <div class="bg-indigo-600 h-3 rounded-full" style="width: 45%"></div>
-        </div>
-      </div>
-      <!-- C++ -->
-      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
-        <img alt="C++ logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" width="80"/>
-        <h3 class="text-indigo-400 font-semibold text-xl">C++</h3>
-        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
-          <div class="bg-indigo-600 h-3 rounded-full" style="width: 40%"></div>
-        </div>
-      </div>
-    </div>
-   </section>
-   <!-- Contact Section -->
-   <section class="bg-gray-800 py-20" id="contact" tabindex="-1">
-    <div class="max-w-3xl mx-auto px-6 sm:px-10 text-center">
-     <h2 class="text-4xl font-extrabold gradient-text mb-8">
-      Get In Touch
-     </h2>
-     <p class="text-gray-300 mb-12 text-lg">
-      Whether you want to collaborate on a project, have a question, or just want to say hi, feel free to reach out!
-     </p>
-  <form action="https://formsubmit.co/s4il.is.a.dev@gmail.com" method="POST" class="space-y-6 text-left" novalidate="" target="_blank">
-      <div>
-       <label class="block mb-2 font-semibold text-indigo-400" for="name">
-  Name or Nickname
-       </label>
-       <input class="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="name" name="name" placeholder="Your name or nickname" required type="text"/>
-      </div>
-      <div>
-       <label class="block mb-2 font-semibold text-indigo-400" for="email">
-        Email
-       </label>
-       <input class="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="email" name="email" placeholder="you@example.com" required="" type="email"/>
-      </div>
-      <div>
-       <label class="block mb-2 font-semibold text-indigo-400" for="message">
-        Message
-       </label>
-       <textarea class="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="message" name="message" placeholder="Write your message here..." required="" rows="5"></textarea>
-      </div>
-      <div class="text-center">
-       <button class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-4 rounded-lg shadow-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400" type="submit">
-        Send Message
-       </button>
-      </div>
-     </form>
-     <div class="mt-16 flex justify-center space-x-10 text-indigo-500 text-3xl">
-      <a aria-label="GitHub profile" class="hover:text-indigo-400 transition" href="https://github.com/S4IL21" rel="noopener noreferrer" target="_blank">
-       <i class="fab fa-github">
-       </i>
-      </a>
-  <a aria-label="Discord server" class="hover:text-indigo-400 transition" href="https://dsc.gg/tatom" rel="noopener noreferrer" target="_blank">
-   <i class="fab fa-discord"></i>
-  </a>
-      <a aria-label="Send email" class="hover:text-indigo-400 transition" href="mailto:s4il.is.a.dev@gmail.com">
-       <i class="fas fa-envelope">
-       </i>
-      </a>
-     </div>
-    </div>
-   </section>
+    </section>
   </main>
-  <footer class="bg-gray-900 py-8 text-center text-gray-500 text-sm select-none flex flex-col items-center gap-2">
-   <div>© 2026 S4IL. All rights reserved.</div>
-<!--   <a href="/privacy" class="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300 transition text-base font-medium" aria-label="Privacy Policy">
-     <i class="fas fa-user-secret"></i> Privacy Policy
-   </a> -->
+
+  <footer class="site-footer">
+    <div class="wrap foot">
+      <p>© <span data-year>2026</span> S4IL · Code. Learn. Repeat.</p>
+      <ul role="list" aria-label="Elsewhere">
+        <li><a href="https://github.com/S4IL21" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
+        <li><a href="https://dsc.gg/tatom" target="_blank" rel="noopener noreferrer">Discord<span class="sr-only"> (opens in a new tab)</span></a></li>
+        <li><a href="https://github.com/S4IL21/S4IL21.github.io" target="_blank" rel="noopener noreferrer">Source<span class="sr-only"> (opens in a new tab)</span></a></li>
+        <li><a href="#top">Back to top <svg class="i" aria-hidden="true"><use href="#i-up"/></svg></a></li>
+      </ul>
+    </div>
   </footer>
+
   <script>
-   const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const navLinks = document.querySelectorAll('a.nav-link');
+    (() => {
+      const $ = (s, r = document) => r.querySelector(s);
+      const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+      const canObserve = 'IntersectionObserver' in window;
 
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-      menuBtn.querySelector('i').classList.toggle('fa-bars');
-      menuBtn.querySelector('i').classList.toggle('fa-times');
-    });
-
-    // Close mobile menu on link click
-    mobileMenu.querySelectorAll('a.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        mobileMenu.classList.add('hidden');
-        menuBtn.querySelector('i').classList.add('fa-bars');
-        menuBtn.querySelector('i').classList.remove('fa-times');
-      });
-    });
-
-    // Highlight nav links on scroll
-    const sections = ['home', 'about', 'projects', 'skills', 'contact'].map(id => document.getElementById(id));
-
-    function onScroll() {
-      const scrollPos = window.scrollY + window.innerHeight / 3;
-
-      let currentSectionId = 'home'; // default
-
-      for (const section of sections) {
-        if (section.offsetTop <= scrollPos) {
-          currentSectionId = section.id;
-        }
+      /* Header: draw the hairline once the page has scrolled */
+      const header = $('[data-header]');
+      const sentinel = $('[data-sentinel]');
+      if (header && sentinel && canObserve) {
+        new IntersectionObserver(([e]) => header.classList.toggle('is-stuck', !e.isIntersecting)).observe(sentinel);
       }
 
-      navLinks.forEach(link => {
-        if (link.dataset.link === currentSectionId) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-      });
+      /* Mobile menu: a plain disclosure button */
+      const toggle = $('.nav-toggle');
+      const list = $('#nav-list');
+      if (toggle && list) {
+        const label = $('.nav-toggle-label', toggle);
+        const setOpen = (open) => {
+          toggle.setAttribute('aria-expanded', String(open));
+          list.toggleAttribute('data-open', open);
+          label.textContent = open ? 'Close' : 'Menu';
+        };
+        toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+        list.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { setOpen(false); toggle.focus(); }
+        });
+        matchMedia('(min-width: 721px)').addEventListener('change', () => setOpen(false));
+      }
 
-      // Also update mobile menu links
-      mobileMenu.querySelectorAll('a.nav-link').forEach(link => {
-        if (link.dataset.link === currentSectionId) {
-          link.classList.add('active');
-        } else {
-          link.classList.remove('active');
-        }
-      });
-    }
+      /* Active section in the nav */
+      if (canObserve) {
+        const links = new Map($$('.nav-list a[href^="#"]').map((a) => [a.getAttribute('href').slice(1), a]));
+        const clear = () => links.forEach((a) => a.removeAttribute('aria-current'));
+        const spy = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (!e.isIntersecting) return;
+            clear();
+            const a = links.get(e.target.id);
+            if (a) a.setAttribute('aria-current', 'location');
+          });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+        links.forEach((_, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
+        const hero = $('.hero');
+        if (hero) spy.observe(hero);
+      }
 
-    window.addEventListener('scroll', onScroll);
-    window.addEventListener('load', onScroll);
+      /* Entrance: fade/slide in once, never repeat */
+      const reveals = $$('.reveal');
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (canObserve && !reduce) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        reveals.forEach((el) => io.observe(el));
+      } else {
+        reveals.forEach((el) => el.classList.add('is-in'));
+      }
+
+      /* Local time in Barcelona */
+      const clocks = $$('[data-clock]');
+      if (clocks.length) {
+        const fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: 'Europe/Madrid', timeZoneName: 'short' });
+        const tick = () => { const t = fmt.format(new Date()); clocks.forEach((c) => { c.textContent = t; }); };
+        tick();
+        setInterval(tick, 20000);
+      }
+
+      /* Copy email, with a fallback that selects the address instead */
+      const copyBtn = $('[data-copy]');
+      if (copyBtn) {
+        const label = $('[data-copy-label]', copyBtn);
+        const icon = $('[data-copy-icon]', copyBtn);
+        const status = $('[data-copy-status]');
+        const mail = $('[data-mail]');
+        let timer;
+        const done = (text, announce, ok) => {
+          label.textContent = text;
+          status.textContent = announce;
+          copyBtn.classList.toggle('is-done', ok);
+          icon.setAttribute('href', ok ? '#i-check' : '#i-copy');
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            label.textContent = 'Copy address';
+            copyBtn.classList.remove('is-done');
+            icon.setAttribute('href', '#i-copy');
+          }, 2400);
+        };
+        copyBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(copyBtn.dataset.copy);
+            done('Copied', 'Email address copied to the clipboard.', true);
+          } catch {
+            const range = document.createRange();
+            range.selectNodeContents(mail);
+            const sel = getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            done('Selected', 'Could not copy automatically. The address is selected, press Ctrl or Command plus C.', false);
+          }
+        });
+      }
+
+      /* VibePost: toggle formats in the feed illustration */
+      const vp = $('.vp');
+      if (vp) {
+        const feed = $('.vp-feed', vp);
+        const chips = $$('.vp-chip', vp);
+        const posts = $$('.vp-post', vp);
+        const empty = $('.vp-empty', vp);
+        const status = $('[data-vp-status]', vp);
+        let lockedAt = 0;
+        const update = () => {
+          const on = chips.filter((c) => c.getAttribute('aria-pressed') === 'true').map((c) => c.dataset.type);
+          posts.forEach((p) => { p.hidden = !on.includes(p.dataset.type); });
+          empty.hidden = on.length > 0;
+          status.textContent = on.length ? 'Feed shows: ' + on.join(', ') + '.' : 'Nothing selected. Your feed, your rules.';
+        };
+        chips.forEach((c) => c.addEventListener('click', () => {
+          vp.classList.add('is-touched');
+          // keep the panel the same height while posts come and go, so nothing below it jumps
+          if (!feed.style.minHeight) { feed.style.minHeight = feed.offsetHeight + 'px'; lockedAt = innerWidth; }
+          c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') === 'true' ? 'false' : 'true');
+          update();
+        }));
+        addEventListener('resize', () => { if (innerWidth !== lockedAt) feed.style.minHeight = ''; });
+      }
+
+      /* Footer year */
+      const year = $('[data-year]');
+      if (year) year.textContent = new Date().getFullYear();
+    })();
   </script>
- </body>
-
+</body>
 </html>
-
-

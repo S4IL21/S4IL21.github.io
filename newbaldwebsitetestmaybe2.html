@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>S4IL | Social platforms, Discord bots and weird tools</title>
+  <meta name="description" content="S4IL builds social platforms, Discord bots and weird little tools. VibePost, Tatom, Chloride, BaldBot and more.">
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="https://s4il.is-a.dev/newbaldwebsitetestmaybe2.html">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" href="files/round-logo.png" type="image/png">
+  <link rel="apple-touch-icon" href="files/logo.png">
+  <link rel="preload" href="assets/fonts/rubik.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/space-mono-bold.woff2" as="font" type="font/woff2" crossorigin>
+  <script>document.documentElement.classList.add('js')</script>
+
+  <style>
+    @font-face{font-family:"Rubik";src:url(assets/fonts/rubik.woff2) format("woff2");font-weight:400 800;font-style:normal;font-display:swap}
+    @font-face{font-family:"Space Mono";src:url(assets/fonts/space-mono-bold.woff2) format("woff2");font-weight:700;font-style:normal;font-display:swap}
+    @font-face{font-family:"Rubik Fallback";src:local("Arial");font-weight:400 500;size-adjust:109.24%;ascent-override:85.59%;descent-override:22.88%;line-gap-override:0%}
+    @font-face{font-family:"Rubik Fallback";src:local("Arial Bold"),local("Arial-BoldMT");font-weight:600 800;size-adjust:104%;ascent-override:89%;descent-override:23.8%;line-gap-override:0%}
+
+    :root{
+      color-scheme:light;
+      --bg:#ffffff;
+      --soft:#f5f7fb;
+      --ink:#0a0a0b;
+      --muted:#4b5563;
+      --line:#e3e7ee;
+      --blue:#1d5cff;
+      --blue-deep:#1346cc;
+      --blue-soft:#eaf1ff;
+      --blue-on-dark:#7aa5ff;
+      --black:#0a0a0b;
+      --font:"Rubik","Rubik Fallback",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+      --mono:"Space Mono",ui-monospace,Menlo,Consolas,monospace;
+      --r:22px;
+      --gutter:clamp(20px,4vw,40px);
+      --ease:cubic-bezier(.2,.7,.2,1);
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{-webkit-text-size-adjust:100%;scroll-padding-top:88px}
+    @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+    body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.65 var(--font);-webkit-font-smoothing:antialiased;font-synthesis:none}
+    h1,h2,h3,p,ul,dl,dd,figure,pre{margin:0}
+    ul{padding:0;list-style:none}
+    img,svg{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;color:inherit;cursor:pointer}
+    ::selection{background:var(--blue);color:#fff}
+    :focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:8px}
+    .dark :focus-visible{outline-color:var(--blue-on-dark)}
+    .wrap{width:min(100% - 2*var(--gutter),1160px);margin-inline:auto}
+    .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+    .sprite{position:absolute;width:0;height:0;overflow:hidden}
+    .skip{position:fixed;left:12px;top:-80px;z-index:100;padding:10px 16px;background:var(--ink);color:#fff;border-radius:10px;font-weight:600;transition:top .2s}
+    .skip:focus{top:12px}
+    .i{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+    .ico{fill:currentColor}
+
+    /* ---------- Header ---------- */
+    .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);-webkit-backdrop-filter:saturate(1.6) blur(14px);backdrop-filter:saturate(1.6) blur(14px);border-bottom:1px solid var(--line)}
+    .bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+    .brand{display:inline-flex;align-items:center;gap:10px;font-weight:700;font-size:1.2rem;letter-spacing:-.01em}
+    .brand img{width:36px;height:36px;border-radius:50%}
+    .nav{display:flex;align-items:center;gap:4px}
+    .nav a{padding:8px 14px;border-radius:999px;font-weight:500;font-size:.98rem;color:var(--muted);transition:background-color .15s,color .15s}
+    .nav a:hover,.nav a[aria-current]{background:var(--soft);color:var(--ink)}
+    .nav .cta{margin-left:6px;background:var(--ink);color:#fff}
+    .nav .cta:hover{background:var(--blue);color:#fff}
+
+    /* ---------- Buttons ---------- */
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:48px;padding:.6em 1.3em;border-radius:999px;border:1px solid transparent;font:600 1rem/1.1 var(--font);transition:background-color .15s,color .15s,border-color .15s,transform .15s var(--ease),box-shadow .15s}
+    .btn svg{width:1.1em;height:1.1em;flex:none}
+    .btn--blue{background:var(--blue);color:#fff}
+    .btn--blue:hover{background:var(--blue-deep);transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(29,92,255,.6)}
+    .btn--line{background:#fff;border-color:var(--line);color:var(--ink)}
+    .btn--line:hover{border-color:var(--ink)}
+    .btn--sm{min-height:42px;padding:.5em 1.1em;font-size:.95rem}
+    .dark .btn--line{background:transparent;border-color:#3a3f4a;color:#fff}
+    .dark .btn--line:hover{border-color:#fff}
+
+    /* ---------- Hero ---------- */
+    .hero{position:relative;overflow:hidden;padding-block:clamp(48px,8vw,104px) clamp(56px,8vw,96px);background:
+      radial-gradient(circle at 1px 1px,rgba(10,10,11,.09) 1px,transparent 0) 0 0/26px 26px}
+    .hero::after{content:"";position:absolute;inset:auto 0 0 0;height:120px;background:linear-gradient(to bottom,transparent,#fff);pointer-events:none}
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(32px,6vw,80px);align-items:center}
+    .status{display:inline-flex;align-items:center;gap:10px;padding:7px 14px 7px 12px;background:#fff;border:1px solid var(--line);border-radius:999px;font-size:.92rem;font-weight:500;box-shadow:0 1px 2px rgba(10,10,11,.04)}
+    .dot{width:9px;height:9px;border-radius:50%;background:var(--blue);box-shadow:0 0 0 0 rgba(29,92,255,.5)}
+    @media (prefers-reduced-motion:no-preference){.dot{animation:ping 2s infinite}}
+    @keyframes ping{70%{box-shadow:0 0 0 9px rgba(29,92,255,0)}100%{box-shadow:0 0 0 0 rgba(29,92,255,0)}}
+    h1{margin-top:22px;font-size:clamp(3.4rem,9.5vw,7.4rem);font-weight:800;line-height:.96;letter-spacing:-.045em}
+    h1 em{font-style:normal;color:var(--blue)}
+    .lead{margin-top:24px;max-width:30em;font-size:clamp(1.15rem,2vw,1.4rem);line-height:1.5;color:var(--muted)}
+    .cta-row{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
+    .portrait{position:relative;justify-self:center;width:min(100%,400px)}
+    .portrait::before{content:"";position:absolute;inset:-14px -14px 14px 14px;border-radius:34px;background:var(--black)}
+    .portrait img{position:relative;width:100%;height:auto;border-radius:30px;border:1px solid var(--ink);background:#00adf2}
+    .tag-float{position:absolute;z-index:2;left:-18px;bottom:28px;padding:9px 16px;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 30px -12px rgba(10,10,11,.35);font:700 .8rem/1 var(--mono)}
+    .tag-float b{color:var(--blue)}
+
+    /* ---------- Sections ---------- */
+    .section{padding-block:clamp(64px,9vw,112px)}
+    .eyebrow{display:inline-block;font:700 .82rem/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--blue)}
+    .dark .eyebrow{color:var(--blue-on-dark)}
+    h2{margin-top:14px;font-size:clamp(2.3rem,5.6vw,4rem);font-weight:800;line-height:1.02;letter-spacing:-.035em}
+    .section-lead{margin-top:14px;max-width:34em;color:var(--muted);font-size:1.15rem}
+    .head{margin-bottom:clamp(32px,5vw,56px)}
+
+    /* ---------- Projects ---------- */
+    .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:20px}
+    .card{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .25s var(--ease),box-shadow .25s,border-color .25s}
+    @media (hover:hover){.card:hover{transform:translateY(-4px);box-shadow:0 24px 48px -24px rgba(10,10,11,.28);border-color:#cdd4e0}}
+    .card--dark{background:var(--black);border-color:var(--black);color:#fff}
+    @media (hover:hover){.card--dark:hover{border-color:var(--blue)}}
+    .c-vibe{grid-column:span 7}
+    .c-tatom{grid-column:span 5}
+    .c-chlor,.c-bald,.c-block{grid-column:span 4}
+    .c-others{grid-column:span 12}
+    .shot{position:relative;background:var(--soft);border-bottom:1px solid var(--line)}
+    .shot img{width:100%;height:auto}
+    .card--dark .shot{background:#000;border-bottom-color:#22252d}
+    .shot--crop{aspect-ratio:4/3;flex:none}
+    .shot--crop img{position:absolute;inset:0;height:100%;object-fit:cover;object-position:50% 38%}
+    .chip-url{position:absolute;right:14px;bottom:14px;padding:6px 12px;background:rgba(255,255,255,.95);border:1px solid var(--line);border-radius:999px;font:700 .75rem/1 var(--mono);color:var(--ink)}
+    .body{display:flex;flex:1;flex-direction:column;gap:14px;padding:26px 26px 28px}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    h3{font-size:1.65rem;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+    .badge{padding:5px 11px;border-radius:999px;background:var(--blue-soft);color:var(--blue-deep);font:700 .72rem/1 var(--mono);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+    .badge--dark{background:#1a2442;color:var(--blue-on-dark)}
+    .badge--grey{background:#eef0f4;color:#3f4652}
+    .body p{color:var(--muted)}
+    .card--dark .body p{color:#b4bac7}
+    .quote{font-size:1.2rem;font-weight:600;line-height:1.35;color:#fff !important;letter-spacing:-.01em}
+    .tags{display:flex;flex-wrap:wrap;gap:8px}
+    .tags li{padding:4px 11px;border:1px solid var(--line);border-radius:8px;background:var(--soft);font:700 .76rem/1.6 var(--mono);color:#2b3140}
+    .card--dark .tags li{background:transparent;border-color:#323846;color:#d6dbe6}
+    .tags a{display:block;margin:-6px -11px;padding:6px 11px}
+    .tags a:hover{color:var(--blue-on-dark)}
+    .actions{margin-top:auto;padding-top:8px;display:flex;flex-wrap:wrap;gap:10px}
+    .term{background:#0f1115;border-bottom:1px solid var(--line)}
+    .term-bar{display:flex;align-items:center;gap:7px;padding:11px 16px;border-bottom:1px solid #22252d;font:700 .75rem/1 var(--mono);color:#8b93a4}
+    .term-bar i{width:10px;height:10px;border-radius:50%;background:#2c313b}
+    .term-bar span{margin-left:8px}
+    .term pre{padding:16px 18px;white-space:pre-wrap;overflow-wrap:anywhere;font:700 .82rem/1.8 var(--mono);color:#eef1f7}
+    .term .c{color:#98a1b8}
+    .term .p{color:var(--blue-on-dark)}
+    .art{display:grid;place-items:center;flex:1;min-height:230px;padding:28px;border-bottom:1px solid var(--line);background:var(--blue-soft)}
+    .art img{width:min(56%,190px);aspect-ratio:1;border-radius:26px;border:1px solid var(--ink);box-shadow:0 18px 36px -18px rgba(19,70,204,.6)}
+    .wide{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:clamp(20px,4vw,48px);padding:clamp(22px,3vw,34px)}
+    .gh{display:grid;place-items:center;width:84px;height:84px;border-radius:24px;background:var(--black);color:#fff}
+    .gh svg{width:44px;height:44px}
+    .wide .body{padding:0}
+    .wide h3{margin-bottom:6px}
+
+    /* ---------- About ---------- */
+    .about{background:var(--soft);border-block:1px solid var(--line)}
+    .about-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(28px,5vw,64px);align-items:start}
+    .about-copy{display:grid;gap:18px;font-size:1.2rem;color:#2b3140}
+    .about-copy a{color:var(--blue-deep);font-weight:600;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+    .facts{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:8px 26px}
+    .facts div{display:grid;grid-template-columns:7.4em 1fr;gap:12px;padding:15px 0;border-bottom:1px solid var(--line)}
+    .facts div:last-child{border-bottom:0}
+    .facts dt{font:700 .76rem/1.9 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--blue-deep)}
+    .facts dd{font-weight:500}
+    .stack{margin-top:clamp(44px,6vw,72px)}
+    .stack h3{font-size:1.4rem}
+    .pills{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+    .pills li{padding:8px 16px;background:#fff;border:1px solid var(--line);border-radius:999px;font-weight:500;font-size:.98rem;transition:border-color .15s,background-color .15s,color .15s}
+    .pills li:hover{border-color:var(--blue);background:var(--blue-soft);color:var(--blue-deep)}
+    .pills .more{border-style:dashed;background:transparent;color:var(--muted)}
+
+    /* ---------- Contact ---------- */
+    .contact{background:var(--black);color:#fff;position:relative;overflow:hidden}
+    .contact::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 1px 1px,rgba(255,255,255,.08) 1px,transparent 0) 0 0/26px 26px;pointer-events:none}
+    .contact::after{content:"";position:absolute;right:-12%;top:-30%;width:620px;height:620px;border-radius:50%;background:radial-gradient(circle,rgba(29,92,255,.45),transparent 65%);pointer-events:none}
+    .contact-grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(28px,5vw,64px);align-items:center}
+    .contact h2{font-size:clamp(3rem,9vw,6.4rem);line-height:.95;letter-spacing:-.045em}
+    .contact .lead{color:#b4bac7;margin-top:20px}
+    .mail{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px}
+    .btn--mail{min-height:56px;padding:.6em 1.5em;font-size:clamp(1rem,3.4vw,1.2rem);overflow-wrap:anywhere}
+    .copy-btn{background:transparent;border-color:#3a3f4a;color:#fff}
+    .copy-btn:hover{border-color:#fff}
+    .copy-btn.is-done{background:#fff;color:var(--ink);border-color:#fff}
+    .socials{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px}
+    .social{display:inline-flex;align-items:center;gap:.6em;min-height:46px;padding:.4em 1.1em;border:1px solid #323846;border-radius:999px;font-weight:600;font-size:.98rem;transition:background-color .15s,border-color .15s,color .15s}
+    .social svg{width:20px;height:20px}
+    .social:hover{background:#fff;color:var(--ink);border-color:#fff}
+    .contact-art{justify-self:center;width:min(100%,300px)}
+    .contact-art img{width:100%;height:auto;border-radius:28px;border:1px solid #3a3f4a;background:#00adf2}
+
+    /* ---------- Footer ---------- */
+    footer{background:#000;color:#9aa3b5;padding-block:26px;font-size:.95rem;border-top:1px solid #1b1e25}
+    .foot{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center}
+    .foot ul{display:flex;flex-wrap:wrap;gap:4px 22px}
+    .foot a{display:inline-block;padding:6px 0;color:#d6dbe6}
+    .foot a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px}
+
+    /* ---------- Reveal ---------- */
+    .js .reveal:not(.in){opacity:0;transform:translateY(22px)}
+    .js .reveal{transition:opacity .7s var(--ease),transform .7s var(--ease)}
+
+    /* ---------- Responsive ---------- */
+    @media (max-width:1000px){
+      .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+      .portrait{justify-self:start;width:min(80%,360px);margin-right:14px}
+      .grid{grid-template-columns:1fr}
+      .grid>*{grid-column:auto !important}
+      .shot--crop{aspect-ratio:16/10}
+      .contact-art{justify-self:start;width:min(70%,260px)}
+    }
+    @media (max-width:640px){
+      .bar{min-height:62px}
+      .nav a{padding:8px 10px;font-size:.92rem}
+      .nav .cta{display:none}
+      .wide{grid-template-columns:1fr}
+      .facts div{grid-template-columns:1fr;gap:2px}
+      .tag-float{left:-6px}
+      .btn--mail{width:100%}
+    }
+    @media (prefers-reduced-motion:reduce){
+      *,*::before,*::after{transition-duration:.001ms !important;animation:none !important}
+      .js .reveal:not(.in){opacity:1;transform:none}
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false"><defs>
+    <symbol id="i-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v15m0 0-6-6m6 6 6-6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.5 5 5L19.5 7"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m4 8 8 6 8-6"/></symbol>
+    <symbol id="b-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+    <symbol id="b-discord" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></symbol>
+    <symbol id="b-youtube" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
+    <symbol id="b-scratch" viewBox="0 0 24 24"><path d="M11.406 11.312c-.78-.123-1.198-.654-.99-2.295l.023-.198c.175-1.426.321-1.743.996-1.706.198.013.426.14.654.33.211.247.68.568.945 1.204.19.466.254.77.281 1.098l.042.402v-.002a.68.68 0 0 0 1.342-.007c.008-.044.176-4.365.176-4.436 0-.38-.302-.69-.68-.696a.685.685 0 0 0-.682.688c0 .009-.001.605-.014 1.206-.536-.592-1.223-1.123-1.994-1.17-2.058-.11-2.283 1.811-2.419 2.918l-.02.196c-.278 2.189.441 3.569 2.13 3.837 1.838.293 3.063.72 3.074 1.868.007.446-.224.903-.627 1.254a2.163 2.163 0 0 1-1.749.507 3.233 3.233 0 0 1-.539-.141c-.24-.136-.847-.51-1.154-.942-.26-.364-.35-.937-.378-1.3.004-.163.005-.27.005-.283a.69.69 0 0 0-.669-.703.689.689 0 0 0-.696.682c0 .013-.017 1.367-.066 2.183-.07 1.313 0 2.426 0 2.474.028.382.35.67.727.644a.681.681 0 0 0 .635-.733c0-.006-.033-.545-.029-1.29a5.21 5.21 0 0 0 1.938.773 3.451 3.451 0 0 0 2.856-.82c.713-.619 1.122-1.464 1.11-2.32-.024-2.555-2.865-3.004-4.228-3.222M14.174 0a5.51 5.51 0 0 0-2.724.723h-.112c-2.637 0-4.937 1.392-6.15 3.728-.728 1.393-.9 2.75-.999 3.579-.012.089-.018.17-.028.262-.12.974-.123 1.904-.01 2.772a5.824 5.824 0 0 0-.625 2.529v.016a58.919 58.919 0 0 1-.057 1.95 29.72 29.72 0 0 0-.008 2.94l.013.209C3.698 21.676 6.159 24 9.083 24a5.516 5.516 0 0 0 3.463-1.21 8.357 8.357 0 0 0 5.195-2.08c1.826-1.587 2.859-3.845 2.83-6.19-.013-1.362-.346-2.638-.978-3.763.117-1.273.221-4.996.221-5.03 0-3.103-2.484-5.67-5.539-5.727zm.056 2.675c1.642.03 2.978 1.412 2.978 3.081 0 .038-.145 4.497-.215 4.883a3.152 3.152 0 0 1-.203.69c.756.89 1.165 2 1.175 3.256.021 1.555-.681 3.076-1.926 4.16a5.763 5.763 0 0 1-3.8 1.444 5.986 5.986 0 0 1-.718-.048 3.386 3.386 0 0 1-.172.215 2.97 2.97 0 0 1-2.264 1.038c-1.573 0-2.897-1.255-3.013-2.856l-.008-.122a27.366 27.366 0 0 1 .005-2.662c.039-.679.06-1.831.062-2.08a3.124 3.124 0 0 1 .783-2.025c-.237-.835-.312-1.836-.167-3.02l.024-.212c.083-.695.208-1.72.72-2.7.765-1.473 2.168-2.318 3.848-2.318a4.568 4.568 0 0 1 .824.07c.546-.5 1.27-.81 2.067-.794Z"/></symbol>
+    <symbol id="b-roblox" viewBox="0 0 24 24"><path d="M18.926 23.998 0 18.892 5.075.002 24 5.108ZM15.348 10.09l-5.282-1.453-1.414 5.273 5.282 1.453z"/></symbol>
+  </defs></svg>
+
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="#top" aria-label="S4IL, back to top"><img src="assets/img/s4il-icon.png" width="36" height="36" alt=""><span>S4IL</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="cta">Say hi</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="status"><span class="dot" aria-hidden="true"></span>Building VibePost right now</p>
+          <h1 id="hero-title">Hi, I&rsquo;m <em>S4IL.</em></h1>
+          <p class="lead">Social platforms, Discord bots and weird little tools. I build whatever sounds fun.</p>
+          <div class="cta-row">
+            <a class="btn btn--blue" href="#projects">See my stuff <svg class="i" aria-hidden="true"><use href="#i-down"/></svg></a>
+            <a class="btn btn--line" href="#contact">Say hi</a>
+          </div>
+        </div>
+        <div class="portrait">
+          <img src="assets/img/mascot/waving.svg" width="326" height="316" alt="Cartoon S4IL waving, in sunglasses and a teal hoodie" fetchpriority="high">
+          <p class="tag-float" aria-hidden="true"><b>&gt;</b> code. learn. repeat.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects" aria-labelledby="projects-title">
+      <div class="wrap">
+        <header class="head reveal">
+          <span class="eyebrow">Projects</span>
+          <h2 id="projects-title">Stuff I&rsquo;ve made</h2>
+          <p class="section-lead">The main stuff. The rest lives on my GitHub.</p>
+        </header>
+
+        <div class="grid">
+          <article class="card c-vibe reveal" id="vibepost" aria-labelledby="vibepost-title">
+            <figure class="shot">
+              <img src="assets/img/shots/vibepost.webp" srcset="assets/img/shots/vibepost-640.webp 640w, assets/img/shots/vibepost.webp 1000w" sizes="(min-width:1001px) 650px, 100vw" width="1000" height="594" alt="Screenshot of the VibePost homepage: a black page with the VibePost logo and the headline Feel the Vibe, Share the Moment." loading="lazy" decoding="async">
+              <figcaption class="chip-url">vibepost.ddns.net</figcaption>
+            </figure>
+            <div class="body">
+              <div class="row"><h3 id="vibepost-title">VibePost</h3><span class="badge">Pre-beta</span></div>
+              <p>A social platform where you pick what your feed shows. Text, videos, pics, audio or any mix. No algorithm trying to hook you, so everyone gets a fair shot at being seen. DMs included. Still pre-beta, so stuff might break.</p>
+              <ul class="tags" role="list" aria-label="Built with"><li>Tailwind CSS</li><li>Alpine.js</li><li>JavaScript</li></ul>
+              <div class="actions"><a class="btn btn--blue btn--sm" href="https://vibepost.ddns.net/" target="_blank" rel="noopener noreferrer">Visit VibePost <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a></div>
+            </div>
+          </article>
+
+          <article class="card card--dark dark c-tatom reveal" id="tatom" aria-labelledby="tatom-title">
+            <figure class="shot shot--crop">
+              <img src="assets/img/shots/tatom.webp" srcset="assets/img/shots/tatom-480.webp 480w, assets/img/shots/tatom.webp 760w" sizes="(min-width:1001px) 470px, 100vw" width="760" height="800" alt="Screenshot of the Tatom website: We build things today. For a better web tomorrow. on a dark blue background, with the Tatom train logo." loading="lazy" decoding="async">
+              <figcaption class="chip-url">tatom.c00l.site</figcaption>
+            </figure>
+            <div class="body">
+              <div class="row"><h3 id="tatom-title">Tatom</h3><span class="badge badge--dark">My company</span></div>
+              <p>I own this one. VibePost, BlockCoin and BaldBot all live here.</p>
+              <p class="quote">&ldquo;We build things today. For a better web tomorrow.&rdquo;</p>
+              <ul class="tags" role="list" aria-label="Projects under Tatom"><li><a href="#vibepost">VibePost</a></li><li><a href="#baldbot">BaldBot</a></li><li><a href="#blockcoin">BlockCoin</a></li></ul>
+              <div class="actions"><a class="btn btn--blue btn--sm" href="https://tatom.c00l.site/" target="_blank" rel="noopener noreferrer">Visit Tatom <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a></div>
+            </div>
+          </article>
+
+          <article class="card c-chlor reveal" id="chloride" aria-labelledby="chloride-title">
+            <figure class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>~/my-bot</span></div>
+              <pre><code><span class="c"># install</span>
+<span class="p">$</span> python -m pip install -e .
+<span class="c"># new workspace</span>
+<span class="p">$</span> chloride create my-bot
+<span class="c"># run it (Docker Compose)</span>
+<span class="p">$</span> chloride run</code></pre>
+            </figure>
+            <div class="body">
+              <div class="row"><h3 id="chloride-title">Chloride</h3><span class="badge">Open source</span></div>
+              <p>My self-hosted AI agent for Discord. It has memory, runs scheduled tasks and uses tools in a sandbox, with permissions you set. Docker Compose, your own keys.</p>
+              <ul class="tags" role="list" aria-label="Built with"><li>Python</li><li>Docker</li></ul>
+              <div class="actions"><a class="btn btn--line btn--sm" href="https://github.com/S4IL21/chloride" target="_blank" rel="noopener noreferrer">GitHub <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a></div>
+            </div>
+          </article>
+
+          <article class="card c-bald reveal" id="baldbot" aria-labelledby="baldbot-title">
+            <div class="art"><img src="assets/img/baldbot-art.webp" width="232" height="232" alt="BaldBot's profile picture: a shiny blue cartoon head with big googly eyes" loading="lazy" decoding="async"></div>
+            <div class="body">
+              <div class="row"><h3 id="baldbot-title">BaldBot</h3><span class="badge">Discord bot</span></div>
+              <p>Da baldest bot in da universe. An economy bot where the currency is hair. Grow hairs, buy boosters and dominate the follicle economy.</p>
+              <ul class="tags" role="list" aria-label="Built with"><li>Python</li><li>Docker</li></ul>
+              <div class="actions"><a class="btn btn--line btn--sm" href="https://discord.com/oauth2/authorize?client_id=1407055827487031336" target="_blank" rel="noopener noreferrer">Add to Discord <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a></div>
+            </div>
+          </article>
+
+          <article class="card c-block reveal" id="blockcoin" aria-labelledby="blockcoin-title">
+            <figure class="shot">
+              <img src="assets/img/shots/blockcoin-480.webp" srcset="assets/img/shots/blockcoin-480.webp 480w, assets/img/shots/blockcoin.webp 820w" sizes="(min-width:1001px) 380px, 100vw" width="820" height="615" alt="Screenshot of the BlockCoin homepage: Write, Post, Earn. next to a phone showing the app's feed." loading="lazy" decoding="async">
+            </figure>
+            <div class="body">
+              <div class="row"><h3 id="blockcoin-title">BlockCoin</h3><span class="badge badge--grey">Archived</span></div>
+              <p>A social platform with a game twist: earn coins from likes, followers and views, then trade, gift or buy posts. Retired now, but the site is still up.</p>
+              <ul class="tags" role="list" aria-label="Built with"><li>SvelteKit</li></ul>
+              <div class="actions"><a class="btn btn--line btn--sm" href="https://blockcoin.vercel.app/" target="_blank" rel="noopener noreferrer">Visit <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">BlockCoin (opens in a new tab)</span></a></div>
+            </div>
+          </article>
+
+          <article class="card c-others wide reveal" id="others" aria-labelledby="others-title">
+            <div class="gh" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><use href="#b-github"/></svg></div>
+            <div class="body">
+              <h3 id="others-title">Others</h3>
+              <p>Smaller projects, experiments and forks live on my GitHub.</p>
+              <div class="actions"><a class="btn btn--blue btn--sm" href="https://github.com/S4IL21?tab=repositories" target="_blank" rel="noopener noreferrer">See my GitHub <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <div class="wrap">
+        <div class="about-grid">
+          <div class="reveal">
+            <span class="eyebrow">About</span>
+            <h2 id="about-title">About me</h2>
+            <div class="about-copy" style="margin-top:26px">
+              <p>I&rsquo;m S4IL, a full-stack dev from Barcelona. I build things from scratch, whether that&rsquo;s a website, a bot or a tool nobody asked for. I care how it looks and feels, not just whether the code runs.</p>
+              <p>Right now I&rsquo;m building <a href="#vibepost">VibePost</a>. It lives under Tatom, my company, along with BaldBot and the retired BlockCoin.</p>
+              <p>On the side I mess with AI agents, automation and self-hosting, mostly in Python. Code. Learn. Repeat.</p>
+            </div>
+          </div>
+          <dl class="facts reveal" aria-label="S4IL at a glance">
+            <div><dt>Role</dt><dd>Full-stack dev</dd></div>
+            <div><dt>Based</dt><dd>Barcelona, Spain</dd></div>
+            <div><dt>Owns</dt><dd>Tatom</dd></div>
+            <div><dt>Now</dt><dd>Building VibePost</dd></div>
+            <div><dt>Main lang</dt><dd>Python</dd></div>
+            <div><dt>Into</dt><dd>AI, automation, self-hosting</dd></div>
+          </dl>
+        </div>
+
+        <div class="stack reveal">
+          <h3>Stuff I use</h3>
+          <ul class="pills" role="list">
+            <li>Python</li><li>JavaScript</li><li>TypeScript</li><li>Node.js</li><li>HTML</li><li>CSS</li><li>SCSS</li>
+            <li>SvelteKit</li><li>Tailwind CSS</li><li>Alpine.js</li><li>Tkinter</li><li>ttkbootstrap</li>
+            <li>Discord API</li><li>Docker</li><li>Docker Compose</li><li>Git</li><li>GitHub</li><li>GitHub Pages</li><li>Vercel</li>
+            <li>Batch</li><li>VBScript</li><li>Scratch</li><li>MIT App Inventor</li>
+            <li>Java</li><li>C#</li><li>C++</li><li>Lua</li>
+            <li>AI agents</li><li>Automation</li><li>Self-hosting</li>
+            <li class="more">and more</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact dark" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact-grid">
+        <div>
+          <span class="eyebrow">Contact</span>
+          <h2 id="contact-title" style="margin-top:16px">Say hi.</h2>
+          <p class="lead">Got an idea? Found a bug? Just wanna say hi? Email me or find me anywhere below.</p>
+          <div class="mail">
+            <a class="btn btn--blue btn--mail" href="mailto:s4il.is.a.dev@gmail.com" data-mail><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>s4il.is.a.dev@gmail.com</a>
+            <button class="btn copy-btn" type="button" data-copy="s4il.is.a.dev@gmail.com"><svg class="i" aria-hidden="true"><use href="#i-copy" data-copy-icon/></svg><span data-copy-label>Copy</span></button>
+            <p class="sr-only" role="status" data-copy-status></p>
+          </div>
+          <ul class="socials" role="list">
+            <li><a class="social" href="https://github.com/S4IL21" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-github"/></svg>GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="social" href="https://dsc.gg/tatom" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-discord"/></svg>Discord<span class="sr-only"> (Tatom Official server, opens in a new tab)</span></a></li>
+            <li><a class="social" href="https://www.youtube.com/@-How-To-Tutorials-" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-youtube"/></svg>YouTube<span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="social" href="https://scratch.mit.edu/users/s4il/" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-scratch"/></svg>Scratch<span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="social" href="https://www.roblox.com/users/2023170110/profile" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-roblox"/></svg>Roblox<span class="sr-only"> (opens in a new tab)</span></a></li>
+          </ul>
+        </div>
+        <div class="contact-art"><img src="assets/img/mascot/blushing.svg" width="163" height="158" alt="Cartoon S4IL blushing" loading="lazy"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <p>&copy; <span data-year>2026</span> S4IL &middot; Code. Learn. Repeat.</p>
+      <ul role="list" aria-label="Elsewhere">
+        <li><a href="https://github.com/S4IL21" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
+        <li><a href="https://dsc.gg/tatom" target="_blank" rel="noopener noreferrer">Discord<span class="sr-only"> (opens in a new tab)</span></a></li>
+        <li><a href="#top">Back to top</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const $ = (s, r = document) => r.querySelector(s);
+      const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* reveal once */
+      const items = $$('.reveal');
+      if ('IntersectionObserver' in window && !reduce) {
+        const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+        items.forEach((el) => io.observe(el));
+      } else items.forEach((el) => el.classList.add('in'));
+
+      /* nav highlight */
+      if ('IntersectionObserver' in window) {
+        const links = new Map($$('.nav a[href^="#"]').map((a) => [a.getAttribute('href').slice(1), a]));
+        const spy = new IntersectionObserver((es) => es.forEach((e) => {
+          if (!e.isIntersecting) return;
+          links.forEach((a) => a.removeAttribute('aria-current'));
+          const a = links.get(e.target.id); if (a && !a.classList.contains('cta')) a.setAttribute('aria-current', 'location');
+        }), { rootMargin: '-40% 0px -55% 0px' });
+        links.forEach((_, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
+      }
+
+      /* copy email */
+      const btn = $('[data-copy]');
+      if (btn) {
+        const label = $('[data-copy-label]', btn), icon = $('[data-copy-icon]', btn), status = $('[data-copy-status]'), mail = $('[data-mail]');
+        let t;
+        const done = (text, msg, ok) => {
+          label.textContent = text; status.textContent = msg; btn.classList.toggle('is-done', ok); icon.setAttribute('href', ok ? '#i-check' : '#i-copy');
+          clearTimeout(t); t = setTimeout(() => { label.textContent = 'Copy'; btn.classList.remove('is-done'); icon.setAttribute('href', '#i-copy'); }, 2400);
+        };
+        btn.addEventListener('click', async () => {
+          try { await navigator.clipboard.writeText(btn.dataset.copy); done('Copied!', 'Email address copied to the clipboard.', true); }
+          catch { const r = document.createRange(); r.selectNodeContents(mail); const s = getSelection(); s.removeAllRanges(); s.addRange(r); done('Selected', 'Could not copy automatically. The address is selected, press Ctrl or Command plus C.', false); }
+        });
+      }
+
+      const y = $('[data-year]'); if (y) y.textContent = new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>

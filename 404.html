@@ -3,78 +3,77 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>404, page not found — S4IL</title>
+  <title>Oops, 404 — S4IL</title>
   <meta name="description" content="This page doesn't exist. The home page still does.">
   <meta name="robots" content="noindex">
-  <meta name="theme-color" content="#0a0b0d">
-  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#ffd93d">
 
   <!-- Root-relative URLs on purpose: GitHub Pages serves this file at any path depth -->
   <link rel="icon" href="/assets/img/s4il-icon.svg" type="image/svg+xml">
   <link rel="icon" href="/assets/img/favicon-32.png" type="image/png" sizes="32x32">
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
-  <link rel="preload" href="/assets/fonts/instrument-serif.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="/assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/lilita-one.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/rubik.woff2" as="font" type="font/woff2" crossorigin>
 
   <style>
-    @font-face{font-family:"Geist";src:url(/assets/fonts/geist.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
-    @font-face{font-family:"Geist Mono";src:url(/assets/fonts/geist-mono.woff2) format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
-    @font-face{font-family:"Instrument Serif";src:url(/assets/fonts/instrument-serif.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
-    @font-face{font-family:"Instrument Serif";src:url(/assets/fonts/instrument-serif-italic.woff2) format("woff2");font-weight:400;font-style:italic;font-display:swap}
-    @font-face{font-family:"Geist Fallback";src:local("Arial");size-adjust:105.55%;ascent-override:95.21%;descent-override:27.95%;line-gap-override:0%}
-    @font-face{font-family:"Geist Mono Fallback";src:local("Courier New");size-adjust:99.98%;ascent-override:100.52%;descent-override:29.5%;line-gap-override:0%}
-    @font-face{font-family:"Instrument Serif Fallback";src:local("Times New Roman");size-adjust:84.32%;ascent-override:117.4%;descent-override:36.76%;line-gap-override:0%}
-    @font-face{font-family:"Instrument Serif Fallback";src:local("Times New Roman Italic"),local("TimesNewRoman-Italic");font-style:italic;size-adjust:88.63%;ascent-override:111.7%;descent-override:34.98%;line-gap-override:0%}
+    @font-face{font-family:"Lilita One";src:url(/assets/fonts/lilita-one.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
+    @font-face{font-family:"Rubik";src:url(/assets/fonts/rubik.woff2) format("woff2");font-weight:400 800;font-style:normal;font-display:swap}
+    @font-face{font-family:"Lilita Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Arial");font-weight:400;size-adjust:88.19%;ascent-override:104.65%;descent-override:24.94%;line-gap-override:0%}
+    @font-face{font-family:"Rubik Fallback";src:local("Arial");font-weight:400 500;size-adjust:109.24%;ascent-override:85.59%;descent-override:22.88%;line-gap-override:0%}
+    @font-face{font-family:"Rubik Fallback";src:local("Arial Bold"),local("Arial-BoldMT");font-weight:600 800;size-adjust:104%;ascent-override:89%;descent-override:23.8%;line-gap-override:0%}
 
     :root{
-      color-scheme:dark;
-      --bg:#0a0b0d;--bg-1:#0f1114;--line:#1b1f24;--line-2:#2a2f36;
-      --text:#eceef0;--text-2:#a4aab3;--text-3:#7b828c;
-      --accent:#00adf2;--accent-2:#52c8ff;--accent-ink:#00141f;
-      --font-sans:"Geist","Geist Fallback",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-      --font-serif:"Instrument Serif","Instrument Serif Fallback","Times New Roman",serif;
-      --font-mono:"Geist Mono","Geist Mono Fallback",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
-      --gutter:clamp(20px,4.5vw,56px);
-      --ease:cubic-bezier(.2,.7,.2,1);
+      color-scheme:light;
+      --ink:#0b0b0f;--white:#fff;--blue:#00adf2;--yellow:#ffd93d;--pink:#ff8fc7;
+      --font-display:"Lilita One","Lilita Fallback","Arial Black",Impact,sans-serif;
+      --font-body:"Rubik","Rubik Fallback",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+      --stroke-3:3px 0px 0 #0b0b0f,2.6px 1.5px 0 #0b0b0f,1.5px 2.6px 0 #0b0b0f,0px 3px 0 #0b0b0f,-1.5px 2.6px 0 #0b0b0f,-2.6px 1.5px 0 #0b0b0f,-3px 0px 0 #0b0b0f,-2.6px -1.5px 0 #0b0b0f,-1.5px -2.6px 0 #0b0b0f,0px -3px 0 #0b0b0f,1.5px -2.6px 0 #0b0b0f,2.6px -1.5px 0 #0b0b0f;
+      --stroke-5:5px 0px 0 #0b0b0f,4.62px 1.91px 0 #0b0b0f,3.54px 3.54px 0 #0b0b0f,1.91px 4.62px 0 #0b0b0f,0px 5px 0 #0b0b0f,-1.91px 4.62px 0 #0b0b0f,-3.54px 3.54px 0 #0b0b0f,-4.62px 1.91px 0 #0b0b0f,-5px 0px 0 #0b0b0f,-4.62px -1.91px 0 #0b0b0f,-3.54px -3.54px 0 #0b0b0f,-1.91px -4.62px 0 #0b0b0f,0px -5px 0 #0b0b0f,1.91px -4.62px 0 #0b0b0f,3.54px -3.54px 0 #0b0b0f,4.62px -1.91px 0 #0b0b0f;
+      --bw:3px;
+      --gutter:clamp(18px,4vw,40px);
     }
     *,*::before,*::after{box-sizing:border-box}
-    body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--bg);color:var(--text);font:400 1rem/1.6 var(--font-sans);font-synthesis:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+    body{margin:0;min-height:100vh;display:flex;flex-direction:column;background:var(--blue);color:var(--ink);font:500 1.0625rem/1.6 var(--font-body);font-synthesis:none;-webkit-font-smoothing:antialiased}
     h1,p{margin:0}
     a{color:inherit;text-decoration:none}
     img,svg{display:block;max-width:100%}
-    :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
-    ::selection{background:var(--accent);color:var(--accent-ink)}
+    ::selection{background:var(--ink);color:var(--yellow)}
+    :focus-visible{outline:4px dashed var(--ink);outline-offset:4px;border-radius:6px}
     .wrap{width:min(100% - 2*var(--gutter),1200px);margin-inline:auto}
 
-    header .wrap{display:flex;align-items:center;height:64px}
-    .brand{display:inline-flex;align-items:center;gap:12px;min-height:44px}
-    .brand img{width:32px;height:32px;border-radius:50%;box-shadow:0 0 0 1px var(--line-2)}
-    .brand span{font:600 1.0625rem/1 var(--font-mono);letter-spacing:.04em}
+    header{background:var(--yellow);border-bottom:4px solid var(--ink)}
+    header .wrap{display:flex;align-items:center;min-height:72px;padding-block:10px}
+    .brand{display:inline-flex;align-items:center;gap:10px;min-height:48px}
+    .brand img{width:46px;height:46px;border:var(--bw) solid var(--ink);border-radius:50%;background:var(--blue)}
+    .brand span{font:400 2.1rem/1 var(--font-display);letter-spacing:.02em;text-shadow:2px 2px 0 var(--white)}
 
-    main{flex:1;display:grid;align-items:center;padding-block:clamp(32px,8vh,96px)}
-    .grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);column-gap:clamp(32px,6vw,96px);align-items:center}
-    .code{display:flex;align-items:center;gap:14px;font:500 .75rem/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--text-3)}
-    .code b{color:var(--accent);font-weight:500}
-    .code::after{content:"";flex:0 1 96px;height:1px;background:var(--line-2)}
-    h1{margin-top:clamp(20px,3vw,32px);font:400 clamp(3.5rem,2rem + 7vw,8rem)/.9 var(--font-serif);letter-spacing:-.025em;word-spacing:.04em;text-wrap:balance}
-    h1 em{font-style:italic;color:var(--accent)}
-    .lead{max-width:30em;margin-top:clamp(20px,3vw,32px);font-size:clamp(1.0625rem,.98rem + .4vw,1.3125rem);line-height:1.55;color:var(--text-2);text-wrap:pretty}
-    .btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;margin-top:clamp(28px,4vw,40px);padding:0 22px;border-radius:6px;background:var(--accent);color:var(--accent-ink);font:500 .9375rem/1 var(--font-sans);transition:background-color .2s var(--ease),transform .15s var(--ease)}
-    .btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s var(--ease)}
-    .btn:active{transform:translateY(1px) scale(.99)}
-    @media (hover:hover){.btn:hover{background:var(--accent-2)} .btn:hover svg{transform:translateX(-2px)}}
-    .art{justify-self:end;width:100%;max-width:300px}
-    .art img{width:100%;height:auto}
+    main{position:relative;flex:1;display:grid;align-items:center;overflow:hidden;padding-block:clamp(32px,5vw,64px)}
+    .waves{position:absolute;inset:0;width:100%;height:100%}
+    .grid{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(32px,5vw,72px);align-items:center}
+    .copy{display:grid;justify-items:start;gap:clamp(18px,2.4vw,28px)}
+    .sticker{display:inline-flex;padding:.28em .75em .2em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);font:400 .95rem/1.1 var(--font-display);letter-spacing:.05em;text-transform:uppercase;rotate:-3deg}
+    h1{font:400 clamp(3.25rem,9vw,7rem)/.94 var(--font-display);letter-spacing:.01em;color:var(--white);text-shadow:var(--stroke-5),8px 8px 0 var(--ink);text-wrap:balance}
+    .lead{max-width:28em;font-size:clamp(1.2rem,2.2vw,1.5rem);line-height:1.45}
+    .btn{display:inline-flex;align-items:center;gap:.55em;min-height:60px;padding:.6em 1.4em;background:var(--yellow);border:var(--bw) solid var(--ink);border-radius:16px;box-shadow:6px 6px 0 var(--ink);font:700 1.25rem/1.1 var(--font-body);transition:translate .12s,box-shadow .12s}
+    .btn svg{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+    .btn:active{translate:4px 4px;box-shadow:0 0 0 var(--ink)}
+    @media (hover:hover){.btn:hover{translate:-2px -2px;box-shadow:8px 8px 0 var(--ink)}.btn:hover:active{translate:4px 4px;box-shadow:0 0 0 var(--ink)}}
+    .art{position:relative;display:grid;justify-items:center;padding-top:34px}
+    .art img{width:min(100%,380px);height:auto;background:var(--blue);border:4px solid var(--ink);border-radius:34px;box-shadow:12px 12px 0 var(--ink);rotate:3deg}
+    .bubble{position:absolute;z-index:2;top:0;left:2%;padding:.65em 1em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:20px;box-shadow:4px 4px 0 var(--ink);font:700 1.0625rem/1.3 var(--font-body);rotate:-4deg}
+    .bubble::after{content:"";position:absolute;left:34px;bottom:-14px;width:22px;height:22px;background:var(--white);border:var(--bw) solid var(--ink);border-width:0 var(--bw) var(--bw) 0;rotate:45deg;border-bottom-right-radius:6px}
 
-    footer{border-top:1px solid var(--line);padding-block:24px 32px;font:500 .8125rem/1.5 var(--font-mono);color:var(--text-3)}
+    footer{background:var(--ink);color:var(--yellow);padding-block:22px 28px;font:700 1rem/1.5 var(--font-body)}
 
-    @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-    .rise{animation:rise .8s var(--ease) both;animation-delay:var(--d,0ms)}
-    @media (max-width:760px){
-      .grid{grid-template-columns:1fr;row-gap:32px}
-      .art{order:-1;justify-self:start;max-width:132px}
+    @keyframes pop{from{opacity:0;translate:0 24px;scale:.96}to{opacity:1;translate:0 0;scale:1}}
+    .pop{animation:pop .6s cubic-bezier(.2,.9,.3,1.25) backwards;animation-delay:var(--d,0ms)}
+    @media (max-width:800px){
+      .grid{grid-template-columns:1fr}
+      .art{justify-items:start}
+      .art img{width:min(70%,300px);border-radius:28px;box-shadow:9px 9px 0 var(--ink)}
     }
-    @media (prefers-reduced-motion:reduce){.rise{animation:none}.btn{transition:none}}
+    @media (max-width:560px){h1{text-shadow:var(--stroke-3),6px 6px 0 var(--ink)}}
+    @media (prefers-reduced-motion:reduce){.pop{animation:none}.btn{transition:none}}
   </style>
 </head>
 
@@ -82,28 +81,34 @@
   <header>
     <div class="wrap">
       <a class="brand" href="/" aria-label="S4IL, home">
-        <img src="/assets/img/s4il-icon.svg" width="32" height="32" alt="">
+        <img src="/assets/img/s4il-icon.svg" width="46" height="46" alt="">
         <span>S4IL</span>
       </a>
     </div>
   </header>
 
   <main>
+    <svg class="waves" aria-hidden="true" viewBox="0 0 1440 760" preserveAspectRatio="none">
+      <path fill="#00a4e6" d="M0 0H1440V575C1210 620 1010 530 760 566S280 626 0 580Z"/>
+      <path fill="#0092d9" d="M0 0H1440V405C1210 450 1010 372 760 408S280 466 0 420Z"/>
+      <path fill="#0089cc" d="M0 0H1440V238C1210 280 1010 208 760 240S280 296 0 252Z"/>
+    </svg>
     <div class="wrap grid">
-      <div>
-        <p class="code rise"><b>404</b> Page not found</p>
-        <h1 class="rise" style="--d:80ms">This page doesn&rsquo;t <em>exist.</em></h1>
-        <p class="lead rise" style="--d:160ms">It may have moved, or I may have broken it. The home page, at least, is still standing.</p>
-        <a class="btn rise" style="--d:240ms" href="/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m0 0 6-6m-6 6 6 6"/></svg>Back home</a>
+      <div class="copy">
+        <p class="sticker pop">404 &middot; Page not found</p>
+        <h1 class="pop" style="--d:80ms">Oops! Nothing here.</h1>
+        <p class="lead pop" style="--d:160ms">Maybe it moved. Maybe I broke it. Either way, the home page still works.</p>
+        <a class="btn pop" style="--d:240ms" href="/"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 12H5m0 0 6-6m-6 6 6 6"/></svg>Take me home</a>
       </div>
-      <div class="art rise" style="--d:120ms">
-        <img src="/assets/img/s4il-sad.svg" width="300" height="291" alt="Cartoon S4IL looking sad, with a frown and a teal hoodie.">
+      <div class="art pop" style="--d:120ms">
+        <p class="bubble">Well, this is awkward.</p>
+        <img src="/assets/img/mascot/sad.svg" width="163" height="158" alt="Cartoon S4IL looking sad, with a frown and a teal hoodie">
       </div>
     </div>
   </main>
 
   <footer>
-    <div class="wrap">© <span id="y">2026</span> S4IL · Code. Learn. Repeat.</div>
+    <div class="wrap">&copy; <span id="y">2026</span> S4IL &middot; Code. Learn. Repeat.</div>
   </footer>
   <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </body>

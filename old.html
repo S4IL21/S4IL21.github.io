@@ -1,99 +1,510 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="S4IL is a dev!"> <!-- CAN EDIT -->
-  <meta property="og:image" content="/files/round-logo.png"> <!-- CAN EDIT -->
-  <meta property="og:description" content="Hello, I'm S4IL! The Chill 🤙 This is my personal website for information and links! :]"> <!-- CAN EDIT -->
-  <meta name="theme-color" content="#0079F2"> <!-- CAN EDIT (use same value as the --button-primary-default variable in style.css) -->
-
-  <meta name="description" content="Hello, I'm S4IL! The Chill 🤙 This is my personal website for information and links! :]">
-  
-  <title>S4IL is a dev!</title>
-  <link rel="shortcut icon" href="/files/round-logo.png">
-  <link href="style.css" rel="stylesheet" type="text/css" />
-</head>
-
-<body>
-  <div class="card">
-    <div class="top">
-      <div class="logo-wrapper">
-        <img src="/files/round-logo.png"> <!-- CAN EDIT -->
-      </div>
-  
-      <div class="text">
-        <!-- CAN EDIT -->
-        <h1>S4IL</h1>
-        
-        <!-- CAN EDIT -->
-        <p>Hello, I'm S4IL! 😎🤙💙</p>
-        <p>Site outdated, new site comming soon!<p>
-      </div>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Portfolio - S4IL
+  </title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://s4il.is-a.dev/files/round-logo.png"/>
+  <!-- Metadata -->
+  <meta name="description" content="S4IL's portfolio - Full-Stack Developer, projects, skills, and contact information."/>
+  <meta name="author" content="S4IL"/>
+  <meta property="og:title" content="Portfolio - S4IL"/>
+  <meta property="og:description" content="S4IL's portfolio - Full-Stack Developer, projects, skills, and contact information."/>
+  <meta property="og:image" content="https://s4il.is-a.dev/files/round-logo.png"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://s4il.is-a.dev/"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Portfolio - S4IL"/>
+  <meta name="twitter:description" content="S4IL's portfolio - Full-Stack Developer, projects, skills, and contact information."/>
+  <meta name="twitter:image" content="https://s4il.is-a.dev/files/round-logo.png"/>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189746536271408" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+      font-family: 'Poppins', sans-serif;
+    }
+    /* Animated underline for nav links */
+    .nav-link {
+      position: relative;
+      overflow: hidden;
+      color: #d1d5db; /* text-gray-300 */
+      transition: color 0.3s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: #4f46e5;
+      bottom: 0;
+      left: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    }
+    .nav-link:hover,
+    .nav-link:focus {
+      color: #6366f1; /* indigo-500 */
+      outline: none;
+    }
+    .nav-link:hover::after,
+    .nav-link:focus::after {
+      transform: scaleX(1);
+    }
+    .nav-link.active {
+      color: #6366f1;
+    }
+    .nav-link.active::after {
+      transform: scaleX(1);
+    }
+    /* Animated gradient text */
+    .gradient-text {
+      background: linear-gradient(90deg, #4f46e5, #3b82f6, #06b6d4);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 3s ease infinite;
+    }
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    /* Floating animation for hero image */
+    @keyframes floatUpDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+    .float-animation {
+      animation: floatUpDown 4s ease-in-out infinite;
+    }
+    /* Card hover effect */
+    .card-hover:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4),
+        0 10px 10px -5px rgba(99, 102, 241, 0.3);
+    }
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    /* Button pulse animation */
+    .btn-pulse {
+      animation: pulse 2.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+      }
+      50% {
+        box-shadow: 0 0 15px 10px rgba(99, 102, 241, 0);
+      }
+    }
+  </style>
+ </head>
+ <body class="bg-gray-900 text-gray-100 selection:bg-indigo-600 selection:text-white scroll-smooth">
+  <header class="fixed w-full bg-gray-900 bg-opacity-90 backdrop-blur-md z-50 shadow-md">
+   <nav class="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between h-16">
+    <a class="flex items-center space-x-3 select-none" href="#">
+     <img class="w-10 h-10 rounded-md" height="40" loading="lazy" src="https://s4il.is-a.dev/files/logo.png" width="40"/>
+     <span class="text-2xl font-bold gradient-text">
+      S4IL
+     </span>
+    </a>
+    <ul class="hidden md:flex space-x-8 text-lg font-medium" id="nav-links">
+     <li>
+      <a class="nav-link active focus:outline-none" href="#home" data-link="home">
+       Home
+      </a>
+     </li>
+     <li>
+      <a class="nav-link focus:outline-none" href="#about" data-link="about">
+       About
+      </a>
+     </li>
+     <li>
+      <a class="nav-link focus:outline-none" href="#projects" data-link="projects">
+       Projects
+      </a>
+     </li>
+     <li>
+      <a class="nav-link focus:outline-none" href="#skills" data-link="skills">
+       Skills
+      </a>
+     </li>
+     <li>
+      <a class="nav-link focus:outline-none" href="#contact" data-link="contact">
+       Contact
+      </a>
+     </li>
+    </ul>
+    <button aria-label="Toggle menu" class="md:hidden focus:outline-none text-indigo-500" id="menu-btn" type="button">
+     <i class="fas fa-bars fa-lg">
+     </i>
+    </button>
+   </nav>
+   <div class="md:hidden bg-gray-800 bg-opacity-95 backdrop-blur-sm hidden" id="mobile-menu">
+    <ul class="flex flex-col space-y-4 p-6 text-lg font-semibold">
+     <li>
+      <a class="nav-link block active focus:outline-none" href="#home" data-link="home">
+       Home
+      </a>
+     </li>
+     <li>
+      <a class="nav-link block focus:outline-none" href="#about" data-link="about">
+       About
+      </a>
+     </li>
+     <li>
+      <a class="nav-link block focus:outline-none" href="#projects" data-link="projects">
+       Projects
+      </a>
+     </li>
+     <li>
+      <a class="nav-link block focus:outline-none" href="#skills" data-link="skills">
+       Skills
+      </a>
+     </li>
+     <li>
+      <a class="nav-link block focus:outline-none" href="#contact" data-link="contact">
+       Contact
+      </a>
+     </li>
+    </ul>
+   </div>
+  </header>
+  <main class="pt-20">
+   <!-- Hero Section -->
+   <section class="min-h-screen flex flex-col md:flex-row items-center justify-center max-w-7xl mx-auto px-6 sm:px-10 gap-12" id="home" tabindex="-1">
+    <div class="text-center md:text-left max-w-xl space-y-6">
+     <h1 class="text-5xl sm:text-6xl font-extrabold gradient-text leading-tight">
+      Hi, I'm
+      <span class="text-indigo-500">
+       S4IL
+      </span>
+     </h1>
+     <p class="text-lg sm:text-xl text-gray-300">
+      A passionate
+      <span class="font-semibold text-indigo-400">
+       Full-Stack Developer
+      </span>
+      making modern and responsive web experiences.
+     </p>
+     <div class="flex justify-center md:justify-start space-x-6 mt-6">
+      <a class="btn-pulse inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400" href="#projects">
+       View Projects
+      </a>
+      <a class="inline-block border-2 border-indigo-600 hover:bg-indigo-600 hover:text-white text-indigo-400 font-semibold px-6 py-3 rounded-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400" href="#contact">
+       Contact Me
+      </a>
+     </div>
     </div>
-
-    <!-- CAN EDIT -->
-    <div class="socials">
-      <a href="mailto:s4il.is.a.dev@gmail.com"> <!-- link to mail -->
-        <button class="icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-<path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6" stroke="var(--text-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-        </button>
-      </a>
-
-      <a href="https://www.youtube.com/@-How-To-Tutorials-" target="_blank"> <!-- link to youtube -->
-        <button class="icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-<path d="M21.8008 7.99951C21.8008 7.99951 21.6055 6.62061 21.0039 6.01514C20.2422 5.21826 19.3906 5.21436 19 5.16748C16.2031 4.96436 12.0039 4.96436 12.0039 4.96436H11.9961C11.9961 4.96436 7.79687 4.96436 5 5.16748C4.60938 5.21436 3.75781 5.21826 2.99609 6.01514C2.39453 6.62061 2.20312 7.99951 2.20312 7.99951C2.20312 7.99951 2 9.62061 2 11.2378V12.7534C2 14.3706 2.19922 15.9917 2.19922 15.9917C2.19922 15.9917 2.39453 17.3706 2.99219 17.9761C3.75391 18.773 4.75391 18.7456 5.19922 18.8315C6.80078 18.9839 12 19.0308 12 19.0308C12 19.0308 16.2031 19.023 19 18.8237C19.3906 18.7769 20.2422 18.773 21.0039 17.9761C21.6055 17.3706 21.8008 15.9917 21.8008 15.9917C21.8008 15.9917 22 14.3745 22 12.7534V11.2378C22 9.62061 21.8008 7.99951 21.8008 7.99951ZM9.93359 14.5933V8.97217L15.3359 11.7925L9.93359 14.5933Z" fill="var(--text-color)"/>
-</svg>
-        </button>
-      </a>
-
-      <a href="https://replit.com/@S4IL" target="_blank"> <!-- link to replit -->
-        <button class="icon">
-        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="21.49897" height="22.02491" viewBox="0,0,21.49897,22.02491"><g transform="translate(-229.00052,-168.98755)"><g data-paper-data="{&quot;isPaintingLayer&quot;:true}" fill-rule="nonzero" stroke="none" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" style="mix-blend-mode: normal"><path d="M232.05251,170.3641c0,-0.76025 0.6163,-1.37655 1.37655,-1.37655h6.42393c0.76023,0 1.37655,0.6163 1.37655,1.37655v5.96508h-7.80049c-0.76025,0 -1.37655,-0.61633 -1.37655,-1.37655z" fill="#ffffff" stroke-width="1"/><path d="M241.32244,176.32917h7.80049c0.76023,0 1.37655,0.61633 1.37655,1.37655v4.58852c0,0.76023 -0.61633,1.37655 -1.37655,1.37655h-7.80049z" fill="#ffffff" stroke-width="1"/><path d="M232.05251,185.04737c0,-0.76023 0.6163,-1.37655 1.37655,-1.37655h7.80049v5.96508c0,0.76023 -0.61633,1.37655 -1.37655,1.37655h-6.42393c-0.76025,0 -1.37655,-0.61633 -1.37655,-1.37655z" fill="#ffffff" stroke-width="1"/><path d="M229.00052,181.36444v-1.45107h1.11621v1.45107z" fill="none" stroke-width="0"/></g></g></svg>
-        </button>
-      </a>
-
-      <a href="https://dsc.gg/tatom" target="_blank"> <!-- link to discord -->
-        <button class="icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="20" viewBox="0 0 24 20" fill="none">
-<g clip-path="url(#clip0_2_1995)">
-<path d="M20.317 2.19206C18.7873 1.47476 17.147 0.946284 15.4319 0.643604C15.4007 0.637762 15.3695 0.652361 15.3534 0.681558C15.1424 1.06502 14.9087 1.56527 14.7451 1.95847C12.9004 1.67623 11.0652 1.67623 9.25832 1.95847C9.09465 1.55653 8.85248 1.06502 8.64057 0.681558C8.62448 0.653335 8.59328 0.638736 8.56205 0.643604C6.84791 0.945317 5.20756 1.47379 3.67694 2.19206C3.66368 2.1979 3.65233 2.20764 3.64479 2.22029C0.533392 6.97077 -0.31895 11.6045 0.0991801 16.1808C0.101072 16.2031 0.11337 16.2246 0.130398 16.2382C2.18321 17.7788 4.17171 18.7142 6.12328 19.3341C6.15451 19.3438 6.18761 19.3322 6.20748 19.3059C6.66913 18.6616 7.08064 17.9823 7.43348 17.2679C7.4543 17.226 7.43442 17.1764 7.39186 17.1598C6.73913 16.9068 6.1176 16.5983 5.51973 16.2479C5.47244 16.2197 5.46865 16.1506 5.51216 16.1175C5.63797 16.0211 5.76382 15.9209 5.88395 15.8197C5.90569 15.8012 5.93598 15.7973 5.96153 15.8089C9.88928 17.6416 14.1415 17.6416 18.023 15.8089C18.0485 15.7963 18.0788 15.8002 18.1015 15.8187C18.2216 15.9199 18.3475 16.0211 18.4742 16.1175C18.5177 16.1506 18.5149 16.2197 18.4676 16.2479C17.8697 16.6051 17.2482 16.9068 16.5945 17.1589C16.552 17.1754 16.533 17.226 16.5538 17.2679C16.9143 17.9813 17.3258 18.6606 17.7789 19.3049C17.7978 19.3322 17.8319 19.3438 17.8631 19.3341C19.8241 18.7142 21.8126 17.7788 23.8654 16.2382C23.8834 16.2246 23.8948 16.2041 23.8967 16.1817C24.3971 10.8911 23.0585 6.29534 20.3482 2.22125C20.3416 2.20764 20.3303 2.1979 20.317 2.19206ZM8.02002 13.3943C6.8375 13.3943 5.86313 12.2848 5.86313 10.9222C5.86313 9.55964 6.8186 8.45014 8.02002 8.45014C9.23087 8.45014 10.1958 9.56938 10.1769 10.9222C10.1769 12.2848 9.22141 13.3943 8.02002 13.3943ZM15.9947 13.3943C14.8123 13.3943 13.8379 12.2848 13.8379 10.9222C13.8379 9.55964 14.7933 8.45014 15.9947 8.45014C17.2056 8.45014 18.1705 9.56938 18.1516 10.9222C18.1516 12.2848 17.2056 13.3943 15.9947 13.3943Z" fill="var(--text-color)"/>
-</g>
-<defs>
-<clipPath id="clip0_2_1995">
-<rect width="24" height="19" fill="white" transform="translate(0 0.5)"/>
-</clipPath>
-</defs>
-</svg>
-        </button>
-      </a>
-
-      <a href="https://github.com/S4IL21" target="_blank"> <!-- link to github -->
-        <button class="icon">
-         <svg preserveAspectRatio="xMidYMin" width="24" height="24" viewBox="0 0 24 24" fill="var(--text-color)" aria-hidden="true" class="css-1b8e0pq" style="vertical-align: middle;"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 0C5.37 0 0 5.37 0 12C0 17.31 3.435 21.795 8.205 23.385C8.805 23.49 9.03 23.13 9.03 22.815C9.03 22.53 9.015 21.585 9.015 20.58C6 21.135 5.22 19.845 4.98 19.17C4.845 18.825 4.26 17.76 3.75 17.475C3.33 17.25 2.73 16.695 3.735 16.68C4.68 16.665 5.355 17.55 5.58 17.91C6.66 19.725 8.385 19.215 9.075 18.9C9.18 18.12 9.495 17.595 9.84 17.295C7.17 16.995 4.38 15.96 4.38 11.37C4.38 10.065 4.845 8.985 5.61 8.145C5.49 7.845 5.07 6.615 5.73 4.965C5.73 4.965 6.735 4.65 9.03 6.195C9.99 5.925 11.01 5.79 12.03 5.79C13.05 5.79 14.07 5.925 15.03 6.195C17.325 4.635 18.33 4.965 18.33 4.965C18.99 6.615 18.57 7.845 18.45 8.145C19.215 8.985 19.68 10.05 19.68 11.37C19.68 15.975 16.875 16.995 14.205 17.295C14.64 17.67 15.015 18.39 15.015 19.515C15.015 21.12 15 22.41 15 22.815C15 23.13 15.225 23.505 15.825 23.385C18.2072 22.5808 20.2773 21.0498 21.7438 19.0074C23.2103 16.9651 23.9994 14.5143 24 12C24 5.37 18.63 0 12 0Z"></path></svg>
-        </button>
-      </a>
+    <div class="w-full max-w-md">
+     <img class="rounded-3xl shadow-2xl float-animation" height="400" loading="lazy" src="https://s4il.is-a.dev/files/logo.png" width="400"/>
     </div>
-
-    <!-- CAN EDIT -->
-    <div class="buttons">
-      <a href="/creations/"> <!-- link to somewhere -->
-        <button class="primary">My Creations</button>
-      </a>
-
-      <a href="/socials/"> <!-- link to somewhere -->
-        <button>My Socials</button>
-      </a>
-      
-      <a href="/more/"> <!-- link to somewhere -->
-        <button>More...</button>
-      </a>
-    </div>       
+   </section>
+   <!-- About Section -->
+   <section class="max-w-5xl mx-auto px-6 sm:px-10 py-20" id="about" tabindex="-1">
+    <h2 class="text-4xl font-extrabold gradient-text mb-12 text-center">
+     About Me
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+     <img alt="Creative workspace with a modern computer, notebook, and coffee cup on a wooden desk, bright and inspiring environment" class="rounded-2xl shadow-lg" height="500" loading="lazy" src="https://www.geenxt.com/wp-content/uploads/2024/04/image-1024x585.jpeg" width="500"/>
+     <div class="text-gray-300 space-y-6 text-lg leading-relaxed">
+      <p>
+       I'm S4IL, a full-stack developer with over 6 years of experience building scalable and performant web applications. I specialize in Python, Html, modern CSS, and creating smooth user experiences.
+      </p>
+     </div>
+    </div>
+   </section>
+   <!-- Projects Section -->
+  <section class="bg-gray-800 py-20" id="projects" tabindex="-1">
+   <div class="max-w-7xl mx-auto px-6 sm:px-10">
+    <h2 class="text-4xl font-extrabold gradient-text mb-12 text-center">
+    Projects
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+    <!-- VibePost -->
+    <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+  <div style="background:#000;" class="w-full aspect-[16/9] flex items-center justify-center">
+    <img alt="VibePost" class="object-contain max-h-full max-w-full" height="400" loading="lazy" src="https://tatom.vercel.app/1.png" width="600"/>
   </div>
+     <div class="p-6">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-400">VibePost</h3>
+      <p class="text-gray-300 mb-4">VibePost is a social platform built around fairness and real connection. There are no algorithms designed to keep you addicted, which means everyone has the same chance of being seen and discovered.
 
-  <script src="script.js"></script>
-</body>
+You decide what your feed looks like. Whether you want to see only text, just videos, only images, audio posts, or any combination, the choice is yours.
+
+Share your creativity in any form, connect through direct messages, and be part of a community that values genuine moments and good vibes.</p>
+      <div class="flex space-x-4 text-indigo-500 text-lg">
+        <a aria-label="Live demo for VibePost" class="hover:text-indigo-400 transition" href="https://vibepost.ddns.net/" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+     </div>
+    </article>
+    <!-- Tatom -->
+    <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+  <div style="background:#000;" class="w-full aspect-[16/9] flex items-center justify-center">
+    <img alt="Tatom" class="object-contain max-h-full max-w-full" height="400" loading="lazy" src="https://tatom.vercel.app/banner.png" width="600"/>
+  </div>
+     <div class="p-6">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-400">Tatom</h3>
+      <p class="text-gray-300 mb-4">Tatom is a digital innovation company focused on creating unique online experiences. At Tatom, we experiment, build, and shape the future of the internet, one project at a time.</p>
+      <div class="flex space-x-4 text-indigo-500 text-lg">
+        <a aria-label="Live demo for Tatom" class="hover:text-indigo-400 transition" href="https://tatom.vercel.app/" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+     </div>
+    </article>
+    <!-- This Website -->
+    <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+     <img alt="Screenshot of this portfolio website" class="w-full h-48 object-cover" height="400" loading="lazy" src="/files/mywebsite.png" width="600"/>
+     <div class="p-6">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-400">This Website</h3>
+      <p class="text-gray-300 mb-4">My personal portfolio, built with HTML, Tailwind CSS, and custom JavaScript. Responsive, modern, and open source.</p>
+      <div class="flex space-x-4 text-indigo-500 text-lg">
+        <a aria-label="GitHub repository for this website" class="hover:text-indigo-400 transition" href="https://github.com/S4IL21/S4IL21.github.io" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+     </div>
+    </article>
+    </div>
+    <div class="flex justify-center mt-12">
+    <a href="https://s4il.is-a.dev/projects/more/" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-4 rounded-lg shadow-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400">View More</a>
+    </div>
+   </div>
+  </section>
+   <!-- Skills Section -->
+   <section class="max-w-5xl mx-auto px-6 sm:px-10 py-20" id="skills" tabindex="-1">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 text-center">
+      <!-- Python -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="Python logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">Python</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 100%"></div>
+        </div>
+      </div>
+      <!-- MIT App Inventor -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+  <img alt="MIT App Inventor logo" class="w-20 h-20" height="80" loading="lazy" src="https://storage.googleapis.com/mitai2gallery/gallery/apps/3c074e02-4be7-4c99-9b44-44637e34e96c/image" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">MIT App Inventor</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 100%"></div>
+        </div>
+      </div>
+      <!-- Scratch -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+  <img alt="Scratch logo" class="w-20 h-20" height="80" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/7/75/Scratch.logo.S.png" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">Scratch</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 100%"></div>
+        </div>
+      </div>
+      <!-- JavaScript -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="JavaScript logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">JavaScript</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 90%"></div>
+        </div>
+      </div>
+      <!-- HTML -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="HTML5 logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">HTML</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 85%"></div>
+        </div>
+      </div>
+      <!-- CSS -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="CSS3 logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">CSS</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 80%"></div>
+        </div>
+      </div>
+      <!-- Node.js -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="Node.js logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">Node.js</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 75%"></div>
+        </div>
+      </div>
+      <!-- TypeScript -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="TypeScript logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">TypeScript</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 70%"></div>
+        </div>
+      </div>
+      <!-- C# -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="C# logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">C#</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 60%"></div>
+        </div>
+      </div>
+      <!-- Java -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="Java logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">Java</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 55%"></div>
+        </div>
+      </div>
+      <!-- Lua -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="Lua logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">Lua</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 45%"></div>
+        </div>
+      </div>
+      <!-- C++ -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="C++ logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">C++</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 40%"></div>
+        </div>
+      </div>
+    </div>
+   </section>
+   <!-- Contact Section -->
+   <section class="bg-gray-800 py-20" id="contact" tabindex="-1">
+    <div class="max-w-3xl mx-auto px-6 sm:px-10 text-center">
+     <h2 class="text-4xl font-extrabold gradient-text mb-8">
+      Get In Touch
+     </h2>
+     <p class="text-gray-300 mb-12 text-lg">
+      Whether you want to collaborate on a project, have a question, or just want to say hi, feel free to reach out!
+     </p>
+  <form action="https://formsubmit.co/s4il.is.a.dev@gmail.com" method="POST" class="space-y-6 text-left" novalidate="" target="_blank">
+      <div>
+       <label class="block mb-2 font-semibold text-indigo-400" for="name">
+  Name or Nickname
+       </label>
+       <input class="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="name" name="name" placeholder="Your name or nickname" required type="text"/>
+      </div>
+      <div>
+       <label class="block mb-2 font-semibold text-indigo-400" for="email">
+        Email
+       </label>
+       <input class="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="email" name="email" placeholder="you@example.com" required="" type="email"/>
+      </div>
+      <div>
+       <label class="block mb-2 font-semibold text-indigo-400" for="message">
+        Message
+       </label>
+       <textarea class="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="message" name="message" placeholder="Write your message here..." required="" rows="5"></textarea>
+      </div>
+      <div class="text-center">
+       <button class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-4 rounded-lg shadow-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400" type="submit">
+        Send Message
+       </button>
+      </div>
+     </form>
+     <div class="mt-16 flex justify-center space-x-10 text-indigo-500 text-3xl">
+      <a aria-label="GitHub profile" class="hover:text-indigo-400 transition" href="https://github.com/S4IL21" rel="noopener noreferrer" target="_blank">
+       <i class="fab fa-github">
+       </i>
+      </a>
+  <a aria-label="Discord server" class="hover:text-indigo-400 transition" href="https://dsc.gg/tatom" rel="noopener noreferrer" target="_blank">
+   <i class="fab fa-discord"></i>
+  </a>
+      <a aria-label="Send email" class="hover:text-indigo-400 transition" href="mailto:s4il.is.a.dev@gmail.com">
+       <i class="fas fa-envelope">
+       </i>
+      </a>
+     </div>
+    </div>
+   </section>
+  </main>
+  <footer class="bg-gray-900 py-8 text-center text-gray-500 text-sm select-none flex flex-col items-center gap-2">
+   <div>© 2026 S4IL. All rights reserved.</div>
+<!--   <a href="/privacy" class="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300 transition text-base font-medium" aria-label="Privacy Policy">
+     <i class="fas fa-user-secret"></i> Privacy Policy
+   </a> -->
+  </footer>
+  <script>
+   const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.querySelectorAll('a.nav-link');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      menuBtn.querySelector('i').classList.toggle('fa-bars');
+      menuBtn.querySelector('i').classList.toggle('fa-times');
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuBtn.querySelector('i').classList.add('fa-bars');
+        menuBtn.querySelector('i').classList.remove('fa-times');
+      });
+    });
+
+    // Highlight nav links on scroll
+    const sections = ['home', 'about', 'projects', 'skills', 'contact'].map(id => document.getElementById(id));
+
+    function onScroll() {
+      const scrollPos = window.scrollY + window.innerHeight / 3;
+
+      let currentSectionId = 'home'; // default
+
+      for (const section of sections) {
+        if (section.offsetTop <= scrollPos) {
+          currentSectionId = section.id;
+        }
+      }
+
+      navLinks.forEach(link => {
+        if (link.dataset.link === currentSectionId) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Also update mobile menu links
+      mobileMenu.querySelectorAll('a.nav-link').forEach(link => {
+        if (link.dataset.link === currentSectionId) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', onScroll);
+    window.addEventListener('load', onScroll);
+  </script>
+ </body>
+
 </html>
+
+

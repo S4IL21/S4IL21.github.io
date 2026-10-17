@@ -1,13 +1,17 @@
-Fonts in this folder are self-hosted, Latin subsets served from Google Fonts:
+Fonts in this folder are self-hosted, Latin subsets (Google Fonts / Fontsource):
   - lilita-one.woff2      (Lilita One)
   - rubik.woff2           (Rubik)
   - space-mono-bold.woff2 (Space Mono Bold)
+  - manrope.woff2         (Manrope, variable)
+  - jetbrains-mono.woff2  (JetBrains Mono, variable)
 
 All are licensed under the SIL Open Font License 1.1 (full text below).
 Copyright notices:
-  Lilita One: Copyright (c) 2011 Juan Montoreano (juan@remolacha.biz), with Reserved Font Name Lilita
-  Rubik:      Copyright 2015 The Rubik Project Authors (https://github.com/googlefonts/rubik)
-  Space Mono: Copyright 2016 The Space Mono Project Authors (https://github.com/googlefonts/spacemono)
+  Lilita One:     Copyright (c) 2011 Juan Montoreano (juan@remolacha.biz), with Reserved Font Name Lilita
+  Rubik:          Copyright 2015 The Rubik Project Authors (https://github.com/googlefonts/rubik)
+  Space Mono:     Copyright 2016 The Space Mono Project Authors (https://github.com/googlefonts/spacemono)
+  Manrope:        Copyright 2019 The Manrope Project Authors (https://github.com/sharanda/manrope)
+  JetBrains Mono: Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)
 
 ------------------------------------------------------------------------
 

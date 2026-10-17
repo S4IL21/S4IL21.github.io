@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>S4IL — Full-stack dev from Barcelona</title>
-  <meta name="description" content="S4IL is a full-stack dev from Barcelona who builds social platforms, Discord bots and weird little tools. Check out VibePost, Chloride, BaldBot and more.">
+  <title>S4IL | Social platforms, Discord bots and weird tools</title>
+  <meta name="description" content="S4IL builds social platforms, Discord bots and weird little tools. Check out VibePost, Tatom, BaldBot and more.">
   <meta name="author" content="S4IL">
   <link rel="canonical" href="https://s4il.is-a.dev/">
   <meta name="theme-color" content="#ffd93d">
@@ -19,7 +19,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="S4IL">
   <meta property="og:title" content="Hi, I'm S4IL!">
-  <meta property="og:description" content="Full-stack dev from Barcelona. Social platforms, Discord bots and weird little tools.">
+  <meta property="og:description" content="Social platforms, Discord bots and weird little tools.">
   <meta property="og:url" content="https://s4il.is-a.dev/">
   <meta property="og:image" content="https://s4il.is-a.dev/assets/img/og.png">
   <meta property="og:image:width" content="1200">
@@ -27,7 +27,7 @@
   <meta property="og:image:alt" content="Hi, I'm S4IL! A cartoon avatar of S4IL waving, in sunglasses and a teal hoodie, on a bright blue background.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Hi, I'm S4IL!">
-  <meta name="twitter:description" content="Full-stack dev from Barcelona. Social platforms, Discord bots and weird little tools.">
+  <meta name="twitter:description" content="Social platforms, Discord bots and weird little tools.">
   <meta name="twitter:image" content="https://s4il.is-a.dev/assets/img/og.png">
 
   <!-- Fonts: self-hosted and preloaded -->
@@ -39,7 +39,7 @@
 
   <style>
     /* ==========================================================================
-       S4IL — personal site
+       S4IL personal site
        Cartoon / neo-brutalist: thick black outlines, flat colour, hard shadows.
        Palette and shapes come straight from the mascot's own art.
        One file on purpose: tokens first, components after, small script at the end.
@@ -142,10 +142,10 @@
 
     .card{position:relative;display:flex;flex-direction:column;background:var(--white);border:var(--bw) solid var(--ink);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
     .spark{position:absolute;width:var(--s,34px);height:var(--s,34px);rotate:var(--rot,0deg);pointer-events:none;fill:var(--c,#fff);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round}
-
     .spark--a{left:46%;top:9%;--s:44px;--rot:-8deg}
     .spark--b{left:43%;bottom:9%;--s:30px;--c:var(--yellow);--rot:10deg}
     .spark--c{right:4%;bottom:7%;--s:38px;--c:var(--pink);--rot:-6deg}
+
     .js .reveal:not(.is-in){opacity:0}
     .js .reveal.is-in{animation:pop .6s var(--pop) backwards}
     @keyframes pop{from{opacity:0;translate:0 28px;scale:.95}to{opacity:1;translate:0 0;scale:1}}
@@ -168,48 +168,36 @@
     .nav-toggle[aria-expanded="true"] .i-close{display:block}
 
     /* ---------- Hero ---------- */
-    .hero{position:relative;overflow:hidden;background:var(--blue);border-bottom:4px solid var(--ink);padding-block:clamp(40px,7vw,84px) clamp(64px,8vw,112px)}
+    .hero{position:relative;overflow:hidden;background:var(--blue);border-bottom:4px solid var(--ink);padding-block:clamp(48px,8vw,96px) clamp(64px,9vw,120px)}
     .waves{position:absolute;inset:0;width:100%;height:100%}
     .hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(32px,5vw,72px);align-items:center}
-    .hero-copy{display:grid;justify-items:start;gap:clamp(18px,2.4vw,28px)}
+    .hero-copy{display:grid;justify-items:start;gap:clamp(20px,2.6vw,32px)}
     .name{position:relative;display:inline-block}
     .squiggle{position:absolute;left:2%;bottom:-.06em;width:96%;height:.16em;min-height:12px;overflow:visible}
-    .lead{max-width:30em;font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.45;font-weight:500}
+    .lead{max-width:26em;font-size:clamp(1.3rem,2.5vw,1.7rem);line-height:1.4;font-weight:500}
     .cta-row{display:flex;flex-wrap:wrap;gap:16px}
-    .hero-art{position:relative;display:grid;justify-items:center;gap:22px;padding-top:34px}
-    .mascot{display:block;width:min(100%,430px);padding:0;background:var(--blue);border:4px solid var(--ink);border-radius:36px;box-shadow:12px 12px 0 var(--ink);overflow:hidden;rotate:3deg;transition:rotate .25s var(--pop),translate .15s,box-shadow .15s}
+    .hero-art{position:relative;display:grid;justify-items:center;padding-top:34px}
+    .mascot{width:min(100%,430px);background:var(--blue);border:4px solid var(--ink);border-radius:36px;box-shadow:12px 12px 0 var(--ink);overflow:hidden;rotate:3deg}
     .mascot img{width:100%;height:auto}
-    .mascot.is-pop img{animation:wiggle .45s var(--pop)}
-    @keyframes wiggle{0%{scale:.92;rotate:-4deg}60%{scale:1.04;rotate:2deg}100%{scale:1;rotate:0deg}}
-    .mascot:active{translate:6px 6px;box-shadow:4px 4px 0 var(--ink)}
-    @media (hover:hover){.mascot:hover{rotate:-2deg;translate:-3px -3px;box-shadow:16px 16px 0 var(--ink)}.mascot:hover:active{translate:6px 6px;box-shadow:4px 4px 0 var(--ink)}}
     .bubble{position:absolute;z-index:2;top:-4px;left:2%;max-width:16em;text-wrap:balance;padding:.65em 1em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:20px;box-shadow:var(--sh-s);font:700 1.0625rem/1.3 var(--font-body);rotate:-4deg}
     .bubble::after{content:"";position:absolute;left:34px;bottom:-14px;width:22px;height:22px;background:var(--white);border:var(--bw) solid var(--ink);border-width:0 var(--bw) var(--bw) 0;rotate:45deg;border-bottom-right-radius:6px}
-    .mood{display:inline-flex;align-items:center;gap:.6em;padding:.4em 1em;background:var(--yellow);border:var(--bw) solid var(--ink);border-radius:999px;box-shadow:var(--sh-s);font:700 .9rem/1.3 var(--font-mono)}
-    .mood b{padding:0 .4em;background:var(--white);border-radius:6px;font-weight:700}
-
-    /* ---------- Band ---------- */
-    .band{display:flex;gap:.7em;align-items:center;justify-content:flex-start;overflow:hidden;white-space:nowrap;padding:.55em var(--gutter) .4em;background:var(--ink);color:var(--yellow);font:400 clamp(1.3rem,3vw,2rem)/1 var(--font-display);letter-spacing:.06em}
-    .band svg{width:.9em;height:.9em;flex:none;fill:var(--pink);stroke:none}
 
     /* ---------- Sections ---------- */
     .section{position:relative;padding-block:clamp(56px,8vw,104px);border-bottom:4px solid var(--ink)}
     .section--paper{background-color:var(--paper);background-image:radial-gradient(rgba(11,11,15,.13) 1.6px,transparent 1.9px);background-size:22px 22px}
-    .section--teal{background:var(--teal)}
     .section--yellow{background:var(--yellow)}
     .section--blue{background:var(--blue);overflow:hidden}
     .section-head{position:relative;display:grid;justify-items:start;gap:14px;margin-bottom:clamp(32px,4.5vw,56px)}
     .section-lead{max-width:34em;font-size:clamp(1.15rem,2vw,1.35rem);font-weight:500}
-    .head-mascot{position:absolute;right:0;top:-6px;width:clamp(84px,11vw,130px);border:var(--bw) solid var(--ink);border-radius:22px;box-shadow:var(--sh-s);rotate:6deg;background:var(--blue)}
 
     /* ---------- Projects ---------- */
     .bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(26px,3.2vw,44px)}
     .project{transition:translate .15s,box-shadow .15s}
     @media (hover:hover){.project:hover{translate:-3px -3px;box-shadow:10px 10px 0 var(--ink)}}
     .p-vibe{grid-column:span 7}
-    .p-chlor{grid-column:span 5}
-    .p-tatom,.p-bald,.p-block{grid-column:span 4}
-    .p-hcr{grid-column:span 12}
+    .p-tatom{grid-column:span 5}
+    .p-chlor,.p-bald,.p-block{grid-column:span 4}
+    .p-others{grid-column:span 12}
     .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:var(--c,var(--yellow));border-bottom:var(--bw) solid var(--ink)}
     .card-title{font:400 clamp(1.9rem,3vw,2.4rem)/1 var(--font-display);letter-spacing:.01em;text-shadow:2px 2px 0 rgba(255,255,255,.7)}
     .card-body{display:flex;flex:1;flex-direction:column;gap:14px;padding:20px 20px 22px}
@@ -219,11 +207,15 @@
     .caps{display:flex;flex-wrap:wrap;gap:8px}
     .caps li{padding:.2em .75em;background:var(--white);border:2.5px solid var(--ink);border-radius:999px;font:700 .9375rem/1.4 var(--font-body)}
     .caps li:nth-child(odd){background:var(--paper)}
+    .caps a{display:block;margin:-.2em -.75em;padding:.2em .75em;border-radius:inherit;transition:background-color .12s}
+    @media (hover:hover){.caps a:hover{background:var(--yellow)}}
     .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:auto;padding-top:6px}
 
     .shot{position:relative;border-bottom:var(--bw) solid var(--ink);background:var(--ink)}
     .shot img{width:100%;height:auto}
-    .shot-url{position:absolute;left:50%;bottom:12px;translate:-50% 0;padding:.25em .7em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);font:700 .8125rem/1.4 var(--font-mono);rotate:-2deg}
+    .shot--fill{flex:1 1 auto;min-height:280px}
+    .shot--fill img{position:absolute;inset:0;height:100%;object-fit:cover}
+    .shot-url{position:absolute;left:50%;bottom:12px;translate:-50% 0;padding:.25em .7em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);font:700 .8125rem/1.4 var(--font-mono);rotate:-2deg;white-space:nowrap}
 
     .term{border-bottom:var(--bw) solid var(--ink);background:#15151f;color:var(--white)}
     .term-bar{display:flex;align-items:center;gap:7px;padding:9px 14px;background:var(--white);border-bottom:var(--bw) solid var(--ink);color:var(--ink);font:700 .8125rem/1 var(--font-mono)}
@@ -231,40 +223,22 @@
     .term-bar i:nth-child(2){background:var(--yellow)}
     .term-bar i:nth-child(3){background:var(--green)}
     .term-bar span{margin-left:6px}
-    .term pre{padding:18px 104px 18px 20px;white-space:pre-wrap;overflow-wrap:anywhere;font:700 clamp(.82rem,1vw + .5rem,.95rem)/1.85 var(--font-mono)}
+    .term pre{padding:14px 18px;white-space:pre-wrap;overflow-wrap:anywhere;font:700 clamp(.8rem,.5vw + .55rem,.88rem)/1.65 var(--font-mono)}
     .term .c{color:#9da3bd}
     .term .p{color:var(--green)}
-    .element{position:absolute;top:70px;right:16px;z-index:2;display:grid;grid-template-rows:auto 1fr auto;width:78px;aspect-ratio:1;padding:6px 8px;background:var(--yellow);border:var(--bw) solid var(--ink);border-radius:10px;box-shadow:3px 3px 0 var(--ink);rotate:7deg;font:700 .7rem/1 var(--font-mono)}
-    .element b{align-self:center;justify-self:center;font:400 2.1rem/1 var(--font-display)}
-    .element sup{font-size:.55em;vertical-align:.7em}
-    .element small{font-size:.58rem;text-transform:uppercase;letter-spacing:.06em}
+    .element{display:grid;grid-template-rows:auto 1fr;flex:none;width:54px;aspect-ratio:1;margin-block:-8px;padding:4px 6px;background:var(--yellow);border:var(--bw) solid var(--ink);border-radius:10px;box-shadow:3px 3px 0 var(--ink);rotate:7deg;font:700 .65rem/1 var(--font-mono)}
+    .element b{align-self:center;justify-self:center;font:400 1.55rem/1 var(--font-display)}
+    .element sup{font-size:.55em;vertical-align:.6em}
 
     .art{position:relative;display:grid;place-items:center;min-height:250px;padding:30px;border-bottom:var(--bw) solid var(--ink);background-color:var(--c);background-image:radial-gradient(rgba(11,11,15,.18) 1.6px,transparent 1.9px);background-size:18px 18px}
+    .art--fill{flex:1 1 auto}
     .art img.sq{width:min(58%,190px);height:auto;aspect-ratio:1;background:var(--white);border:4px solid var(--ink);border-radius:26px;box-shadow:8px 8px 0 var(--ink);rotate:4deg}
     .art .bubble{top:14px;left:12px;max-width:11em;font-size:.95rem;font-family:var(--font-body)}
 
-    .hcr{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
-    .hcr .art{border-bottom:0;border-right:var(--bw) solid var(--ink);min-height:300px}
-    .hcr-svg{width:min(100%,360px);height:auto}
-    .hcr-num{margin-top:12px;padding:.1em .5em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:12px;box-shadow:var(--sh-s);font:400 clamp(1.8rem,4.2vw,3rem)/1.2 var(--font-display);letter-spacing:.04em}
-    .hcr-cap{margin-top:8px;font:700 .8125rem/1.3 var(--font-mono)}
-
-    /* ---------- Playground ---------- */
-    .tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(20px,2.6vw,34px)}
-    .tile{position:relative;display:flex;flex-direction:column;gap:8px;min-height:200px;padding:20px 18px 18px;background:var(--bg,var(--white));border:var(--bw) solid var(--ink);border-radius:16px;box-shadow:5px 5px 0 var(--ink);transition:translate .15s,box-shadow .15s}
-    .tile-title{font:400 1.7rem/1.02 var(--font-display);letter-spacing:.01em;padding-right:.2em}
-    .tile p{font-size:1.0625rem;line-height:1.45;font-weight:500}
-    .tile-go{display:inline-flex;align-items:center;gap:.4em;margin-top:auto;padding-top:6px;font-weight:700}
-    .tile-go svg{width:1.1em;height:1.1em;transition:translate .15s}
-    .tile-link::after{content:"";position:absolute;inset:0;border-radius:inherit}
-    .tile-link:focus-visible{outline:none}
-    .tile:has(.tile-link:focus-visible){outline:4px dashed var(--ink);outline-offset:5px}
-    .tile-mascot{position:absolute;top:-18px;right:12px;width:62px;height:auto;border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 var(--ink);rotate:var(--mrot,6deg);background:var(--blue);pointer-events:none}
-    .tile--m .tile-title{padding-right:62px}
-    @media (hover:hover){
-      .tile:hover{translate:-3px -3px;box-shadow:9px 9px 0 var(--ink)}
-      .tile:hover .tile-go svg{translate:3px -3px}
-    }
+    .wide{display:grid;grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr)}
+    .wide .art{border-bottom:0;border-right:var(--bw) solid var(--ink);min-height:0;gap:14px}
+    .gh-big{width:clamp(96px,11vw,132px);height:auto;aspect-ratio:1;padding:24px;background:var(--ink);color:var(--white);border:4px solid var(--ink);border-radius:50%;box-shadow:7px 7px 0 var(--white)}
+    .wide-cap{padding:.2em .7em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);font:700 .8125rem/1.4 var(--font-mono)}
 
     /* ---------- About + stack ---------- */
     .about-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(28px,4vw,56px);align-items:start}
@@ -280,8 +254,6 @@
     .stats>div{display:grid;grid-template-columns:7.6em 1fr;gap:12px;align-items:center}
     .stats dt{justify-self:start;padding:.1em .6em;background:var(--ink);color:var(--yellow);border-radius:8px;font:700 .75rem/1.7 var(--font-mono);letter-spacing:.04em;text-transform:uppercase}
     .stats dd{font-weight:700;line-height:1.3}
-    .stats .clock{font-family:var(--font-mono);font-size:.9em}
-    .clock{display:inline-block;min-width:10ch}
     .stack{margin-top:clamp(40px,6vw,72px);display:grid;gap:20px}
     .stack h3{font:400 clamp(2rem,4vw,2.9rem)/1 var(--font-display);text-shadow:var(--stroke-3),4px 4px 0 var(--ink);color:var(--white)}
     .pills{display:flex;flex-wrap:wrap;gap:12px}
@@ -291,6 +263,7 @@
     .pills li:nth-child(5n+3){background:var(--green)}
     .pills li:nth-child(5n+4){background:var(--white)}
     .pills li:nth-child(5n+5){background:var(--purple)}
+    .pills li.more{background:transparent;border-style:dashed;box-shadow:none}
 
     /* ---------- Contact ---------- */
     .contact-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(28px,5vw,64px);align-items:center}
@@ -303,7 +276,6 @@
     .social svg{width:24px;height:24px;flex:none}
     .social:active{translate:4px 4px;box-shadow:0 0 0 var(--ink)}
     @media (hover:hover){.social:hover{background:var(--yellow);translate:-2px -2px;box-shadow:7px 7px 0 var(--ink)}.social:hover:active{translate:4px 4px;box-shadow:0 0 0 var(--ink)}}
-    .where{display:inline-flex;gap:.5em;align-items:center;padding:.35em .9em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:999px;box-shadow:var(--sh-s);font:700 .9rem/1.3 var(--font-mono)}
     .contact-art{position:relative;display:grid;justify-items:center;padding-top:44px}
     .contact-art img.big{width:min(100%,340px);height:auto;background:var(--blue);border:4px solid var(--ink);border-radius:32px;box-shadow:10px 10px 0 var(--ink);rotate:-3deg}
     .contact-art .bubble{top:0;left:auto;right:4%;rotate:4deg}
@@ -327,12 +299,12 @@
       .spark--b{left:auto;right:34%;bottom:3%}
       .bento{grid-template-columns:1fr}
       .bento>*{grid-column:auto !important}
-      .hcr{grid-template-columns:1fr}
-      .hcr .art{border-right:0;border-bottom:var(--bw) solid var(--ink);min-height:240px}
-      .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .shot--fill{flex:none;min-height:0;aspect-ratio:760/800}
+      .art--fill{flex:none}
+      .wide{grid-template-columns:1fr}
+      .wide .art{border-right:0;border-bottom:var(--bw) solid var(--ink);padding-block:28px}
       .contact-art{justify-items:start}
       .contact-art img.big{width:min(70%,300px)}
-      .element{top:68px}
     }
     @media (max-width:720px){
       .js .nav-toggle{display:inline-flex}
@@ -345,16 +317,11 @@
     }
     @media (max-width:560px){
       body{font-size:1.0625rem}
-      .tiles{grid-template-columns:1fr}
-      .tile{min-height:0}
       .cta-row .btn{flex:1 1 auto}
       .mascot{width:min(78%,300px);border-radius:28px;box-shadow:9px 9px 0 var(--ink)}
       .bubble{font-size:.95rem}
       .card-body{padding:18px 16px 20px}
       .stats>div{grid-template-columns:1fr;gap:4px}
-      .element{display:none}
-      .term pre{padding-right:20px}
-      .head-mascot{display:none}
       .foot{flex-direction:column;align-items:flex-start}
       .title{text-shadow:var(--stroke-3),4px 4px 0 var(--ink)}
       .title--hero{text-shadow:var(--stroke-3),6px 6px 0 var(--ink)}
@@ -365,7 +332,7 @@
       .js .reveal:not(.is-in){opacity:1}
     }
     @media print{
-      .site-header,.skip,.nav-toggle,.band{display:none}
+      .site-header,.skip,.nav-toggle{display:none}
       .js .reveal:not(.is-in){opacity:1}
     }
   </style>
@@ -379,7 +346,7 @@
     "image": "https://s4il.is-a.dev/assets/img/apple-touch-icon.png",
     "jobTitle": "Full-stack developer",
     "homeLocation": { "@type": "Place", "name": "Barcelona, Spain" },
-    "sameAs": ["https://github.com/S4IL21", "https://www.youtube.com/@-How-To-Tutorials-", "https://scratch.mit.edu/users/s4il/"]
+    "sameAs": ["https://github.com/S4IL21", "https://www.youtube.com/@-How-To-Tutorials-", "https://scratch.mit.edu/users/s4il/", "https://wasteof.money/users/s4il"]
   }
   </script>
 </head>
@@ -404,6 +371,8 @@
       <symbol id="b-youtube" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
       <symbol id="b-scratch" viewBox="0 0 24 24"><path d="M11.406 11.312c-.78-.123-1.198-.654-.99-2.295l.023-.198c.175-1.426.321-1.743.996-1.706.198.013.426.14.654.33.211.247.68.568.945 1.204.19.466.254.77.281 1.098l.042.402v-.002a.68.68 0 0 0 1.342-.007c.008-.044.176-4.365.176-4.436 0-.38-.302-.69-.68-.696a.685.685 0 0 0-.682.688c0 .009-.001.605-.014 1.206-.536-.592-1.223-1.123-1.994-1.17-2.058-.11-2.283 1.811-2.419 2.918l-.02.196c-.278 2.189.441 3.569 2.13 3.837 1.838.293 3.063.72 3.074 1.868.007.446-.224.903-.627 1.254a2.163 2.163 0 0 1-1.749.507 3.233 3.233 0 0 1-.539-.141c-.24-.136-.847-.51-1.154-.942-.26-.364-.35-.937-.378-1.3.004-.163.005-.27.005-.283a.69.69 0 0 0-.669-.703.689.689 0 0 0-.696.682c0 .013-.017 1.367-.066 2.183-.07 1.313 0 2.426 0 2.474.028.382.35.67.727.644a.681.681 0 0 0 .635-.733c0-.006-.033-.545-.029-1.29a5.21 5.21 0 0 0 1.938.773 3.451 3.451 0 0 0 2.856-.82c.713-.619 1.122-1.464 1.11-2.32-.024-2.555-2.865-3.004-4.228-3.222M14.174 0a5.51 5.51 0 0 0-2.724.723h-.112c-2.637 0-4.937 1.392-6.15 3.728-.728 1.393-.9 2.75-.999 3.579-.012.089-.018.17-.028.262-.12.974-.123 1.904-.01 2.772a5.824 5.824 0 0 0-.625 2.529v.016a58.919 58.919 0 0 1-.057 1.95 29.72 29.72 0 0 0-.008 2.94l.013.209C3.698 21.676 6.159 24 9.083 24a5.516 5.516 0 0 0 3.463-1.21 8.357 8.357 0 0 0 5.195-2.08c1.826-1.587 2.859-3.845 2.83-6.19-.013-1.362-.346-2.638-.978-3.763.117-1.273.221-4.996.221-5.03 0-3.103-2.484-5.67-5.539-5.727zm.056 2.675c1.642.03 2.978 1.412 2.978 3.081 0 .038-.145 4.497-.215 4.883a3.152 3.152 0 0 1-.203.69c.756.89 1.165 2 1.175 3.256.021 1.555-.681 3.076-1.926 4.16a5.763 5.763 0 0 1-3.8 1.444 5.986 5.986 0 0 1-.718-.048 3.386 3.386 0 0 1-.172.215 2.97 2.97 0 0 1-2.264 1.038c-1.573 0-2.897-1.255-3.013-2.856l-.008-.122a27.366 27.366 0 0 1 .005-2.662c.039-.679.06-1.831.062-2.08a3.124 3.124 0 0 1 .783-2.025c-.237-.835-.312-1.836-.167-3.02l.024-.212c.083-.695.208-1.72.72-2.7.765-1.473 2.168-2.318 3.848-2.318a4.568 4.568 0 0 1 .824.07c.546-.5 1.27-.81 2.067-.794Z"/></symbol>
       <symbol id="b-roblox" viewBox="0 0 24 24"><path d="M18.926 23.998 0 18.892 5.075.002 24 5.108ZM15.348 10.09l-5.282-1.453-1.414 5.273 5.282 1.453z"/></symbol>
+      <symbol id="b-replit" viewBox="0 0 24 24"><path d="M2 1.5A1.5 1.5 0 0 1 3.5 0h7A1.5 1.5 0 0 1 12 1.5V8H3.5A1.5 1.5 0 0 1 2 6.5ZM12 8h8.5A1.5 1.5 0 0 1 22 9.5v5a1.5 1.5 0 0 1-1.5 1.5H12ZM2 17.5A1.5 1.5 0 0 1 3.5 16H12v6.5a1.5 1.5 0 0 1-1.5 1.5h-7A1.5 1.5 0 0 1 2 22.5Z"/></symbol>
+      <symbol id="b-wasteof" viewBox="0 0 24 24"><path d="M1.5 5h3.6l2.2 9.4L10 5h2.7l2.7 9.4L17.6 5h3.6l-4.4 14.2h-3L11.4 10.7 8.6 19.2h-3z"/></symbol>
       <symbol id="star" viewBox="0 0 24 24"><path d="M12 1.5l2.5 8.2L22.5 12l-8 2.3L12 22.5l-2.5-8.2L1.5 12l8-2.3z"/></symbol>
     </defs>
   </svg>
@@ -422,7 +391,6 @@
         </button>
         <ul class="nav-list" id="nav-list" role="list">
           <li><a href="#projects">Projects</a></li>
-          <li><a href="#playground">Playground</a></li>
           <li><a href="#about">About</a></li>
           <li><a class="nav-cta" href="#contact">Say hi</a></li>
         </ul>
@@ -445,9 +413,8 @@
 
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="sticker" style="--c:var(--white);--rot:-3deg">Full-stack dev · Barcelona</p>
           <h1 class="title title--hero" id="hero-title"><span class="nb">Hi, I&rsquo;m</span> <span class="name">S4IL!<svg class="squiggle" viewBox="0 0 200 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 9c14-9 26 9 40 0s26 9 40 0 26 9 40 0 26 9 40 0 26 9 32 3" fill="none" stroke="#0b0b0f" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 9c14-9 26 9 40 0s26 9 40 0 26 9 40 0 26 9 40 0 26 9 32 3" fill="none" stroke="#ffd93d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></h1>
-          <p class="lead">I build social platforms, Discord bots and weird little tools. <strong>Code. Learn. Repeat.</strong></p>
+          <p class="lead">Social platforms, Discord bots and weird little tools. I build whatever sounds fun.</p>
           <div class="cta-row">
             <a class="btn btn--lg" href="#projects">See my stuff <svg class="i" aria-hidden="true"><use href="#i-down"/></svg></a>
             <a class="btn btn--lg btn--white" href="#contact">Say hi</a>
@@ -456,26 +423,19 @@
 
         <div class="hero-art">
           <p class="bubble">Building VibePost right now!</p>
-          <button class="mascot" type="button" data-mascot aria-describedby="mood-label">
+          <div class="mascot">
             <img src="assets/img/mascot/waving.svg" width="326" height="316" alt="Cartoon S4IL waving, in sunglasses and a teal hoodie" fetchpriority="high" decoding="async">
-          </button>
-          <p class="mood" id="mood-label">Mood: <b data-mood-name>waving</b> <span aria-hidden="true">· poke me</span></p>
-          <p class="sr-only" role="status" data-mood-status></p>
+          </div>
         </div>
       </div>
     </section>
-
-    <div class="band" aria-hidden="true">
-      <span>Code</span><svg viewBox="0 0 24 24"><use href="#star"/></svg><span>Learn</span><svg viewBox="0 0 24 24"><use href="#star"/></svg><span>Repeat</span><svg viewBox="0 0 24 24"><use href="#star"/></svg><span>Code</span><svg viewBox="0 0 24 24"><use href="#star"/></svg><span>Learn</span><svg viewBox="0 0 24 24"><use href="#star"/></svg><span>Repeat</span><svg viewBox="0 0 24 24"><use href="#star"/></svg><span>Code</span><svg viewBox="0 0 24 24"><use href="#star"/></svg><span>Learn</span><svg viewBox="0 0 24 24"><use href="#star"/></svg><span>Repeat</span><svg viewBox="0 0 24 24"><use href="#star"/></svg><span>Code</span><svg viewBox="0 0 24 24"><use href="#star"/></svg><span>Learn</span><svg viewBox="0 0 24 24"><use href="#star"/></svg><span>Repeat</span>
-    </div>
 
     <!-- ====================== Projects ====================== -->
     <section class="section section--paper" id="projects" aria-labelledby="projects-title">
       <div class="wrap">
         <header class="section-head">
           <h2 class="title title--section" id="projects-title">Stuff I&rsquo;ve made</h2>
-          <p class="section-lead">The bigger projects. The small and weird ones are down in the playground.</p>
-          <img class="head-mascot" src="assets/img/mascot/yes.svg" width="171" height="158" alt="" loading="lazy">
+          <p class="section-lead">The main stuff. The rest lives on my GitHub.</p>
         </header>
 
         <div class="bento">
@@ -491,40 +451,11 @@
               <figcaption class="shot-url">vibepost.ddns.net</figcaption>
             </figure>
             <div class="card-body">
-              <p>A social platform where <strong>you</strong> decide what your feed looks like: only text, only videos, only pics, audio, or any mix. No algorithm built to keep you hooked, so everyone gets the same chance of being seen. DMs included.</p>
+              <p>A social platform where you pick what your feed shows. Text, videos, pics, audio or any mix. No algorithm trying to hook you, so everyone gets a fair shot at being seen. DMs included.</p>
               <p class="note">Still pre-beta, so stuff might break.</p>
               <ul class="tags" role="list" aria-label="Built with"><li>Tailwind CSS</li><li>Alpine.js</li><li>JavaScript</li></ul>
               <div class="actions">
                 <a class="btn" href="https://vibepost.ddns.net/" target="_blank" rel="noopener noreferrer">Visit VibePost <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Chloride -->
-          <article class="card project p-chlor reveal" id="chloride" aria-labelledby="chloride-title">
-            <div class="card-top" style="--c:var(--teal)">
-              <h3 class="card-title" id="chloride-title">Chloride</h3>
-              <span class="sticker" style="--c:var(--sky)">Open source</span>
-            </div>
-            <figure class="term">
-              <div class="term-bar"><i></i><i></i><i></i><span>~/my-bot</span></div>
-              <pre><code><span class="c"># install</span>
-<span class="p">$</span> python -m pip install -e .
-
-<span class="c"># new workspace, then edit config.yaml</span>
-<span class="p">$</span> chloride create my-bot
-<span class="p">$</span> cd my-bot
-
-<span class="c"># start it (Docker Compose)</span>
-<span class="p">$</span> chloride run</code></pre>
-            </figure>
-            <div class="element" aria-hidden="true"><span>17</span><b>Cl<sup>&minus;</sup></b><small>Chloride</small></div>
-            <div class="card-body">
-              <p>My self-hosted AI agent that lives in Discord. It remembers stuff, runs scheduled tasks and uses tools inside a sandbox, with permissions you control. Runs on Docker Compose with your own keys.</p>
-              <ul class="caps" role="list" aria-label="What it does"><li>Memory</li><li>Sandboxing</li><li>Scheduled automations</li><li>Tool permissions</li><li>Discord integration</li></ul>
-              <ul class="tags" role="list" aria-label="Built with"><li>Python 3.11+</li><li>Docker Compose</li><li>Discord</li></ul>
-              <div class="actions">
-                <a class="btn" href="https://github.com/S4IL21/chloride" target="_blank" rel="noopener noreferrer">GitHub <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
               </div>
             </div>
           </article>
@@ -535,15 +466,45 @@
               <h3 class="card-title" id="tatom-title">Tatom</h3>
               <span class="sticker" style="--c:var(--yellow)">My company</span>
             </div>
-            <figure class="shot">
-              <img src="assets/img/shots/tatom.webp" srcset="assets/img/shots/tatom-480.webp 480w, assets/img/shots/tatom.webp 820w" sizes="(min-width:1001px) 390px, 100vw" width="820" height="522" alt="Screenshot of the Tatom website: “We build things today. For a better web tomorrow.” on a dark blue background, with the Tatom train logo." loading="lazy" decoding="async">
-              <figcaption class="shot-url">tatom.vercel.app</figcaption>
+            <figure class="shot shot--fill">
+              <img src="assets/img/shots/tatom.webp" srcset="assets/img/shots/tatom-480.webp 480w, assets/img/shots/tatom.webp 760w" sizes="(min-width:1001px) 480px, 100vw" width="760" height="800" alt="Screenshot of the Tatom website: “We build things today. For a better web tomorrow.” on a dark blue background, with the Tatom train logo." loading="lazy" decoding="async">
+              <figcaption class="shot-url">tatom.c00l.site</figcaption>
             </figure>
             <div class="card-body">
-              <p>The company behind VibePost, BlockCoin and BaldBot. I&rsquo;m the owner.</p>
+              <p>I own this one. VibePost, BlockCoin and BaldBot all live here.</p>
               <p class="motto">&ldquo;We build things today. For a better web tomorrow.&rdquo;</p>
+              <ul class="caps" role="list" aria-label="Projects under Tatom">
+                <li><a href="#vibepost">VibePost</a></li><li><a href="#baldbot">BaldBot</a></li><li><a href="#blockcoin">BlockCoin</a></li>
+              </ul>
               <div class="actions">
-                <a class="btn" href="https://tatom.vercel.app/" target="_blank" rel="noopener noreferrer">Visit Tatom <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
+                <a class="btn" href="https://tatom.c00l.site/" target="_blank" rel="noopener noreferrer">Visit Tatom <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Chloride -->
+          <article class="card project p-chlor reveal" id="chloride" aria-labelledby="chloride-title">
+            <div class="card-top" style="--c:var(--teal)">
+              <h3 class="card-title" id="chloride-title">Chloride</h3>
+              <div class="element" aria-hidden="true"><span>17</span><b>Cl<sup>&minus;</sup></b></div>
+            </div>
+            <figure class="term">
+              <div class="term-bar"><i></i><i></i><i></i><span>~/my-bot</span></div>
+              <pre><code><span class="c"># install</span>
+<span class="p">$</span> python -m pip install -e .
+
+<span class="c"># new workspace (edit config.yaml)</span>
+<span class="p">$</span> chloride create my-bot
+<span class="p">$</span> cd my-bot
+
+<span class="c"># run it (Docker Compose)</span>
+<span class="p">$</span> chloride run</code></pre>
+            </figure>
+            <div class="card-body">
+              <p>My self-hosted AI agent for Discord. It has memory, runs scheduled tasks and uses tools in a sandbox, with permissions you set. Docker Compose, your own keys.</p>
+              <ul class="tags" role="list" aria-label="Built with"><li>Open source</li><li>Python</li><li>Docker</li></ul>
+              <div class="actions">
+                <a class="btn" href="https://github.com/S4IL21/chloride" target="_blank" rel="noopener noreferrer">GitHub <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
               </div>
             </div>
           </article>
@@ -554,7 +515,7 @@
               <h3 class="card-title" id="baldbot-title">BaldBot</h3>
               <span class="sticker" style="--c:var(--yellow)">Discord bot</span>
             </div>
-            <div class="art" style="--c:var(--pink)">
+            <div class="art art--fill" style="--c:var(--pink)">
               <p class="bubble">Da baldest bot in da universe</p>
               <img class="sq" src="assets/img/baldbot-art.webp" width="232" height="232" alt="BaldBot’s profile picture: a shiny blue cartoon head with big googly eyes" loading="lazy" decoding="async">
             </div>
@@ -574,11 +535,11 @@
               <span class="sticker" style="--c:var(--grey)">Archived</span>
             </div>
             <figure class="shot">
-              <img src="assets/img/shots/blockcoin.webp" srcset="assets/img/shots/blockcoin-480.webp 480w, assets/img/shots/blockcoin.webp 820w" sizes="(min-width:1001px) 390px, 100vw" width="820" height="461" alt="Screenshot of the BlockCoin homepage: “Write, Post, Earn.” next to a phone showing the app’s feed." loading="lazy" decoding="async">
+              <img src="assets/img/shots/blockcoin.webp" srcset="assets/img/shots/blockcoin-480.webp 480w, assets/img/shots/blockcoin.webp 820w" sizes="(min-width:1001px) 390px, 100vw" width="820" height="615" alt="Screenshot of the BlockCoin homepage: “Write, Post, Earn.” next to a phone showing the app’s feed." loading="lazy" decoding="async">
               <figcaption class="shot-url">blockcoin.vercel.app</figcaption>
             </figure>
             <div class="card-body">
-              <p>A social platform with a game-like twist: earn coins from likes, followers and views, then trade, gift or buy posts. Retired now, but the site&rsquo;s still up.</p>
+              <p>A social platform with a game twist: earn coins from likes, followers and views, then trade, gift or buy posts. Retired now, but the site is still up.</p>
               <ul class="tags" role="list" aria-label="Built with"><li>SvelteKit</li></ul>
               <div class="actions">
                 <a class="btn" href="https://blockcoin.vercel.app/" target="_blank" rel="noopener noreferrer">Visit <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">BlockCoin (opens in a new tab)</span></a>
@@ -586,31 +547,21 @@
             </div>
           </article>
 
-          <!-- Hill Climb Racing Hacks -->
-          <article class="card project p-hcr hcr reveal" id="hcr" aria-labelledby="hcr-title">
-            <div class="art" style="--c:var(--coral)">
-              <svg class="hcr-svg" viewBox="0 0 320 170" aria-hidden="true">
-                <g stroke="#0b0b0f" stroke-width="5" stroke-linejoin="round" stroke-linecap="round">
-                  <circle cx="92" cy="86" r="62" fill="#ffd93d"/>
-                  <circle cx="92" cy="86" r="40" fill="#ffb347"/>
-                  <path d="M92 62l6.5 16 17 1.4-13 11 4.2 16.6L92 97.5 77.3 107l4.2-16.6-13-11 17-1.4z" fill="#fff4d6" stroke-width="3.5"/>
-                  <path d="M226 22l52 42-52 92-52-92z" fill="#7fd6ff"/>
-                  <path d="M174 64h104M204 22l-14 42 36 92M248 22l14 42-36 92" fill="none" stroke-width="4"/>
-                </g>
-              </svg>
-              <p class="hcr-num">2147483647</p>
-              <p class="hcr-cap">the max it can set</p>
+          <!-- Others -->
+          <article class="card project p-others wide reveal" id="others" aria-labelledby="others-title">
+            <div class="art" style="--c:var(--sky)">
+              <svg class="gh-big ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-github"/></svg>
+              <p class="wide-cap">github.com/S4IL21</p>
             </div>
             <div>
-              <div class="card-top" style="--c:var(--coral)">
-                <h3 class="card-title" id="hcr-title">Hill Climb Racing Hacks</h3>
-                <span class="sticker" style="--c:var(--sky)">Open source</span>
+              <div class="card-top" style="--c:var(--sky)">
+                <h3 class="card-title" id="others-title">Others</h3>
+                <span class="sticker" style="--c:var(--white)">On GitHub</span>
               </div>
               <div class="card-body">
-                <p>A Python hack menu for Hill Climb Racing on Windows. It attaches to the game and edits your coins and gems in memory. Built for educational and testing purposes.</p>
-                <ul class="tags" role="list" aria-label="Built with"><li>Python</li><li>Tkinter</li><li>ttkbootstrap</li><li>pymem</li></ul>
+                <p>Smaller projects, experiments and forks live on my GitHub.</p>
                 <div class="actions">
-                  <a class="btn" href="https://github.com/S4IL21/Hill-Climb-Racing-Hacks" target="_blank" rel="noopener noreferrer">GitHub <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
+                  <a class="btn" href="https://github.com/S4IL21?tab=repositories" target="_blank" rel="noopener noreferrer">See my GitHub <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
                 </div>
               </div>
             </div>
@@ -620,118 +571,15 @@
       </div>
     </section>
 
-    <!-- ====================== Playground ====================== -->
-    <section class="section section--teal" id="playground" aria-labelledby="playground-title">
-      <div class="wrap">
-        <header class="section-head">
-          <h2 class="title title--section" id="playground-title">Games &amp; weird experiments</h2>
-          <p class="section-lead">Random stuff I made for fun. Some of it is old, some of it is broken, all of it is mine.</p>
-        </header>
-
-        <ul class="tiles" role="list">
-          <li class="tile tile--m reveal" style="--bg:var(--yellow)">
-            <img class="tile-mascot" src="assets/img/mascot/happy.svg" width="163" height="158" alt="" loading="lazy">
-            <h3 class="tile-title"><a class="tile-link" href="/favrun/" target="_blank" rel="noopener">Favrun<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>A T-rex dino game that runs in your tab&rsquo;s favicon instead of the page. Yes, the tiny icon.</p>
-            <span class="tile-go" aria-hidden="true">Play <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-          <li class="tile tile--m reveal" style="--bg:var(--white)">
-            <img class="tile-mascot" src="assets/img/mascot/angry.svg" width="163" height="158" alt="" loading="lazy" style="--mrot:-5deg">
-            <h3 class="tile-title"><a class="tile-link" href="/games/flappy-cacatua/" target="_blank" rel="noopener">Flappy Cacat&uacute;a<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>Flappy Bird, but with a cockatoo and fun sounds.</p>
-            <span class="tile-go" aria-hidden="true">Play <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-          <li class="tile reveal" style="--bg:var(--pink)">
-            <h3 class="tile-title"><a class="tile-link" href="/games/basketwear/" target="_blank" rel="noopener">BasketWear<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>A basketball game made for WearOS. Score as many points as you can!</p>
-            <span class="tile-go" aria-hidden="true">Play <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-          <li class="tile tile--m reveal" style="--bg:var(--sky)">
-            <img class="tile-mascot" src="assets/img/mascot/derp.svg" width="163" height="158" alt="" loading="lazy">
-            <h3 class="tile-title"><a class="tile-link" href="/games/cool_game/" target="_blank" rel="noopener">Cool Game<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>A fun and mysterious game. Try to find the secret!</p>
-            <span class="tile-go" aria-hidden="true">Play <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-
-          <li class="tile tile--m reveal" style="--bg:var(--green)">
-            <img class="tile-mascot" src="assets/img/mascot/anxious.svg" width="163" height="158" alt="" loading="lazy" style="--mrot:-6deg">
-            <h3 class="tile-title"><a class="tile-link" href="/charging_only/" target="_blank" rel="noopener">Charging Only Chat<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>A chat app that only works while your device is charging.</p>
-            <span class="tile-go" aria-hidden="true">Open <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-          <li class="tile reveal" style="--bg:var(--purple)">
-            <h3 class="tile-title"><a class="tile-link" href="/custom-captcha/edit/" target="_blank" rel="noopener">Custom Captcha<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>A captcha generator and editor for your own projects.</p>
-            <span class="tile-go" aria-hidden="true">Try it <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-          <li class="tile reveal" style="--bg:var(--yellow)">
-            <h3 class="tile-title"><a class="tile-link" href="/secmes/" target="_blank" rel="noopener">Secmes<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>Super simple message encryption and decryption. Minimal privacy, minimal effort.</p>
-            <span class="tile-go" aria-hidden="true">Open <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-          <li class="tile reveal" style="--bg:var(--white)">
-            <h3 class="tile-title"><a class="tile-link" href="/corruptor/" target="_blank" rel="noopener">File Corruptor<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>Corrupt files on purpose, for testing or just for fun.</p>
-            <span class="tile-go" aria-hidden="true">Open <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-
-          <li class="tile reveal" style="--bg:var(--orange)">
-            <h3 class="tile-title"><a class="tile-link" href="/weird-sandbox/" target="_blank" rel="noopener">Weird Sandbox<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>A weird, odd, cool and broken sandbox.</p>
-            <span class="tile-go" aria-hidden="true">Try it <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-          <li class="tile reveal" style="--bg:var(--sky)">
-            <h3 class="tile-title"><a class="tile-link" href="/bald/" target="_blank" rel="noopener">Bald File Creator &amp; Reader<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>A tool for making and reading &lsquo;bald&rsquo; files.</p>
-            <span class="tile-go" aria-hidden="true">Try it <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-          <li class="tile reveal" style="--bg:var(--pink)">
-            <h3 class="tile-title"><a class="tile-link" href="/pi/" target="_blank" rel="noopener">Infinite Pi<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>Never-ending pi decimals. Scroll as far as you have patience for.</p>
-            <span class="tile-go" aria-hidden="true">Open <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-          <li class="tile reveal" style="--bg:var(--green)">
-            <h3 class="tile-title"><a class="tile-link" href="https://0.is-a.dev/" target="_blank" rel="noopener noreferrer">The Zero Zone<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>A mysterious corner of the web themed around zero.</p>
-            <span class="tile-go" aria-hidden="true">Enter <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-
-          <li class="tile tile--m reveal" style="--bg:var(--white)">
-            <img class="tile-mascot" src="assets/img/mascot/sweating.svg" width="163" height="158" alt="" loading="lazy" style="--mrot:-5deg">
-            <h3 class="tile-title"><a class="tile-link" href="https://mod.s4il.is-a.dev/" target="_blank" rel="noopener noreferrer">s4mod<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>A Scratch mod I made with a Scratch mod. Never finished it, published it anyway.</p>
-            <span class="tile-go" aria-hidden="true">Open <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-          <li class="tile tile--m reveal" style="--bg:var(--yellow)">
-            <img class="tile-mascot" src="assets/img/mascot/love.svg" width="163" height="158" alt="" loading="lazy">
-            <h3 class="tile-title"><a class="tile-link" href="/files/s4il-emojis/" target="_blank" rel="noopener">S4IL Emojis<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>A pack of free emojis of me, in PNG and SVG. Yes, these are them.</p>
-            <span class="tile-go" aria-hidden="true">Grab them <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-          <li class="tile tile--m reveal" style="--bg:var(--purple)">
-            <img class="tile-mascot" src="assets/img/mascot/crying.svg" width="163" height="158" alt="" loading="lazy" style="--mrot:-6deg">
-            <h3 class="tile-title"><a class="tile-link" href="https://github.com/S4IL21/bruce-for-cyberpi" target="_blank" rel="noopener noreferrer">Bruce on CyberPi<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>My attempt to put Bruce firmware on a CyberPi. Didn&rsquo;t get it working. PRs welcome!</p>
-            <span class="tile-go" aria-hidden="true">GitHub <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-          <li class="tile reveal" style="--bg:var(--sky)">
-            <h3 class="tile-title"><a class="tile-link" href="/useless/" target="_blank" rel="noopener">Useless stuff<span class="sr-only"> (opens in a new tab)</span></a></h3>
-            <p>Things I made because I was bored.</p>
-            <span class="tile-go" aria-hidden="true">Open <svg class="i"><use href="#i-ur"/></svg></span>
-          </li>
-        </ul>
-      </div>
-    </section>
-
     <!-- ====================== About ====================== -->
     <section class="section section--yellow" id="about" aria-labelledby="about-title">
       <div class="wrap">
         <div class="about-grid">
           <div class="card about-card reveal">
             <h2 class="title title--section" id="about-title">About me</h2>
-            <p>I&rsquo;m S4IL, a full-stack dev from Barcelona. I like building stuff from scratch (websites, bots, tools, whatever sounds fun) and I care how it looks and feels, not just whether the code runs.</p>
-            <p>Right now I&rsquo;m building <a href="#vibepost"><strong>VibePost</strong></a>. It&rsquo;s one of the projects under Tatom, my company, along with BaldBot and the archived BlockCoin.</p>
-            <p>On the side I mess around with AI agents, automation and self-hosting, mostly in Python. <strong>Code. Learn. Repeat.</strong></p>
+            <p>I&rsquo;m S4IL, a full-stack dev from Barcelona. I build things from scratch, whether that&rsquo;s a website, a bot or a tool nobody asked for. I care how it looks and feels, not just whether the code runs.</p>
+            <p>Right now I&rsquo;m building <a href="#vibepost"><strong>VibePost</strong></a>. It lives under Tatom, my company, along with BaldBot and the retired BlockCoin.</p>
+            <p>On the side I mess with AI agents, automation and <span class="nb">self-hosting</span>, mostly in Python. <strong>Code. Learn. Repeat.</strong></p>
           </div>
 
           <aside class="card char reveal" aria-label="S4IL at a glance">
@@ -744,7 +592,7 @@
             </div>
             <dl class="stats">
               <div><dt>Class</dt><dd>Full-stack dev</dd></div>
-              <div><dt>Base</dt><dd>Barcelona, Spain <span class="clock" data-clock></span></dd></div>
+              <div><dt>Base</dt><dd>Barcelona, Spain</dd></div>
               <div><dt>Owns</dt><dd>Tatom</dd></div>
               <div><dt>Now</dt><dd>Building VibePost</dd></div>
               <div><dt>Main lang</dt><dd>Python</dd></div>
@@ -756,9 +604,13 @@
         <div class="stack reveal">
           <h3>Stuff I use</h3>
           <ul class="pills" role="list">
-            <li>Python</li><li>JavaScript</li><li>TypeScript</li><li>HTML &amp; CSS</li><li>Scratch</li>
-            <li>SvelteKit</li><li>Tailwind CSS</li><li>Alpine.js</li><li>Tkinter</li>
-            <li>Discord API</li><li>Docker</li><li>Vercel</li><li>GitHub Pages</li>
+            <li>Python</li><li>JavaScript</li><li>TypeScript</li><li>Node.js</li><li>HTML</li><li>CSS</li><li>SCSS</li>
+            <li>SvelteKit</li><li>Tailwind CSS</li><li>Alpine.js</li><li>Tkinter</li><li>ttkbootstrap</li>
+            <li>Discord API</li><li>Docker</li><li>Docker Compose</li><li>Git</li><li>GitHub</li><li>GitHub Pages</li><li>Vercel</li>
+            <li>Batch</li><li>VBScript</li><li>Scratch</li><li>MIT App Inventor</li>
+            <li>Java</li><li>C#</li><li>C++</li><li>Lua</li>
+            <li>AI agents</li><li>Automation</li><li>Self-hosting</li>
+            <li class="more">and more</li>
           </ul>
         </div>
       </div>
@@ -774,7 +626,7 @@
       <div class="wrap contact-grid">
         <div class="contact-copy">
           <h2 class="title title--hero" id="contact-title">Say hi!</h2>
-          <p class="lead">Got an idea, a bug report or just wanna say hi? Email me, or find me anywhere below.</p>
+          <p class="lead">Got an idea? Found a bug? Just wanna say hi? Email me or find me anywhere below.</p>
           <div class="mail">
             <a class="btn btn--xl" href="mailto:s4il.is.a.dev@gmail.com" data-mail><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>s4il.is.a.dev@gmail.com</a>
             <button class="btn btn--white" type="button" data-copy="s4il.is.a.dev@gmail.com"><svg class="i" aria-hidden="true"><use href="#i-copy" data-copy-icon/></svg><span data-copy-label>Copy</span></button>
@@ -786,8 +638,9 @@
             <li><a class="social" href="https://www.youtube.com/@-How-To-Tutorials-" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-youtube"/></svg>YouTube<span class="sr-only"> (opens in a new tab)</span></a></li>
             <li><a class="social" href="https://scratch.mit.edu/users/s4il/" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-scratch"/></svg>Scratch<span class="sr-only"> (opens in a new tab)</span></a></li>
             <li><a class="social" href="https://www.roblox.com/users/2023170110/profile" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-roblox"/></svg>Roblox<span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="social" href="https://wasteof.money/users/s4il" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-wasteof"/></svg>Wasteof<span class="sr-only"> (opens in a new tab)</span></a></li>
+            <li><a class="social" href="https://replit.com/@S4IL" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-replit"/></svg>Replit<span class="sr-only"> (opens in a new tab)</span></a></li>
           </ul>
-          <p class="where">Barcelona, Spain <span class="clock" data-clock></span></p>
         </div>
         <div class="contact-art">
           <p class="bubble">Hit me up!</p>
@@ -860,45 +713,6 @@
         reveals.forEach((el) => io.observe(el));
       } else {
         reveals.forEach((el) => el.classList.add('is-in'));
-      }
-
-      /* Local time in Barcelona */
-      const clocks = $$('[data-clock]');
-      if (clocks.length) {
-        const fmt = new Intl.DateTimeFormat('en-GB', { hour: '2-digit', minute: '2-digit', hourCycle: 'h23', timeZone: 'Europe/Madrid', timeZoneName: 'short' });
-        const tick = () => { const t = fmt.format(new Date()); clocks.forEach((c) => { c.textContent = t; }); };
-        tick();
-        setInterval(tick, 20000);
-      }
-
-      /* Poke the mascot: it changes mood */
-      const mascot = $('[data-mascot]');
-      if (mascot) {
-        const moods = [
-          ['waving', 'waving, in sunglasses'], ['happy', 'happy'], ['yes', 'thumbs up'], ['blushing', 'blushing'], ['love', 'in love'],
-          ['joy', 'over the moon'], ['cute', 'cute and happy'], ['neutral', 'unimpressed'], ['derp', 'derpy'], ['sweating', 'sweating'],
-          ['anxious', 'anxious'], ['sad', 'sad'], ['crying', 'crying'], ['angry', 'angry'], ['no', 'thumbs down'],
-        ];
-        const img = $('img', mascot);
-        const nameEl = $('[data-mood-name]');
-        const status = $('[data-mood-status]');
-        let i = 0;
-        let warmed = false;
-        const warm = () => { if (warmed) return; warmed = true; moods.forEach(([n]) => { const p = new Image(); p.src = `assets/img/mascot/${n}.svg`; }); };
-        mascot.addEventListener('pointerenter', warm, { once: true });
-        mascot.addEventListener('focus', warm, { once: true });
-        mascot.addEventListener('click', () => {
-          warm();
-          i = (i + 1) % moods.length;
-          const [file, text] = moods[i];
-          img.src = `assets/img/mascot/${file}.svg`;
-          img.alt = 'Cartoon S4IL, ' + text;
-          nameEl.textContent = text.split(',')[0];
-          status.textContent = 'Mood: ' + text;
-          mascot.classList.remove('is-pop');
-          void mascot.offsetWidth;
-          mascot.classList.add('is-pop');
-        });
       }
 
       /* Copy email, with a fallback that selects the address instead */

@@ -1,753 +1,510 @@
-<!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>S4IL | Social platforms, Discord bots and weird tools</title>
-  <meta name="description" content="S4IL builds social platforms, Discord bots and weird little tools. Check out VibePost, Tatom, BaldBot and more.">
-  <meta name="author" content="S4IL">
-  <link rel="canonical" href="https://s4il.is-a.dev/">
-  <meta name="theme-color" content="#ff5fa8">
-
-  <!-- Icons -->
-  <link rel="icon" href="files/round-logo.png" type="image/png">
-  <link rel="apple-touch-icon" href="files/logo.png">
-
-  <!-- Social -->
-  <meta property="og:type" content="website">
-  <meta property="og:site_name" content="S4IL">
-  <meta property="og:title" content="Hi, I'm S4IL!">
-  <meta property="og:description" content="Social platforms, Discord bots and weird little tools.">
-  <meta property="og:url" content="https://s4il.is-a.dev/">
-  <meta property="og:image" content="https://s4il.is-a.dev/assets/img/og.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Hi, I'm S4IL! A cartoon avatar of S4IL waving, in sunglasses and a teal hoodie, on a bright blue background.">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Hi, I'm S4IL!">
-  <meta name="twitter:description" content="Social platforms, Discord bots and weird little tools.">
-  <meta name="twitter:image" content="https://s4il.is-a.dev/assets/img/og.png">
-
-  <!-- Fonts: self-hosted and preloaded -->
-  <link rel="preload" href="assets/fonts/lilita-one.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/rubik.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/fonts/space-mono-bold.woff2" as="font" type="font/woff2" crossorigin>
-
-  <script>document.documentElement.classList.add('js')</script>
-
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <title>
+   Portfolio - S4IL
+  </title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://s4il.is-a.dev/files/round-logo.png"/>
+  <!-- Metadata -->
+  <meta name="description" content="S4IL's portfolio - Full-Stack Developer, projects, skills, and contact information."/>
+  <meta name="author" content="S4IL"/>
+  <meta property="og:title" content="Portfolio - S4IL"/>
+  <meta property="og:description" content="S4IL's portfolio - Full-Stack Developer, projects, skills, and contact information."/>
+  <meta property="og:image" content="https://s4il.is-a.dev/files/round-logo.png"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://s4il.is-a.dev/"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Portfolio - S4IL"/>
+  <meta name="twitter:description" content="S4IL's portfolio - Full-Stack Developer, projects, skills, and contact information."/>
+  <meta name="twitter:image" content="https://s4il.is-a.dev/files/round-logo.png"/>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9189746536271408" crossorigin="anonymous"></script>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&amp;display=swap" rel="stylesheet"/>
   <style>
-    /* ==========================================================================
-       S4IL personal site
-       Cartoon / neo-brutalist: thick black outlines, flat colour, hard shadows.
-       Palette and shapes come straight from the mascot's own art.
-       One file on purpose: tokens first, components after, small script at the end.
-       ========================================================================== */
-
-    /* ---------- Fonts (self-hosted, Latin subset) ---------- */
-    @font-face{font-family:"Lilita One";src:url(assets/fonts/lilita-one.woff2) format("woff2");font-weight:400;font-style:normal;font-display:swap}
-    @font-face{font-family:"Rubik";src:url(assets/fonts/rubik.woff2) format("woff2");font-weight:400 800;font-style:normal;font-display:swap}
-    @font-face{font-family:"Space Mono";src:url(assets/fonts/space-mono-bold.woff2) format("woff2");font-weight:700;font-style:normal;font-display:swap}
-    /* Metric-matched fallbacks so nothing jumps when the web fonts arrive */
-    @font-face{font-family:"Lilita Fallback";src:local("Arial Bold"),local("Arial-BoldMT"),local("Arial");font-weight:400;size-adjust:88.19%;ascent-override:104.65%;descent-override:24.94%;line-gap-override:0%}
-    @font-face{font-family:"Rubik Fallback";src:local("Arial");font-weight:400 500;size-adjust:109.24%;ascent-override:85.59%;descent-override:22.88%;line-gap-override:0%}
-    @font-face{font-family:"Rubik Fallback";src:local("Arial Bold"),local("Arial-BoldMT");font-weight:600 800;size-adjust:104%;ascent-override:89%;descent-override:23.8%;line-gap-override:0%}
-    @font-face{font-family:"Space Mono Fallback";src:local("Courier New Bold"),local("CourierNewPS-BoldMT"),local("Courier New");font-weight:700;size-adjust:101.98%;ascent-override:109.82%;descent-override:35.4%;line-gap-override:0%}
-
-    /* ---------- Tokens ---------- */
-    :root{
-      color-scheme:light;
-
-      --ink:#0b0b0f;
-      --white:#fff;
-      --paper:#fff4d6;
-      --blue:#00adf2;      /* the mascot's background blue */
-      --sky:#bfeaff;
-      --accent:#ff5fa8;      /* the one loud colour: hot pink */
-      --teal:#00cbcb;      /* the mascot's hoodie */
-      --purple:#c9b3ff;
-      --green:#8cff93;
-      --coral:#ff8a78;
-      --orange:#ffb347;
-      --grey:#e4e4e4;
-
-      --font-display:"Lilita One","Lilita Fallback","Arial Black",Impact,sans-serif;
-      --font-body:"Rubik","Rubik Fallback",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-      --font-mono:"Space Mono","Space Mono Fallback",ui-monospace,Menlo,Consolas,monospace;
-
-      /* cartoon title outline: ring of hard shadows */
-      --stroke-3:3px 0px 0 #0b0b0f,2.6px 1.5px 0 #0b0b0f,1.5px 2.6px 0 #0b0b0f,0px 3px 0 #0b0b0f,-1.5px 2.6px 0 #0b0b0f,-2.6px 1.5px 0 #0b0b0f,-3px 0px 0 #0b0b0f,-2.6px -1.5px 0 #0b0b0f,-1.5px -2.6px 0 #0b0b0f,0px -3px 0 #0b0b0f,1.5px -2.6px 0 #0b0b0f,2.6px -1.5px 0 #0b0b0f;
-      --stroke-5:5px 0px 0 #0b0b0f,4.62px 1.91px 0 #0b0b0f,3.54px 3.54px 0 #0b0b0f,1.91px 4.62px 0 #0b0b0f,0px 5px 0 #0b0b0f,-1.91px 4.62px 0 #0b0b0f,-3.54px 3.54px 0 #0b0b0f,-4.62px 1.91px 0 #0b0b0f,-5px 0px 0 #0b0b0f,-4.62px -1.91px 0 #0b0b0f,-3.54px -3.54px 0 #0b0b0f,-1.91px -4.62px 0 #0b0b0f,0px -5px 0 #0b0b0f,1.91px -4.62px 0 #0b0b0f,3.54px -3.54px 0 #0b0b0f,4.62px -1.91px 0 #0b0b0f;
-
-      --bw:3px;            /* border width */
-      --r:18px;            /* card radius, same family as the mascot tile */
-      --sh:6px 6px 0 var(--ink);
-      --sh-s:4px 4px 0 var(--ink);
-      --gutter:clamp(18px,4vw,40px);
-      --header-h:72px;
-      --pop:cubic-bezier(.2,.9,.3,1.25);
+   body {
+      font-family: 'Poppins', sans-serif;
     }
-
-    /* ---------- Base ---------- */
-    *,*::before,*::after{box-sizing:border-box}
-    html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:calc(var(--header-h) + 16px)}
-    @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
-    body{margin:0;min-height:100vh;background:var(--blue);color:var(--ink);font:500 1.0625rem/1.6 var(--font-body);font-synthesis:none;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-    h1,h2,h3,p,ul,ol,dl,dd,figure,pre{margin:0}
-    ul,ol{padding:0;list-style:none}
-    img,svg{display:block;max-width:100%}
-    a{color:inherit;text-decoration:none}
-    button{font:inherit;color:inherit;cursor:pointer}
-    strong{font-weight:700}
-    ::selection{background:var(--ink);color:var(--accent)}
-    :focus-visible{outline:4px dashed var(--ink);outline-offset:4px;border-radius:6px}
-    main:focus{outline:none}
-    main{overflow-x:clip}
-
-    .wrap{width:min(100% - 2*var(--gutter),1200px);margin-inline:auto}
-    .nb{white-space:nowrap}
-    .sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
-    .sprite{position:absolute;width:0;height:0;overflow:hidden}
-    .sentinel{position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none}
-    .skip{position:fixed;left:12px;top:-120px;z-index:100;padding:12px 18px;background:var(--accent);border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:var(--sh-s);font-weight:700;transition:top .2s}
-    .skip:focus{top:12px}
-    .i{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
-    .ico{fill:currentColor}
-
-    /* ---------- Cartoon bits ---------- */
-    .title{font:400 var(--fs,3rem)/.98 var(--font-display);letter-spacing:.01em;color:var(--white);text-shadow:var(--stroke-3),5px 5px 0 var(--ink);text-wrap:balance}
-    .title--hero{--fs:clamp(4.25rem,14vw,9.5rem);text-shadow:var(--stroke-5),8px 8px 0 var(--ink);line-height:.92}
-    .title--section{--fs:clamp(2.75rem,7vw,5rem)}
-
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:52px;padding:.55em 1.15em;background:var(--c,var(--accent));border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:var(--sh-s);font:700 1.0625rem/1.1 var(--font-body);text-align:center;transition:translate .12s,box-shadow .12s,background-color .12s}
-    .btn svg{width:1.15em;height:1.15em;flex:none}
-    .btn--white{--c:var(--white)}
-    .btn--lg{min-height:60px;padding:.6em 1.4em;font-size:1.25rem;border-radius:16px;box-shadow:6px 6px 0 var(--ink)}
-    .btn:active{translate:4px 4px;box-shadow:0 0 0 var(--ink)}
-    @media (hover:hover){
-      .btn:hover{translate:-2px -2px;box-shadow:7px 7px 0 var(--ink)}
-      .btn:hover:active{translate:4px 4px;box-shadow:0 0 0 var(--ink)}
+    /* Animated underline for nav links */
+    .nav-link {
+      position: relative;
+      overflow: hidden;
+      color: #d1d5db; /* text-gray-300 */
+      transition: color 0.3s ease;
     }
-
-    .sticker{display:inline-flex;align-items:center;gap:.4em;padding:.28em .75em .2em;background:var(--c,var(--white));border:var(--bw) solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);font:400 .95rem/1.1 var(--font-display);letter-spacing:.05em;text-transform:uppercase;rotate:var(--rot,-3deg);white-space:nowrap}
-
-    .tags{display:flex;flex-wrap:wrap;gap:8px}
-    .tags li{padding:.1em .6em;background:var(--white);border:2.5px solid var(--ink);border-radius:10px;font:700 .8125rem/1.7 var(--font-mono)}
-    .tags li:nth-child(4n+1){background:var(--accent)}
-    .tags li:nth-child(4n+2){background:var(--sky)}
-    .tags li:nth-child(4n+3){background:var(--purple)}
-    .tags li:nth-child(4n+4){background:var(--green)}
-
-    .card{position:relative;display:flex;flex-direction:column;background:var(--white);border:var(--bw) solid var(--ink);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden}
-    .spark{position:absolute;width:var(--s,34px);height:var(--s,34px);rotate:var(--rot,0deg);pointer-events:none;fill:var(--c,#fff);stroke:var(--ink);stroke-width:2.2;stroke-linejoin:round}
-    .spark--a{left:46%;top:9%;--s:44px;--rot:-8deg}
-    .spark--b{left:43%;bottom:9%;--s:30px;--c:var(--accent);--rot:10deg}
-    .spark--c{right:4%;bottom:7%;--s:38px;--c:var(--purple);--rot:-6deg}
-
-    .js .reveal:not(.is-in){opacity:0}
-    .js .reveal.is-in{animation:pop .6s var(--pop) backwards}
-    @keyframes pop{from{opacity:0;translate:0 28px;scale:.95}to{opacity:1;translate:0 0;scale:1}}
-
-    /* ---------- Header ---------- */
-    .site-header{position:sticky;top:0;z-index:50;background:var(--accent);border-bottom:4px solid var(--ink)}
-    .bar{min-height:var(--header-h);display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:10px}
-    .brand{display:inline-flex;align-items:center;gap:10px;min-height:48px}
-    .brand img{width:46px;height:46px;border:var(--bw) solid var(--ink);border-radius:50%;background:var(--blue)}
-    .brand span{font:400 2.1rem/1 var(--font-display);letter-spacing:.02em;text-shadow:2px 2px 0 var(--white)}
-    .nav-list{display:flex;align-items:center;gap:10px}
-    .nav-list a{display:inline-flex;align-items:center;min-height:46px;padding:0 18px;background:var(--white);border:var(--bw) solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);font:700 1rem/1 var(--font-body);transition:translate .12s,box-shadow .12s,background-color .12s}
-    .nav-list a[aria-current]{background:var(--sky)}
-    .nav-list .nav-cta{background:var(--blue)}
-    .nav-list a:active{translate:3px 3px;box-shadow:0 0 0 var(--ink)}
-    @media (hover:hover){.nav-list a:hover{background:var(--purple);translate:-1px -1px;box-shadow:5px 5px 0 var(--ink)}}
-    .nav-toggle{display:none;align-items:center;gap:10px;min-height:48px;padding:0 16px;background:var(--white);border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:var(--sh-s);font:700 1rem/1 var(--font-body)}
-    .nav-toggle svg{width:22px;height:22px}
-    .nav-toggle .i-close,.nav-toggle[aria-expanded="true"] .i-menu{display:none}
-    .nav-toggle[aria-expanded="true"] .i-close{display:block}
-
-    /* ---------- Hero ---------- */
-    .hero{position:relative;overflow:hidden;background:var(--blue);border-bottom:4px solid var(--ink);padding-block:clamp(48px,8vw,96px) clamp(64px,9vw,120px)}
-    .waves{position:absolute;inset:0;width:100%;height:100%}
-    .hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(32px,5vw,72px);align-items:center}
-    .hero-copy{display:grid;justify-items:start;gap:clamp(20px,2.6vw,32px)}
-    .name{position:relative;display:inline-block}
-    .squiggle{position:absolute;left:2%;bottom:-.06em;width:96%;height:.16em;min-height:12px;overflow:visible}
-    .lead{max-width:26em;font-size:clamp(1.3rem,2.5vw,1.7rem);line-height:1.4;font-weight:500}
-    .cta-row{display:flex;flex-wrap:wrap;gap:16px}
-    .hero-art{position:relative;display:grid;justify-items:center;padding-top:34px}
-    .mascot{width:min(100%,430px);background:var(--blue);border:4px solid var(--ink);border-radius:36px;box-shadow:12px 12px 0 var(--ink);overflow:hidden;rotate:3deg}
-    .mascot img{width:100%;height:auto}
-    .bubble{position:absolute;z-index:2;top:-4px;left:2%;max-width:16em;text-wrap:balance;padding:.65em 1em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:20px;box-shadow:var(--sh-s);font:700 1.0625rem/1.3 var(--font-body);rotate:-4deg}
-    .bubble::after{content:"";position:absolute;left:34px;bottom:-14px;width:22px;height:22px;background:var(--white);border:var(--bw) solid var(--ink);border-width:0 var(--bw) var(--bw) 0;rotate:45deg;border-bottom-right-radius:6px}
-
-    /* ---------- Sections ---------- */
-    .section{position:relative;padding-block:clamp(56px,8vw,104px);border-bottom:4px solid var(--ink)}
-    .section--paper{background-color:var(--paper);background-image:radial-gradient(rgba(11,11,15,.13) 1.6px,transparent 1.9px);background-size:22px 22px}
-    .section--accent{background:var(--accent)}
-    .section--blue{background:var(--blue);overflow:hidden}
-    .section-head{position:relative;display:grid;justify-items:start;gap:14px;margin-bottom:clamp(32px,4.5vw,56px)}
-    .section-lead{max-width:34em;font-size:clamp(1.15rem,2vw,1.35rem);font-weight:500}
-
-    /* ---------- Projects ---------- */
-    .bento{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:clamp(26px,3.2vw,44px)}
-    .project{transition:translate .15s,box-shadow .15s}
-    @media (hover:hover){.project:hover{translate:-3px -3px;box-shadow:10px 10px 0 var(--ink)}}
-    .p-vibe{grid-column:span 7}
-    .p-tatom{grid-column:span 5}
-    .p-chlor,.p-bald,.p-block{grid-column:span 4}
-    .p-others{grid-column:span 12}
-    .card-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:var(--c,var(--accent));border-bottom:var(--bw) solid var(--ink)}
-    .card-title{font:400 clamp(1.9rem,3vw,2.4rem)/1 var(--font-display);letter-spacing:.01em;text-shadow:2px 2px 0 rgba(255,255,255,.7)}
-    .card-body{display:flex;flex:1;flex-direction:column;gap:14px;padding:20px 20px 22px}
-    .card-body p{max-width:42em}
-    .note{font-weight:700}
-    .motto{font:400 clamp(1.35rem,2.2vw,1.65rem)/1.15 var(--font-display);letter-spacing:.01em}
-    .caps{display:flex;flex-wrap:wrap;gap:8px}
-    .caps li{padding:.2em .75em;background:var(--white);border:2.5px solid var(--ink);border-radius:999px;font:700 .9375rem/1.4 var(--font-body)}
-    .caps li:nth-child(odd){background:var(--paper)}
-    .caps a{display:block;margin:-.2em -.75em;padding:.2em .75em;border-radius:inherit;transition:background-color .12s}
-    @media (hover:hover){.caps a:hover{background:var(--accent)}}
-    .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:auto;padding-top:6px}
-
-    .shot{position:relative;border-bottom:var(--bw) solid var(--ink);background:var(--ink)}
-    .shot img{width:100%;height:auto}
-    .shot--fill{flex:1 1 auto;min-height:280px}
-    .shot--fill img{position:absolute;inset:0;height:100%;object-fit:cover}
-    .shot-url{position:absolute;left:50%;bottom:12px;translate:-50% 0;padding:.25em .7em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);font:700 .8125rem/1.4 var(--font-mono);rotate:-2deg;white-space:nowrap}
-
-    .term{border-bottom:var(--bw) solid var(--ink);background:#15151f;color:var(--white)}
-    .term-bar{display:flex;align-items:center;gap:7px;padding:9px 14px;background:var(--white);border-bottom:var(--bw) solid var(--ink);color:var(--ink);font:700 .8125rem/1 var(--font-mono)}
-    .term-bar i{width:12px;height:12px;border:2px solid var(--ink);border-radius:50%;background:var(--coral)}
-    .term-bar i:nth-child(2){background:var(--orange)}
-    .term-bar i:nth-child(3){background:var(--green)}
-    .term-bar span{margin-left:6px}
-    .term pre{padding:14px 18px;white-space:pre-wrap;overflow-wrap:anywhere;font:700 clamp(.8rem,.5vw + .55rem,.88rem)/1.65 var(--font-mono)}
-    .term .c{color:#9da3bd}
-    .term .p{color:var(--green)}
-    .element{display:grid;grid-template-rows:auto 1fr;flex:none;width:54px;aspect-ratio:1;margin-block:-8px;padding:4px 6px;background:var(--accent);border:var(--bw) solid var(--ink);border-radius:10px;box-shadow:3px 3px 0 var(--ink);rotate:7deg;font:700 .65rem/1 var(--font-mono)}
-    .element b{align-self:center;justify-self:center;font:400 1.55rem/1 var(--font-display)}
-    .element sup{font-size:.55em;vertical-align:.6em}
-
-    .art{position:relative;display:grid;place-items:center;min-height:250px;padding:30px;border-bottom:var(--bw) solid var(--ink);background-color:var(--c);background-image:radial-gradient(rgba(11,11,15,.18) 1.6px,transparent 1.9px);background-size:18px 18px}
-    .art--fill{flex:1 1 auto}
-    .art img.sq{width:min(58%,190px);height:auto;aspect-ratio:1;background:var(--white);border:4px solid var(--ink);border-radius:26px;box-shadow:8px 8px 0 var(--ink);rotate:4deg}
-    .art .bubble{top:14px;left:12px;max-width:11em;font-size:.95rem;font-family:var(--font-body)}
-
-    .wide{display:grid;grid-template-columns:minmax(0,.6fr) minmax(0,1.4fr)}
-    .wide .art{border-bottom:0;border-right:var(--bw) solid var(--ink);min-height:0;gap:14px}
-    .gh-big{width:clamp(96px,11vw,132px);height:auto;aspect-ratio:1;padding:24px;background:var(--ink);color:var(--white);border:4px solid var(--ink);border-radius:50%;box-shadow:7px 7px 0 var(--white)}
-    .wide-cap{padding:.2em .7em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink);font:700 .8125rem/1.4 var(--font-mono)}
-
-    /* ---------- About + stack ---------- */
-    .about-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);gap:clamp(28px,4vw,56px);align-items:start}
-    .about-card{padding:clamp(22px,3.2vw,38px);display:grid;gap:18px;font-size:clamp(1.1rem,1.6vw,1.25rem);line-height:1.6}
-    .about-card .title{margin-bottom:6px;color:var(--accent)}
-    .about-card a{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:4px;text-decoration-color:var(--accent)}
-    .char{padding:0;background:var(--sky)}
-    .char-head{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--white);border-bottom:var(--bw) solid var(--ink)}
-    .char-head img{width:92px;height:auto;border:var(--bw) solid var(--ink);border-radius:18px;background:var(--blue)}
-    .char-name{font:400 2.4rem/1 var(--font-display);text-shadow:2px 2px 0 var(--accent)}
-    .char-sub{font:700 .8125rem/1.3 var(--font-mono)}
-    .stats{padding:12px 16px 18px;display:grid;gap:10px}
-    .stats>div{display:grid;grid-template-columns:7.6em 1fr;gap:12px;align-items:center}
-    .stats dt{justify-self:start;padding:.1em .6em;background:var(--ink);color:var(--accent);border-radius:8px;font:700 .75rem/1.7 var(--font-mono);letter-spacing:.04em;text-transform:uppercase}
-    .stats dd{font-weight:700;line-height:1.3}
-    .stack{margin-top:clamp(40px,6vw,72px);display:grid;gap:20px}
-    .stack h3{font:400 clamp(2rem,4vw,2.9rem)/1 var(--font-display);text-shadow:var(--stroke-3),4px 4px 0 var(--ink);color:var(--white)}
-    .pills{display:flex;flex-wrap:wrap;gap:12px}
-    .pills li{padding:.4em .95em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:3px 3px 0 var(--ink);font:700 1.0625rem/1.3 var(--font-body)}
-    .pills li:nth-child(5n+1){background:var(--sky)}
-    .pills li:nth-child(5n+2){background:var(--paper)}
-    .pills li:nth-child(5n+3){background:var(--green)}
-    .pills li:nth-child(5n+4){background:var(--white)}
-    .pills li:nth-child(5n+5){background:var(--purple)}
-    .pills li.more{background:transparent;border-style:dashed;box-shadow:none}
-
-    /* ---------- Contact ---------- */
-    .contact-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(28px,5vw,64px);align-items:center}
-    .contact-copy{display:grid;justify-items:start;gap:clamp(18px,2.4vw,26px)}
-    .mail{display:flex;flex-wrap:wrap;align-items:center;gap:14px}
-    .btn--xl{min-height:64px;padding:.5em 1.1em;font-size:clamp(1.05rem,3.4vw,1.75rem);box-shadow:6px 6px 0 var(--ink);overflow-wrap:anywhere}
-    .btn.is-done{--c:var(--green)}
-    .socials{display:flex;flex-wrap:wrap;gap:12px;margin-top:6px}
-    .social{display:inline-flex;align-items:center;gap:.6em;min-height:52px;padding:.4em .85em;background:var(--white);border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:var(--sh-s);font:700 1.0625rem/1.1 var(--font-body);transition:translate .12s,box-shadow .12s,background-color .12s}
-    .social svg{width:24px;height:24px;flex:none}
-    .social:active{translate:4px 4px;box-shadow:0 0 0 var(--ink)}
-    @media (hover:hover){.social:hover{background:var(--accent);translate:-2px -2px;box-shadow:7px 7px 0 var(--ink)}.social:hover:active{translate:4px 4px;box-shadow:0 0 0 var(--ink)}}
-    .contact-art{position:relative;display:grid;justify-items:center;padding-top:44px}
-    .contact-art img.big{width:min(100%,340px);height:auto;background:var(--blue);border:4px solid var(--ink);border-radius:32px;box-shadow:10px 10px 0 var(--ink);rotate:-3deg}
-    .contact-art .bubble{top:0;left:auto;right:4%;rotate:4deg}
-    .contact-art .bubble::after{left:auto;right:36px}
-
-    /* ---------- Footer ---------- */
-    .site-footer{background:var(--ink);color:var(--accent);padding-block:28px 36px;font:700 1rem/1.5 var(--font-body)}
-    .foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 32px}
-    .foot ul{display:flex;flex-wrap:wrap;gap:4px 22px}
-    .foot a{display:inline-flex;align-items:center;gap:.4em;min-height:40px;text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:5px;text-decoration-color:var(--white)}
-    .foot a svg{width:1em;height:1em}
-    .site-footer :focus-visible{outline-color:var(--white)}
-    @media (hover:hover){.foot a:hover{color:var(--white)}}
-
-    /* ---------- Responsive ---------- */
-    @media (max-width:1000px){
-      .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
-      .hero-art{padding-top:34px}
-      .mascot{width:min(72%,360px)}
-      .spark--a{left:auto;right:6%;top:3%}
-      .spark--b{left:auto;right:34%;bottom:3%}
-      .bento{grid-template-columns:1fr}
-      .bento>*{grid-column:auto !important}
-      .shot--fill{flex:none;min-height:0;aspect-ratio:760/800}
-      .art--fill{flex:none}
-      .wide{grid-template-columns:1fr}
-      .wide .art{border-right:0;border-bottom:var(--bw) solid var(--ink);padding-block:28px}
-      .contact-art{justify-items:start}
-      .contact-art img.big{width:min(70%,300px)}
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background: #4f46e5;
+      bottom: 0;
+      left: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s cubic-bezier(.4,0,.2,1);
     }
-    @media (max-width:720px){
-      .js .nav-toggle{display:inline-flex}
-      .js .nav-list{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;gap:12px;padding:18px var(--gutter) 24px;background:var(--accent);border-bottom:4px solid var(--ink)}
-      .js .nav-list[data-open]{display:flex}
-      .js .nav-list a{display:flex;justify-content:center;min-height:56px;font-size:1.2rem}
-      .nav-list{flex-wrap:wrap;justify-content:flex-end;gap:8px}
-      .nav-list a{padding:0 12px;min-height:44px}
-      .brand span{font-size:1.8rem}
+    .nav-link:hover,
+    .nav-link:focus {
+      color: #6366f1; /* indigo-500 */
+      outline: none;
     }
-    @media (max-width:560px){
-      body{font-size:1.0625rem}
-      .cta-row .btn{flex:1 1 auto}
-      .mascot{width:min(78%,300px);border-radius:28px;box-shadow:9px 9px 0 var(--ink)}
-      .bubble{font-size:.95rem}
-      .card-body{padding:18px 16px 20px}
-      .stats>div{grid-template-columns:1fr;gap:4px}
-      .foot{flex-direction:column;align-items:flex-start}
-      .title{text-shadow:var(--stroke-3),4px 4px 0 var(--ink)}
-      .title--hero{text-shadow:var(--stroke-3),6px 6px 0 var(--ink)}
+    .nav-link:hover::after,
+    .nav-link:focus::after {
+      transform: scaleX(1);
     }
-
-    @media (prefers-reduced-motion:reduce){
-      *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;transition-delay:0ms !important}
-      .js .reveal:not(.is-in){opacity:1}
+    .nav-link.active {
+      color: #6366f1;
     }
-    @media print{
-      .site-header,.skip,.nav-toggle{display:none}
-      .js .reveal:not(.is-in){opacity:1}
+    .nav-link.active::after {
+      transform: scaleX(1);
+    }
+    /* Animated gradient text */
+    .gradient-text {
+      background: linear-gradient(90deg, #4f46e5, #3b82f6, #06b6d4);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientShift 3s ease infinite;
+    }
+    @keyframes gradientShift {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    /* Floating animation for hero image */
+    @keyframes floatUpDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-15px);
+      }
+    }
+    .float-animation {
+      animation: floatUpDown 4s ease-in-out infinite;
+    }
+    /* Card hover effect */
+    .card-hover:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.4),
+        0 10px 10px -5px rgba(99, 102, 241, 0.3);
+    }
+    .card-hover {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    /* Button pulse animation */
+    .btn-pulse {
+      animation: pulse 2.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+      }
+      50% {
+        box-shadow: 0 0 15px 10px rgba(99, 102, 241, 0);
+      }
     }
   </style>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "S4IL",
-    "url": "https://s4il.is-a.dev/",
-    "image": "https://s4il.is-a.dev/files/round-logo.png",
-    "jobTitle": "Full-stack developer",
-    "homeLocation": { "@type": "Place", "name": "Barcelona, Spain" },
-    "sameAs": ["https://github.com/S4IL21", "https://www.youtube.com/@-How-To-Tutorials-", "https://scratch.mit.edu/users/s4il/"]
-  }
-  </script>
-</head>
-
-<body id="top">
-  <a class="skip" href="#main">Skip to content</a>
-  <div class="sentinel" data-sentinel aria-hidden="true"></div>
-
-  <!-- Icon sprite -->
-  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
-    <defs>
-      <symbol id="i-ur" viewBox="0 0 24 24"><path d="M7 17 17 7M8.5 7H17v8.5"/></symbol>
-      <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v15m0 0-6-6m6 6 6-6"/></symbol>
-      <symbol id="i-up" viewBox="0 0 24 24"><path d="M12 20V5m0 0-6 6m6-6 6 6"/></symbol>
-      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></symbol>
-      <symbol id="i-check" viewBox="0 0 24 24"><path d="m4.5 12.5 5 5L19.5 7"/></symbol>
-      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
-      <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
-      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="m4 8 8 6 8-6"/></symbol>
-      <symbol id="b-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
-      <symbol id="b-discord" viewBox="0 0 24 24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></symbol>
-      <symbol id="b-youtube" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
-      <symbol id="b-scratch" viewBox="0 0 24 24"><path d="M11.406 11.312c-.78-.123-1.198-.654-.99-2.295l.023-.198c.175-1.426.321-1.743.996-1.706.198.013.426.14.654.33.211.247.68.568.945 1.204.19.466.254.77.281 1.098l.042.402v-.002a.68.68 0 0 0 1.342-.007c.008-.044.176-4.365.176-4.436 0-.38-.302-.69-.68-.696a.685.685 0 0 0-.682.688c0 .009-.001.605-.014 1.206-.536-.592-1.223-1.123-1.994-1.17-2.058-.11-2.283 1.811-2.419 2.918l-.02.196c-.278 2.189.441 3.569 2.13 3.837 1.838.293 3.063.72 3.074 1.868.007.446-.224.903-.627 1.254a2.163 2.163 0 0 1-1.749.507 3.233 3.233 0 0 1-.539-.141c-.24-.136-.847-.51-1.154-.942-.26-.364-.35-.937-.378-1.3.004-.163.005-.27.005-.283a.69.69 0 0 0-.669-.703.689.689 0 0 0-.696.682c0 .013-.017 1.367-.066 2.183-.07 1.313 0 2.426 0 2.474.028.382.35.67.727.644a.681.681 0 0 0 .635-.733c0-.006-.033-.545-.029-1.29a5.21 5.21 0 0 0 1.938.773 3.451 3.451 0 0 0 2.856-.82c.713-.619 1.122-1.464 1.11-2.32-.024-2.555-2.865-3.004-4.228-3.222M14.174 0a5.51 5.51 0 0 0-2.724.723h-.112c-2.637 0-4.937 1.392-6.15 3.728-.728 1.393-.9 2.75-.999 3.579-.012.089-.018.17-.028.262-.12.974-.123 1.904-.01 2.772a5.824 5.824 0 0 0-.625 2.529v.016a58.919 58.919 0 0 1-.057 1.95 29.72 29.72 0 0 0-.008 2.94l.013.209C3.698 21.676 6.159 24 9.083 24a5.516 5.516 0 0 0 3.463-1.21 8.357 8.357 0 0 0 5.195-2.08c1.826-1.587 2.859-3.845 2.83-6.19-.013-1.362-.346-2.638-.978-3.763.117-1.273.221-4.996.221-5.03 0-3.103-2.484-5.67-5.539-5.727zm.056 2.675c1.642.03 2.978 1.412 2.978 3.081 0 .038-.145 4.497-.215 4.883a3.152 3.152 0 0 1-.203.69c.756.89 1.165 2 1.175 3.256.021 1.555-.681 3.076-1.926 4.16a5.763 5.763 0 0 1-3.8 1.444 5.986 5.986 0 0 1-.718-.048 3.386 3.386 0 0 1-.172.215 2.97 2.97 0 0 1-2.264 1.038c-1.573 0-2.897-1.255-3.013-2.856l-.008-.122a27.366 27.366 0 0 1 .005-2.662c.039-.679.06-1.831.062-2.08a3.124 3.124 0 0 1 .783-2.025c-.237-.835-.312-1.836-.167-3.02l.024-.212c.083-.695.208-1.72.72-2.7.765-1.473 2.168-2.318 3.848-2.318a4.568 4.568 0 0 1 .824.07c.546-.5 1.27-.81 2.067-.794Z"/></symbol>
-      <symbol id="b-roblox" viewBox="0 0 24 24"><path d="M18.926 23.998 0 18.892 5.075.002 24 5.108ZM15.348 10.09l-5.282-1.453-1.414 5.273 5.282 1.453z"/></symbol>
-      <symbol id="star" viewBox="0 0 24 24"><path d="M12 1.5l2.5 8.2L22.5 12l-8 2.3L12 22.5l-2.5-8.2L1.5 12l8-2.3z"/></symbol>
-    </defs>
-  </svg>
-
-  <header class="site-header" data-header>
-    <div class="wrap bar">
-      <a class="brand" href="#top" aria-label="S4IL, back to top">
-        <img src="assets/img/s4il-icon.png" width="46" height="46" alt="">
-        <span>S4IL</span>
+ </head>
+ <body class="bg-gray-900 text-gray-100 selection:bg-indigo-600 selection:text-white scroll-smooth">
+  <header class="fixed w-full bg-gray-900 bg-opacity-90 backdrop-blur-md z-50 shadow-md">
+   <nav class="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between h-16">
+    <a class="flex items-center space-x-3 select-none" href="#">
+     <img class="w-10 h-10 rounded-md" height="40" loading="lazy" src="https://s4il.is-a.dev/files/logo.png" width="40"/>
+     <span class="text-2xl font-bold gradient-text">
+      S4IL
+     </span>
+    </a>
+    <ul class="hidden md:flex space-x-8 text-lg font-medium" id="nav-links">
+     <li>
+      <a class="nav-link active focus:outline-none" href="#home" data-link="home">
+       Home
       </a>
-      <nav aria-label="Primary">
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-list">
-          <span class="nav-toggle-label">Menu</span>
-          <svg class="i i-menu" aria-hidden="true"><use href="#i-menu"/></svg>
-          <svg class="i i-close" aria-hidden="true"><use href="#i-close"/></svg>
-        </button>
-        <ul class="nav-list" id="nav-list" role="list">
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a class="nav-cta" href="#contact">Say hi</a></li>
-        </ul>
-      </nav>
-    </div>
+     </li>
+     <li>
+      <a class="nav-link focus:outline-none" href="#about" data-link="about">
+       About
+      </a>
+     </li>
+     <li>
+      <a class="nav-link focus:outline-none" href="#projects" data-link="projects">
+       Projects
+      </a>
+     </li>
+     <li>
+      <a class="nav-link focus:outline-none" href="#skills" data-link="skills">
+       Skills
+      </a>
+     </li>
+     <li>
+      <a class="nav-link focus:outline-none" href="#contact" data-link="contact">
+       Contact
+      </a>
+     </li>
+    </ul>
+    <button aria-label="Toggle menu" class="md:hidden focus:outline-none text-indigo-500" id="menu-btn" type="button">
+     <i class="fas fa-bars fa-lg">
+     </i>
+    </button>
+   </nav>
+   <div class="md:hidden bg-gray-800 bg-opacity-95 backdrop-blur-sm hidden" id="mobile-menu">
+    <ul class="flex flex-col space-y-4 p-6 text-lg font-semibold">
+     <li>
+      <a class="nav-link block active focus:outline-none" href="#home" data-link="home">
+       Home
+      </a>
+     </li>
+     <li>
+      <a class="nav-link block focus:outline-none" href="#about" data-link="about">
+       About
+      </a>
+     </li>
+     <li>
+      <a class="nav-link block focus:outline-none" href="#projects" data-link="projects">
+       Projects
+      </a>
+     </li>
+     <li>
+      <a class="nav-link block focus:outline-none" href="#skills" data-link="skills">
+       Skills
+      </a>
+     </li>
+     <li>
+      <a class="nav-link block focus:outline-none" href="#contact" data-link="contact">
+       Contact
+      </a>
+     </li>
+    </ul>
+   </div>
   </header>
-
-  <main id="main" tabindex="-1">
-
-    <!-- ====================== Hero ====================== -->
-    <section class="hero" aria-labelledby="hero-title">
-      <svg class="waves" aria-hidden="true" viewBox="0 0 1440 760" preserveAspectRatio="none">
-        <path fill="#00a4e6" d="M0 0H1440V575C1210 620 1010 530 760 566S280 626 0 580Z"/>
-        <path fill="#0092d9" d="M0 0H1440V405C1210 450 1010 372 760 408S280 466 0 420Z"/>
-        <path fill="#0089cc" d="M0 0H1440V238C1210 280 1010 208 760 240S280 296 0 252Z"/>
-      </svg>
-      <svg class="spark spark--a" aria-hidden="true"><use href="#star"/></svg>
-      <svg class="spark spark--b" aria-hidden="true"><use href="#star"/></svg>
-      <svg class="spark spark--c" aria-hidden="true"><use href="#star"/></svg>
-
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <h1 class="title title--hero" id="hero-title"><span class="nb">Hi, I&rsquo;m</span> <span class="name">S4IL!<svg class="squiggle" viewBox="0 0 200 16" preserveAspectRatio="none" aria-hidden="true"><path d="M4 9c14-9 26 9 40 0s26 9 40 0 26 9 40 0 26 9 40 0 26 9 32 3" fill="none" stroke="#0b0b0f" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 9c14-9 26 9 40 0s26 9 40 0 26 9 40 0 26 9 40 0 26 9 32 3" fill="none" stroke="#ff5fa8" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></h1>
-          <p class="lead">Social platforms, Discord bots and weird little tools. I build whatever sounds fun.</p>
-          <div class="cta-row">
-            <a class="btn btn--lg" href="#projects">See my stuff <svg class="i" aria-hidden="true"><use href="#i-down"/></svg></a>
-            <a class="btn btn--lg btn--white" href="#contact">Say hi</a>
-          </div>
-        </div>
-
-        <div class="hero-art">
-          <p class="bubble">Building VibePost right now!</p>
-          <div class="mascot">
-            <img src="assets/img/mascot/waving.svg" width="326" height="316" alt="Cartoon S4IL waving, in sunglasses and a teal hoodie" fetchpriority="high" decoding="async">
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================== Projects ====================== -->
-    <section class="section section--paper" id="projects" aria-labelledby="projects-title">
-      <div class="wrap">
-        <header class="section-head">
-          <h2 class="title title--section" id="projects-title">Stuff I&rsquo;ve made</h2>
-          <p class="section-lead">The main stuff. The rest lives on my GitHub.</p>
-        </header>
-
-        <div class="bento">
-
-          <!-- VibePost -->
-          <article class="card project p-vibe reveal" id="vibepost" aria-labelledby="vibepost-title">
-            <div class="card-top" style="--c:var(--accent)">
-              <h3 class="card-title" id="vibepost-title">VibePost</h3>
-              <span class="sticker" style="--c:var(--green)">Pre-beta</span>
-            </div>
-            <figure class="shot">
-              <img src="assets/img/shots/vibepost.webp" srcset="assets/img/shots/vibepost-640.webp 640w, assets/img/shots/vibepost.webp 1000w" sizes="(min-width:1001px) 680px, 100vw" width="1000" height="594" alt="Screenshot of the VibePost homepage: a black page with the VibePost logo and the headline “Feel the Vibe, Share the Moment.”" loading="lazy" decoding="async">
-              <figcaption class="shot-url">vibepost.ddns.net</figcaption>
-            </figure>
-            <div class="card-body">
-              <p>A social platform where you pick what your feed shows. Text, videos, pics, audio or any mix. No algorithm trying to hook you, so everyone gets a fair shot at being seen. DMs included.</p>
-              <p class="note">Still pre-beta, so stuff might break.</p>
-              <ul class="tags" role="list" aria-label="Built with"><li>Tailwind CSS</li><li>Alpine.js</li><li>JavaScript</li></ul>
-              <div class="actions">
-                <a class="btn" href="https://vibepost.ddns.net/" target="_blank" rel="noopener noreferrer">Visit VibePost <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Tatom -->
-          <article class="card project p-tatom reveal" id="tatom" aria-labelledby="tatom-title">
-            <div class="card-top" style="--c:var(--sky)">
-              <h3 class="card-title" id="tatom-title">Tatom</h3>
-              <span class="sticker" style="--c:var(--accent)">My company</span>
-            </div>
-            <figure class="shot shot--fill">
-              <img src="assets/img/shots/tatom.webp" srcset="assets/img/shots/tatom-480.webp 480w, assets/img/shots/tatom.webp 760w" sizes="(min-width:1001px) 480px, 100vw" width="760" height="800" alt="Screenshot of the Tatom website: “We build things today. For a better web tomorrow.” on a dark blue background, with the Tatom train logo." loading="lazy" decoding="async">
-              <figcaption class="shot-url">tatom.c00l.site</figcaption>
-            </figure>
-            <div class="card-body">
-              <p>I own this one. VibePost, BlockCoin and BaldBot all live here.</p>
-              <p class="motto">&ldquo;We build things today. For a better web tomorrow.&rdquo;</p>
-              <ul class="caps" role="list" aria-label="Projects under Tatom">
-                <li><a href="#vibepost">VibePost</a></li><li><a href="#baldbot">BaldBot</a></li><li><a href="#blockcoin">BlockCoin</a></li>
-              </ul>
-              <div class="actions">
-                <a class="btn" href="https://tatom.c00l.site/" target="_blank" rel="noopener noreferrer">Visit Tatom <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Chloride -->
-          <article class="card project p-chlor reveal" id="chloride" aria-labelledby="chloride-title">
-            <div class="card-top" style="--c:var(--teal)">
-              <h3 class="card-title" id="chloride-title">Chloride</h3>
-              <div class="element" aria-hidden="true"><span>17</span><b>Cl<sup>&minus;</sup></b></div>
-            </div>
-            <figure class="term">
-              <div class="term-bar"><i></i><i></i><i></i><span>~/my-bot</span></div>
-              <pre><code><span class="c"># install</span>
-<span class="p">$</span> python -m pip install -e .
-
-<span class="c"># new workspace (edit config.yaml)</span>
-<span class="p">$</span> chloride create my-bot
-<span class="p">$</span> cd my-bot
-
-<span class="c"># run it (Docker Compose)</span>
-<span class="p">$</span> chloride run</code></pre>
-            </figure>
-            <div class="card-body">
-              <p>My self-hosted AI agent for Discord. It has memory, runs scheduled tasks and uses tools in a sandbox, with permissions you set. Docker Compose, your own keys.</p>
-              <ul class="tags" role="list" aria-label="Built with"><li>Open source</li><li>Python</li><li>Docker</li></ul>
-              <div class="actions">
-                <a class="btn" href="https://github.com/S4IL21/chloride" target="_blank" rel="noopener noreferrer">GitHub <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
-              </div>
-            </div>
-          </article>
-
-          <!-- BaldBot -->
-          <article class="card project p-bald reveal" id="baldbot" aria-labelledby="baldbot-title">
-            <div class="card-top" style="--c:var(--green)">
-              <h3 class="card-title" id="baldbot-title">BaldBot</h3>
-              <span class="sticker" style="--c:var(--white)">Discord bot</span>
-            </div>
-            <div class="art art--fill" style="--c:var(--green)">
-              <p class="bubble">Da baldest bot in da universe</p>
-              <img class="sq" src="assets/img/baldbot-art.webp" width="232" height="232" alt="BaldBot’s profile picture: a shiny blue cartoon head with big googly eyes" loading="lazy" decoding="async">
-            </div>
-            <div class="card-body">
-              <p>An economy bot where the currency is hair. Grow hairs, buy boosters and dominate the follicle economy.</p>
-              <ul class="tags" role="list" aria-label="Built with"><li>Python</li><li>Docker</li></ul>
-              <div class="actions">
-                <a class="btn" href="https://discord.com/oauth2/authorize?client_id=1407055827487031336" target="_blank" rel="noopener noreferrer">Add to Discord <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
-              </div>
-            </div>
-          </article>
-
-          <!-- BlockCoin -->
-          <article class="card project p-block reveal" id="blockcoin" aria-labelledby="blockcoin-title">
-            <div class="card-top" style="--c:var(--purple)">
-              <h3 class="card-title" id="blockcoin-title">BlockCoin</h3>
-              <span class="sticker" style="--c:var(--grey)">Archived</span>
-            </div>
-            <figure class="shot">
-              <img src="assets/img/shots/blockcoin.webp" srcset="assets/img/shots/blockcoin-480.webp 480w, assets/img/shots/blockcoin.webp 820w" sizes="(min-width:1001px) 390px, 100vw" width="820" height="615" alt="Screenshot of the BlockCoin homepage: “Write, Post, Earn.” next to a phone showing the app’s feed." loading="lazy" decoding="async">
-              <figcaption class="shot-url">blockcoin.vercel.app</figcaption>
-            </figure>
-            <div class="card-body">
-              <p>A social platform with a game twist: earn coins from likes, followers and views, then trade, gift or buy posts. Retired now, but the site is still up.</p>
-              <ul class="tags" role="list" aria-label="Built with"><li>SvelteKit</li></ul>
-              <div class="actions">
-                <a class="btn" href="https://blockcoin.vercel.app/" target="_blank" rel="noopener noreferrer">Visit <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">BlockCoin (opens in a new tab)</span></a>
-              </div>
-            </div>
-          </article>
-
-          <!-- Others -->
-          <article class="card project p-others wide reveal" id="others" aria-labelledby="others-title">
-            <div class="art" style="--c:var(--sky)">
-              <svg class="gh-big ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-github"/></svg>
-              <p class="wide-cap">github.com/S4IL21</p>
-            </div>
-            <div>
-              <div class="card-top" style="--c:var(--sky)">
-                <h3 class="card-title" id="others-title">Others</h3>
-                <span class="sticker" style="--c:var(--white)">On GitHub</span>
-              </div>
-              <div class="card-body">
-                <p>Smaller projects, experiments and forks live on my GitHub.</p>
-                <div class="actions">
-                  <a class="btn" href="https://github.com/S4IL21?tab=repositories" target="_blank" rel="noopener noreferrer">See my GitHub <svg class="i" aria-hidden="true"><use href="#i-ur"/></svg><span class="sr-only">(opens in a new tab)</span></a>
-                </div>
-              </div>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================== About ====================== -->
-    <section class="section section--accent" id="about" aria-labelledby="about-title">
-      <div class="wrap">
-        <div class="about-grid">
-          <div class="card about-card reveal">
-            <h2 class="title title--section" id="about-title">About me</h2>
-            <p>I&rsquo;m S4IL, a full-stack dev from Barcelona. I build things from scratch, whether that&rsquo;s a website, a bot or a tool nobody asked for. I care how it looks and feels, not just whether the code runs.</p>
-            <p>Right now I&rsquo;m building <a href="#vibepost"><strong>VibePost</strong></a>. It lives under Tatom, my company, along with BaldBot and the retired BlockCoin.</p>
-            <p>On the side I mess with AI agents, automation and <span class="nb">self-hosting</span>, mostly in Python. <strong>Code. Learn. Repeat.</strong></p>
-          </div>
-
-          <aside class="card char reveal" aria-label="S4IL at a glance">
-            <div class="char-head">
-              <img src="assets/img/mascot/cute.svg" width="163" height="158" alt="" loading="lazy">
-              <div>
-                <p class="char-name">S4IL</p>
-                <p class="char-sub">@S4IL21</p>
-              </div>
-            </div>
-            <dl class="stats">
-              <div><dt>Class</dt><dd>Full-stack dev</dd></div>
-              <div><dt>Base</dt><dd>Barcelona, Spain</dd></div>
-              <div><dt>Owns</dt><dd>Tatom</dd></div>
-              <div><dt>Now</dt><dd>Building VibePost</dd></div>
-              <div><dt>Main lang</dt><dd>Python</dd></div>
-              <div><dt>Into</dt><dd>AI, automation, self-hosting</dd></div>
-            </dl>
-          </aside>
-        </div>
-
-        <div class="stack reveal">
-          <h3>Stuff I use</h3>
-          <ul class="pills" role="list">
-            <li>Python</li><li>JavaScript</li><li>TypeScript</li><li>Node.js</li><li>HTML</li><li>CSS</li><li>SCSS</li>
-            <li>SvelteKit</li><li>Tailwind CSS</li><li>Alpine.js</li><li>Tkinter</li><li>ttkbootstrap</li>
-            <li>Discord API</li><li>Docker</li><li>Docker Compose</li><li>Git</li><li>GitHub</li><li>GitHub Pages</li><li>Vercel</li>
-            <li>Batch</li><li>VBScript</li><li>Scratch</li><li>MIT App Inventor</li>
-            <li>Java</li><li>C#</li><li>C++</li><li>Lua</li>
-            <li>AI agents</li><li>Automation</li><li>Self-hosting</li>
-            <li class="more">and more</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================== Contact ====================== -->
-    <section class="section section--blue" id="contact" aria-labelledby="contact-title">
-      <svg class="waves" aria-hidden="true" viewBox="0 0 1440 600" preserveAspectRatio="none">
-        <path fill="#00a4e6" d="M0 0H1440V470C1210 510 1010 430 760 460S280 510 0 470Z"/>
-        <path fill="#0092d9" d="M0 0H1440V330C1210 368 1010 300 760 330S280 376 0 340Z"/>
-        <path fill="#0089cc" d="M0 0H1440V190C1210 226 1010 164 760 190S280 232 0 200Z"/>
-      </svg>
-      <div class="wrap contact-grid">
-        <div class="contact-copy">
-          <h2 class="title title--hero" id="contact-title">Say hi!</h2>
-          <p class="lead">Got an idea? Found a bug? Just wanna say hi? Email me or find me anywhere below.</p>
-          <div class="mail">
-            <a class="btn btn--xl" href="mailto:s4il.is.a.dev@gmail.com" data-mail><svg class="i" aria-hidden="true"><use href="#i-mail"/></svg>s4il.is.a.dev@gmail.com</a>
-            <button class="btn btn--white" type="button" data-copy="s4il.is.a.dev@gmail.com"><svg class="i" aria-hidden="true"><use href="#i-copy" data-copy-icon/></svg><span data-copy-label>Copy</span></button>
-            <p class="sr-only" role="status" data-copy-status></p>
-          </div>
-          <ul class="socials" role="list">
-            <li><a class="social" href="https://github.com/S4IL21" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-github"/></svg>GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
-            <li><a class="social" href="https://dsc.gg/tatom" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-discord"/></svg>Discord<span class="sr-only"> (Tatom Official server, opens in a new tab)</span></a></li>
-            <li><a class="social" href="https://www.youtube.com/@-How-To-Tutorials-" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-youtube"/></svg>YouTube<span class="sr-only"> (opens in a new tab)</span></a></li>
-            <li><a class="social" href="https://scratch.mit.edu/users/s4il/" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-scratch"/></svg>Scratch<span class="sr-only"> (opens in a new tab)</span></a></li>
-            <li><a class="social" href="https://www.roblox.com/users/2023170110/profile" target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><use href="#b-roblox"/></svg>Roblox<span class="sr-only"> (opens in a new tab)</span></a></li>
-          </ul>
-        </div>
-        <div class="contact-art">
-          <p class="bubble">Hit me up!</p>
-          <img class="big" src="assets/img/mascot/blushing.svg" width="163" height="158" alt="Cartoon S4IL blushing" loading="lazy">
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="wrap foot">
-      <p>&copy; <span data-year>2026</span> S4IL &middot; Code. Learn. Repeat.</p>
-      <ul role="list" aria-label="Elsewhere">
-        <li><a href="https://github.com/S4IL21" target="_blank" rel="noopener noreferrer">GitHub<span class="sr-only"> (opens in a new tab)</span></a></li>
-        <li><a href="https://dsc.gg/tatom" target="_blank" rel="noopener noreferrer">Discord<span class="sr-only"> (opens in a new tab)</span></a></li>
-        <li><a href="https://github.com/S4IL21/S4IL21.github.io" target="_blank" rel="noopener noreferrer">Source<span class="sr-only"> (opens in a new tab)</span></a></li>
-        <li><a href="#top">Back to top <svg class="i" aria-hidden="true"><use href="#i-up"/></svg></a></li>
-      </ul>
+  <main class="pt-20">
+   <!-- Hero Section -->
+   <section class="min-h-screen flex flex-col md:flex-row items-center justify-center max-w-7xl mx-auto px-6 sm:px-10 gap-12" id="home" tabindex="-1">
+    <div class="text-center md:text-left max-w-xl space-y-6">
+     <h1 class="text-5xl sm:text-6xl font-extrabold gradient-text leading-tight">
+      Hi, I'm
+      <span class="text-indigo-500">
+       S4IL
+      </span>
+     </h1>
+     <p class="text-lg sm:text-xl text-gray-300">
+      A passionate
+      <span class="font-semibold text-indigo-400">
+       Full-Stack Developer
+      </span>
+      making modern and responsive web experiences.
+     </p>
+     <div class="flex justify-center md:justify-start space-x-6 mt-6">
+      <a class="btn-pulse inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400" href="#projects">
+       View Projects
+      </a>
+      <a class="inline-block border-2 border-indigo-600 hover:bg-indigo-600 hover:text-white text-indigo-400 font-semibold px-6 py-3 rounded-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400" href="#contact">
+       Contact Me
+      </a>
+     </div>
     </div>
+    <div class="w-full max-w-md">
+     <img class="rounded-3xl shadow-2xl float-animation" height="400" loading="lazy" src="https://s4il.is-a.dev/files/logo.png" width="400"/>
+    </div>
+   </section>
+   <!-- About Section -->
+   <section class="max-w-5xl mx-auto px-6 sm:px-10 py-20" id="about" tabindex="-1">
+    <h2 class="text-4xl font-extrabold gradient-text mb-12 text-center">
+     About Me
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+     <img alt="Creative workspace with a modern computer, notebook, and coffee cup on a wooden desk, bright and inspiring environment" class="rounded-2xl shadow-lg" height="500" loading="lazy" src="https://www.geenxt.com/wp-content/uploads/2024/04/image-1024x585.jpeg" width="500"/>
+     <div class="text-gray-300 space-y-6 text-lg leading-relaxed">
+      <p>
+       I'm S4IL, a full-stack developer with over 6 years of experience building scalable and performant web applications. I specialize in Python, Html, modern CSS, and creating smooth user experiences.
+      </p>
+     </div>
+    </div>
+   </section>
+   <!-- Projects Section -->
+  <section class="bg-gray-800 py-20" id="projects" tabindex="-1">
+   <div class="max-w-7xl mx-auto px-6 sm:px-10">
+    <h2 class="text-4xl font-extrabold gradient-text mb-12 text-center">
+    Projects
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+    <!-- VibePost -->
+    <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+  <div style="background:#000;" class="w-full aspect-[16/9] flex items-center justify-center">
+    <img alt="VibePost" class="object-contain max-h-full max-w-full" height="400" loading="lazy" src="https://tatom.vercel.app/1.png" width="600"/>
+  </div>
+     <div class="p-6">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-400">VibePost</h3>
+      <p class="text-gray-300 mb-4">VibePost is a social platform built around fairness and real connection. There are no algorithms designed to keep you addicted, which means everyone has the same chance of being seen and discovered.
+
+You decide what your feed looks like. Whether you want to see only text, just videos, only images, audio posts, or any combination, the choice is yours.
+
+Share your creativity in any form, connect through direct messages, and be part of a community that values genuine moments and good vibes.</p>
+      <div class="flex space-x-4 text-indigo-500 text-lg">
+        <a aria-label="Live demo for VibePost" class="hover:text-indigo-400 transition" href="https://vibepost.ddns.net/" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+     </div>
+    </article>
+    <!-- Tatom -->
+    <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+  <div style="background:#000;" class="w-full aspect-[16/9] flex items-center justify-center">
+    <img alt="Tatom" class="object-contain max-h-full max-w-full" height="400" loading="lazy" src="https://tatom.vercel.app/banner.png" width="600"/>
+  </div>
+     <div class="p-6">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-400">Tatom</h3>
+      <p class="text-gray-300 mb-4">Tatom is a digital innovation company focused on creating unique online experiences. At Tatom, we experiment, build, and shape the future of the internet, one project at a time.</p>
+      <div class="flex space-x-4 text-indigo-500 text-lg">
+        <a aria-label="Live demo for Tatom" class="hover:text-indigo-400 transition" href="https://tatom.vercel.app/" target="_blank" rel="noopener noreferrer">
+          <i class="fas fa-external-link-alt"></i>
+        </a>
+      </div>
+     </div>
+    </article>
+    <!-- This Website -->
+    <article class="bg-gray-900 rounded-3xl overflow-hidden card-hover shadow-lg">
+     <img alt="Screenshot of this portfolio website" class="w-full h-48 object-cover" height="400" loading="lazy" src="/files/mywebsite.png" width="600"/>
+     <div class="p-6">
+      <h3 class="text-2xl font-semibold mb-2 text-indigo-400">This Website</h3>
+      <p class="text-gray-300 mb-4">My personal portfolio, built with HTML, Tailwind CSS, and custom JavaScript. Responsive, modern, and open source.</p>
+      <div class="flex space-x-4 text-indigo-500 text-lg">
+        <a aria-label="GitHub repository for this website" class="hover:text-indigo-400 transition" href="https://github.com/S4IL21/S4IL21.github.io" target="_blank" rel="noopener noreferrer">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+     </div>
+    </article>
+    </div>
+    <div class="flex justify-center mt-12">
+    <a href="https://s4il.is-a.dev/projects/more/" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-4 rounded-lg shadow-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400">View More</a>
+    </div>
+   </div>
+  </section>
+   <!-- Skills Section -->
+   <section class="max-w-5xl mx-auto px-6 sm:px-10 py-20" id="skills" tabindex="-1">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 text-center">
+      <!-- Python -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="Python logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">Python</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 100%"></div>
+        </div>
+      </div>
+      <!-- MIT App Inventor -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+  <img alt="MIT App Inventor logo" class="w-20 h-20" height="80" loading="lazy" src="https://storage.googleapis.com/mitai2gallery/gallery/apps/3c074e02-4be7-4c99-9b44-44637e34e96c/image" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">MIT App Inventor</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 100%"></div>
+        </div>
+      </div>
+      <!-- Scratch -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+  <img alt="Scratch logo" class="w-20 h-20" height="80" loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/7/75/Scratch.logo.S.png" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">Scratch</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 100%"></div>
+        </div>
+      </div>
+      <!-- JavaScript -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="JavaScript logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">JavaScript</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 90%"></div>
+        </div>
+      </div>
+      <!-- HTML -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="HTML5 logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">HTML</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 85%"></div>
+        </div>
+      </div>
+      <!-- CSS -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="CSS3 logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">CSS</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 80%"></div>
+        </div>
+      </div>
+      <!-- Node.js -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="Node.js logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">Node.js</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 75%"></div>
+        </div>
+      </div>
+      <!-- TypeScript -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="TypeScript logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">TypeScript</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 70%"></div>
+        </div>
+      </div>
+      <!-- C# -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="C# logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">C#</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 60%"></div>
+        </div>
+      </div>
+      <!-- Java -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="Java logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">Java</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 55%"></div>
+        </div>
+      </div>
+      <!-- Lua -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="Lua logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">Lua</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 45%"></div>
+        </div>
+      </div>
+      <!-- C++ -->
+      <div class="bg-gray-800 rounded-2xl p-6 card-hover shadow-md flex flex-col items-center space-y-4">
+        <img alt="C++ logo" class="w-20 h-20" height="80" loading="lazy" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" width="80"/>
+        <h3 class="text-indigo-400 font-semibold text-xl">C++</h3>
+        <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-indigo-600 h-3 rounded-full" style="width: 40%"></div>
+        </div>
+      </div>
+    </div>
+   </section>
+   <!-- Contact Section -->
+   <section class="bg-gray-800 py-20" id="contact" tabindex="-1">
+    <div class="max-w-3xl mx-auto px-6 sm:px-10 text-center">
+     <h2 class="text-4xl font-extrabold gradient-text mb-8">
+      Get In Touch
+     </h2>
+     <p class="text-gray-300 mb-12 text-lg">
+      Whether you want to collaborate on a project, have a question, or just want to say hi, feel free to reach out!
+     </p>
+  <form action="https://formsubmit.co/s4il.is.a.dev@gmail.com" method="POST" class="space-y-6 text-left" novalidate="" target="_blank">
+      <div>
+       <label class="block mb-2 font-semibold text-indigo-400" for="name">
+  Name or Nickname
+       </label>
+       <input class="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="name" name="name" placeholder="Your name or nickname" required type="text"/>
+      </div>
+      <div>
+       <label class="block mb-2 font-semibold text-indigo-400" for="email">
+        Email
+       </label>
+       <input class="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="email" name="email" placeholder="you@example.com" required="" type="email"/>
+      </div>
+      <div>
+       <label class="block mb-2 font-semibold text-indigo-400" for="message">
+        Message
+       </label>
+       <textarea class="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-3 text-gray-100 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500" id="message" name="message" placeholder="Write your message here..." required="" rows="5"></textarea>
+      </div>
+      <div class="text-center">
+       <button class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-4 rounded-lg shadow-lg transition focus:outline-none focus:ring-4 focus:ring-indigo-400" type="submit">
+        Send Message
+       </button>
+      </div>
+     </form>
+     <div class="mt-16 flex justify-center space-x-10 text-indigo-500 text-3xl">
+      <a aria-label="GitHub profile" class="hover:text-indigo-400 transition" href="https://github.com/S4IL21" rel="noopener noreferrer" target="_blank">
+       <i class="fab fa-github">
+       </i>
+      </a>
+  <a aria-label="Discord server" class="hover:text-indigo-400 transition" href="https://dsc.gg/tatom" rel="noopener noreferrer" target="_blank">
+   <i class="fab fa-discord"></i>
+  </a>
+      <a aria-label="Send email" class="hover:text-indigo-400 transition" href="mailto:s4il.is.a.dev@gmail.com">
+       <i class="fas fa-envelope">
+       </i>
+      </a>
+     </div>
+    </div>
+   </section>
+  </main>
+  <footer class="bg-gray-900 py-8 text-center text-gray-500 text-sm select-none flex flex-col items-center gap-2">
+   <div>© 2026 S4IL. All rights reserved.</div>
+<!--   <a href="/privacy" class="inline-flex items-center gap-1 text-indigo-400 hover:text-indigo-300 transition text-base font-medium" aria-label="Privacy Policy">
+     <i class="fas fa-user-secret"></i> Privacy Policy
+   </a> -->
   </footer>
-
   <script>
-    (() => {
-      const $ = (s, r = document) => r.querySelector(s);
-      const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-      const canObserve = 'IntersectionObserver' in window;
+   const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const navLinks = document.querySelectorAll('a.nav-link');
 
-      /* Mobile menu: a plain disclosure button */
-      const toggle = $('.nav-toggle');
-      const list = $('#nav-list');
-      if (toggle && list) {
-        const label = $('.nav-toggle-label', toggle);
-        const setOpen = (open) => {
-          toggle.setAttribute('aria-expanded', String(open));
-          list.toggleAttribute('data-open', open);
-          label.textContent = open ? 'Close' : 'Menu';
-        };
-        toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
-        list.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { setOpen(false); toggle.focus(); }
-        });
-        matchMedia('(min-width: 721px)').addEventListener('change', () => setOpen(false));
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      menuBtn.querySelector('i').classList.toggle('fa-bars');
+      menuBtn.querySelector('i').classList.toggle('fa-times');
+    });
+
+    // Close mobile menu on link click
+    mobileMenu.querySelectorAll('a.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuBtn.querySelector('i').classList.add('fa-bars');
+        menuBtn.querySelector('i').classList.remove('fa-times');
+      });
+    });
+
+    // Highlight nav links on scroll
+    const sections = ['home', 'about', 'projects', 'skills', 'contact'].map(id => document.getElementById(id));
+
+    function onScroll() {
+      const scrollPos = window.scrollY + window.innerHeight / 3;
+
+      let currentSectionId = 'home'; // default
+
+      for (const section of sections) {
+        if (section.offsetTop <= scrollPos) {
+          currentSectionId = section.id;
+        }
       }
 
-      /* Highlight the section you're in */
-      if (canObserve) {
-        const links = new Map($$('.nav-list a[href^="#"]').map((a) => [a.getAttribute('href').slice(1), a]));
-        const clear = () => links.forEach((a) => a.removeAttribute('aria-current'));
-        const spy = new IntersectionObserver((entries) => {
-          entries.forEach((e) => {
-            if (!e.isIntersecting) return;
-            clear();
-            const a = links.get(e.target.id);
-            if (a) a.setAttribute('aria-current', 'location');
-          });
-        }, { rootMargin: '-40% 0px -55% 0px' });
-        links.forEach((_, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
-        const hero = $('.hero');
-        if (hero) spy.observe(hero);
-      }
+      navLinks.forEach(link => {
+        if (link.dataset.link === currentSectionId) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
 
-      /* Pop in once, never repeat */
-      const reveals = $$('.reveal');
-      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (canObserve && !reduce) {
-        const io = new IntersectionObserver((entries) => {
-          entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
-        }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
-        reveals.forEach((el) => io.observe(el));
-      } else {
-        reveals.forEach((el) => el.classList.add('is-in'));
-      }
+      // Also update mobile menu links
+      mobileMenu.querySelectorAll('a.nav-link').forEach(link => {
+        if (link.dataset.link === currentSectionId) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
 
-      /* Copy email, with a fallback that selects the address instead */
-      const copyBtn = $('[data-copy]');
-      if (copyBtn) {
-        const label = $('[data-copy-label]', copyBtn);
-        const icon = $('[data-copy-icon]', copyBtn);
-        const status = $('[data-copy-status]');
-        const mail = $('[data-mail]');
-        let timer;
-        const done = (text, announce, ok) => {
-          label.textContent = text;
-          status.textContent = announce;
-          copyBtn.classList.toggle('is-done', ok);
-          icon.setAttribute('href', ok ? '#i-check' : '#i-copy');
-          clearTimeout(timer);
-          timer = setTimeout(() => {
-            label.textContent = 'Copy';
-            copyBtn.classList.remove('is-done');
-            icon.setAttribute('href', '#i-copy');
-          }, 2400);
-        };
-        copyBtn.addEventListener('click', async () => {
-          try {
-            await navigator.clipboard.writeText(copyBtn.dataset.copy);
-            done('Copied!', 'Email address copied to the clipboard.', true);
-          } catch {
-            const range = document.createRange();
-            range.selectNodeContents(mail);
-            const sel = getSelection();
-            sel.removeAllRanges();
-            sel.addRange(range);
-            done('Selected', 'Could not copy automatically. The address is selected, press Ctrl or Command plus C.', false);
-          }
-        });
-      }
-
-      /* Footer year */
-      const year = $('[data-year]');
-      if (year) year.textContent = new Date().getFullYear();
-    })();
+    window.addEventListener('scroll', onScroll);
+    window.addEventListener('load', onScroll);
   </script>
-</body>
+ </body>
+
 </html>
+
+

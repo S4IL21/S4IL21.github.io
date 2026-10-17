@@ -1,14 +1,13 @@
 Fonts in this folder are self-hosted, Latin subsets served from Google Fonts:
-  - lilita-one.woff2, rubik.woff2, space-mono-bold.woff2   (Lilita One, Rubik, Space Mono)
-  - geist*.woff2, instrument-serif*.woff2                   (previous design, being removed)
+  - lilita-one.woff2      (Lilita One)
+  - rubik.woff2           (Rubik)
+  - space-mono-bold.woff2 (Space Mono Bold)
 
 All are licensed under the SIL Open Font License 1.1 (full text below).
 Copyright notices:
   Lilita One: Copyright (c) 2011 Juan Montoreano (juan@remolacha.biz), with Reserved Font Name Lilita
-  Rubik: Copyright 2015 The Rubik Project Authors (https://github.com/googlefonts/rubik)
+  Rubik:      Copyright 2015 The Rubik Project Authors (https://github.com/googlefonts/rubik)
   Space Mono: Copyright 2016 The Space Mono Project Authors (https://github.com/googlefonts/spacemono)
-  Geist, Geist Mono: Copyright 2024 The Geist Project Authors (https://github.com/vercel/geist-font.git)
-  Instrument Serif:  Copyright 2022 The Instrument Serif Project Authors (https://github.com/Instrument/instrument-serif)
 
 ------------------------------------------------------------------------
 

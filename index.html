@@ -63,9 +63,6 @@
       --white:#fff;
       --paper:#fff4d6;
       --blue:#00adf2;      /* the mascot's background blue */
-      --blue-d:#0089cc;
-      --blue-m:#0092d9;
-      --blue-s:#00a4e6;
       --sky:#bfeaff;
       --yellow:#ffd93d;
       --teal:#00cbcb;      /* the mascot's hoodie */
@@ -127,8 +124,6 @@
     .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:52px;padding:.55em 1.15em;background:var(--c,var(--yellow));border:var(--bw) solid var(--ink);border-radius:14px;box-shadow:var(--sh-s);font:700 1.0625rem/1.1 var(--font-body);text-align:center;transition:translate .12s,box-shadow .12s,background-color .12s}
     .btn svg{width:1.15em;height:1.15em;flex:none}
     .btn--white{--c:var(--white)}
-    .btn--blue{--c:var(--blue)}
-    .btn--pink{--c:var(--pink)}
     .btn--lg{min-height:60px;padding:.6em 1.4em;font-size:1.25rem;border-radius:16px;box-shadow:6px 6px 0 var(--ink)}
     .btn:active{translate:4px 4px;box-shadow:0 0 0 var(--ink)}
     @media (hover:hover){
@@ -247,8 +242,6 @@
     .art{position:relative;display:grid;place-items:center;min-height:250px;padding:30px;border-bottom:var(--bw) solid var(--ink);background-color:var(--c);background-image:radial-gradient(rgba(11,11,15,.18) 1.6px,transparent 1.9px);background-size:18px 18px}
     .art img.sq{width:min(58%,190px);height:auto;aspect-ratio:1;background:var(--white);border:4px solid var(--ink);border-radius:26px;box-shadow:8px 8px 0 var(--ink);rotate:4deg}
     .art .bubble{top:14px;left:12px;max-width:11em;font-size:.95rem;font-family:var(--font-body)}
-    .art--tatom{background-color:#07131f;background-image:none}
-    .art--tatom img{width:min(46%,170px);height:auto}
 
     .hcr{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
     .hcr .art{border-bottom:0;border-right:var(--bw) solid var(--ink);min-height:300px}
